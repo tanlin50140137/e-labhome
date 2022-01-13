@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>采购</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="./iview/node_modules/view-design/dist/styles/iview.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./layer/theme/default/layer.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/onedelivery.css">
+    <link rel="stylesheet" href="./swiper/package/swiper-bundle.min.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script src="./layer/layer.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./swiper/package/swiper-bundle.min.js"></script>
+    <script src="./iview/node_modules/view-design/dist/iview.min.js"></script>
+    <style>
+    .layui-table-cell{
+      height:2rem;
+      line-height:2rem;
+    }
+    .layui-table-cell span{
+        font-size:1.1rem;
+        font-weight:600;
+    }
+    #layui-table-page1 .layui-laypage-limits{
+        display: none;
+    }
+    .layui-btn{
+        height:2rem;
+        line-height:2rem;
+        font-size:1rem;
+        padding:0 0.9rem;
+    }
+    #layui-table-page1 .layui-laypage-curr{
+        padding:0 20px;
+    }
+    </style>
+</head>
+<body>
+<div class="swiper-container" id="Vueapp">
+          <div class="elaBoxs">
+            <div class="fuzuheight" style="height:1rem;"></div>
+            <div class="elaMenu">
+              <div class="elaMenuInner">
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo" onclick="backIndex();" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                      <div class="elaLogo">采购</div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo">
+                            <div class="userInfoList" onclick="back()">
+                                <div class="userInfoInner"><img class="loginimg" src="./img/bcak.png" alt="头像"></div>
+                                <div class="userInfoInner">返回上一步</div>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="elaOption">
+                <div class="toolbarBoxs">
+                    <span style="color:#666666;">创建订单名称</span><span>: <input type="text" class="toolbarinput kbtoolbarinput kbvaluseinput" placeholder="自定义订单名称"/></span>
+                    <!-- <span class="previewOrder test-table-operate-btn boom3" data-type="historical">历史记录</span> -->
+                </div>
+                <div class="tablesBoxs">
+                    <!-- 第一个 -->
+                    <div class="tablesInner">
+                        <div class="tablesSrech">
+                            <div class="tablesSrechInner"><input type="text" class="toolbarpreinput kbtoolbarinput" placeholder="搜索：产品ID、产品名称、厂商"/></div>
+                            <div class="tablesSrechInner test-table-operate-btn boom3" data-type="sreach">搜索</div>
+                        </div>
+                        <div class="libraryOrder">
+                          <table class="layui-hide" id="test-table-toolbar" lay-filter="test-table-toolbar"></table>
+                        </div>
+                    </div>
+                    <!-- 第二个 -->
+                    <div class="tablesInner">
+                        <div class="tablesButton test-table-operate-btn boom3" data-type="isAll">添加&gt;&gt;</div>
+                    </div>
+                    <!-- 第三个 -->
+                    <div class="tablesInner">
+                      <div class="tablesSrech"><div class="tablesChuku">采购清单</div></div>
+                      <div class="libraryOrder">
+                            <table class="layui-hide" id="test-table-toolbar2" lay-filter="test-table-toolbar2"></table>
+                            <script type="text/html" id="test-table-operate-barDemo">
+                              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                            </script>
+                      </div>
+                    </div>
+                </div>
+                <div class="btnListBox">
+                    <div class="btnListInner">
+                        <div class="btnPcStr test-table-operate-btn boom3" data-type="OneClickDelivery">确认下单</div>
+                        <!-- <div class="btnPcStr boom3" style="margin-right:2rem;">保存</div> -->
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+<script src="./js/common.js"></script>
+<script src="./js/CSG.js"></script>
+<script type="text/javascript" src="./keyboard/kbmodule.js" id="keyboard"></script>
+<script src="./js/qwebchannel.js"></script>
+<script>
+<!--  实现部分  -->
+// 监听Python channel返回槽对像，赋值给 window.obj
+document.addEventListener("DOMContentLoaded", function(){
+    new QWebChannel(qt.webChannelTransport, function(channel){
+          window.obj = channel.objects.obj;
+    })
+})
+function onFactorial4(flag){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial4(flag, callback);
+    }
+}
+// html触发函数
+function onFactorial9(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial9(url, callback);
+    }
+}
+// Python槽方法返回的数据
+function callback(result){}
+
+var table='', page=1, kb2='';
+var checked = false;
+var a = [];
+layui.use(['table'], function(){
+  table = layui.table;
+  // console.log(table);
+  table.render({
+    elem: '#test-table-toolbar'
+    ,url:url+'hwapi/cart/cart_search_consumable_list'
+    ,height:libraryOrderExt
+    ,title: '用户数据表'
+    ,cols: [[
+      {type: 'checkbox', fixed: 'left'}
+      ,{field:'postId', title:'产品ID', ixed: 'left', unresize: true, align:'center', width:90, style:'font-size:1rem'}
+      ,{field:'productName', title:'产品名称', align:'center', style:'font-size:1rem'}
+      ,{field:'productType', title:'规格型号', align:'center', style:'font-size:1rem'}
+      ,{field:'manufacturer', title:'厂商', align:'center', style:'font-size:1rem'}
+      ,{field:'punit', title:'单位', align:'center', width:70, style:'font-size:1rem'}
+    ]]
+    ,page: {
+      layout: [ 'prev', 'page', 'next', 'skip','count'],
+      limit:10
+    }
+    ,done: function(res, curr, count){
+    	    //得到当前页码
+    	    page = curr;
+    	    //得到数据总量
+    	    // console.log(res);
+    	}
+  });
+  //监听表格复选框选择
+  table.on('checkbox(test-table-toolbar)', function(obj){
+        if( obj.checked ){
+            checked = true;
+        }else{
+            checked = false;
+        }
+  });
+  //添加事件
+  var $ = layui.$, active = {
+      sreach:function(){
+          var value = $(".toolbarpreinput").val();
+          //执行重载
+          table.reload('test-table-toolbar', {
+            page: {
+              curr: 1 //重新从第 1 页开始
+            }
+            ,where: {
+              search: value
+            }
+          });
+      }
+      ,historical:function(){
+        var index = layer.open({
+            type: 2
+            ,title: '历史记录'
+            //,content: 'oneclicklist.html'
+            ,content: 'historical.html'
+            ,maxmin: true
+            ,area: ['85%', '85%']
+            ,btn: ['关闭']
+            ,yes: function(index, layero){
+                layer.msg('正在提交...',{shift:-1,time:2000},function(){
+                    $.post(url+'hwapi/putin/putin_by_onebutton',{orderId:data.order_id},function(res){
+                          layer.msg('ID['+data.order_id+']入库成功');
+                          layer.close(index);
+                          table.reload('test-table-operate', {
+                              page: {
+                                curr: page //重新从第 1 页开始
+                              }
+                          });
+                    });
+                });
+            }
+            ,end: function(){
+                table.reload('test-table-operate', {
+                    page: {
+                      curr: page //重新从第 1 页开始
+                    }
+                });
+            }
+        });
+      }
+      ,isAll: function(){ //验证是否全选
+        var checkStatus = table.checkStatus('test-table-toolbar');
+        var len = checkStatus.data.length;
+        if( len > 0 ){
+            checked = true;
+        }else{
+            checked = false;
+        }
+        if( checked ){
+            layer.prompt({
+              title: '请输入下单数量',
+              offset:'250px',
+              formType: 0,
+              btn2:function(){
+                  kb2.kbhide();
+              }
+            }, function(pass, index){
+                kb2.kbhide();
+                if (!isNaN(pass)) {
+                    if( pass < 1 ){
+                        layer.msg('下单数量至少1个', {offset:'300px'});
+                        return false;
+                    }
+                    checkStatus.data.forEach(function(item){
+                        if( in_array(item.post_id+item.product_type,a) ){
+                            var tmp = a;
+                            a = [];
+                            a = update_arr(item.post_id+item.product_type,tmp,pass);
+                        }else{
+                            item.product_stock = pass;
+                            a.push(item);
+                        }
+                    });
+                    var dataJson = JSON.stringify({"code":0,"msg":"","count":a.length,"data":a});
+                    onFactorial4(dataJson);
+                    layer.close(index);
+                    table.render({
+                      elem: '#test-table-toolbar2'
+                      ,url:'data/purchase.json'
+                      ,height:libraryOrderExt
+                      ,title: '用户数据表'
+                      ,cols: [[
+                         {field:'postId', title:'产品ID', ixed: 'left', unresize: true, align:'center', width:90, style:'font-size:1rem'}
+                        ,{field:'productName', title:'产品名称', align:'center', style:'font-size:1rem'}
+                        ,{field:'productType', title:'规格型号', align:'center', style:'font-size:1rem'}
+                        ,{field:'manufacturer', title:'厂商', align:'center', style:'font-size:1rem'}
+                        ,{field:'punit', title:'单位', align:'center', width:70, style:'font-size:1rem'}
+                        ,{field:'product_stock', title:'数量', align:'center', width:90,  style:'font-size:1rem'}
+                        ,{width:100, align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
+                      ]]
+                      ,page: false
+                      ,done: function(res, curr, count){
+                      	    //得到数据总量
+                      	    // console.log(res);
+                            if( res.code != 0 ){
+                                table.reload('test-table-toolbar2');
+                            }
+                      	}
+                    });
+                    //监听工具条
+                    table.on('tool(test-table-toolbar2)', function(obj){
+                          var data = obj.data;
+                          if(obj.event === 'del'){
+                              var d = [];
+                              a.forEach(function(item){
+                                    if( (data.postId+data.productType) != (item.postId+item.productType)  ){
+                                        d.push(item);
+                                    }
+                              });
+                              a = d;
+                              var dataJson = JSON.stringify({"code":0,"msg":"","count":a.length,"data":a});
+                              onFactorial4(dataJson);
+                              table.reload('test-table-toolbar2');
+                          }
+                    });
+                }else{
+                    layer.msg('请输入数字');
+                }
+            });
+            $(".layui-layer-input").blur();
+            kb2 = new keyboard({
+                el:".layui-layer-input",
+                x:1.6,
+                keyHeight:"5rem",
+                fontSize:'1.8rem',
+                bottom:"6rem",
+                end:function(res,value){
+                    // console.log(res, value)
+                    if( res == 'OK' ){
+                        // layer.msg('完成提交');
+                    }else{
+                        // layer.msg('什么都不做');
+                    }
+                }
+            });
+            kb2.run();
+            $(".layui-layer-input").focus();
+        }else{
+            layer.msg('请选择要采购的产品');
+        }
+      }
+      ,OneClickDelivery:function(){
+          kb2.kbhide();
+          if( a.length > 0 ){
+              var kbvaluseinput = $(".kbvaluseinput").val();
+              if( kbvaluseinput == '' ){
+                  $(".kbvaluseinput").focus();
+                  layer.msg('请输入订单名称', {offset:'300px'});
+                  return false;
+              }
+              var html = '<div style="margin:0.5rem;">';
+
+                  html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
+                  html += '采购下单，需要扫描管理员身份二维码';
+                  html += '</div>';
+                  html += '<div class="layui-container" style="width:100%;border-top:1px solid #999999;padding:1rem 0;">';
+
+                  html += '<div class="layui-row" style="margin-bottom:1rem;padding:0 1rem;">';
+                  html += '<div class="layuikuang" style="border:2px solid #6fb729;height:5rem;border-radius:0.5rem;overflow:hidden;position:relative;">';
+                  html += '<input type="text" id="listen" placeholder="允许扫描" style="height:5rem;width:100%;text-align:center;font-size:1.2rem;border:none;background:#F0F0F0;color:#666666;"/>';
+                  html += '</div>';
+                  html += '</div>';
+
+                  html += '<div style="font-size:1.1rem;color:#b5b0b0;padding:0 1rem;">温馨提示：显示绿色边框时允许扫描，显示红色边框时禁止扫描。</div>';
+
+                  html += '</div>';
+                  html += '<div id="userNameBoxs1" style="padding:1rem;color:#213fd0;font-size:1.2rem;display:none;">扫描成功－〉操作人：<span id="userName"></span></div>';
+                  html += '<div id="userNameBoxs2" style="padding:1rem;color:red;font-size:1.2rem;display:none;"></div>';
+                  html += '</div>';
+              layer.open({
+                type: 1,
+                title:false,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['620px', '300px'], //宽高
+                content: html
+             });
+             $("#listen").focus(function(){
+                  $(".layuikuang").css({"border":"2px solid #6fb729"});
+                  $(this).attr({"placeholder":"允许扫描"});
+             }).blur(function(){
+                  $(".layuikuang").css({"border":"2px solid red"});
+                  $(this).attr({"placeholder":"禁止扫描"});
+             });
+             var csg = new CodeScanningGrab({
+               el:"#listen",
+               addClick:".layernoneouto",
+               addClass:".inputBoxs",
+               time:2000,
+               success:function(res){
+                 var id = res;
+                  //验证管理员身份
+                  $.ajax({
+                      url:url+"hwapi/basic/name_bind_qrcode",
+                      data:{userId:userId,id:id},
+                      success:function(info){
+                          var obj = JSON.parse(info);
+                          if(obj.code == 0 ){
+                              $("#userNameBoxs2").hide();
+                              $("#userNameBoxs1").show();
+                              $("#userName").html(obj.data.name);
+                              if( obj.data.status=="ok" ){//需要管员权限
+                                  if( obj.data.role == 1 ){
+                                      var toolbarinput = $(".toolbarinput").val();
+                                      var productList = JSON.stringify(a);
+                                      $.post(url+'hwapi/cart/cart_submit_consumable_list',{userId:userId,proName:toolbarinput,productList:productList,pickerId:id},function(res){
+                                            if( res.code == 0 ){
+                                                layer.msg('下单成功',{shift:-1,time:3000},function(){
+                                                    a = [];
+                                                    var dataJson = JSON.stringify({"code":0,"msg":"","count":a.length,"data":a});
+                                                    onFactorial4(dataJson);
+                                                    table.reload('test-table-toolbar2');
+                                                    table.reload('test-table-toolbar');
+                                                    //跳转到一键入库
+                                                    location.href = 'oncewarehous.html';
+                                                });
+                                            }else{
+                                                layer.alert(res.msg);
+                                            }
+                                      });
+                                  }else{
+                                      $("#userNameBoxs1").hide();
+                                      $("#userNameBoxs2").show();
+                                      $("#userNameBoxs2").html("你不是管理员，没有权限操作!");
+                                  }
+                              }else{//普通人员
+                                  $("#userNameBoxs1").hide();
+                                  $("#userNameBoxs2").show();
+                                  $("#userNameBoxs2").html("该用户已经被禁用");
+                              }
+                          }else{
+                              $("#userNameBoxs1").hide();
+                              $("#userNameBoxs2").show();
+                              $("#userNameBoxs2").html('非管理员受权二维码，无法登录');
+                          }
+                      },
+                      error:function(err){
+                          $("#userNameBoxs2").show();
+                          $("#userNameBoxs2").html("非管理员受权二维码，无法登录");
+                      }
+                  });
+               },
+               endClick:function(res){
+                   console.log(res)
+               }
+             });
+          }else{
+              layer.msg('请选择要采购的产品');
+          }
+      }
+  };
+  $('.test-table-operate-btn').on('click', function(){
+      var type = $(this).data('type');
+      active[type] ? active[type].call(this) : '';
+  });
+});
+function in_array(val,arr){
+    var flag = false;
+    if( arr.length > 0 ){
+      for(var i=0;i<arr.length;i++){
+          if( val == (arr[i].post_id+arr[i].product_type) ){
+              flag =  true;
+              break;
+          }
+      }
+    }
+    return flag;
+}
+function update_arr(post_id,a,int){
+    var b = [];
+    if( a.length > 0 ){
+        a.forEach(function(item){
+            if( (item.post_id+item.product_type) == post_id ){
+                item.product_stock = int;
+                b.push(item);
+            }else{
+                b.push(item);
+            }
+        });
+        return b;
+    }else{
+        return b;
+    }
+}
+kb = new keyboard({
+    el:".kbtoolbarinput",
+    x:1.6,
+    keyHeight:"5rem",
+    fontSize:'1.8rem',
+    bottom:"6rem",
+    end:function(res,value){
+        // console.log(res, value)
+        if( res == 'OK' ){
+            // layer.msg('完成提交');
+        }else{
+            // layer.msg('什么都不做');
+        }
+    }
+});
+kb.run();
+//点击表格行时同时选中
+$(document).on("click", ".layui-table-body table.layui-table tbody tr", function () {
+    var index = $(this).attr('data-index');
+    var tableBox = $(this).parents('.layui-table-box');
+    //存在固定列
+    if (tableBox.find(".layui-table-fixed.layui-table-fixed-l").length > 0) {
+        tableDiv = tableBox.find(".layui-table-fixed.layui-table-fixed-l");
+    } else {
+        tableDiv = tableBox.find(".layui-table-body.layui-table-main");
+    }
+    var checkCell = tableDiv.find("tr[data-index=" + index + "]").find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
+    if (checkCell.length > 0) {
+        checkCell.click();
+    }
+});
+//对td的单击事件进行拦截停止，防止事件冒泡再次触发上述的单击事件（Table的单击行事件不会拦截，依然有效）
+$(document).on("click", "td div.laytable-cell-checkbox div.layui-form-checkbox", function (e) {
+    e.stopPropagation();
+});
+</script>
+</html>

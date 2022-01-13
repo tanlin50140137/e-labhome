@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一键入库</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="./iview/node_modules/view-design/dist/styles/iview.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./layer/theme/default/layer.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script src="./layer/layer.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./swiper/package/swiper-bundle.min.js"></script>
+    <script src="./iview/node_modules/view-design/dist/iview.min.js"></script>
+    <style>
+    .layui-table-cell{
+      height:2.3rem;
+      line-height:2.3rem;
+    }
+    .layui-table-cell span{
+        font-size:1.4rem;
+        font-weight:700;
+    }
+    #layui-table-page1 .layui-laypage-limits{
+        display: none;
+    }
+    .layui-btn{
+        height:2.2rem;
+        line-height:2.2rem;
+        font-size:1.1rem;
+        padding:0 0.9rem;
+    }
+    #layui-table-page1 .layui-laypage-curr{
+        padding:0 20px;
+    }
+    #zxr{width:260px;height:50px;}
+    </style>
+</head>
+<body>
+<div class="swiper-container" id="Vueapp">
+  <div class="layui-fluid">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+          <div class="layui-card">
+            <div class="layui-card-body">
+              <table class="layui-hide" id="test-table-cellEdit" lay-filter="test-table-cellEdit"></table>
+              <script type="text/html" id="test-table-operate-barDemo">
+                <a class="layui-btn layui-btn-xs" lay-event="actual">改价格</a>
+                <a class="layui-btn layui-btn-xs" lay-event="num">改数量</a>
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+<script src="./js/common.js"></script>
+<script type="text/javascript" src="./keyboard/kbmodule.js" id="keyboard"></script>
+<script>
+var id = getQueryString();
+var table='',kb2='';
+layui.use('table', function(){
+    table = layui.table;
+
+    table.render({
+      elem: '#test-table-cellEdit'
+      ,url:url+'hwapi/putin/order_terms?orderId='+id
+      ,page: false //开启分页
+      ,cols: [[
+        {field: 'termId', title: '细目ID', fixed: 'left', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'product_name', title: '产品名称', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'product_type', title: '规格型号', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'manufacturer', title: '厂商', align:'center', style:'font-size:1.2rem'}
+        // ,{field: 'product_price', title: '市场价', align:'center', style:'font-size:1.2rem'}
+        // ,{field: 'product_price_sum', title: '市场价总额', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'actual_price', title: '实际价', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'actual_price_sum', title: '实际总额', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'punit', title: '单位', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'product_num', title: '原有数量', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'p_want_putin_num', title: '待入库数', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'remark', title: '备注', align:'center'}
+        ,{width:230, align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
+      ]]
+      ,done: function(res, curr, count){
+      	    //得到当前页码
+      	    page = curr;
+      	    //得到数据总量
+      	    // console.log(res);
+      }
+    })
+    //监听工具条
+    table.on('tool(test-table-cellEdit)', function(obj){
+          var data = obj.data;
+          if(obj.event === 'actual'){
+              layer.prompt({
+                  title: '改实际价：ID[ '+data.termId+' ]-名称[ '+data.product_name+' ]',
+                  offset:'50px',
+                  value:data.actual_price,
+                  btn2:function(){
+                      kb2.kbhide();
+                  }
+              }, function(value, index, elem){
+                  if (isNaN(value)) {
+                      layer.msg('请输入数字！',{offset:'115px'});
+                      return;
+                  }
+                  $.post(url+'hwapi/putin/term_aprice',{termId:data.termId,actualPrice:value},function(res){
+                        if( res.code == 0 ){
+                          //重载表格
+                          table.reload('test-table-cellEdit', {
+                            page: {
+                              curr:page //重新从第 1 页开始
+                            }
+                          });
+                        }else {
+                          layer.msg(res.msg, {offset:'115px'});
+                        }
+                  });
+                  kb2.kbhide();
+                  layer.close(index);
+              });
+              $(".layui-layer-input").blur();
+              kb2 = new keyboard({
+                  el:".layui-layer-input",
+                  x:1.6,
+                  keyHeight:"5rem",
+                  fontSize:'1.8rem',
+                  bottom:"3rem",
+                  end:function(res,value){
+                      // console.log(res, value)
+                      if( res == 'OK' ){
+                          // layer.msg('完成提交');
+                      }else{
+                          // layer.msg('什么都不做');
+                      }
+                  }
+              });
+              kb2.run();
+          }else if( obj.event === 'num' ){
+            layer.prompt({
+                title: '改数量：ID[ '+data.termId+' ]-名称[ '+data.product_name+' ]',
+                offset:'50px',
+                value:data.p_want_putin_num,
+                btn2:function(){
+                    kb2.kbhide();
+                }
+            }, function(value, index, elem){
+                if (isNaN(value)) {
+                    layer.msg('请输入数字！',{offset:'115px'});
+                    return;
+                }
+
+                // 添加备注
+                var remark = $("#zxr").val()
+
+                $.post(url+'hwapi/putin/term_num',{termId:data.termId,num:value,remark:remark},function(res){
+                    if( res.code == 0 ){
+                      //重载表格
+                      table.reload('test-table-cellEdit', {
+                        page: {
+                          curr:page //重新从第 1 页开始
+                        }
+                      });
+                    }else {
+                      layer.msg(res.msg, {offset:'115px'});
+                    }
+                });
+                kb2.kbhide();
+                layer.close(index);
+            });
+            // 添加备注框
+            $(".layui-layer-content").append("<br/><textarea id= \"zxr\" class=\"layui-layer-input\" placeholder=\"备注\"/></textarea>");
+            $("#zxr").val(data.remark);
+            $(".layui-layer-input").blur();
+            kb2 = new keyboard({
+                el:".layui-layer-input",
+                x:1.6,
+                keyHeight:"5rem",
+                fontSize:'1.8rem',
+                bottom:"3rem",
+                end:function(res,value){
+                    // console.log(res, value)
+                    if( res == 'OK' ){
+                        // layer.msg('完成提交');
+                    }else{
+                        // layer.msg('什么都不做');
+                    }
+                }
+            });
+            kb2.run();
+          }
+    });
+});
+</script>
+</html>

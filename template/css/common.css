@@ -1,0 +1,129 @@
+*{margin:0;padding:0;font-family: "微软雅黑",Arial, Helvetica, sans-serif;touch-action:none;}
+html,body{
+  background:url(../img/bag01.jpg);
+  height:100%;
+  /* background:#FFFFFF; */
+}
+.elaBoxs{min-width:1200px;width:90%;margin:auto;color:#333333;padding:0.5rem;font-size:1.5rem;}
+/* display:inline-flex;align-items:center;flex-wrap:wrap;  */
+.elaMenu{height:5rem;}
+.elaMenuList:nth-child(1){width:20%;height:5rem;}
+.elaMenuList:nth-child(2){width:60%;height:5rem;font-size:2.5rem;font-weight: 700;background:#f6f6f6;}
+.elaMenuList:nth-child(3){width:20%;height:5rem;}
+.elaOption{overflow-y: auto;margin-top:0.5rem;}
+.elaMenuInner{display:flex;align-items:center;flex-wrap:nowrap;}
+.elaOptionInner{display:flex;align-items:center;flex-wrap:nowrap;}
+.elaOptionList:nth-child(1){width:36%;margin-right:0.25rem;}
+.elaOptionList:nth-child(2){width:64%;margin-left:0.25rem;}
+.elaCard:nth-child(1){background:#99ccff;}
+.elaCard:nth-child(2){background:#99ccff;}
+
+.elaCardTitle{display:flex;align-items:center;flex-wrap:nowrap;height:2.5rem;}
+.elaCardTitleList{width:50%;text-align: center;color:#FFFFFF;}
+
+.elaCardname{display:flex;align-items:center;flex-wrap:nowrap;}
+.elaCardnameList:nth-child(1){width:50%;margin-left:0.4rem;margin-right:0.2rem;background:#F6F6F6;}
+.elaCardnameList:nth-child(2){width:50%;margin-left:0.2rem;margin-right:0.4rem;background:#F6F6F6;}
+
+.elaCard4Img{display:flex;align-items:center;flex-wrap:nowrap;padding:0.4rem;}
+.elaCardInnerImg:nth-child(1){width: 50%;height:100%;margin-right:0.2rem;}
+.elaCardInnerImg:nth-child(2){width: 50%;height:100%;margin-left:0.2rem;}
+.upImgBoxs{height:49.3%;background:#F6F6F6;}
+.jiangexian{height:0.4rem;}
+
+.elaCardright{display:flex;align-items:center;flex-wrap:nowrap;height:100%;}
+.elaCardrightList:nth-child(1){width:50%;margin-right:0.25rem;height:100%;background:#99ccff;}
+.elaCardrightList:nth-child(2){width:50%;margin-left:0.25rem;height:100%;background:#99ccff;}
+
+.btnYuan{
+  border:1px solid #FFFFFF;
+  position:absolute;top:50%;left:50%;width:16rem;height:16rem;margin-left:-8rem;margin-top:-8rem;background:#F6F6F6;border-radius:10rem;cursor:pointer;
+  /* -webkit-box-shadow:0px 0px 6px #99ccff;
+  -moz-box-shadow:0px 0px 6px #99ccff;
+  box-shadow: 0px 0px 6px #99ccff;
+  background-image: linear-gradient(#99ccff, #3789f5); */
+  background:url(../img/e-labhome2.jpg) no-repeat;
+  background-size:100% 100%;
+}
+.layerbtn{height:100%;border-radius:10rem;}
+.btnList{position:absolute;top:50%;left:50%;width:100%;height:5rem;overflow:hidden;margin-left:-50%;margin-top:-2.5rem;}
+.btnList p{text-align:center;
+background-image:-webkit-linear-gradient(bottom,red,#c54793,#178bff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+font-weight:700;}
+
+.elaCardRuKu{height:100%;position:relative;margin:0 0.4rem;}
+.elaCardRuKuImg{width:100%;height:66%;position:absolute;top:50%;margin-top:-27.35%;background:#F6F6F6;}
+
+.loginkuang{display:flex;align-items:center;flex-wrap:nowrap;}
+.loginkuangIner:nth-child(1){width:9%;font-size:1.2rem;background:url(../img/acclogin.png) no-repeat;height:2rem;background-size:80% 80%;}
+.loginkuangIner:nth-child(2){width:91%;height:2rem;margin:0.5rem 0;}
+.loginkuangIner2:nth-child(1){width:9%;font-size:1.2rem;background:url(../img/password.png) no-repeat;height:2rem;background-size:90% 90%;}
+.loginkuangIner2:nth-child(2){width:91%;height:2rem;margin:0.5rem 0;}
+
+.userInfoList{display:flex;align-items:center;flex-wrap:nowrap;}
+.userInfoInner:nth-child(1){margin-left:0.5rem;width:3rem;height:3rem;border-radius:10rem;}
+.userInfoInner:nth-child(2){margin-left:0.5rem;width:80%;height:5rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align: left;}
+.loginimg{width:100%;height:100%;}
+
+/*手指3*/
+.boom3{position:relative;}
+.boom3:focus{outline: none;}
+.boom3:after {content: "";display: block;position: absolute;top: -0px;left: -0px; right: -0px;bottom: -0px;pointer-events: none;background-color:#b9bbbe; background-repeat: no-repeat;background-position:50%;opacity: 0;transition: all .3s;border-radius:0rem;width:100%;}
+.boom3:active:after {opacity: .3;top:0;left:0; right: 0; bottom: 0;transition: 0s;}
+
+/*手指2*/
+.boom2{position:relative;}
+.boom2:focus{outline: none;}
+.boom2:after {content: "";display: block;position: absolute;top: -0px;left: -0px; right: -0px;bottom: -0px;pointer-events: none;background-color:#b9bbbe; background-repeat: no-repeat;background-position:50%;opacity: 0;transition: all .3s;border-radius:10rem;width:100%;}
+.boom2:active:after {opacity: .3;top:0;left:0; right: 0; bottom: 0;transition: 0s;}
+[v-cloak]{display:none}
+
+.kbShengyuHanZiBoxs::-webkit-scrollbar {
+    width: 80px;
+}
+.kbscrollInner::-webkit-scrollbar {
+    width: 80px;
+}
+.kbShengyuHanZiBoxs::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;  /*滚动条的背景区域的圆角*/
+  background-color: #F0F0F0;/*滚动条的背景颜色*/
+}
+.kbscrollInner::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;  /*滚动条的背景区域的圆角*/
+  background-color: #F0F0F0;/*滚动条的背景颜色*/
+}
+.kbShengyuHanZiBoxs::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;  /*滚动条的圆角*/
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #d0d0d0;  /*滚动条的背景颜色*/
+}
+.kbscrollInner::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;  /*滚动条的圆角*/
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #d0d0d0;  /*滚动条的背景颜色*/
+}
+.layui-table-main::-webkit-scrollbar {
+    width: 80px;
+}
+.layui-table-main::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;  /*滚动条的背景区域的圆角*/
+  background-color: #F0F0F0;/*滚动条的背景颜色*/
+}
+.layui-table-main::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;  /*滚动条的圆角*/
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #d0d0d0;  /*滚动条的背景颜色*/
+}
+/* .layui-table tr th{border:1px solid #9e9d9d !important;border-left:none!important;} */
+.layui-table tr td{border:1px solid #9e9d9d !important;border-left:none!important;}
+.layui-table-view{border:1px solid #9e9d9d !important;}
+.layui-table-page{border-top:1px solid #9e9d9d !important;}
+.layui-input{border:1px solid #9e9d9d !important;}

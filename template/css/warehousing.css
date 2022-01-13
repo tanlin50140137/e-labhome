@@ -1,0 +1,6 @@
+.elaOption{background:#99ccff;}
+.warehousingTips{border-bottom:1px solid #3789f5;height:5rem;overflow:hidden;margin:2rem 0;font-size:1.8rem;font-weight:700;color:#f1f1e4;text-align: center;line-height: 5rem;}
+.warehousingBoxs{margin:0.5rem;padding:0.5rem;}
+.warehousingInner{display:flex;align-items:center;flex-wrap:nowrap;;}
+.warehousingList{width:25%;}
+.warehousingCard{height:18rem;margin:0.5rem;text-align:center;line-height:18rem;border-radius: 0.5rem;overflow:hidden;}

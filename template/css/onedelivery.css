@@ -1,0 +1,22 @@
+.elaOption{background:#99ccff;position:relative;}
+.loginimg{position:relative;top:-35%;}
+.tablesBoxs{border:1px solid #e2e2e2;background:#FFFFFF;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;}
+.tablesInner:nth-child(1){width:47%;}
+.tablesInner:nth-child(2){width:6%;border-left:1px solid #e2e2e2;border-right:1px solid #e2e2e2;position:relative;}
+.tablesInner:nth-child(3){width:47%;}
+.toolbarBoxs{border:1px solid #e2e2e2;margin:0.5rem;background:#FFFFFF;padding:0.5rem}
+.toolbarBoxs span{display:inline-block;margin-right:0.5rem;color:#333333;}
+.toolbarinput{border:1px solid #666666;padding:0 0.5rem;border-radius:0.2rem;text-align:center;background:#F6F6F6;}
+.previewOrder{border:1px solid #bfbaba;display:inline-block;float:right;padding:0 0.3rem;border-radius:0.2rem;background:#e0dddd;color:#fd5725 !important;}
+.btnListBox{position:absolute;bottom:0;left:0;width:100%;height:3rem;}
+.btnListInner{margin:0 0.5rem 0 0.5rem;}
+.btnPcStr{border:1px solid #3789f5;float:right;padding:0.2rem 1rem;border-radius:0.2rem;background:#3789f5;color:#FFFFFF;}
+.tablesButton{border:1px solid #868383;font-size:1.1rem;text-align:center;border-radius:0.2rem;width:80%;height:3.4rem;line-height:3.4rem;position:absolute;top:50%;left:50%;margin-top:-1.2rem;margin-left:-40%;background:#F0F0F0;color:#333333;}
+.tablesSrech{border-bottom:1px solid #e2e2e2;display:flex;align-items:center;flex-wrap:nowrap;padding:0.3rem;height:3rem;background:#F0F0F0;}
+.tablesSrechInner:nth-child(1){width:84%;height:2rem;margin-right:0.5rem;}
+.toolbarpreinput{border:1px solid #868383;width:100%;border-radius:0.2rem;height:2rem;padding-left:0.5rem;padding-right:0.5rem;background:#F6F6F6;}
+.tablesSrechInner:nth-child(2){border:1px solid #bfbaba;width:15%;height:2rem;text-align:center;font-size:1.2rem;line-height:2rem;border-radius:0.2rem;background:#bfbaba;color:#ffffff;background:#3789f5;}
+.toolbarinput::placeholder {font-size:1rem;color:#999999 !important;position:relative;top:-0.2rem;}
+.toolbarpreinput::placeholder {font-size:1rem;color:#999999 !important;position:relative;top:-0.2rem;}
+.tablesChuku{font-size:1rem;color:#666666;text-align:center;width:100%;}
+.libraryOrder{overflow:hidden;}

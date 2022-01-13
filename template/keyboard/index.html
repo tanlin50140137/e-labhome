@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>html键盘</title>
+</head>
+<body>
+<div>
+  <center>
+    <input type="text" name="name" autocomplete="off" style="width:30%;outline:none;padding:0.5rem;font-size:1.4rem;" placeholder="输入字符">
+  </center>
+  <br/>
+  <center>
+    <input type="number" name="number" autocomplete="off" style="width:30%;outline:none;padding:0.5rem;font-size:1.4rem;" placeholder="输入数字">
+  </center>
+  <br/>
+  <center>
+  <textarea name="textContent" cols="100" autocomplete="off" style="outline:none;padding:0.5rem;font-size:1.4rem;" rows="2" id="textContent"  placeholder="输入文本"></textarea>
+  </center>
+  <!--startprint-->
+  <!-- <img src="http://192.168.31.101/test/123.jpg">
+  <!--endprint-->
+  <!-- <button onclick="doPrint()">打印</button> -->
+</div>
+</body>
+<script type="text/javascript" src="jquery-1.11.2.min.js" ></script>
+<script type="text/javascript" src="kbmodule.js?v=879794" id="keyboard"></script>
+<script>
+$(function(){
+	var kb = new keyboard({
+        x:1.6,
+        keyHeight:"5rem",
+        fontSize:'1.8rem',
+        bottom:"5rem"
+    });
+    kb.run();
+
+    $("#dayinji").click(function(){
+        window.print();
+    });
+});
+function doPrint() {
+        bdhtml=window.document.body.innerHTML;
+        sprnstr="<!--startprint-->"; //开始打印标识字符串有17个字符
+        eprnstr="<!--endprint-->"; //结束打印标识字符串
+        prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); //从开始打印标识之后的内容
+        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+        window.document.body.innerHTML=prnhtml; //把需要打印的指定内容赋给body.innerHTML
+        window.print(); //调用浏览器的打印功能打印指定区域
+        window.document.body.innerHTML=bdhtml; // 最后还原页面
+}
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录或注册</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="../../layer/theme/default/layer.css">
+    <link rel="stylesheet" href="../../css/login.css">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../layer/layer.js"></script>
+    <script src="../../js/vue.min.js"></script>
+</head>
+<body>
+<div class="loginBoxs">
+  <div class="loginPIC">
+      <img class="loginImg" src="../../img/bag01.jpg" alt="Logo">
+  </div>
+  <div class="loginInner">
+      <div class="loginList">账号：</div>
+      <div class="loginList">
+          <input type="text" class="loginInput" onfocus="login();" value="">
+      </div>
+      <div class="loginList"><font color="red" class="redBoxs">*</font>必填项</div>
+  </div>
+  <div class="loginInner">
+      <div class="loginList">密码：</div>
+      <div class="loginList">
+          <input type="password" class="loginInput" name="" value="">
+      </div>
+      <div class="loginList"><font color="red" class="redBoxs">*</font>必填项</div>
+  </div>
+  <div class="btnBoxs">
+      <div class="btnInner">
+          <div class="btnReset" onclick="reset();">重置</div>
+      </div>
+      <div class="btnInner">
+          <div class="btnReset">登录</div>
+      </div>
+  </div>
+</div>
+<div class="resetBoxs"><font color="#0000FF" class="fontBoxs">没有账号？去注册一个</font></div>
+</body>
+<script src="../../js/login.js"></script>
+</html>

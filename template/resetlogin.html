@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页面</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="./iview/node_modules/view-design/dist/styles/iview.css">
+    <link rel="stylesheet" href="./layer/theme/default/layer.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/showtime.css">
+    <link rel="stylesheet" href="./swiper/package/swiper-bundle.min.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/qrcode.min.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script src="./layer/layer.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./swiper/package/swiper-bundle.min.js"></script>
+    <script src="./iview/node_modules/view-design/dist/iview.min.js"></script>
+    <style>
+      .layui-form-select dl{max-height:600px; !important;}
+    </style>
+</head>
+<body>
+<div class="swiper-container" id="Vueapp" v-cloak>
+    <div class="swiper-wrapper">
+      <!-- 试剂耗材管理系统 -->
+      <div class="swiper-slide">
+          <div class="elaBoxs">
+            <div class="fuzuheight" style="height:1rem;"></div>
+            <div class="elaMenu">
+              <div class="elaMenuInner">
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                      <div class="elaLogo">试剂耗材管理系统</div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo" onclick="Get2D();">
+                            <div class="userInfoList">
+                                <div class="userInfoInner loginimgpic" v-html="picurl"></div>
+                                <div class="userInfoInner nicknametitle" v-html="nicname"></div>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="elaOption">
+              <div class="elaOptionInner">
+                  <div class="elaOptionList">
+                      <div class="elaCard" style="margin-bottom:0.5rem;">
+                          <div class="elaCardTitle">
+                              <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">库存报警</font></div>
+                              <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
+                          </div>
+                          <div class="elaCardname">
+                              <div class="elaCardnameList boom3" @click="voiceAnnouncements('查看库存警报','alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
+                              <div class="elaCardnameList boom3" @click="voiceAnnouncements('查看过期警报','expire.html')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          </div>
+                      </div>
+                      <div class="elaCard">
+                        <div class="elaCard">
+                            <div class="elaCard4Img">
+                                <div class="elaCardInnerImg">
+                                      <div class="upImgBoxs boom3" @click="voiceAnnouncements('查看出库记录','outboundrecord.html')" style="background:url(./img/wendu2.jpg) no-repeat;background-size:100% 100%;"></div>
+                                      <div class="jiangexian"></div>
+                                      <div class="upImgBoxs">
+                                         <!-- 日期模块 -->
+                                          <div class="dateshowl">
+                                              <div class="dateshowInner" @click="leftYear();">《</div>
+                                              <div class="dateshowInner" @click="leftMonth();">〈</div>
+                                              <div class="dateshowInner">
+                                                  <div class="shownum">
+                                                      <div class="shownumInner">{{yy}}年</div>
+                                                      <div class="shownumInner">{{mm}} 月</div>
+                                                  </div>
+                                              </div>
+                                              <div class="dateshowInner" @click="rightMonth();">〉</div>
+                                              <div class="dateshowInner" @click="rightYear();">》</div>
+                                          </div>
+                                          <div class="shownumZi">
+                                                <div class="shownumZiList">日</div>
+                                                <div class="shownumZiList">一</div>
+                                                <div class="shownumZiList">二</div>
+                                                <div class="shownumZiList">三</div>
+                                                <div class="shownumZiList">四</div>
+                                                <div class="shownumZiList">五</div>
+                                                <div class="shownumZiList">六</div>
+                                          </div>
+                                          <div class="shownumZi" v-for="(item_l,keys) in timeList">
+                                                <div class="shownumZiList selnoaction" v-for="item in item_l" v-if="item.flag==0">{{item.d}}</div>
+                                                <div class="shownumZiList riliaction" v-else-if="item.flag==2">{{item.d}}</div>
+                                                <div class="shownumZiList" v-else>{{item.d}}</div>
+                                          </div>
+                                      </div>
+                                </div>
+                                <div class="elaCardInnerImg">
+                                      <div class="upImgBoxs boom3" @click="voiceAnnouncements('查看入库记录','warehousingrecord.html')" style="background:url(./img/shidu2.jpg) no-repeat;background-size:100% 100%;"></div>
+                                      <div class="jiangexian"></div>
+                                      <div class="upImgBoxs boom3" @click="voiceAnnouncements('查看视频记录','viewvideo.html')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="elaOptionList" style="position:relative;">
+                    <div class="elaCard2" style="margin-bottom:0.5rem;">
+                        <div class="elaCardright">
+                            <div class="elaCardrightList boom3" @click="voiceAnnouncements('操作入库','warehousing.html')">
+                                <div class="elaCardRuKu">
+                                    <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="elaCardrightList boom3" @click="voiceAnnouncements('操作出库','retrieval.html')">
+                                <div class="elaCardRuKu">
+                                    <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="elaCard2">
+                        <div class="elaCardright">
+                            <div class="elaCardrightList boom3" @click="voiceAnnouncements('查看库存','stock.html')">
+                                <div class="elaCardRuKu">
+                                    <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="elaCardrightList boom3" @click="voiceAnnouncements('采购产品','purchase.html')">
+                                <div class="elaCardRuKu">
+                                    <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btnYuan" @click="utilitiePanel();"></div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- 标准品管理系统 -->
+    <div class="swiper-slide">
+        <div class="elaBoxs">
+          <div class="fuzuheight" style="height:1rem;"></div>
+          <div class="elaMenu">
+            <div class="elaMenuInner">
+                <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                    <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                </div>
+                <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                    <div class="elaLogo">标准品管理系统</div>
+                </div>
+                <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                    <div class="elaLogo">
+                          <div class="userInfoList" @click="login()">
+                              <div class="userInfoInner"><img class="loginimg" src="./img/loginimg.png" alt="头像"></div>
+                              <div class="userInfoInner">用户登录</div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="elaOption">
+            <div class="elaOptionInner">
+                <div class="elaOptionList">
+                    <div class="elaCard" style="margin-bottom:0.5rem;">
+                        <div class="elaCardTitle">
+                            <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">库存报警</font></div>
+                            <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
+                        </div>
+                        <div class="elaCardname">
+                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="elaCard">
+                      <div class="elaCard">
+                          <div class="elaCard4Img">
+                              <div class="elaCardInnerImg">
+                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看温度','')" style="background:url(./img/wendu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                    <div class="jiangexian"></div>
+                                    <div class="upImgBoxs">
+                                        <div class="dateshowl">
+                                            <div class="dateshowInner" @click="leftYear();">《</div>
+                                            <div class="dateshowInner" @click="leftMonth();">〈</div>
+                                            <div class="dateshowInner">
+                                                <div class="shownum">
+                                                    <div class="shownumInner">{{yy}}年</div>
+                                                    <div class="shownumInner">{{mm}} 月</div>
+                                                </div>
+                                            </div>
+                                            <div class="dateshowInner" @click="rightMonth();">〉</div>
+                                            <div class="dateshowInner" @click="rightYear();">》</div>
+                                        </div>
+                                        <div class="shownumZi">
+                                              <div class="shownumZiList">日</div>
+                                              <div class="shownumZiList">一</div>
+                                              <div class="shownumZiList">二</div>
+                                              <div class="shownumZiList">三</div>
+                                              <div class="shownumZiList">四</div>
+                                              <div class="shownumZiList">五</div>
+                                              <div class="shownumZiList">六</div>
+                                        </div>
+                                        <div class="shownumZi" v-for="(item_l,keys) in timeList">
+                                              <div class="shownumZiList selnoaction" v-for="item in item_l" v-if="item.flag==0">{{item.d}}</div>
+                                              <div class="shownumZiList riliaction" v-else-if="item.flag==2">{{item.d}}</div>
+                                              <div class="shownumZiList" v-else>{{item.d}}</div>
+                                        </div>
+                                    </div>
+                              </div>
+                              <div class="elaCardInnerImg">
+                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                    <div class="jiangexian"></div>
+                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="elaOptionList" style="position:relative;">
+                  <div class="elaCard2" style="margin-bottom:0.5rem;">
+                      <div class="elaCardright">
+                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','')">
+                              <div class="elaCardRuKu">
+                                  <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                              </div>
+                          </div>
+                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','')">
+                              <div class="elaCardRuKu">
+                                  <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="elaCard2">
+                      <div class="elaCardright">
+                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','standard/stock.html')">
+                              <div class="elaCardRuKu">
+                                  <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
+                              </div>
+                          </div>
+                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','standard/purchase.html')">
+                              <div class="elaCardRuKu">
+                                  <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="btnYuan" @click="utilitiePanel();"></div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <!-- 样品管理系统 -->
+  <div class="swiper-slide">
+      <div class="elaBoxs">
+        <div class="fuzuheight" style="height:1rem;"></div>
+        <div class="elaMenu">
+          <div class="elaMenuInner">
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                  <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+              </div>
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                  <div class="elaLogo">样品管理系统</div>
+              </div>
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                  <div class="elaLogo">
+                        <div class="userInfoList" @click="login()">
+                            <div class="userInfoInner"><img class="loginimg" src="./img/loginimg.png" alt="头像"></div>
+                            <div class="userInfoInner">用户登录</div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="elaOption">
+          <div class="elaOptionInner">
+              <div class="elaOptionList">
+                  <div class="elaCard" style="margin-bottom:0.5rem;">
+                      <div class="elaCardTitle">
+                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">库存报警</font></div>
+                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
+                      </div>
+                      <div class="elaCardname">
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                      </div>
+                  </div>
+                  <div class="elaCard">
+                    <div class="elaCard">
+                        <div class="elaCard4Img">
+                            <div class="elaCardInnerImg">
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看温度','')" style="background:url(./img/wendu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="jiangexian"></div>
+                                  <div class="upImgBoxs">
+                                      <div class="dateshowl">
+                                          <div class="dateshowInner" @click="leftYear();">《</div>
+                                          <div class="dateshowInner" @click="leftMonth();">〈</div>
+                                          <div class="dateshowInner">
+                                              <div class="shownum">
+                                                  <div class="shownumInner">{{yy}}年</div>
+                                                  <div class="shownumInner">{{mm}} 月</div>
+                                              </div>
+                                          </div>
+                                          <div class="dateshowInner" @click="rightMonth();">〉</div>
+                                          <div class="dateshowInner" @click="rightYear();">》</div>
+                                      </div>
+                                      <div class="shownumZi">
+                                            <div class="shownumZiList">日</div>
+                                            <div class="shownumZiList">一</div>
+                                            <div class="shownumZiList">二</div>
+                                            <div class="shownumZiList">三</div>
+                                            <div class="shownumZiList">四</div>
+                                            <div class="shownumZiList">五</div>
+                                            <div class="shownumZiList">六</div>
+                                      </div>
+                                      <div class="shownumZi" v-for="(item_l,keys) in timeList">
+                                            <div class="shownumZiList selnoaction" v-for="item in item_l" v-if="item.flag==0">{{item.d}}</div>
+                                            <div class="shownumZiList riliaction" v-else-if="item.flag==2">{{item.d}}</div>
+                                            <div class="shownumZiList" v-else>{{item.d}}</div>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="elaCardInnerImg">
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="jiangexian"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="elaOptionList" style="position:relative;">
+                <div class="elaCard2" style="margin-bottom:0.5rem;">
+                    <div class="elaCardright">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="elaCard2">
+                    <div class="elaCardright">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','standard/stock.html')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btnYuan" @click="utilitiePanel();"></div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- 仪器设备管理系统 -->
+  <div class="swiper-slide">
+      <div class="elaBoxs">
+        <div class="fuzuheight" style="height:1rem;"></div>
+        <div class="elaMenu">
+          <div class="elaMenuInner">
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                  <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+              </div>
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                  <div class="elaLogo">仪器设备管理系统</div>
+              </div>
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                  <div class="elaLogo">
+                        <div class="userInfoList" @click="login()">
+                            <div class="userInfoInner"><img class="loginimg" src="./img/loginimg.png" alt="头像"></div>
+                            <div class="userInfoInner">用户登录</div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="elaOption">
+          <div class="elaOptionInner">
+              <div class="elaOptionList">
+                  <div class="elaCard" style="margin-bottom:0.5rem;">
+                      <div class="elaCardTitle">
+                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">库存报警</font></div>
+                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
+                      </div>
+                      <div class="elaCardname">
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                      </div>
+                  </div>
+                  <div class="elaCard">
+                    <div class="elaCard">
+                        <div class="elaCard4Img">
+                            <div class="elaCardInnerImg">
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看温度','')" style="background:url(./img/wendu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="jiangexian"></div>
+                                  <div class="upImgBoxs">
+                                      <div class="dateshowl">
+                                          <div class="dateshowInner" @click="leftYear();">《</div>
+                                          <div class="dateshowInner" @click="leftMonth();">〈</div>
+                                          <div class="dateshowInner">
+                                              <div class="shownum">
+                                                  <div class="shownumInner">{{yy}}年</div>
+                                                  <div class="shownumInner">{{mm}} 月</div>
+                                              </div>
+                                          </div>
+                                          <div class="dateshowInner" @click="rightMonth();">〉</div>
+                                          <div class="dateshowInner" @click="rightYear();">》</div>
+                                      </div>
+                                      <div class="shownumZi">
+                                            <div class="shownumZiList">日</div>
+                                            <div class="shownumZiList">一</div>
+                                            <div class="shownumZiList">二</div>
+                                            <div class="shownumZiList">三</div>
+                                            <div class="shownumZiList">四</div>
+                                            <div class="shownumZiList">五</div>
+                                            <div class="shownumZiList">六</div>
+                                      </div>
+                                      <div class="shownumZi" v-for="(item_l,keys) in timeList">
+                                            <div class="shownumZiList selnoaction" v-for="item in item_l" v-if="item.flag==0">{{item.d}}</div>
+                                            <div class="shownumZiList riliaction" v-else-if="item.flag==2">{{item.d}}</div>
+                                            <div class="shownumZiList" v-else>{{item.d}}</div>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="elaCardInnerImg">
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="jiangexian"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="elaOptionList" style="position:relative;">
+                <div class="elaCard2" style="margin-bottom:0.5rem;">
+                    <div class="elaCardright">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="elaCard2">
+                    <div class="elaCardright">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','standard/stock.html')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btnYuan" @click="utilitiePanel();"></div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- 资料档案管理系统 -->
+  <div class="swiper-slide">
+      <div class="elaBoxs">
+        <div class="fuzuheight" style="height:1rem;"></div>
+        <div class="elaMenu">
+          <div class="elaMenuInner">
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                  <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+              </div>
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                  <div class="elaLogo">资料档案管理系统</div>
+              </div>
+              <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                  <div class="elaLogo">
+                        <div class="userInfoList" @click="login()">
+                            <div class="userInfoInner"><img class="loginimg" src="./img/loginimg.png" alt="头像"></div>
+                            <div class="userInfoInner">用户登录</div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="elaOption">
+          <div class="elaOptionInner">
+              <div class="elaOptionList">
+                  <div class="elaCard" style="margin-bottom:0.5rem;">
+                      <div class="elaCardTitle">
+                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">库存报警</font></div>
+                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
+                      </div>
+                      <div class="elaCardname">
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                      </div>
+                  </div>
+                  <div class="elaCard">
+                    <div class="elaCard">
+                        <div class="elaCard4Img">
+                            <div class="elaCardInnerImg">
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看温度','')" style="background:url(./img/wendu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="jiangexian"></div>
+                                  <div class="upImgBoxs">
+                                      <div class="dateshowl">
+                                          <div class="dateshowInner" @click="leftYear();">《</div>
+                                          <div class="dateshowInner" @click="leftMonth();">〈</div>
+                                          <div class="dateshowInner">
+                                              <div class="shownum">
+                                                  <div class="shownumInner">{{yy}}年</div>
+                                                  <div class="shownumInner">{{mm}} 月</div>
+                                              </div>
+                                          </div>
+                                          <div class="dateshowInner" @click="rightMonth();">〉</div>
+                                          <div class="dateshowInner" @click="rightYear();">》</div>
+                                      </div>
+                                      <div class="shownumZi">
+                                            <div class="shownumZiList">日</div>
+                                            <div class="shownumZiList">一</div>
+                                            <div class="shownumZiList">二</div>
+                                            <div class="shownumZiList">三</div>
+                                            <div class="shownumZiList">四</div>
+                                            <div class="shownumZiList">五</div>
+                                            <div class="shownumZiList">六</div>
+                                      </div>
+                                      <div class="shownumZi" v-for="(item_l,keys) in timeList">
+                                            <div class="shownumZiList selnoaction" v-for="item in item_l" v-if="item.flag==0">{{item.d}}</div>
+                                            <div class="shownumZiList riliaction" v-else-if="item.flag==2">{{item.d}}</div>
+                                            <div class="shownumZiList" v-else>{{item.d}}</div>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="elaCardInnerImg">
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="jiangexian"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="elaOptionList" style="position:relative;">
+                <div class="elaCard2" style="margin-bottom:0.5rem;">
+                    <div class="elaCardright">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="elaCard2">
+                    <div class="elaCardright">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','standard/stock.html')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','')">
+                            <div class="elaCardRuKu">
+                                <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btnYuan" @click="utilitiePanel();"></div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+<div class="elabvoice" style="display:none;"></div>
+<div class="networkBoxs" style="position:fixed;bottom:1rem;right:1.3rem;width:3.5rem;height:3.5rem;display:none;"><img src="./img/nonetwork.png" style="width:100%;"/></div>
+<div class="networkBoxs" style="position:fixed;bottom:1rem;right:1.3rem;width:3.5rem;height:3.5rem;display:none;"><img src="./img/network.png" style="width:100%;"/></div>
+</body>
+<script src="./js/CSG.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/showtime.js"></script>
+<script src="./js/resetlogin.js"></script>
+<script src="./js/disablescaling.js"></script>
+<script type="text/javascript" src="./keyboard/kbmodule.js" id="keyboard"></script>
+<script src="./js/qwebchannel.js"></script>
+<!--  实现部分  -->
+<script language="javascript">
+  app.setpicnicname(userId);
+  // 监听Python channel返回槽对像，赋值给 window.obj
+  document.addEventListener("DOMContentLoaded", function(){
+      new QWebChannel(qt.webChannelTransport, function(channel){
+            window.obj = channel.objects.obj;
+      })
+  })
+  // html触发函数
+  function onFactorial(url){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial(url, callback);
+      }
+  }
+  function onFactorial2(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial2(flag, callback);
+      }
+  }
+  function onFactorial5(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial5(flag, callback5);
+      }
+  }
+  function onFactorial6(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial6(flag, callback6);
+      }
+  }
+  function onFactorial7(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial7(flag, callback7);
+      }
+  }
+  function onFactorial10(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial10(flag, callback10);
+      }
+  }
+  function onFactorial11(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial11(flag, callback11);
+      }
+  }
+  function onFactorial12(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial12(flag, callback12);
+      }
+  }
+  setTimeout(function(){
+      onFactorial12('默认获取');
+  },1000);
+  function onFactorial13(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial13(flag, callback13);
+      }
+  }
+  function onFactorial14(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial14(flag, callback14);
+      }
+  }
+  function callback14(callback){
+      layer.close( updateIndexVersion );
+      if( callback == 'OK' ){
+          layer.msg('更新成功',{time:3000});
+          location.reload();
+      } else {
+          layer.msg('更新失败',{time:3000});
+      }
+  }
+  function onFactorial15(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial15(flag, callback15);
+      }
+  }
+  function onFactorial16(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial16(flag, callback16);
+      }
+  }
+  function onFactorial17(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial17(flag, callback17);
+      }
+  }
+  function onFactorial18(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial18(flag, callback18);
+      }
+  }
+  var objList = [], indexListPrint = '';
+  function callback16(callback){
+      //显示打印名列表
+      objList = JSON.parse(callback);
+      var html  = '<div>';
+          html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
+          html += '打印设置';
+          html += '</div>';
+          html += '<div class="layui-table-main printArea" style="margin:0.5rem;padding:0.5rem;max-height:25rem;background:#3789f5;overflow-y:auto;border-radius:0.2rem;">';
+          if( objList.length > 0 ){
+            for( var i=0; i<objList.length; i++ ){
+                html += '<div style="border-bottom:1px solid #99ccff;height:4rem;line-height:4rem;font-size:1.2rem;">';
+                html += '<label style="display:block;color:#ffecec;">';
+                html += '<input type="radio" name="p" '+(objList[i].df==1?'checked':'')+' onclick="selDefaultPrin('+i+')" style="height:1.5rem;width:1.5rem;position:relative;top:0.35rem;"/>  【标签打印机】  '+objList[i].name;
+                if( objList[i].df == 1 ){
+                  html += '<span class="defaultPrin" style="float:right;">√设为默认</span>';
+                }else{
+                  html += '<span class="defaultPrin" style="float:right;"></span>';
+                }
+                html += '</label>';
+                html += '</div>';
+            }
+          }else{
+            html += '<div style="height:4rem;line-height:4rem;font-size:1.2rem;color:#ffecec;text-align:center;">未安装</div>';
+          }
+          html += '</div>';
+          html += '<div style="border-top:1px solid #3789f5;position:absolute;bottom:0;left:0;width:100%;height:4rem;">';
+          html += '<div style="float:left;margin-top:0.4rem;padding:0.6rem;font-size:1.2rem;color:#333333;">目前有<span class="printNumber">'+(objList.length)+'</span>个打印驱动</div>';
+          html += '<div onclick="installingThePrintDriver()" style="border:1px solid #3789f5;background:#3789f5;float:right;padding:0.6rem;border-radius:0.2rem;font-size:1.2rem;color:#ffecec;margin-top:0.4rem;margin-right:0.8rem;">添加标签打印机驱动</div>';
+          html += '</div>';
+          html += '</div>';
+      indexListPrint = layer.open({
+          type: 1,
+          title:false,
+          skin: 'layui-layer-rim', //加上边框
+          area: ['40%', '55%'], //宽高
+          content: html
+      });
+      $(".layui-layer-content").css({"background":"#99ccff"});
+  }
+  //设置默认打印机
+  function selDefaultPrin(int){
+    var name = objList[int].name;
+    $(".defaultPrin").html('');
+    $(".defaultPrin:eq("+int+")").html('√设为默认');
+    onFactorial17(name)
+  }
+  function callback17(callback){
+    layer.msg(callback);
+  }
+  //安装打印机驱动
+  function installingThePrintDriver(){
+    onFactorial18('添加标签打印机驱动');
+  }
+  function callback18(callback){
+    layer.close(indexListPrint);
+    //layer.msg(callback);
+  }
+  function callback15(callback){}
+  // Python槽方法返回的数据
+  function callback(result){}
+  // 记录
+  function callback13(callback){
+      // 重载终端
+      layer.msg('用户ID设置成功',{shift:-1,time:2000},function(){
+          location.reload();
+      });
+  }
+  // Python槽方法返回的数据
+  function callback11(callback){
+      var obj = eval("("+callback+")");
+      if( obj.code == 'OK' ){
+          layer.prompt({
+            title: '更改用户ID',
+            value:obj.data,
+            formType: 0,
+            offset:'150px',
+            btn2:function(){
+                kb2.kbhide();
+            }
+          }, function(value, index){
+              if (isNaN(value)) {
+                  layer.msg('请输入数字！', {offset:'230px'});
+                  return;
+              }
+              var dataJson = JSON.stringify({"userid":value});
+              onFactorial13(dataJson);
+              kb2.kbhide();
+              layer.close(index);
+          });
+          $(".layui-layer-input").blur();
+          kb2 = new keyboard({
+              el:".layui-layer-input",
+              x:1.6,
+              keyHeight:"5rem",
+              fontSize:'1.8rem',
+              bottom:"6rem",
+              end:function(res,value){
+                  // console.log(res, value)
+                  if( res == 'OK' ){
+                      // layer.msg('完成提交');
+                  }else{
+                      // layer.msg('什么都不做');
+                  }
+              }
+          });
+          kb2.run();
+      }else{
+          layer.msg('终端权限口令有误，请重试', {shift:-1,time:3000}, function(){
+                userseting();
+          });
+      }
+  }
+  // 默认获取
+  function callback12(callback){
+      if( callback != userId ){
+          localStorage.setItem("userId", callback);
+          app.setpicnicname(callback);
+      }
+  }
+  // 扫描WIFI
+  function callback10(result){
+      layer.close(scanning);
+      layui.use(['form'], function(){
+            var form = layui.form;
+        var obj = eval("("+result+")");
+        var list = obj.show.split("<br/>");
+        var netlist = obj.net.split("<br/>");
+        var html  = '<div>';
+            html += '<blockquote class="layui-elem-quote layui-quote-nm">';
+            html += '连接网络';
+            html += '</blockquote>';
+            html += '<form class="layui-form" lay-filter="component-form-element" style="padding: 20px 30px 0 0;">';
+            html += '<div class="layui-form-item">';
+            html += '<label class="layui-form-label">wifi</label>';
+            html += '<div class="layui-input-block">';
+            html += '<select name="wifiname" lay-filter="college">';
+            for( var i=0; i<list.length; i++ ){
+                if(wifiname == list[i]){
+                    html += '<option value="'+i+'" selected="selected">'+list[i]+'</option>';
+                }else{
+                    html += '<option value="'+i+'">'+list[i]+'</option>';
+                }
+            }
+            html += '</select>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="layui-form-item">';
+            html += '<label class="layui-form-label">密码</label>';
+            html += '<div class="layui-input-block">';
+            html += '<input type="text" name="password" lay-verify="required" value="'+wifipassword+'" placeholder="请输入wifi密码" autocomplete="off" class="layui-input kbkey-input">';
+            html += '</div>';
+            html += '</div>';
+            html += '<div style="position:absolute;bottom:0;left:0;width:100%;z-index:2000;background:#FFFFFF;">';
+            html += '<div style="border-top:1px solid #F0F0F0;height:3rem;">';
+            html += '<div class="layui-form-item" style="float:right;margin-right:1rem;margin-top:0.8rem;">';
+            html += '<div class="layui-input-block">';
+            html += '<button class="layui-btn" lay-submit lay-filter="component-form-element">提交</button>';
+            html += '<button type="reset" class="layui-btn layui-btn-primary" onclick="resetClose();">取消</button>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '</form>';
+            html += '</div>';
+        setingIndex = layer.open({
+            type: 1,
+            title:false,
+            offset:'30px',
+            skin: 'layui-layer-rim', //加上边框
+            area: ['40%', '85%'], //宽高
+            content: html,
+            end:function(){
+                kb.kbhide();
+            }
+        });
+        form.on('submit(component-form-element)', function(res){
+
+              var pass = netlist[res.field.wifiname];
+              var password = res.field.password;
+
+              localStorage.setItem("wifiname", "");
+              localStorage.setItem("wifipassword", "");
+              localStorage.setItem("wifiname", pass);
+              localStorage.setItem("wifipassword", password);
+
+              var dataJson = JSON.stringify({"wifiname":pass,"password":password});
+              onFactorial5(dataJson);
+
+              layer.close(setingIndex);
+
+              return false;
+        });
+        form.render(null, 'component-form-element');
+        kb = new keyboard({
+            el:".kbkey-input",
+            x:1.6,
+            keyHeight:"5rem",
+            fontSize:'1.8rem',
+            bottom:"3rem",
+            end:function(res,value){
+                if( res == 'OK' ){
+                    // layer.msg('完成提交');
+                }else{
+                    // layer.msg('什么都不做');
+                }
+            }
+        });
+        kb.run();
+      });
+  }
+  // Python槽方法返回的数据
+  var wifiindex = '';
+  function callback5(result){
+      wifiindex = layer.msg('正在连接wifi...', {
+        icon: 16
+        ,shade: 0.01
+      });
+      setTimeout(function(){
+          onFactorial6('监测wifi连接状态')
+      },6000);
+  }
+  // Python槽方法返回的数据
+  function callback6(result){
+      layer.close(wifiindex);
+      if( result == 1 ){
+          layer.msg('wifi连接成功');
+          $(".networkBoxs:eq(1)").show(),$(".networkBoxs:eq(0)").hide();
+          location.reload();
+      }else{
+          $(".networkBoxs:eq(0)").show(),$(".networkBoxs:eq(1)").hide();
+          layer.msg('网络不可用，正在尝试连接...');
+      }
+  }
+  // Python槽方法返回的数据
+  function callback7(result){
+      if( result == 1 ){
+          $(".networkBoxs:eq(1)").show(),$(".networkBoxs:eq(0)").hide();
+      }else{
+          $(".networkBoxs:eq(0)").show(),$(".networkBoxs:eq(1)").hide();
+          localStorage.setItem("flagInIndexs", '');
+          layer.msg('网络不可用，正在尝试连接...',{shift:-1,time:3000},function(){
+                var dataJson = JSON.stringify({"wifiname":wifiname,"password":wifipassword});
+                onFactorial5(dataJson);
+                if( password == '' ){
+                    onFactorial10('扫描WIFI名称');
+                }
+          });
+      }
+  }
+  setTimeout(function(){
+      onFactorial7('监测wifi连接状态')
+  },3000);
+  // 扫描抢页面
+  function CSG(){
+      open("./csg.html","_self");
+  }
+  function resetClose(){
+      kb.kbhide();
+      layer.close(setingIndex);
+  }
+</script>
+</html>

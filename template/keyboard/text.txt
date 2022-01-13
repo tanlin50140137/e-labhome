@@ -1,0 +1,23 @@
+说明：
+jq自主开键盘
+安装说明：
+载入文件即可使用
+<script type="text/javascript" src="jquery-1.8.2.min.js" ></script>
+<script type="text/javascript" src="kbmodule.js" id="keyboard"></script>
+初始化
+<script>
+(function(){
+    var kb = new keyboard({
+        x:1.6,
+        keyHeight:"5rem",
+        fontSize:'1.8rem',
+        bottom:"5rem"
+    });
+    kb.run();
+})()
+</script>
+字段说明：
+x , 取值范围(1~2)间， 表示键盘宽度
+keyHeight , 单位(rem,em,px)，表示按键高度
+fontSize , 单位(rem,em,px)，表示按键字体大小
+bottom , 单位(rem,em,px)，表示键盘初始化底部居中并与底部间距5rem
