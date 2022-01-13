@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt, QObject
 from ela import mainela, factorial, elabprinter, connectwifi, recordvideo, elabversionupdate, elabcommunicat
 
 """
-打包命令必须是:
+打包命令必须是:记得要用这个来编译
 pyinstaller --hidden-import=websockets.legacy.auth --hidden-import=websockets.client --hidden-import=websockets.server -F -w -i template/img/logo.ico ./elabhome.py
 """
 
