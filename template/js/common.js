@@ -457,8 +457,7 @@ function backIndex(){
     window.location.href="resetlogin.html"
 }
 //获取url传参部分
-function getQueryString()
-{
+function getQueryString() {
 	var name = window.location.search;
 	if( name != undefined )
 	{
@@ -470,4 +469,35 @@ function getQueryString()
 	{
 		return 0;
 	}
+}
+
+// 圆盘特效
+var angleStart = -360;
+// jquery rotate animation
+function rotate(li,d) {
+    $({d:angleStart}).animate({d:d}, {
+        step: function(now) {
+            $(li).css({transform:'rotate('+now+'deg)'}).find('label').css({transform:'rotate('+(-now)+'deg)'});
+        },
+        duration: 0
+    });
+}
+// show / hide the options
+function toggleOptions(s) {
+    $(s).toggleClass('open');
+    var li = $(s).find('li');
+    var deg = $(s).hasClass('half') ? 180/(li.length-1) : 360/li.length;
+
+    for(var i=0; i<li.length; i++) {
+        var d = $(s).hasClass('half') ? (i*deg)-90 : i*deg;
+        $(s).hasClass('open') ? rotate(li[i], d) : rotate(li[i], angleStart);
+    }
+
+    if( $(s).hasClass('open') == true ){
+        $(s).find("button").eq(0).hide();
+        $(s).find("button").eq(1).show();
+    }else{
+        $(s).find("button").eq(1).hide();
+        $(s).find("button").eq(0).show();
+    }
 }

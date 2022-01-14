@@ -116,14 +116,89 @@ font-weight:700;}
   border-radius: 10px;  /*滚动条的背景区域的圆角*/
   background-color: #F0F0F0;/*滚动条的背景颜色*/
 }
-.layui-table-main::-webkit-scrollbar-thumb
-{
+.layui-table-main::-webkit-scrollbar-thumb{
     border-radius: 10px;  /*滚动条的圆角*/
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #d0d0d0;  /*滚动条的背景颜色*/
 }
-/* .layui-table tr th{border:1px solid #9e9d9d !important;border-left:none!important;} */
 .layui-table tr td{border:1px solid #9e9d9d !important;border-left:none!important;}
 .layui-table-view{border:1px solid #9e9d9d !important;}
 .layui-table-page{border-top:1px solid #9e9d9d !important;}
 .layui-input{border:1px solid #9e9d9d !important;}
+/* 圆盘特效 */
+.selector {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16rem;
+  height: 16rem;
+  margin-top: -8rem;
+  margin-left: -8rem;
+}
+.selector, .selector button {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+}
+.selector button {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 50%;
+  border: 0;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  transition: all .1s;
+  background-color:transparent;
+  border-style:none;
+}
+.selector ul {
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  top: -20px;
+  right: -20px;
+  bottom: -20px;
+  left: -20px;
+}
+.selector li {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  margin: 0 50%;
+  -webkit-transform: rotate(-360deg);
+  transition: all 0.8s ease-in-out;
+}
+.selector li input {
+  display: none;
+}
+.selector li input + label {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 0;
+  height: 0;
+  line-height: 1px;
+  margin-left: 0;
+  background: #FF5722;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;
+  color:#FFFFFF;
+}
+.selector.open li input + label {
+  width: 100px;
+  height: 80px;
+  line-height: 80px;
+  margin-left: -40px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-weight: bold;
+}
