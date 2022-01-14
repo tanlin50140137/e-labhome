@@ -470,6 +470,10 @@ function getQueryString() {
 		return 0;
 	}
 }
+// 关于我们
+function aboutus(){
+  alert(123);
+}
 
 // 圆盘特效
 var angleStart = -360;
