@@ -58,6 +58,13 @@ class Elamain:
 
         # 创建浏览器对像
         self.browser = WebEngineView()
+
+        # 设置视频
+        self.browser.settings().setAttribute(QtWebEngineWidgets.QWebEngineSettings.PluginsEnabled, True)
+        self.browser.settings().setAttribute(QtWebEngineWidgets.QWebEngineSettings.JavascriptEnabled, True)
+        self.browser.settings().setAttribute(QtWebEngineWidgets.QWebEngineSettings.FullScreenSupportEnabled, True)
+        self.browser.page().fullScreenRequested.connect(self._fullScreenRequested)
+
         # 清空缓存
         objProfile = self.browser.page().profile()
         objProfile.clearHttpCache()
@@ -100,6 +107,10 @@ class Elamain:
         # 绑定信号
         factorial.signalHtml19.connect(self.sendSignalHtml19)
 
+    # 缩放视频
+    def _fullScreenRequested(self, request):
+        request.accept()
+        self.browser.showFullScreen()
 
     # 执行打印-线程调用
     def abc(self, n):

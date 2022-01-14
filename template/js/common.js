@@ -472,7 +472,21 @@ function getQueryString() {
 }
 // 关于我们
 function aboutus(){
-  alert(123);
+  var html = '<div style="width:900px;height:600px;margin:1.1rem auto 0 auto;"><video width="100%" height="100%" controls autoplay="autoplay">';
+        //不支持MP4
+        //html += '<source src="https://www.runoob.com/try/demo_source/movie.mp4" type="video/mp4">';
+        //pyQt5默认支持ogg格式
+        //html += '<source src="KZY-mini2.ogg" type="video/ogg">';
+        html += '<source src="./KZY/KZY-mini2.webm" type="video/webm">';
+        html += '您的浏览器不支持 video 标签。';
+        html += '</video></div>';
+    layer.open({
+            type: 1,
+            title: false,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['950px', '650px'], //宽高
+            content: html
+    });
 }
 
 // 圆盘特效
