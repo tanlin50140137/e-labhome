@@ -197,10 +197,10 @@
                     <div class="elaLogo">标准品管理系统</div>
                 </div>
                 <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                    <div class="elaLogo">
-                          <div class="userInfoList" @click="login()">
-                              <div class="userInfoInner"><img class="loginimg" src="./img/loginimg.png" alt="头像"></div>
-                              <div class="userInfoInner">用户登录</div>
+                    <div class="elaLogo" onclick="Get2D();">
+                          <div class="userInfoList">
+                              <div class="userInfoInner loginimgpic" v-html="picurl"></div>
+                              <div class="userInfoInner nicknametitle" v-html="nicname"></div>
                           </div>
                     </div>
                 </div>
@@ -292,7 +292,51 @@
                           </div>
                       </div>
                   </div>
-                  <div class="btnYuan" @click="utilitiePanel();"></div>
+                  <!-- 中间按钮 -->
+                  <div class="btnYuan">
+                        <div class='selector2'>
+                        <ul>
+                          <li>
+                            <input id='1' type='checkbox'>
+                            <label for='1' onclick="connectwifi();">连接WIFI</label>
+                          </li>
+                          <li>
+                            <input id='2' type='checkbox'>
+                            <label for='2' onclick="userseting();">修改账号</label>
+                          </li>
+                          <li>
+                            <input id='3' type='checkbox'>
+                            <label for='3' onclick="heavyloadTerminal();">平台刷新</label>
+                          </li>
+                          <li>
+                            <input id='4' type='checkbox'>
+                            <label for='4' onclick="updatedVersion(1);">更新系统</label>
+                          </li>
+                          <li>
+                            <input id='5' type='checkbox'>
+                            <label for='5' onclick="closeTerminal();">关闭系统</label>
+                          </li>
+                          <li>
+                            <input id='6' type='checkbox'>
+                            <label for='6' onclick="restartTerminal();">重启系统</label>
+                          </li>
+                          <li>
+                            <input id='7' type='checkbox'>
+                            <label for='7' onclick="aboutus()">关于我们</label>
+                          </li>
+                          <li>
+                            <input id='8' type='checkbox'>
+                            <label for='8' onclick="userManagement();">用户管理</label>
+                          </li>
+                          <li>
+                            <input id='9' type='checkbox'>
+                            <label for='9' onclick="associatedSystem();">打印设置</label>
+                          </li>
+                        </ul>
+                        <button onclick="toggleOptions('.selector2');"></button>
+                        <button onclick="toggleOptions('.selector2');" style="display:none;background:rgb(0,51,168,0.5);color:#FFFFFF;font-size:2.2rem;">关闭选项</button>
+                      </div>
+                  </div>
                 </div>
             </div>
           </div>
@@ -311,10 +355,10 @@
                   <div class="elaLogo">样品管理系统</div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                  <div class="elaLogo">
-                        <div class="userInfoList" @click="login()">
-                            <div class="userInfoInner"><img class="loginimg" src="./img/loginimg.png" alt="头像"></div>
-                            <div class="userInfoInner">用户登录</div>
+                  <div class="elaLogo" onclick="Get2D();">
+                        <div class="userInfoList">
+                            <div class="userInfoInner loginimgpic" v-html="picurl"></div>
+                            <div class="userInfoInner nicknametitle" v-html="nicname"></div>
                         </div>
                   </div>
               </div>
@@ -406,7 +450,51 @@
                         </div>
                     </div>
                 </div>
-                <div class="btnYuan" @click="utilitiePanel();"></div>
+                <!-- 中间按钮 -->
+                <div class="btnYuan">
+                      <div class='selector3'>
+                      <ul>
+                        <li>
+                          <input id='1' type='checkbox'>
+                          <label for='1' onclick="connectwifi();">连接WIFI</label>
+                        </li>
+                        <li>
+                          <input id='2' type='checkbox'>
+                          <label for='2' onclick="userseting();">修改账号</label>
+                        </li>
+                        <li>
+                          <input id='3' type='checkbox'>
+                          <label for='3' onclick="heavyloadTerminal();">平台刷新</label>
+                        </li>
+                        <li>
+                          <input id='4' type='checkbox'>
+                          <label for='4' onclick="updatedVersion(1);">更新系统</label>
+                        </li>
+                        <li>
+                          <input id='5' type='checkbox'>
+                          <label for='5' onclick="closeTerminal();">关闭系统</label>
+                        </li>
+                        <li>
+                          <input id='6' type='checkbox'>
+                          <label for='6' onclick="restartTerminal();">重启系统</label>
+                        </li>
+                        <li>
+                          <input id='7' type='checkbox'>
+                          <label for='7' onclick="aboutus()">关于我们</label>
+                        </li>
+                        <li>
+                          <input id='8' type='checkbox'>
+                          <label for='8' onclick="userManagement();">用户管理</label>
+                        </li>
+                        <li>
+                          <input id='9' type='checkbox'>
+                          <label for='9' onclick="associatedSystem();">打印设置</label>
+                        </li>
+                      </ul>
+                      <button onclick="toggleOptions('.selector3');"></button>
+                      <button onclick="toggleOptions('.selector3');" style="display:none;background:rgb(0,51,168,0.5);color:#FFFFFF;font-size:2.2rem;">关闭选项</button>
+                    </div>
+                </div>
               </div>
           </div>
         </div>
@@ -425,10 +513,10 @@
                   <div class="elaLogo">仪器设备管理系统</div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                  <div class="elaLogo">
-                        <div class="userInfoList" @click="login()">
-                            <div class="userInfoInner"><img class="loginimg" src="./img/loginimg.png" alt="头像"></div>
-                            <div class="userInfoInner">用户登录</div>
+                  <div class="elaLogo" onclick="Get2D();">
+                        <div class="userInfoList">
+                            <div class="userInfoInner loginimgpic" v-html="picurl"></div>
+                            <div class="userInfoInner nicknametitle" v-html="nicname"></div>
                         </div>
                   </div>
               </div>
@@ -520,7 +608,51 @@
                         </div>
                     </div>
                 </div>
-                <div class="btnYuan" @click="utilitiePanel();"></div>
+                <!-- 中间按钮 -->
+                <div class="btnYuan">
+                      <div class='selector4'>
+                      <ul>
+                        <li>
+                          <input id='1' type='checkbox'>
+                          <label for='1' onclick="connectwifi();">连接WIFI</label>
+                        </li>
+                        <li>
+                          <input id='2' type='checkbox'>
+                          <label for='2' onclick="userseting();">修改账号</label>
+                        </li>
+                        <li>
+                          <input id='3' type='checkbox'>
+                          <label for='3' onclick="heavyloadTerminal();">平台刷新</label>
+                        </li>
+                        <li>
+                          <input id='4' type='checkbox'>
+                          <label for='4' onclick="updatedVersion(1);">更新系统</label>
+                        </li>
+                        <li>
+                          <input id='5' type='checkbox'>
+                          <label for='5' onclick="closeTerminal();">关闭系统</label>
+                        </li>
+                        <li>
+                          <input id='6' type='checkbox'>
+                          <label for='6' onclick="restartTerminal();">重启系统</label>
+                        </li>
+                        <li>
+                          <input id='7' type='checkbox'>
+                          <label for='7' onclick="aboutus()">关于我们</label>
+                        </li>
+                        <li>
+                          <input id='8' type='checkbox'>
+                          <label for='8' onclick="userManagement();">用户管理</label>
+                        </li>
+                        <li>
+                          <input id='9' type='checkbox'>
+                          <label for='9' onclick="associatedSystem();">打印设置</label>
+                        </li>
+                      </ul>
+                      <button onclick="toggleOptions('.selector4');"></button>
+                      <button onclick="toggleOptions('.selector4');" style="display:none;background:rgb(0,51,168,0.5);color:#FFFFFF;font-size:2.2rem;">关闭选项</button>
+                    </div>
+                </div>
               </div>
           </div>
         </div>
@@ -539,10 +671,10 @@
                   <div class="elaLogo">资料档案管理系统</div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                  <div class="elaLogo">
-                        <div class="userInfoList" @click="login()">
-                            <div class="userInfoInner"><img class="loginimg" src="./img/loginimg.png" alt="头像"></div>
-                            <div class="userInfoInner">用户登录</div>
+                  <div class="elaLogo" onclick="Get2D();">
+                        <div class="userInfoList">
+                            <div class="userInfoInner loginimgpic" v-html="picurl"></div>
+                            <div class="userInfoInner nicknametitle" v-html="nicname"></div>
                         </div>
                   </div>
               </div>
@@ -634,7 +766,51 @@
                         </div>
                     </div>
                 </div>
-                <div class="btnYuan" @click="utilitiePanel();"></div>
+                <!-- 中间按钮 -->
+                <div class="btnYuan">
+                      <div class='selector5'>
+                      <ul>
+                        <li>
+                          <input id='1' type='checkbox'>
+                          <label for='1' onclick="connectwifi();">连接WIFI</label>
+                        </li>
+                        <li>
+                          <input id='2' type='checkbox'>
+                          <label for='2' onclick="userseting();">修改账号</label>
+                        </li>
+                        <li>
+                          <input id='3' type='checkbox'>
+                          <label for='3' onclick="heavyloadTerminal();">平台刷新</label>
+                        </li>
+                        <li>
+                          <input id='4' type='checkbox'>
+                          <label for='4' onclick="updatedVersion(1);">更新系统</label>
+                        </li>
+                        <li>
+                          <input id='5' type='checkbox'>
+                          <label for='5' onclick="closeTerminal();">关闭系统</label>
+                        </li>
+                        <li>
+                          <input id='6' type='checkbox'>
+                          <label for='6' onclick="restartTerminal();">重启系统</label>
+                        </li>
+                        <li>
+                          <input id='7' type='checkbox'>
+                          <label for='7' onclick="aboutus()">关于我们</label>
+                        </li>
+                        <li>
+                          <input id='8' type='checkbox'>
+                          <label for='8' onclick="userManagement();">用户管理</label>
+                        </li>
+                        <li>
+                          <input id='9' type='checkbox'>
+                          <label for='9' onclick="associatedSystem();">打印设置</label>
+                        </li>
+                      </ul>
+                      <button onclick="toggleOptions('.selector5');"></button>
+                      <button onclick="toggleOptions('.selector5');" style="display:none;background:rgb(0,51,168,0.5);color:#FFFFFF;font-size:2.2rem;">关闭选项</button>
+                    </div>
+                </div>
               </div>
           </div>
         </div>

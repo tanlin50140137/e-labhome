@@ -125,80 +125,48 @@ font-weight:700;}
 .layui-table-view{border:1px solid #9e9d9d !important;}
 .layui-table-page{border-top:1px solid #9e9d9d !important;}
 .layui-input{border:1px solid #9e9d9d !important;}
-/* 圆盘特效 */
-.selector {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 16rem;
-  height: 16rem;
-  margin-top: -8rem;
-  margin-left: -8rem;
-}
-.selector, .selector button {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 300;
-}
-.selector button {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  border-radius: 50%;
-  border: 0;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  transition: all .1s;
-  background-color:transparent;
-  border-style:none;
-}
-.selector ul {
-  position: absolute;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  top: -20px;
-  right: -20px;
-  bottom: -20px;
-  left: -20px;
-}
-.selector li {
-  position: absolute;
-  width: 0;
-  height: 100%;
-  margin: 0 50%;
-  -webkit-transform: rotate(-360deg);
-  transition: all 0.8s ease-in-out;
-}
-.selector li input {
-  display: none;
-}
-.selector li input + label {
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  width: 0;
-  height: 0;
-  line-height: 1px;
-  margin-left: 0;
-  background: #0033a8;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 1px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: none;
-  transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;
-  color:#FFFFFF;
-}
-.selector.open li input + label {
-  width: 100px;
-  height: 80px;
-  line-height: 80px;
-  margin-left: -40px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  font-size: 18px;
-  font-weight: bold;
-}
+/* 圆盘特效-试剂耗材管理系统 */
+.selector {position: absolute;left: 50%;top: 50%;width: 16rem;height: 16rem;margin-top: -8rem;margin-left: -8rem;}
+.selector, .selector button {font-family: 'Oswald', sans-serif;font-weight: 300;}
+.selector button {position: relative;width: 100%;height: 100%;padding: 10px;border-radius: 50%;border: 0;color: white;font-size: 20px;cursor: pointer;box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);transition: all .1s;background-color:transparent;border-style:none;}
+.selector ul {position: absolute;list-style: none;padding: 0;margin: 0;top: -20px;right: -20px;bottom: -20px;left: -20px;}
+.selector li {position: absolute;width: 0;height: 100%;margin: 0 50%;-webkit-transform: rotate(-360deg);transition: all 0.8s ease-in-out;}
+.selector li input {display: none;}
+.selector li input + label {position: absolute;left: 50%;bottom: 100%;width: 0;height: 0;line-height: 1px;margin-left: 0;background:#0033a8;border-radius: 50%;text-align:center;font-size: 1px;overflow: hidden;cursor: pointer;box-shadow: none;transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;color:#FFFFFF;}
+.selector.open li input + label {width:100px;height:80px;line-height:80px;margin-left:-40px;box-shadow:0 3px 3px rgba(0, 0, 0, 0.1);font-size:18px;font-weight: bold;}
+/* 圆盘特效-标准品管理系统 */
+.selector2 {position: absolute;left: 50%;top: 50%;width: 16rem;height: 16rem;margin-top: -8rem;margin-left: -8rem;}
+.selector2, .selector2 button {font-family: 'Oswald', sans-serif;font-weight: 300;}
+.selector2 button {position: relative;width: 100%;height: 100%;padding: 10px;border-radius: 50%;border: 0;color: white;font-size: 20px;cursor: pointer;box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);transition: all .1s;background-color:transparent;border-style:none;}
+.selector2 ul {position: absolute;list-style: none;padding: 0;margin: 0;top: -20px;right: -20px;bottom: -20px;left: -20px;}
+.selector2 li {position: absolute;width: 0;height: 100%;margin: 0 50%;-webkit-transform: rotate(-360deg);transition: all 0.8s ease-in-out;}
+.selector2 li input {display: none;}
+.selector2 li input + label {position: absolute;left: 50%;bottom: 100%;width: 0;height: 0;line-height: 1px;margin-left: 0;background:#0033a8;border-radius: 50%;text-align:center;font-size: 1px;overflow: hidden;cursor: pointer;box-shadow: none;transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;color:#FFFFFF;}
+.selector2.open li input + label {width:100px;height:80px;line-height:80px;margin-left:-40px;box-shadow:0 3px 3px rgba(0, 0, 0, 0.1);font-size:18px;font-weight: bold;}
+/* 圆盘特效-样品管理系统 */
+.selector3 {position: absolute;left: 50%;top: 50%;width: 16rem;height: 16rem;margin-top: -8rem;margin-left: -8rem;}
+.selector3, .selector3 button {font-family: 'Oswald', sans-serif;font-weight: 300;}
+.selector3 button {position: relative;width: 100%;height: 100%;padding: 10px;border-radius: 50%;border: 0;color: white;font-size: 20px;cursor: pointer;box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);transition: all .1s;background-color:transparent;border-style:none;}
+.selector3 ul {position: absolute;list-style: none;padding: 0;margin: 0;top: -20px;right: -20px;bottom: -20px;left: -20px;}
+.selector3 li {position: absolute;width: 0;height: 100%;margin: 0 50%;-webkit-transform: rotate(-360deg);transition: all 0.8s ease-in-out;}
+.selector3 li input {display: none;}
+.selector3 li input + label {position: absolute;left: 50%;bottom: 100%;width: 0;height: 0;line-height: 1px;margin-left: 0;background:#0033a8;border-radius: 50%;text-align:center;font-size: 1px;overflow: hidden;cursor: pointer;box-shadow: none;transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;color:#FFFFFF;}
+.selector3.open li input + label {width:100px;height:80px;line-height:80px;margin-left:-40px;box-shadow:0 3px 3px rgba(0, 0, 0, 0.1);font-size:18px;font-weight: bold;}
+/* 圆盘特效-仪器耗材管理系统 */
+.selector4 {position: absolute;left: 50%;top: 50%;width: 16rem;height: 16rem;margin-top: -8rem;margin-left: -8rem;}
+.selector4, .selector4 button {font-family: 'Oswald', sans-serif;font-weight: 300;}
+.selector4 button {position: relative;width: 100%;height: 100%;padding: 10px;border-radius: 50%;border: 0;color: white;font-size: 20px;cursor: pointer;box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);transition: all .1s;background-color:transparent;border-style:none;}
+.selector4 ul {position: absolute;list-style: none;padding: 0;margin: 0;top: -20px;right: -20px;bottom: -20px;left: -20px;}
+.selector4 li {position: absolute;width: 0;height: 100%;margin: 0 50%;-webkit-transform: rotate(-360deg);transition: all 0.8s ease-in-out;}
+.selector4 li input {display: none;}
+.selector4 li input + label {position: absolute;left: 50%;bottom: 100%;width: 0;height: 0;line-height: 1px;margin-left: 0;background:#0033a8;border-radius: 50%;text-align:center;font-size: 1px;overflow: hidden;cursor: pointer;box-shadow: none;transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;color:#FFFFFF;}
+.selector4.open li input + label {width:100px;height:80px;line-height:80px;margin-left:-40px;box-shadow:0 3px 3px rgba(0, 0, 0, 0.1);font-size:18px;font-weight: bold;}
+/* 圆盘特效-资料档案管理系统 */
+.selector5 {position: absolute;left: 50%;top: 50%;width: 16rem;height: 16rem;margin-top: -8rem;margin-left: -8rem;}
+.selector5, .selector5 button {font-family: 'Oswald', sans-serif;font-weight: 300;}
+.selector5 button {position: relative;width: 100%;height: 100%;padding: 10px;border-radius: 50%;border: 0;color: white;font-size: 20px;cursor: pointer;box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);transition: all .1s;background-color:transparent;border-style:none;}
+.selector5 ul {position: absolute;list-style: none;padding: 0;margin: 0;top: -20px;right: -20px;bottom: -20px;left: -20px;}
+.selector5 li {position: absolute;width: 0;height: 100%;margin: 0 50%;-webkit-transform: rotate(-360deg);transition: all 0.8s ease-in-out;}
+.selector5 li input {display: none;}
+.selector5 li input + label {position: absolute;left: 50%;bottom: 100%;width: 0;height: 0;line-height: 1px;margin-left: 0;background:#0033a8;border-radius: 50%;text-align:center;font-size: 1px;overflow: hidden;cursor: pointer;box-shadow: none;transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;color:#FFFFFF;}
+.selector5.open li input + label {width:100px;height:80px;line-height:80px;margin-left:-40px;box-shadow:0 3px 3px rgba(0, 0, 0, 0.1);font-size:18px;font-weight: bold;}
