@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新品入库</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../layer/theme/default/layer.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/stock.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/qrcode.min.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="../layer/layer.js"></script>
+    <style>
+    .layui-table-cell{
+      height:3.24rem;
+      line-height:3.24rem;
+    }
+    .layui-table-cell span{
+        font-size:1.4rem;
+        font-weight:700;
+    }
+    #layui-table-page1 .layui-laypage-limits{
+        display: none;
+    }
+    .layui-btn{
+        height:2.8rem;
+        line-height:2.8rem;
+        font-size:1.2rem;
+        padding:0 0.9rem;
+    }
+    #layui-table-page1 .layui-laypage-curr{
+        padding:0 20px;
+    }
+    .layui-form-label,.layui-layer-title{font-size:1rem;font-weight:700;color:#666666;}
+    .layui-input{font-size:1rem;border:1px solid #a2a1a1;}
+    .layui-unselect span{font-size:1rem;}
+    .layui-form-select dl{max-height:600px; !important;}
+    </style>
+</head>
+<body>
+<div class="swiper-container" id="Vueapp">
+          <div class="elaBoxs">
+            <div class="fuzuheight" style="height:1rem;"></div>
+            <div class="elaMenu">
+              <div class="elaMenuInner">
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo" onclick="backIndex();" style="background: #99ccff url(../img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                      <div class="elaLogo">打印二维码(新品入库)</div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo">
+                            <div class="userInfoList" onclick="back()">
+                                <div class="userInfoInner"><img class="loginimg" src="../img/bcak.png" alt="头像"></div>
+                                <div class="userInfoInner">返回上一步</div>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="elaOption">
+                <div class="tablesBoxs">
+                    <div class="layui-fluid">
+                      <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md12">
+                          <div class="layui-card">
+                            <div class="layui-card-header">新品列表</div>
+                            <div class="layui-card-body">
+                              <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                                <button class="layui-btn" data-type="add" style="padding:0 14px;height:2.19rem;line-height:2.19rem;">添加新产品</button>
+                              </div>
+
+                              <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
+
+                              <script type="text/html" id="test-table-operate-barDemo">
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">打印二维码</a>
+                                <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+                                <a class="layui-btn layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i></a>
+                              </script>
+                              <script type="text/html" id="stauts_txt">
+                          				{{#  if(d.status == 'publish'){ }}
+                            				<button class="layui-btn layui-btn-xs">通过</button>
+                          				{{#  } else { }}
+                            				<button class="layui-btn layui-btn-danger layui-btn-xs">审核中</button>
+                          				{{#  } }}
+                        			</script>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+<script src="../js/common.js"></script>
+<script src="../js/CSG.js"></script>
+<script type="text/javascript" src="../keyboard/kbmodule.js" id="keyboard"></script>
+<script src="../js/qwebchannel.js"></script>
+<script>
+// 监听Python channel返回槽对像，赋值给 window.obj
+document.addEventListener("DOMContentLoaded", function(){
+    new QWebChannel(qt.webChannelTransport, function(channel){
+          window.obj = channel.objects.obj;
+    })
+})
+// html触发函数
+function onFactorial(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial(url, callback);
+    }
+}
+// html触发函数
+function onFactorial9(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial9(url, callback);
+    }
+}
+// html触发函数
+function onFactorial19(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial19(url, callback19);
+    }
+}
+// Python槽方法返回的数据
+function callback(result){}
+// 操作串口
+function callback19(result){
+    // layer.alert(result)
+}
+//
+var qrcode = '';
+var kb = '',kb2='',page = 1,table='',form='',indexcloseframe='',element='';
+var objnewproduct = '';
+var data2=[],childrenData=[];
+var windows = $(window).height();
+var fuzuheight = $(".fuzuheight").height();
+var elaMenu = $(".elaMenu").height();
+var height = windows-(fuzuheight+elaMenu)-185;
+layui.use(['table','form'], function(){
+  table = layui.table;
+  form = layui.form;
+  element = layui.element;
+  //第一个实例
+  table.render({
+    elem: '#test-table-operate'
+    ,height: height
+    ,url:url+'apiequ/putin/my_post_list?userId='+userId
+    ,page: {
+      layout: [ 'prev', 'page', 'next', 'skip','count'],
+      limit:10
+    }
+    ,cols: [[ //表头
+      {field: 'postId', title: '产品ID', sort: true, fixed: 'left', width:120, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'productName', title: '产品名称', align:'center', style:'font-size:1.2rem'}
+      ,{field: 'manufacturer', title: '厂商名称', align:'center', style:'font-size:1.2rem'}
+      ,{field: 'productType', title: '产品类型', width:120, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'punit', title: '单位', width:120, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'price', title: '产品价格', width:120, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'productNum', title: '数量', width:120, align:'center', style:'font-size:1.2rem'}
+      ,{width:320, align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
+    ]]
+    ,done: function(res, curr, count){
+    	    //得到当前页码
+    	    page = curr;
+    	    //得到数据总量
+    	    // console.log(res);
+    	}
+  });
+  //监听工具条
+  table.on('tool(test-table-operate)', function(obj){
+        var data = obj.data;
+        var pInfo = data;
+        if( obj.event === 'detail' ){
+          //打印二维码
+          layer.confirm('是否打印二维码？', {
+              title:false,
+              btn: ['确定','取消'] //按钮
+            }, function(){
+              layer.msg('正在打印二维码...',{shift:-1,time:2000},function(){
+                  $.post(url+'apiequ/stock/makeqrcode',{userId:userId,postId:data.postId,productType:data.productType},function(res){
+                        var data = JSON.parse(res);
+                        onFactorial(data.url);
+                  });
+              });
+            }, function(){});
+        }else if( obj.event === 'delete' ){
+            var html = '<div style="margin:0.5rem;">';
+                html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
+                html += '删除操作，需要扫描管理员身份二维码';
+                html += '</div>';
+                html += '<div class="layui-container" style="width:100%;border-top:1px solid #999999;padding:1rem 0;">';
+                html += '<div class="layui-row" style="margin-bottom:1rem;padding:0 1rem;">';
+                html += '<div class="layuikuang" style="border:2px solid #6fb729;height:5rem;border-radius:0.5rem;overflow:hidden;position:relative;">';
+                html += '<input type="text" id="listen3" placeholder="允许扫描" style="height:5rem;width:100%;text-align:center;font-size:1.2rem;border:none;background:#F0F0F0;color:#666666;"/>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div style="font-size:1.1rem;color:#b5b0b0;padding:0 1rem;">温馨提示：显示绿色边框时允许扫描，显示红色边框时禁止扫描。</div>';
+                html += '</div>';
+                html += '<div id="userNameBoxs3" style="padding:1rem;color:#213fd0;font-size:1.2rem;display:none;">删除成功－〉操作人：<span id="userName2"></span></div>';
+                html += '<div id="userNameBoxs4" style="padding:1rem;color:red;font-size:1.2rem;display:none;"></div>';
+                html += '</div>';
+             var indexnexts = layer.open({
+                type: 1,
+                title:false,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['620px', '300px'], //宽高
+                content: html
+             });
+             $("#listen3").focus(function(){
+                  $(".layuikuang").css({"border":"2px solid #6fb729"});
+                  $(this).attr({"placeholder":"允许扫描"});
+             }).blur(function(){
+                  $(".layuikuang").css({"border":"2px solid red"});
+                  $(this).attr({"placeholder":"禁止扫描"});
+             });
+             var cs3 = new CodeScanningGrab({
+               el:"#listen3",
+               addClick:".layernoneouto",
+               addClass:".inputBoxs",
+               time:2000,
+               success:function(res){
+                  var id = res;
+                  //验证管理员身份
+                  $.ajax({
+                      url:url+"apiequ/basic/name_bind_qrcode",
+                      data:{userId:userId,id:id},
+                      success:function(info){
+                          var obj = JSON.parse(info);
+                          if(obj.code == 0 ){
+                              $("#userNameBoxs4").hide();
+                              $("#userNameBoxs3").show();
+                              $("#userName2").html(obj.data.name);
+                              if( obj.data.status=="ok" ){
+                                  if( obj.data.role == 1 ){
+                                    //删除
+                                    $.post(url+'apiequ/putin/delete_my_post',{termId:pInfo.termId},function(res){
+                                          if( res.code == 0 ){
+                                              layer.msg(res.msg,{shade: -0.01},function(){
+                                                  layer.close(indexnexts);
+                                                  table.reload('test-table-operate', {
+                                                      page: {
+                                                          curr: page //重新从第 1 页开始
+                                                      }
+                                                  });
+                                              });
+                                          }else{
+                                             layer.msg(res.msg);
+                                          }
+                                    });
+                                  }else{
+                                      $("#userNameBoxs1").hide();
+                                      $("#userNameBoxs2").show();
+                                      $("#userNameBoxs2").html("你不是管理员，没有权限操作!");
+                                  }
+                              }else{
+                                  $("#userNameBoxs1").hide();
+                                  $("#userNameBoxs2").show();
+                                  $("#userNameBoxs2").html("该用户已经被禁用");
+                              }
+                          }else{
+                              $("#userNameBoxs1").hide();
+                              $("#userNameBoxs2").show();
+                              $("#userNameBoxs2").html('非管理员授权二维码，无法登录');
+                          }
+                      },
+                      error:function(err){
+                          $("#userNameBoxs2").show();
+                          $("#userNameBoxs2").html("非管理员授权二维码，无法登录");
+                      }
+                  });
+               },
+               endClick:function(res){
+                   console.log(res)
+               }
+             });
+        }else if( obj.event === 'edit' ){
+          var bigCatId = data.bigCat.catId;
+          var cat = data.cat;
+          $.post(url+'apiequ/putin/get_cat',{userId:userId},function(res){
+                if( res.code == 0 ){
+                    data2 = res.data;
+                    var html  = '<div>';
+                        html += '<blockquote class="layui-elem-quote layui-quote-nm">';
+                        html += '修改产品信息';
+                        html += '</blockquote>';
+                        html += '<form class="layui-form" action="" lay-filter="component-form-element" style="padding: 20px 30px 0 0;">';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">产品分类</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<select name="bigCatId" lay-filter="college">';
+                        html += '<option value="-1">请选择类型</option>';
+                        for( var i=0; i<data2.length; i++ ){
+                            childrenData[data2[i].catId] = data2[i].children;
+                            if( data2[i].catId == bigCatId ){
+                                html += '<option value="'+data2[i].catId+'" selected="selected">'+data2[i].catName+'</option>';
+                            }else{
+                                html += '<option value="'+data2[i].catId+'">'+data2[i].catName+'</option>';
+                            }
+                        }
+                        html += '</select>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label"></label>';
+                        html += '<div class="layui-input-block subclassList">';
+                        var selList = childrenData[bigCatId];
+                        for(var y=0;y<selList.length;y++){
+                            if( in_array(selList[y].catId,cat) ){
+                                  html += '<input type="checkbox" name="catId[]" value="'+selList[y].catId+'" lay-skin="primary" title="'+selList[y].catName+'" checked="checked"/>';
+                            }else{
+                                  html += '<input type="checkbox" name="catId[]" value="'+selList[y].catId+'" lay-skin="primary" title="'+selList[y].catName+'"/>';
+                            }
+                        }
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">产品名称</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="productName" lay-verify="required" placeholder="请输入产品名称-必填" value="'+data.productName+'" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">厂商名称</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="manu" lay-verify="required" placeholder="请输入厂商名称-必填" value="'+data.manufacturer+'" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">产品型号</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="productType" lay-verify="required" placeholder="请输入产品型号-必填" value="'+data.productType+'" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        // html += '<div class="layui-form-item">';
+                        // html += '<label class="layui-form-label">重量</label>';
+                        // html += '<div class="layui-input-block">';
+                        // html += '<input type="text" name="weight" placeholder="请使用电子秤-选填" autocomplete="off" class="layui-input kbkey-input" style="width:55%;float:left;">';
+                        // html += '<div onclick="weightstart()" style="float:right;width:40%;height:36px;text-align:center;line-height:36px;font-size:1.2rem;border-radius:0.3rem;background:#cacaca;">打开称重面板</div>';
+                        // html += '</div>';
+                        // html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">单位</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="punit" lay-verify="required" placeholder="请输入单位-必填" value="'+data.punit+'" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">价格(元)</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="price" placeholder="请输入产品价格-选填" value="'+data.price+'" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div style="position:absolute;bottom:0;left:0;width:100%;z-index:2000;background:#FFFFFF;">';
+                        html += '<div style="border-top:1px solid #F0F0F0;height:3rem;">';
+                        html += '<div class="layui-form-item" style="float:right;margin-right:1rem;margin-top:0.8rem;">';
+                        html += '<div class="layui-input-block">';
+                        html += '<button class="layui-btn" lay-submit lay-filter="component-form-element">提交</button>';
+                        html += '<button type="reset" class="layui-btn layui-btn-primary" onclick="resetClose();">取消</button>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<input type="hidden" name="userId" value="'+userId+'"/>';
+                        html += '<input type="hidden" name="postId" value="'+data.postId+'"/>';
+                        html += '<input type="hidden" name="termId" value="'+data.termId+'"/>';
+                        html += '</form>';
+                        html += '</div>';
+                    indexcloseframe = layer.open({
+                        type: 1,
+                        // title: '填写产品信息',
+                        title:false,
+                        offset:'30px',
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['40%', '85%'], //宽高
+                        content: html,
+                        end:function(){
+                            kb.kbhide();
+                        }
+                    });
+                    form.render(null, 'component-form-element');
+                    form.on('submit(component-form-element)', function(res){
+                        var frm = res;
+                        if( res.field.rolename == -1 ){
+                            layer.msg('请选择分类');
+                            return false;
+                        }
+                        var html = '<div style="margin:0.5rem;">';
+                            html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
+                            html += '修改产品信息，需要扫描管理员身份二维码';
+                            html += '</div>';
+                            html += '<div class="layui-container" style="width:100%;border-top:1px solid #999999;padding:1rem 0;">';
+                            html += '<div class="layui-row" style="margin-bottom:1rem;padding:0 1rem;">';
+                            html += '<div class="layuikuang" style="border:2px solid #6fb729;height:5rem;border-radius:0.5rem;overflow:hidden;position:relative;">';
+                            html += '<input type="text" id="listen2" placeholder="允许扫描" style="height:5rem;width:100%;text-align:center;font-size:1.2rem;border:none;background:#F0F0F0;color:#666666;"/>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div style="font-size:1.1rem;color:#b5b0b0;padding:0 1rem;">温馨提示：显示绿色边框时允许扫描，显示红色边框时禁止扫描。</div>';
+                            html += '</div>';
+                            html += '<div id="userNameBoxs1" style="padding:1rem;color:#213fd0;font-size:1.2rem;display:none;">扫描成功－〉操作人：<span id="userName"></span></div>';
+                            html += '<div id="userNameBoxs2" style="padding:1rem;color:red;font-size:1.2rem;display:none;"></div>';
+                            html += '</div>';
+                         var indexnexts = layer.open({
+                            type: 1,
+                            title:false,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['620px', '300px'], //宽高
+                            content: html
+                         });
+                         $("#listen2").focus(function(){
+                              $(".layuikuang").css({"border":"2px solid #6fb729"});
+                              $(this).attr({"placeholder":"允许扫描"});
+                         }).blur(function(){
+                              $(".layuikuang").css({"border":"2px solid red"});
+                              $(this).attr({"placeholder":"禁止扫描"});
+                         });
+                         var cs2 = new CodeScanningGrab({
+                           el:"#listen2",
+                           addClick:".layernoneouto",
+                           addClass:".inputBoxs",
+                           time:2000,
+                           success:function(res){
+                              var id = res;
+                              frm.pickerId = id;
+                              //验证管理员身份
+                              $.ajax({
+                                  url:url+"apiequ/basic/name_bind_qrcode",
+                                  data:{userId:userId,id:id},
+                                  success:function(info){
+                                      var obj = JSON.parse(info);
+                                      if(obj.code == 0 ){
+                                          $("#userNameBoxs2").hide();
+                                          $("#userNameBoxs1").show();
+                                          $("#userName").html(obj.data.name);
+                                          if( obj.data.status=="ok" ){
+                                              if( obj.data.role == 1 ){
+                                                //提交表单
+                                                var ii = layer.load(0, {shade:[0.8,'#393D49']});
+                                                $.post(url+'apiequ/putin/update_my_post',frm.field,function(info){
+                                                      if( info.code == 0 ){
+                                                          layer.close(ii)
+                                                          layer.close(indexcloseframe);
+                                                          layer.close(indexnexts);
+                                                          table.reload('test-table-operate', {
+                                                              page:{
+                                                                  curr:page //重新从第 1 页开始
+                                                              }
+                                                          });
+                                                      }else{
+                                                          layer.msg(info.msg);
+                                                      }
+                                                });
+                                              }else{
+                                                  $("#userNameBoxs1").hide();
+                                                  $("#userNameBoxs2").show();
+                                                  $("#userNameBoxs2").html("你不是管理员，没有权限操作!");
+                                              }
+                                          }else{
+                                              $("#userNameBoxs1").hide();
+                                              $("#userNameBoxs2").show();
+                                              $("#userNameBoxs2").html("该用户已经被禁用");
+                                          }
+                                      }else{
+                                          $("#userNameBoxs1").hide();
+                                          $("#userNameBoxs2").show();
+                                          $("#userNameBoxs2").html('非管理员授权二维码，无法登录');
+                                      }
+                                  },
+                                  error:function(err){
+                                      $("#userNameBoxs2").show();
+                                      $("#userNameBoxs2").html("非管理员授权二维码，无法登录");
+                                  }
+                              });
+                           },
+                           endClick:function(res){
+                               console.log(res)
+                           }
+                         });
+                        return false;
+                    });
+                    form.on('select(college)',function(res){
+                          var message = $("select[name=bigCatId").val();
+                          var list = [];
+                          if( message > -1 ){
+                              list = childrenData[message];
+                          }
+                          var html = '';
+                          $(".subclassList").empty();
+                          if( list.length > 0 ){
+                              for( var i=0;i<list.length;i++){
+                                   html += '<input type="checkbox" name="catId[]" value="'+list[i].catId+'" lay-skin="primary" title="'+list[i].catName+'">';
+                              }
+                              $(".subclassList").append(html);
+                          }
+                          form.render(null, 'component-form-element');
+                    });
+                    kb = new keyboard({
+                        el:".kbkey-input",
+                        x:1.6,
+                        keyHeight:"5rem",
+                        fontSize:'1.8rem',
+                        bottom:"3rem",
+                        end:function(res,value){
+                            // console.log(res, value)
+                            if( res == 'OK' ){
+                                // layer.msg('完成提交');
+                            }else{
+                                // layer.msg('什么都不做');
+                            }
+                        }
+                    });
+                    kb.run();
+                }else{
+                    layer.msg(res.msg);
+                }
+          });
+        }
+  });
+  var $ = layui.$, active = {
+      add:function(){
+          $.post(url+'apiequ/putin/get_cat',{userId:userId},function(res){
+                if( res.code == 0 ){
+                    data2 = res.data;
+                    var html  = '<div>';
+                        html += '<blockquote class="layui-elem-quote layui-quote-nm">';
+                        html += '新品入库';
+                        html += '</blockquote>';
+                        html += '<form class="layui-form" action="" lay-filter="component-form-element" style="padding: 20px 30px 0 0;">';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">产品分类</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<select name="bigCatId" lay-filter="college">';
+                        html += '<option value="-1">请选择类型</option>';
+                        for( var i=0; i<data2.length; i++ ){
+                            childrenData[data2[i].catId] = data2[i].children;
+                            html += '<option value="'+data2[i].catId+'">'+data2[i].catName+'</option>';
+                        }
+                        html += '</select>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label"></label>';
+                        html += '<div class="layui-input-block subclassList">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">产品名称</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="productName" lay-verify="required" placeholder="请输入产品名称-必填" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">厂商名称</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="manu" lay-verify="required" placeholder="请输入厂商名称-必填" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">产品型号</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="productType" lay-verify="required" placeholder="请输入产品型号-必填" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        // html += '<div class="layui-form-item">';
+                        // html += '<label class="layui-form-label">重量</label>';
+                        // html += '<div class="layui-input-block">';
+                        // html += '<input type="text" name="weight" placeholder="请使用电子秤-选填" autocomplete="off" class="layui-input kbkey-input" style="width:55%;float:left;">';
+                        // html += '<div onclick="weightstart()" style="float:right;width:40%;height:36px;text-align:center;line-height:36px;font-size:1.2rem;border-radius:0.3rem;background:#cacaca;">打开称重面板</div>';
+                        // html += '</div>';
+                        // html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">单位</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="punit" lay-verify="required" placeholder="请输入单位-必填" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">价格(元)</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="price" placeholder="请输入产品价格-选填" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="layui-form-item">';
+                        html += '<label class="layui-form-label">入库数量</label>';
+                        html += '<div class="layui-input-block">';
+                        html += '<input type="text" name="num" lay-verify="required" placeholder="请输入入库数量-必填" autocomplete="off" class="layui-input kbkey-input">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div style="position:absolute;bottom:0;left:0;width:100%;z-index:2000;background:#FFFFFF;">';
+                        html += '<div style="border-top:1px solid #F0F0F0;height:3rem;">';
+                        html += '<div class="layui-form-item" style="float:right;margin-right:1rem;margin-top:0.8rem;">';
+                        html += '<div class="layui-input-block">';
+                        html += '<button class="layui-btn" lay-submit lay-filter="component-form-element" id="submitTanlin">提交</button>';
+                        html += '<button type="reset" class="layui-btn layui-btn-primary" onclick="resetClose();">取消</button>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<input type="hidden" name="userId" value="'+userId+'"/>';
+                        html += '</form>';
+                        html += '<div class="layui-form-item" style="padding:10px 30px 0 30px;">';
+                        html += '<div>';
+                        html += '<span style="font-size:1.2rem;">自动填写，产品二维码</span><span><input type="text" placeholder="允许扫描" id="listen" style="border:2px solid #00b500;text-align:center;border-radius:0.3rem;padding:0.5rem;width:97%;color:#666666;"/></span>';
+                        html += '</div>';
+                        html += '<div style="margin-top:1rem;">';
+                        html += '<div style="width:6rem;float:right;" id="qrcode"></div><span style="width:8rem;height:6rem;line-height:6rem;display:inline-block;float:right;font-size:1.2rem;">手机辅助填写</span>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                    indexcloseframe = layer.open({
+                        type: 1,
+                        // title: '填写产品信息',
+                        title:false,
+                        offset:'20px',
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['40%', '90%'], //宽高
+                        content: html,
+                        end:function(){
+                            kb.kbhide();
+                            //通知手机端提交成功
+                            objnewproduct.send({type:2,userid:'mobile'+userId,msg:{frm:'reset'}});
+                        }
+                    });
+                    qrcode = new QRCode(document.getElementById("qrcode"), {width:100,height:100});
+                    qrcode.makeCode('http://py.e-labhome.cn/auxiliary.html?id='+userId);
+
+                    $("#listen").focus(function(){
+                        $(this).css({"border":"2px solid #00b500"});
+                        $(this).attr({"placeholder":"允许扫描"});
+                    }).blur(function(){
+                        $(this).css({"border":"2px solid #FF0000"});
+                        $(this).attr({"placeholder":"禁止扫描"});
+                    });
+                    form.render(null, 'component-form-element');
+                    // element.render('breadcrumb', 'breadcrumb');
+                    form.on('submit(component-form-element)', function(res){
+                        var frm = res;
+                        if( res.field.bigCatId == -1 ){
+                            layer.msg('请选择分类');
+                            return false;
+                        }
+                        if (isNaN(res.field.num)) {
+                            layer.msg('入库数量必须是大于0的数值！');
+                            return false;
+                        }
+                        if( res.field.num <= 0 ){
+                            layer.msg('入库数量必须是大于0的数值！');
+                            return false;
+                        }
+                        var html = '<div style="margin:0.5rem;">';
+                            html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
+                            html += '添加新品，需要扫描管理员身份二维码';
+                            html += '</div>';
+                            html += '<div class="layui-container" style="width:100%;border-top:1px solid #999999;padding:1rem 0;">';
+                            html += '<div class="layui-row" style="margin-bottom:1rem;padding:0 1rem;">';
+                            html += '<div class="layuikuang" style="border:2px solid #6fb729;height:5rem;border-radius:0.5rem;overflow:hidden;position:relative;">';
+                            html += '<input type="text" id="listen2" placeholder="允许扫描" style="height:5rem;width:100%;text-align:center;font-size:1.2rem;border:none;background:#F0F0F0;color:#666666;"/>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div style="font-size:1.1rem;color:#b5b0b0;padding:0 1rem;">温馨提示：显示绿色边框时允许扫描，显示红色边框时禁止扫描。</div>';
+                            html += '</div>';
+                            html += '<div id="userNameBoxs1" style="padding:1rem;color:#213fd0;font-size:1.2rem;display:none;">扫描成功－〉操作人：<span id="userName"></span></div>';
+                            html += '<div id="userNameBoxs2" style="padding:1rem;color:red;font-size:1.2rem;display:none;"></div>';
+                            html += '</div>';
+                         var indexnexts = layer.open({
+                            type: 1,
+                            title:false,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['620px', '300px'], //宽高
+                            content: html
+                         });
+                         $("#listen2").focus(function(){
+                              $(".layuikuang").css({"border":"2px solid #6fb729"});
+                              $(this).attr({"placeholder":"允许扫描"});
+                         }).blur(function(){
+                              $(".layuikuang").css({"border":"2px solid red"});
+                              $(this).attr({"placeholder":"禁止扫描"});
+                         });
+                         var cs2 = new CodeScanningGrab({
+                           el:"#listen2",
+                           addClick:".layernoneouto",
+                           addClass:".inputBoxs",
+                           time:2000,
+                           success:function(res){
+                              var id = res;
+                              frm.pickerId = id;
+                              //验证管理员身份
+                              $.ajax({
+                                  url:url+"apiequ/basic/name_bind_qrcode",
+                                  data:{userId:userId,id:id},
+                                  success:function(info){
+                                      var obj = JSON.parse(info);
+                                      if(obj.code == 0 ){
+                                          $("#userNameBoxs2").hide();
+                                          $("#userNameBoxs1").show();
+                                          $("#userName").html(obj.data.name);
+                                          if( obj.data.status=="ok" ){
+                                              if( obj.data.role == 1 ){
+                                                  //提交表单
+                                                  // console.log(JSON.stringify(frm.field));
+                                                  $.post(url+'apiequ/putin/submit_post',frm.field,function(res){
+                                                        if( res.code == 0 ){
+                                                            //通知手机端提交成功
+                                                            objnewproduct.send({type:2,userid:'mobile'+userId,msg:{frm:'submit'}});
+                                                            layer.close(indexcloseframe);
+                                                            layer.close(indexnexts);
+                                                            table.reload('test-table-operate', {
+                                                                page:{
+                                                                    curr:page //重新从第 1 页开始
+                                                                }
+                                                            });
+                                                        }else{
+                                                            layer.msg(res.msg);
+                                                        }
+                                                  });
+                                              }else{
+                                                  $("#userNameBoxs1").hide();
+                                                  $("#userNameBoxs2").show();
+                                                  $("#userNameBoxs2").html("你不是管理员，没有权限操作!");
+                                              }
+                                          }else{
+                                              $("#userNameBoxs1").hide();
+                                              $("#userNameBoxs2").show();
+                                              $("#userNameBoxs2").html("该用户已经被禁用");
+                                          }
+                                      }else{
+                                          $("#userNameBoxs1").hide();
+                                          $("#userNameBoxs2").show();
+                                          $("#userNameBoxs2").html('非管理员授权二维码，无法登录');
+                                      }
+                                  },
+                                  error:function(err){
+                                      $("#userNameBoxs2").show();
+                                      $("#userNameBoxs2").html("非管理员授权二维码，无法登录");
+                                  }
+                              });
+                           },
+                           endClick:function(res){
+                               console.log(res)
+                           }
+                         });
+                        return false;
+                    });
+                    form.on('select(college)',function(res){
+                          var message = $("select[name=bigCatId").val();
+                          var list = [];
+                          if( message > -1 ){
+                              list = childrenData[message];
+                          }
+                          var html = '';
+                          $(".subclassList").empty();
+                          if( list.length > 0 ){
+                              for( var i=0;i<list.length;i++){
+                                   html += '<input type="checkbox" name="catId[]" value="'+list[i].catId+'" lay-skin="primary" title="'+list[i].catName+'">';
+                              }
+                              $(".subclassList").append(html);
+                          }
+                          form.render(null, 'component-form-element');
+                    });
+                    kb = new keyboard({
+                        el:".kbkey-input",
+                        x:1.6,
+                        keyHeight:"5rem",
+                        fontSize:'1.8rem',
+                        bottom:"0.5rem",
+                        end:function(res,value){
+                            // console.log(res, value)
+                            if( res == 'OK' ){
+                                // layer.msg('完成提交');
+                            }else{
+                                // layer.msg('什么都不做');
+                            }
+                        }
+                    });
+                    kb.run();
+                    var layerIndex = '';
+                    var csg = new CodeScanningGrab({
+                        el:"#listen",
+                        time:2000,
+                        success:function(res){
+                            var id = res;
+                            if (isNaN(res)) {
+                                var len = res.lastIndexOf("=");
+                                var id = parseInt(res.substring(len+1));
+                            }
+                            layerIndex = layer.msg('正在识别请稍候...', {
+                                icon: 16
+                                ,shade: 0.01
+                            });
+                            $.post(url+'apiequ/putin/product_msg_by_qrcode',{qrcodeId:id},function(res){
+                                  layer.close(layerIndex);
+                                  if(res.code == 0 ){
+                                    layer.msg('正在填写请稍候...', {icon: 16,shade: 0.01, time:2000}, function(){
+                                        $('[name="bigCatId"]').empty();
+                                        var bigCat_id = res.data.bigCat.catId;
+                                        var hl = '<option value="-1">请选择类型</option>';
+                                        for( var i=0; i<data2.length; i++ ){
+                                            if( bigCat_id == data2[i].catId ){
+                                                hl += '<option value="'+data2[i].catId+'" selected="selected">'+data2[i].catName+'</option>';
+                                            }else{
+                                                hl += '<option value="'+data2[i].catId+'">'+data2[i].catName+'</option>';
+                                            }
+                                        }
+                                        $('[name="bigCatId"]').append(hl);
+                                        $(".subclassList").empty();
+                                        var cat = res.data.cat;
+                                        var listData = childrenData[bigCat_id];
+                                            lists = listData==undefined?[]:listData;
+                                        var hk = '';
+                                        for( var y=0; y<lists.length; y++ ){
+                                            if( in_array(lists[y].catId,cat) ){
+                                                hk += '<input type="checkbox" name="catId[]" value="'+lists[y].catId+'" lay-skin="primary" title="'+lists[y].catName+'" checked="checked"/>';
+                                            }else{
+                                                hk += '<input type="checkbox" name="catId[]" value="'+lists[y].catId+'" lay-skin="primary" title="'+lists[y].catName+'"/>';
+                                            }
+                                        }
+                                        $(".subclassList").append(hk);
+                                        var productName = res.data.productName;
+                                        $('[name="productName"]').val(productName);
+                                        var manufacturer = res.data.manufacturer;
+                                        $('[name="manu"]').val(manufacturer);
+                                        var productType = res.data.productType;
+                                        $('[name="productType"]').val(productType);
+                                        var punit = res.data.punit;
+                                        $('[name="punit"]').val(punit);
+                                        form.render(null, 'component-form-element');
+                                      });
+                                  }else{
+                                      layer.msg('扫描失败，请重试！', {icon: 2});
+                                  }
+                            });
+                        },
+                        endClick:function(res){
+                            if( res == 1 ){
+
+                            }
+                        }
+                    });
+                }else{
+                    layer.msg(res.msg);
+                }
+          });
+      }
+  };
+  $('.test-table-reload-btn .layui-btn').on('click', function(){
+          var type = $(this).data('type');
+          active[type] ? active[type].call(this) : '';
+  });
+});
+function in_array(val,arr){
+    var flag = false;
+    if( arr.length > 0 ){
+      for(var i=0;i<arr.length;i++){
+          if( val == arr[i].catId ){
+              flag =  true;
+              break;
+          }
+      }
+    }
+    return flag;
+}
+function resetClose(){
+    kb.kbhide();
+    layer.close(indexcloseframe);
+}
+// 连接
+objnewproduct = new linkSocket({
+    type:1,
+    userid:'terminal'+userId,
+    msg:'连接成功',
+    success:function(res){
+        if( res != '连接成功' ){
+            analysis(res);
+        }
+    }
+});
+$(".body").mousemove(function(){
+    setTimeout(function(){
+      if( objnewproduct.state != 1 ){
+          objnewproduct = new linkSocket({
+              type:1,
+              userid:'terminal'+userId,
+              msg:'连接成功',
+              success:function(res){
+                  if( res != '连接成功' ){
+                      analysis(res);
+                  }
+              }
+          });
+      }
+    },1000);
+});
+function analysis(res){
+    var obj = JSON.parse(res);
+    if( obj.input == 1 ){
+      $('[name="productName"]').val(obj.value);
+    }else if( obj.input == 2 ){
+      $('[name="manu"]').val(obj.value);
+    }else if( obj.input == 3 ){
+      $('[name="productType"]').val(obj.value);
+    }else if( obj.input == 4 ){
+      $('[name="punit"]').val(obj.value);
+    }else if( obj.input == 5 ){
+      $('[name="price"]').val(obj.value);
+    }else if( obj.input == 6 ){
+      $('[name="num"]').val(obj.value);
+    }else if( obj.input == 'submit' ){
+        $("#submitTanlin").click();
+    }
+}
+var weigh_index = '';
+//点击开始称重
+function weightstart(){
+  // 打开串口COM1
+  onFactorial19('open');
+  // 同步电子秤数据
+  var html = '<div style="width:100%;height:8rem;position:absolute;top:50%;left:0;margin-top:-4rem;">';
+  html += '<div style="height:5rem;text-align:center;line-height:5rem;font-size:3rem;font-weight:bold;color:#333333;"><font id="weigh_value">......</font><font id="weigh_punit"></font></div>';
+  html += '<div style="height:3rem;text-align:center;line-height:3rem;font-size:1.2rem;font-weight:bold;color:#333333;"><font id="weigh_state"></font></div>';
+  html += '</div>';
+  weigh_index = layer.open({
+      type: 1,
+      // title: '填写产品信息',
+      title:false,
+      skin: 'layui-layer-rim', //加上边框
+      area: ['30%', '30%'], //宽高
+      content: html,
+      end:function(){
+          onFactorial19('close');
+      }
+  });
+  // 连接服务器
+  var ws = new WebSocket("ws://localhost:9501");
+  ws.onopen = function(evt) {
+    $("#weigh_state").html("已经连接")
+    $("#weigh_value").html("0.00");
+    var data = JSON.stringify({type:"login",userid:"COM1",msg:""});
+  	ws.send(data);
+  };
+  ws.onmessage = function(evt) {
+    // 电子秤数据
+  	var l = evt.data.split("-");
+    // 时实变化
+    $("#weigh_value").html(l[l.length-2]);
+    $("#weigh_punit").html(l[l.length-1]);
+    $("#weigh_state").html("正在确认")
+    // 确认重量 并 关闭串口
+    if( l[0] == "K" ){
+        if( l[l.length-2] > 0 ){
+            var weigh_value = l[l.length-2];
+            $('[name="weight"]').val(weigh_value);
+            var weigh_punit = l[l.length-1];
+            $('[name="punit"]').val(weigh_punit);
+            layer.close(weigh_index);
+        }
+    }
+  };
+  ws.onclose = function(evt) {
+    $("#weigh_value").html("......");
+    $("#weigh_state").html("连接失败，请重试")
+  	// console.log("Connection closed.");
+  };
+}
+</script>
+</html>

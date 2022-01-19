@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>未归还列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../iview/node_modules/view-design/dist/styles/iview.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../layer/theme/default/layer.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="../layer/layer.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../swiper/package/swiper-bundle.min.js"></script>
+    <script src="../iview/node_modules/view-design/dist/iview.min.js"></script>
+    <style>
+    .layui-table-cell{
+      height:2.3rem;
+      line-height:2.3rem;
+    }
+    .layui-table-cell span{
+        font-size:1.4rem;
+        font-weight:700;
+    }
+    #layui-table-page1 .layui-laypage-limits{
+        display: none;
+    }
+    .layui-btn{
+        height:2.2rem;
+        line-height:2.2rem;
+        font-size:1.1rem;
+        padding:0 0.9rem;
+    }
+    #layui-table-page1 .layui-laypage-curr{
+        padding:0 20px;
+    }
+    #zxr{width:260px;height:50px;}
+    </style>
+</head>
+<body>
+<div class="swiper-container" id="Vueapp">
+  <div class="layui-fluid">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+          <div class="layui-card">
+            <div class="layui-card-body">
+              <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                姓名：
+                <div class="layui-inline">
+                  <input class="layui-input" name="id" id="test-table-demoReload" autocomplete="off">
+                </div>
+                <button class="layui-btn" data-type="reload" style="padding:0 14px;height:2.19rem;line-height:2.19rem;">搜索</button>
+              </div>
+              <table class="layui-hide" id="test-table-cellEdit" lay-filter="test-table-cellEdit"></table>
+              <script type="text/html" id="test-table-operate-barDemo">
+                <a class="layui-btn layui-btn-xs" lay-event="returnFun">点击归还</a>
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+<script src="../js/common.js"></script>
+<script src="../js/CSG.js"></script>
+<script type="text/javascript" src="../keyboard/kbmodule.js" id="keyboard"></script>
+<script>
+var id = getQueryString();
+var data = id.split('-');
+var table='',kb='',kb2='';
+layui.use('table', function(){
+    table = layui.table;
+    table.render({
+      elem: '#test-table-cellEdit'
+      ,url:url+'apismr/outof/return_product?userId='+userId+'&postId='+data[0]+'&productType='+data[1]
+      ,page: {
+        layout: [ 'prev', 'page', 'next', 'skip','count'],
+        limit:10
+      }
+      ,height:'full-110'
+      ,cols: [[
+        {field: 'postId', title: '产品ID', fixed: 'left', align:'center', width:120, style:'font-size:1.2rem'}
+        ,{field: 'productName', title: '产品名称', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'productType', title: '规格型号', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'productGcno', title: '通用证书', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'punit', title: '单位', align:'center', width:120, style:'font-size:1.2rem'}
+        ,{field: 'num', title: '借出数量', align:'center', width:120, style:'font-size:1.2rem'}
+        ,{field: 'mark', title: '备注', align:'center', style:'font-size:1.2rem'}
+        ,{field: 'who', title: '借用人', align:'center', width:120, style:'font-size:1.2rem'}
+        ,{field: 'time', title: '时间', align:'center', style:'font-size:1.2rem'}
+        ,{width:150, align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
+      ]]
+      ,done: function(res, curr, count){
+      	    //得到当前页码
+      	    page = curr;
+      	    //得到数据总量
+      	    // console.log(res);
+      }
+    })
+    //监听工具条
+    table.on('tool(test-table-cellEdit)', function(obj){
+          var data = obj.data;
+          if(obj.event === 'returnFun'){
+              layer.prompt({
+                  title: '归还：ID[ '+data.postId+' ],类型['+data.productType+']-输入归还数量',
+                  offset:'50px',
+                  btn2:function(){
+                      kb2.kbhide();
+                  }
+              }, function(value, index, elem){
+                  kb2.kbhide();
+                  if (isNaN(value)) {
+                      layer.msg('请输入数字！',{offset:'115px'});
+                      return;
+                  }
+                  if( value < 0 ){
+                      layer.msg('请输入数字大于0的数字！',{offset:'115px'});
+                      return;
+                  }
+                  // var name = $("#name").val();
+                  // if( name == '' ){
+                  //     layer.msg('请输入归还人姓名!',{offset:'115px'});
+                  //     return;
+                  // }
+                  var use = $("#zxr").val();
+                  var html = '<div style="margin:0.5rem;">';
+                      html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
+                      html += '归还入库，需要扫描身份二维码';
+                      html += '</div>';
+                      html += '<div class="layui-container" style="width:100%;border-top:1px solid #999999;padding:1rem 0;">';
+                      html += '<div class="layui-row" style="margin-bottom:1rem;padding:0 1rem;">';
+                      html += '<div class="layuikuang" style="border:2px solid #6fb729;height:5rem;border-radius:0.5rem;overflow:hidden;position:relative;">';
+                      html += '<input type="text" id="listen2" placeholder="允许扫描" style="height:5rem;width:100%;text-align:center;font-size:1.2rem;border:none;background:#F0F0F0;color:#666666;"/>';
+                      html += '</div>';
+                      html += '</div>';
+                      html += '<div style="font-size:1.1rem;color:#b5b0b0;padding:0 1rem;">温馨提示：显示绿色边框时允许扫描，显示红色边框时禁止扫描。</div>';
+                      html += '</div>';
+                      html += '<div id="userNameBoxs1" style="padding:1rem;color:#213fd0;font-size:1.2rem;display:none;">扫描成功－〉操作人：<span id="userName"></span></div>';
+                      html += '<div id="userNameBoxs2" style="padding:1rem;color:red;font-size:1.2rem;display:none;"></div>';
+                      html += '</div>';
+                   var indexnexts = layer.open({
+                      type: 1,
+                      title:false,
+                      skin: 'layui-layer-rim', //加上边框
+                      area: ['620px', '300px'], //宽高
+                      content: html
+                   });
+                   $("#listen2").focus(function(){
+                        $(".layuikuang").css({"border":"2px solid #6fb729"});
+                        $(this).attr({"placeholder":"允许扫描"});
+                   }).blur(function(){
+                        $(".layuikuang").css({"border":"2px solid red"});
+                        $(this).attr({"placeholder":"禁止扫描"});
+                   });
+                   var cs2 = new CodeScanningGrab({
+                     el:"#listen2",
+                     addClick:".layernoneouto",
+                     addClass:".inputBoxs",
+                     time:2000,
+                     success:function(res){
+                        var id = res;
+                        //验证管理员身份
+                        $.ajax({
+                            url:url+"apismr/basic/name_bind_qrcode",
+                            data:{userId:userId,id:id},
+                            success:function(info){
+                                var obj = JSON.parse(info);
+                                if(obj.code == 0 ){
+                                    $("#userNameBoxs2").hide();
+                                    $("#userNameBoxs1").show();
+                                    $("#userName").html(obj.data.name);
+                                    if( obj.data.status=="ok" ){
+                                        $.post(url+'apismr/outof/return_product2',{borrowId:data.id,num:value,use:use,name:obj.data.name},function(info){
+                                              // console.log(res);
+                                              layer.close(indexnexts);
+                                              if( info.code == 0 ){
+                                                //重载表格
+                                                table.reload('test-table-cellEdit', {
+                                                  page: {
+                                                    curr:page //重新从第 1 页开始
+                                                  }
+                                                });
+                                              }else {
+                                                layer.msg(info.msg, {offset:'115px'});
+                                              }
+                                        });
+                                        kb2.kbhide();
+                                        layer.close(index);
+                                    }else{
+                                        $("#userNameBoxs1").hide();
+                                        $("#userNameBoxs2").show();
+                                        $("#userNameBoxs2").html("该用户已经被禁用");
+                                    }
+                                }else{
+                                    $("#userNameBoxs1").hide();
+                                    $("#userNameBoxs2").show();
+                                    $("#userNameBoxs2").html('非管理员授权二维码，无法登录');
+                                }
+                            },
+                            error:function(err){
+                                $("#userNameBoxs2").show();
+                                $("#userNameBoxs2").html("非管理员授权二维码，无法登录");
+                            }
+                        });
+                     },
+                     endClick:function(res){
+                         console.log(res)
+                     }
+                   });
+              });
+              // 添加备注框
+              $(".layui-layer-input").eq(0).attr({"placeholder":"归还数量"});
+              // $(".layui-layer-content").append("<br/><input id= \"name\" class=\"layui-layer-input\" placeholder=\"归还人\"/>");
+              $(".layui-layer-content").append("<br/><textarea id= \"zxr\" class=\"layui-layer-input\" placeholder=\"备注\"/></textarea>");
+              $(".layui-layer-input").blur();
+              kb2 = new keyboard({
+                  el:".layui-layer-input",
+                  x:1.6,
+                  keyHeight:"5rem",
+                  fontSize:'1.8rem',
+                  bottom:"3rem",
+                  end:function(res,value){
+                      // console.log(res, value)
+                      if( res == 'OK' ){
+                          // layer.msg('完成提交');
+                      }else{
+                          // layer.msg('什么都不做');
+                      }
+                  }
+              });
+              kb2.run();
+          }
+    });
+});
+var $ = layui.$, active = {
+      reload: function(){
+        kb.kbhide();
+        var demoReload = $('#test-table-demoReload');
+        //执行重载
+        table.reload('test-table-cellEdit', {
+          page: {
+            curr: 1 //重新从第 1 页开始
+          }
+          ,where: {
+            search: demoReload.val()
+          }
+        });
+      }
+};
+$('.test-table-reload-btn .layui-btn').on('click', function(){
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+});
+kb = new keyboard({
+    el:".layui-input",
+    x:1.6,
+    keyHeight:"5rem",
+    fontSize:'1.8rem',
+    bottom:"6rem",
+    end:function(res,value){
+        // console.log(res, value)
+        if( res == 'OK' ){
+            // layer.msg('完成提交');
+        }else{
+            // layer.msg('什么都不做');
+        }
+    }
+});
+kb.run();
+</script>
+</html>

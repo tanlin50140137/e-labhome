@@ -242,15 +242,15 @@
                             <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
                         </div>
                         <div class="elaCardname">
-                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
-                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apismr/alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
+                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apismr/expire.html')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
                         </div>
                     </div>
                     <div class="elaCard">
                       <div class="elaCard">
                           <div class="elaCard4Img">
                               <div class="elaCardInnerImg">
-                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看温度','')" style="background:url(./img/wendu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看出库记录','./apismr/outboundrecord.html')" style="background:url(./img/wendu2.jpg) no-repeat;background-size:100% 100%;"></div>
                                     <div class="jiangexian"></div>
                                     <div class="upImgBoxs">
                                         <div class="dateshowl">
@@ -282,9 +282,9 @@
                                     </div>
                               </div>
                               <div class="elaCardInnerImg">
-                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看入库记录','./apismr/warehousingrecord.html')" style="background:url(./img/shidu2.jpg) no-repeat;background-size:100% 100%;"></div>
                                     <div class="jiangexian"></div>
-                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                                    <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','./apismr/viewvideo.html')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
                               </div>
                           </div>
                       </div>
@@ -293,12 +293,12 @@
                 <div class="elaOptionList" style="position:relative;">
                   <div class="elaCard2" style="margin-bottom:0.5rem;">
                       <div class="elaCardright">
-                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','')">
+                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','./apismr/warehousing.html')">
                               <div class="elaCardRuKu">
                                   <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
                               </div>
                           </div>
-                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','')">
+                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','./apismr/retrieval.html')">
                               <div class="elaCardRuKu">
                                   <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
                               </div>
@@ -307,12 +307,12 @@
                   </div>
                   <div class="elaCard2">
                       <div class="elaCardright">
-                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','standard/stock.html')">
+                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','./apismr/stock.html')">
                               <div class="elaCardRuKu">
                                   <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
                               </div>
                           </div>
-                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','standard/purchase.html')">
+                          <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','./apismr/purchase.html')">
                               <div class="elaCardRuKu">
                                   <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
                               </div>
@@ -427,15 +427,15 @@
                           <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
                       </div>
                       <div class="elaCardname">
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apisam/alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apisam/expire.html')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
                       </div>
                   </div>
                   <div class="elaCard">
                     <div class="elaCard">
                         <div class="elaCard4Img">
                             <div class="elaCardInnerImg">
-                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看温度','')" style="background:url(./img/wendu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看出库记录','./apisam/outboundrecord.html')" style="background:url(./img/wendu2.jpg) no-repeat;background-size:100% 100%;"></div>
                                   <div class="jiangexian"></div>
                                   <div class="upImgBoxs">
                                       <div class="dateshowl">
@@ -467,9 +467,9 @@
                                   </div>
                             </div>
                             <div class="elaCardInnerImg">
-                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看入库记录','./apisam/warehousingrecord.html')" style="background:url(./img/shidu2.jpg) no-repeat;background-size:100% 100%;"></div>
                                   <div class="jiangexian"></div>
-                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','./apisam/viewvideo.html')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
                     </div>
@@ -478,12 +478,12 @@
               <div class="elaOptionList" style="position:relative;">
                 <div class="elaCard2" style="margin-bottom:0.5rem;">
                     <div class="elaCardright">
-                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','')">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','./apisam/warehousing.html')">
                             <div class="elaCardRuKu">
                                 <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
-                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','')">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','./apisam/retrieval.html')">
                             <div class="elaCardRuKu">
                                 <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
                             </div>
@@ -492,12 +492,12 @@
                 </div>
                 <div class="elaCard2">
                     <div class="elaCardright">
-                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','standard/stock.html')">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','./apisam/stock.html')">
                             <div class="elaCardRuKu">
                                 <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
-                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','')">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','./apisam/purchase.html')">
                             <div class="elaCardRuKu">
                                 <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
                             </div>
@@ -612,15 +612,15 @@
                           <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
                       </div>
                       <div class="elaCardname">
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apiequ/alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apiequ/expire.html')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
                       </div>
                   </div>
                   <div class="elaCard">
                     <div class="elaCard">
                         <div class="elaCard4Img">
                             <div class="elaCardInnerImg">
-                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看温度','')" style="background:url(./img/wendu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('查看出库记录','./apiequ/outboundrecord.html')" style="background:url(./img/wendu2.jpg) no-repeat;background-size:100% 100%;"></div>
                                   <div class="jiangexian"></div>
                                   <div class="upImgBoxs">
                                       <div class="dateshowl">
@@ -652,9 +652,9 @@
                                   </div>
                             </div>
                             <div class="elaCardInnerImg">
-                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('查看入库记录','./apiequ/warehousingrecord.html')" style="background:url(./img/shidu2.jpg) no-repeat;background-size:100% 100%;"></div>
                                   <div class="jiangexian"></div>
-                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('查看视频记录','./apiequ/viewvideo.html')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
                     </div>
@@ -663,12 +663,12 @@
               <div class="elaOptionList" style="position:relative;">
                 <div class="elaCard2" style="margin-bottom:0.5rem;">
                     <div class="elaCardright">
-                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','')">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','./apiequ/warehousing.html')">
                             <div class="elaCardRuKu">
                                 <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
-                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','')">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','./apiequ/retrieval.html')">
                             <div class="elaCardRuKu">
                                 <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
                             </div>
@@ -677,12 +677,12 @@
                 </div>
                 <div class="elaCard2">
                     <div class="elaCardright">
-                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','standard/stock.html')">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','./apiequ/stock.html')">
                             <div class="elaCardRuKu">
                                 <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
-                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','')">
+                        <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','./apiequ/purchase.html')">
                             <div class="elaCardRuKu">
                                 <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
                             </div>
@@ -776,20 +776,27 @@
                   <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;">
-                  <div class="elaLogo">资料档案管理系统</div>
+                  <div class="elaLogo">数字化档案管理系统</div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                  <div class="elaLogo" onclick="Get2D();">
+                  <!-- <div class="elaLogo" onclick="Get2D();">
                         <div class="userInfoList">
                             <div class="userInfoInner loginimgpic" v-html="picurl"></div>
                             <div class="userInfoInner nicknametitle" v-html="nicname"></div>
+                        </div>
+                  </div> -->
+                  <div class="elaLogo">
+                        <div class="userInfoList" onclick="switching_system()">
+                            <div class="userInfoInner"><img class="loginimg" src="./img/bcak.png" alt="头像"></div>
+                            <div class="userInfoInner">切换系统</div>
                         </div>
                   </div>
               </div>
           </div>
         </div>
-        <div class="elaOption">
-          <div class="elaOptionInner">
+        <div class="elaOption" style="position: relative;">
+          <iframe :src="iframe_url" width="100%" height="99%" scrolling="no" frameborder="no" style="background-color:transparent"></iframe>
+          <!-- <div class="elaOptionInner">
               <div class="elaOptionList">
                   <div class="elaCard" style="margin-bottom:0.5rem;">
                       <div class="elaCardTitle">
@@ -875,7 +882,7 @@
                     </div>
                 </div>
                 <!-- 中间按钮 -->
-                <div class="btnYuan">
+                <!-- <div class="btnYuan">
                       <div class='selector5'>
                         <ul>
                           <li>
@@ -946,7 +953,65 @@
                       <button onclick="toggleOptions('.selector5');" style="display:none;background:rgb(0,51,168,0.5);color:#FFFFFF;font-size:2.2rem;">关闭选项</button>
                     </div>
                 </div>
-              </div>
+              </div> -->
+          <!-- </div> -->
+          <div style="width:90%;position:absolute;bottom:0;left:50%;z-index:2000;height:90px;margin-left:-45%;">
+                <div style="display: flex;align-items: center;flex-wrap: nowrap;">
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="connectwifi();" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/wifi_settings.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">连接WIFI</div>
+                        </div>
+                    </div>
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="userseting();" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/modifyaccountnumber.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">修改账号</div>
+                        </div>
+                    </div>
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="heavyloadTerminal();" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/refresh.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">平台刷新</div>
+                        </div>
+                    </div>
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="restartTerminal();" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/restart_thesystem.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">重启系统</div>
+                        </div>
+                    </div>
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="closeTerminal();" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/shutdownthesystem.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">关闭系统</div>
+                        </div>
+                    </div>
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="updatedVersion(1);" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/update_system.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">更新系统</div>
+                        </div>
+                    </div>
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="aboutus()" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/print_settings.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">关于我们</div>
+                        </div>
+                    </div>
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="userManagement();" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/user_management.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">用户管理</div>
+                        </div>
+                    </div>
+                    <div style="width:11.11%;height:90px;padding:0 1rem;">
+                        <div  onclick="associatedSystem();" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
+                          <img src="./img/print_settings.png" class="settingImg" style="margin-top:0.5rem;"/>
+                          <div style="color:#FFFFFF;text-align:center;">打印设置</div>
+                        </div>
+                    </div>
+                </div>
           </div>
         </div>
     </div>

@@ -20,7 +20,8 @@ var app = new Vue({
     mm:'',
     vHtml:'',
     picurl:'',
-    nicname:''
+    nicname:'',
+    iframe_url:''
   },
   methods:{
     /*设置头像和昵称*/
@@ -30,6 +31,7 @@ var app = new Vue({
           url:url+'hwapi/basic/usermeta',
           data:{"userId":userid},
           success:function(res){
+              p.getResource(res.phone,res.user_logo);
               p.picurl = '<img class="loginimg" src="'+res.user_logo+'" alt="头像">';
               p.nicname = res.nickname;
               var has_mod = [];
@@ -54,6 +56,30 @@ var app = new Vue({
           error:function(xhr,status,error){
               p.picurl = '<img class="loginimg" src="./img/loginimg.png" alt="头像">';
               p.nicname = '欢迎登录易莱博系统';
+          }
+        });
+    },
+    /*获取资源库的连接*/
+    getResource:function(tel, user_logo){
+        console.log(tel);
+        console.log(user_logo);
+        var p = this;
+        $.ajax({
+          url:'http://res.e-labhome.cn/resource/login/login2',
+          type:"POST",
+          contentType:"application/x-www-form-urlencoded",
+          data:{"userid":tel,"portrait":user_logo},
+          success:function(res){
+              if( res.error == 0 ){
+                  p.iframe_url = res.url
+              }else{
+                  console.log(res.msg);
+              }
+          },
+          error:function(xhr,status,error){
+              // p.picurl = '<img class="loginimg" src="./img/loginimg.png" alt="头像">';
+              // p.nicname = '欢迎登录易莱博系统';
+              console.log(res.msg);
           }
         });
     },

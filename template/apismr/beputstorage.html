@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>归还入库</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../iview/node_modules/view-design/dist/styles/iview.css">
+    <link rel="stylesheet" href="../layer/theme/default/layer.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/csg.css">
+    <link rel="stylesheet" href="../swiper/package/swiper-bundle.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../layer/layer.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../swiper/package/swiper-bundle.min.js"></script>
+    <script src="../iview/node_modules/view-design/dist/iview.min.js"></script>
+</head>
+<body>
+<div class="swiper-container" id="Vueapp">
+          <div class="elaBoxs">
+            <div class="fuzuheight" style="height:1rem;"></div>
+            <div class="elaMenu">
+              <div class="elaMenuInner">
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo" onclick="backIndex();" style="background: #99ccff url(../img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                      <div class="elaLogo">归还入库</div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <!-- <div class="elaLogo" @click="warning();"> -->
+                      <div class="elaLogo">
+                            <div class="userInfoList" onclick="back()">
+                                <div class="userInfoInner"><img class="loginimg" src="../img/bcak.png" alt="头像"></div>
+                                <div class="userInfoInner">返回上一步</div>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="elaOption">
+                <div class="csgBoxs">
+                    <div class="csgInner">
+                        <input type="text" class="inputBoxs" placeholder="允许扫描-产品二维码" id="listen" onfocus="listenfocus()" onblur="listenblur()"/>
+                        <div class="layernoneouto"></div>
+                        <input type="text" class="inputBoxs kbkeyClass" placeholder="手动输入模式" style="display:none;"/>
+                        <div class="lampBoxs"></div>
+                    </div>
+                </div>
+                <div class="csgImgs">
+                    <img src="../img/scan2.0fe4467d.gif" alt="图标">
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+<script src="../js/common.js"></script>
+<script src="../js/CSG.js"></script>
+<script type="text/javascript" src="../keyboard/kbmodule.js" id="keyboard"></script>
+<script src="../js/qwebchannel.js"></script>
+<script>
+// 监听Python channel返回槽对像，赋值给 window.obj
+document.addEventListener("DOMContentLoaded", function(){
+    new QWebChannel(qt.webChannelTransport, function(channel){
+          window.obj = channel.objects.obj;
+    })
+})
+// html触发函数
+function onFactorial9(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial9(url, callback);
+    }
+}
+// Python槽方法返回的数据
+function callback(result){}
+//
+var kb='',kb2='',layerIndex='';
+var indexcloseframe = '';
+var csg = new CodeScanningGrab({
+  el:"#listen",
+  addClick:".layernoneouto",
+  addClass:".inputBoxs",
+  time:2000,
+  success:function(res){
+      var id = res;
+      if (isNaN(res)) {
+          var len = res.lastIndexOf("=");
+          var id = parseInt(res.substring(len+1));
+      }
+      layerIndex = layer.msg('正在识别请稍候...', {
+          icon: 16
+          ,shade: 0.01
+      });
+      $.post(url+'apismr/putin/product_msg_by_qrcode',{qrcodeId:id},function(res){
+            // console.log(res);
+            layer.close(layerIndex);
+            if(res.code == 0 ){
+                productInformation(res.data, id)
+            }else{
+                layer.msg('扫描失败，请重试！', {icon: 2});
+            }
+      });
+  },
+  endClick:function(res){
+      if( res == 1 ){
+          kb.kbhide();
+      }
+  }
+});
+//显示产品信息
+function productInformation(obj){
+  var index = layer.open({
+      type: 2
+      ,title: '未归还列表'
+      ,content: 'returnlist.html?id='+obj.postId+'-'+obj.productType
+      ,maxmin: true
+      ,area: ['85%', '85%']
+      ,btn: ['取消']
+      ,yes: function(index, layero){
+          layer.close(index);
+      }
+  });
+}
+
+(function(){
+    kb = new keyboard({
+        el:".kbkeyClass",
+        x:1.6,
+        keyHeight:"5rem",
+        fontSize:'1.8rem',
+        bottom:"5rem",
+        end:function(res,value){
+            if( res == 'OK' ){
+              $.post(url+'apismr/putin/product_msg_by_qrcode',{qrcodeId:parseInt(value)},function(res){
+                    if(res.code == 0 ){
+                        productInformation(res.data, parseInt(value))
+                    }else{
+                        layer.msg('扫描失败，请重试！', {icon: 2});
+                    }
+              });
+            }else{
+                // layer.msg('什么都不做');
+            }
+        }
+    });
+    kb.run();
+})()
+function closeframe(){
+    kb2.kbhide();
+    layer.close(indexcloseframe);
+}
+function listenfocus(){
+    $(".lampBoxs").css({"background":"#00b500"});
+    $("#listen").attr({"placeholder":"允许扫描-产品二维码"});
+    // layer.tips('绿灯亮起时可以扫描','.lampBoxs', {
+    //     tips: 3,
+    //     time:10000
+    // });
+}
+function listenblur(){
+    $(".lampBoxs").css({"background":"#FF0000"});
+    $("#listen").attr({"placeholder":"禁止扫描"});
+    // layer.tips('红灯亮起时禁止扫描','.lampBoxs', {
+    //     tips: 3,
+    //     time:10000
+    // });
+}
+</script>
+</html>

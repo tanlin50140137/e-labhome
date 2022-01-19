@@ -44,7 +44,10 @@ setTimeout(function(){
   }
 },1000);
 
-
+function switching_system(){
+    var swiperIndex = localStorage.getItem("swiperIndex")==null?0:localStorage.getItem("swiperIndex");
+    swiper.slideTo(swiperIndex-1, 500, false);//切换到第一个slide，速度为1秒
+}
 
 window.onpopstate = () => { history.go(1); }
 document.documentElement.addEventListener('touchstart',function (event){if(event.touches.length > 1){event.preventDefault();}},{passive:false});
