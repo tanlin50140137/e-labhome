@@ -2,6 +2,8 @@
 主程序模块-
 """
 import sys
+import time
+
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QObject

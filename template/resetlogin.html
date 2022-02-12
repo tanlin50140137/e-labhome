@@ -779,33 +779,33 @@
                   <div class="elaLogo">数字化档案管理系统</div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                  <!-- <div class="elaLogo" onclick="Get2D();">
+                  <div class="elaLogo" onclick="Get2D();">
                         <div class="userInfoList">
                             <div class="userInfoInner loginimgpic" v-html="picurl"></div>
                             <div class="userInfoInner nicknametitle" v-html="nicname"></div>
                         </div>
-                  </div> -->
-                  <div class="elaLogo">
+                  </div>
+                  <!-- <div class="elaLogo">
                         <div class="userInfoList" onclick="switching_system()">
                             <div class="userInfoInner"><img class="loginimg" src="./img/bcak.png" alt="头像"></div>
                             <div class="userInfoInner">切换系统</div>
                         </div>
-                  </div>
+                  </div> -->
               </div>
           </div>
         </div>
         <div class="elaOption" style="position: relative;">
-          <iframe :src="iframe_url" width="100%" height="99%" scrolling="no" frameborder="no" style="background-color:transparent"></iframe>
-          <!-- <div class="elaOptionInner">
+          <!-- <iframe :src="iframe_url" width="100%" height="99%" scrolling="no" frameborder="no" style="background-color:transparent"></iframe> -->
+          <div class="elaOptionInner">
               <div class="elaOptionList">
                   <div class="elaCard" style="margin-bottom:0.5rem;">
                       <div class="elaCardTitle">
-                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">库存报警</font></div>
-                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
+                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">环境监测</font></div>
+                          <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">操作记录</font></div>
                       </div>
                       <div class="elaCardname">
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing_zl.png) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing_zl.png) no-repeat;background-size:100% 100%;"></div>
                       </div>
                   </div>
                   <div class="elaCard">
@@ -844,9 +844,9 @@
                                   </div>
                             </div>
                             <div class="elaCardInnerImg">
-                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看湿度','')" style="background:url(./img/shidu_zl.png) no-repeat;background-size:100% 100%;"></div>
                                   <div class="jiangexian"></div>
-                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2.jpg) no-repeat;background-size:100% 100%;"></div>
+                                  <div class="upImgBoxs boom3" @click="voiceAnnouncements('正在查看视频','')" style="background:url(./img/camera2_zl.png) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
                     </div>
@@ -857,12 +857,12 @@
                     <div class="elaCardright">
                         <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作入库','')">
                             <div class="elaCardRuKu">
-                                <div class="elaCardRuKuImg" style="background:url(./img/warehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                                <div class="elaCardRuKuImg" style="background:url(./img/warehousing_zl.png) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
                         <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在操作出库','')">
                             <div class="elaCardRuKu">
-                                <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing.jpg) no-repeat;background-size:100% 100%;"></div>
+                                <div class="elaCardRuKuImg" style="background:url(./img/exwarehousing_zl.png) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
                     </div>
@@ -871,18 +871,18 @@
                     <div class="elaCardright">
                         <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在查看库存','standard/stock.html')">
                             <div class="elaCardRuKu">
-                                <div class="elaCardRuKuImg" style="background:url(./img/stock.jpg) no-repeat;background-size:100% 100%;"></div>
+                                <div class="elaCardRuKuImg" style="background:url(./img/stock_zl.png) no-repeat;background-size:100% 100%;"></div>
                             </div>
                         </div>
                         <div class="elaCardrightList boom3" @click="voiceAnnouncements('正在采购产品','')">
                             <div class="elaCardRuKu">
-                                <div class="elaCardRuKuImg" style="background:url(./img/purchase.jpg) no-repeat;background-size:100% 100%;"><center></center></div>
+                                <div class="elaCardRuKuImg" style="background:url(./img/purchase_zl.png) no-repeat;background-size:100% 100%;"><center></center></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- 中间按钮 -->
-                <!-- <div class="btnYuan">
+                <div class="btnYuan">
                       <div class='selector5'>
                         <ul>
                           <li>
@@ -953,9 +953,9 @@
                       <button onclick="toggleOptions('.selector5');" style="display:none;background:rgb(0,51,168,0.5);color:#FFFFFF;font-size:2.2rem;">关闭选项</button>
                     </div>
                 </div>
-              </div> -->
-          <!-- </div> -->
-          <div style="width:90%;position:absolute;bottom:0;left:50%;z-index:2000;height:90px;margin-left:-45%;">
+              </div>
+          </div>
+          <!-- <div style="width:90%;position:absolute;bottom:0;left:50%;z-index:2000;height:90px;margin-left:-45%;">
                 <div style="display: flex;align-items: center;flex-wrap: nowrap;">
                     <div style="width:11.11%;height:90px;padding:0 1rem;">
                         <div  onclick="connectwifi();" style="border:1px solid #ffffff;text-align:center;border-radius: 0.3rem;">
@@ -1012,7 +1012,7 @@
                         </div>
                     </div>
                 </div>
-          </div>
+          </div> -->
         </div>
     </div>
   </div>

@@ -25,7 +25,7 @@ factorial = Factorial()  # 只能在全局中定义
 elprinter = Elabprinter()
 conntwifi = ConnetWifi()
 recovideo = recordvideo()
-recovideo = recordvideo()
+
 
 # 自定义一个类继承QWebEngineView
 class WebEngineView(QWebEngineView):
