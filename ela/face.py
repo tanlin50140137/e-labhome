@@ -18,20 +18,20 @@ class Mywin(QDialog):
 
     def __init__(self):
         super(Mywin, self).__init__()
-        # self.timer_camera = QTimer()  # 初始化定时器
-        # self.cap = cv2.VideoCapture(0)  # 初始化摄像头
-        # # 告诉OpenCV使用人脸识别分类器
-        # self.classfier = cv2.CascadeClassifier("./template/xml/haarcascade_frontalface_alt2.xml")
-        # self.photograph = 100
-        # self.chinese_logo = "开始扫描脸部「」对准框"
-        # self.color_logo = (0, 255, 0)
-        # self.verification = ""
+        self.timer_camera = QTimer()  # 初始化定时器
+        self.cap = cv2.VideoCapture(0)  # 初始化摄像头
+        # 告诉OpenCV使用人脸识别分类器
+        self.classfier = cv2.CascadeClassifier("./template/xml/haarcascade_frontalface_alt2.xml")
+        self.photograph = 100
+        self.chinese_logo = "开始扫描脸部「」对准框"
+        self.color_logo = (0, 255, 0)
+        self.verification = ""
         self.initUI()
 
 
     def initUI(self):
         self.setWindowTitle('人脸识别')
-        # self.setWindowIcon(QtGui.QIcon('../yilaibo/res/logo.ico'))
+        # self.setWindowIcon(QtGui.QIcon('../template/img/logo.ico'))
         self.resize(800, 550)
         # 禁止调整大小
         self.setFixedSize(self.width(), self.height())
@@ -43,8 +43,8 @@ class Mywin(QDialog):
         v_layout.addWidget(self.labal)
 
         # 计时器
-        # self.timer_camera.timeout.connect(self.show_camera)
-        # self.timer_camera.start()
+        self.timer_camera.timeout.connect(self.show_camera)
+        self.timer_camera.start()
 
     # 在图片上显示支持中文
     def cv2ImgAddText(self, img, text, left, top, textColor=(0, 255, 0), textSize=20):
@@ -191,5 +191,12 @@ class Mywin(QDialog):
         self.labal.clear()
 
     # 关闭窗口时销毁
-    # def closeEvent(self, event):
-    #     self.closeCamera()
+    def closeEvent(self, event):
+        self.closeCamera()
+
+    # 执行窗口
+    def showFace(self):
+        app = QApplication(sys.argv)
+        win = Mywin()
+        win.show()
+        sys.exit(app.exec_())

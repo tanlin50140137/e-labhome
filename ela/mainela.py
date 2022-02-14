@@ -19,6 +19,7 @@ from ela.connectwifi import *
 from ela.recordvideo import *
 from ela.elabversionupdate import *
 from ela.elabcommunicat import *
+from ela.face import *
 
 channel = QtWebChannel.QWebChannel()  # 只能在全局中定义
 factorial = Factorial()  # 只能在全局中定义
@@ -106,6 +107,8 @@ class Elamain:
         factorial.signalHtml15.connect(self.sendSignalHtml15)
         # 绑定信号
         factorial.signalHtml19.connect(self.sendSignalHtml19)
+        # 绑定信号
+        factorial.signalHtml20.connect(self.sendSignalHtml20)
 
     # 缩放视频
     def _fullScreenRequested(self, request):
@@ -233,3 +236,10 @@ class Elamain:
             self.run_thread2.start()
             time.sleep(1)
             self.run_thread2.join()
+
+    def open_face_recognition(self, s):
+        face = Mywin()
+        face.showFace()
+
+    def sendSignalHtml20(self, s):
+        threading.Thread(target=self.open_face_recognition, name='open_face_recognition', args=(s,)).start()
