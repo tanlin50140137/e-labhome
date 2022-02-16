@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>h5人脸识别</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+</head>
+<body>
+  <div class="video_btn">
+   	<input id="imgFile" type="file" accept="video/*" capture="camcorder" onchange="uploadVideo()">
+  </div>
+</body>
+<script>
+function uploadVideo() {
+  var file = document.getElementById("imgFile").files[0];
+  const isLt20M = file.size / 1024 / 1024 < 20;
+  if (!isLt20M) {
+        console.log('上传视频大小不能超过20MB!');
+        return false;
+  } else {
+        console.log(file);
+  }
+}
+</script>
+</html>
