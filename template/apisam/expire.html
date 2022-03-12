@@ -150,6 +150,8 @@ layui.use('table', function(){
     	    page = curr;
     	    //得到数据总量
     	    // console.log(res);
+          // 设置报警数
+          localStorage.setItem("alarm5", res.count==undefined?0:res.count);
     	}
   });
   //监听工具条

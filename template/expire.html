@@ -149,7 +149,9 @@ layui.use('table', function(){
     	    //得到当前页码
     	    page = curr;
     	    //得到数据总量
-    	    // console.log(res);
+    	    //console.log(res);
+          // 记录报警条数
+          localStorage.setItem("alarm2", res.count==undefined?0:res.count);
     	}
   });
   //监听工具条

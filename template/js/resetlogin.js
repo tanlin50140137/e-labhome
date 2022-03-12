@@ -61,8 +61,8 @@ var app = new Vue({
     },
     /*获取资源库的连接*/
     getResource:function(tel, user_logo){
-        console.log(tel);
-        console.log(user_logo);
+        //console.log(tel);
+        //console.log(user_logo);
         var p = this;
         $.ajax({
           url:'http://res.e-labhome.cn/resource/login/login2',

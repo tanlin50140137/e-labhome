@@ -54,6 +54,10 @@ class Elamain:
         self.height = window.height()
         # 获取本地的HTML路径
         url = os.getcwd() + "/template/resetlogin.html"
+        # 如果文件不存在
+        # if not os.path.isfile(url):
+        #     pass
+        #     return
         # 网络链接
         # url = 'http://8.135.103.186/template/resetlogin.html'
 

@@ -20,6 +20,45 @@
     <script src="./iview/node_modules/view-design/dist/iview.min.js"></script>
     <style>
       .layui-form-select dl{max-height:600px; !important;}
+       /*报警*/
+       /*试剂耗材库存报警*/
+      .blue0{width:10%;height:8%;background:blue;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
+      .red0{width:10%;height:8%;background:red;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
+      /*试剂耗材过去报警*/
+      .blue1{width:32%;height:25%;background:blue;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
+      .red1{width:32%;height:25%;background:red;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
+
+      /*标准品库存报警*/
+      .blue2{width:10%;height:8%;background:blue;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
+      .red2{width:10%;height:8%;background:red;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
+      /*标准品效期报警*/
+      .blue3{width:15%;height:12%;background:blue;border-radius:100%;margin-left:0.2rem;}
+      .red3{width:15%;height:12%;background:red;border-radius:100%;margin-left:0.2rem;}
+      /*样品效期报警*/
+      .blue4{width:15%;height:12%;background:blue;border-radius:100%;margin-left:0.2rem;}
+      .red4{width:15%;height:12%;background:red;border-radius:100%;margin-left:0.2rem;}
+
+      /*仪器报警*/
+      .blue5{width:20%;height:15%;background:blue;border-radius:100%;margin-left:0.2rem;}
+      .red5{width:20%;height:15%;background:red;border-radius:100%;margin-left:0.2rem;}
+
+      .blue6{width:20%;height:15%;background:blue;border-radius:100%;margin-left:0.2rem;}
+      .red6{width:20%;height:15%;background:red;border-radius:100%;margin-left:0.2rem;}
+      /*资料报警*/
+      .blue7{width:13%;height:12%;background:blue;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
+      .red7{width:13%;height:12%;background:red;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
+
+      .wingBoxs{display:inline-block;}
+
+      /*库存报警位置*/
+      .postionins0{position:absolute;top:37.3%;left:54.34%;display:none;}
+      .postionins1{position:absolute;top:24%;left:33%;display:none;}
+      .postionins2{position:absolute;top:37.3%;left:54.34%;display:none;}
+      .postionins3{position:absolute;top:27%;left:41.5%;display:none;}
+      .postionins4{position:absolute;top:27%;left:41.5%;display:none;}
+      .postionins5{position:absolute;top:33.7%;left:46.4%;display:none;}
+      .postionins6{position:absolute;top:33.7%;left:48%;display:none;}
+      .postionins7{position:absolute;top:38%;left:52%;display:none;}
     </style>
 </head>
 <body>
@@ -57,8 +96,12 @@
                               <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">过期预警</font></div>
                           </div>
                           <div class="elaCardname">
-                              <div class="elaCardnameList boom3" @click="voiceAnnouncements('查看库存警报','alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
-                              <div class="elaCardnameList boom3" @click="voiceAnnouncements('查看过期警报','expire.html')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;"></div>
+                              <div class="elaCardnameList boom3" @click="voiceAnnouncements('查看库存警报','alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;position:relative;">
+                                  <div class="wingBoxs postionins0 blue0"></div>
+                              </div>
+                              <div class="elaCardnameList boom3" @click="voiceAnnouncements('查看过期警报','expire.html')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;position:relative;">
+                                  <div class="wingBoxs postionins1 blue1"></div>
+                              </div>
                           </div>
                       </div>
                       <div class="elaCard">
@@ -243,8 +286,12 @@
                             <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">任务设定</font></div>
                         </div>
                         <div class="elaCardname">
-                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apismr/alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;"></div>
-                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apismr/expire.html')"  style="background:url(./img/guoqiyujing_yp.png) no-repeat;background-size:100% 100%;"></div>
+                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apismr/alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;">
+                                <div class="wingBoxs postionins2 blue2"></div>
+                            </div>
+                            <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apismr/expire.html')"  style="background:url(./img/guoqiyujing_yp.png) no-repeat;background-size:100% 100%;">
+                                <div class="wingBoxs postionins3 blue3"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="elaCard">
@@ -429,7 +476,9 @@
                       </div>
                       <div class="elaCardname">
                           <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apisam/alarm.html')"  style="background:url(./img/kucunbaojing_yp.png) no-repeat;background-size:100% 100%;"></div>
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apisam/expire.html')"  style="background:url(./img/guoqiyujing_yp.png) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apisam/expire.html')"  style="background:url(./img/guoqiyujing_yp.png) no-repeat;background-size:100% 100%;">
+                              <div class="wingBoxs postionins4 blue4"></div>
+                          </div>
                       </div>
                   </div>
                   <div class="elaCard">
@@ -613,8 +662,12 @@
                           <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">定检计划</font></div>
                       </div>
                       <div class="elaCardname">
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apiequ/alarm.html')"  style="background:url(./img/kucunbaojing_wb.png) no-repeat;background-size:100% 100%;"></div>
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apiequ/expire.html')"  style="background:url(./img/guoqiyujing_wb.png) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apiequ/alarm.html')"  style="background:url(./img/kucunbaojing_wb.png) no-repeat;background-size:100% 100%;">
+                              <div class="wingBoxs postionins5 blue5"></div>
+                          </div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apiequ/expire.html')"  style="background:url(./img/guoqiyujing_wb.png) no-repeat;background-size:100% 100%;">
+                                <div class="wingBoxs postionins6 blue6"></div>
+                          </div>
                       </div>
                   </div>
                   <div class="elaCard">
@@ -805,7 +858,9 @@
                           <div class="elaCardTitleList"><font style="position:relative;top:0.28rem;color:#EEEEEE;">操作记录</font></div>
                       </div>
                       <div class="elaCardname">
-                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing_zl2.png) no-repeat;background-size:100% 100%;"></div>
+                          <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing_zl2.png) no-repeat;background-size:100% 100%;">
+                                <div class="wingBoxs postionins7 blue7"></div>
+                          </div>
                           <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing_zl.png) no-repeat;background-size:100% 100%;"></div>
                       </div>
                   </div>
@@ -1422,6 +1477,49 @@
   function resetClose(){
       kb.kbhide();
       layer.close(setingIndex);
+  }
+  //开启警报器
+  function open(i){
+      $(".postionins"+i).show();
+      setInterval(function(){
+          $(".wingBoxs:eq("+i+")").toggleClass("red"+i);
+      },1);
+  }
+  // 试剂耗材系统
+  var alarm1 = localStorage.getItem("alarm1");
+  if( alarm1 > 0 ){
+      open(0); // 报警红点
+  }
+  var alarm2 = localStorage.getItem("alarm2");
+  if( alarm2 > 0 ){
+      open(1); // 报警红点
+  }
+  // 标准品系统
+  var alarm3 = localStorage.getItem("alarm3");
+  if( alarm3 > 0 ){
+      open(2); // 报警红点
+  }
+  var alarm4 = localStorage.getItem("alarm4");
+  if( alarm4 > 0 ){
+      open(3); // 报警红点
+  }
+  // 样品系统
+  var alarm5 = localStorage.getItem("alarm5");
+  if( alarm5 > 0 ){
+      open(4); // 报警红点
+  }
+  // 仪器设备系统
+  var alarm6 = localStorage.getItem("alarm6");
+  if( alarm6 > 0 ){
+      open(5); // 报警红点
+  }
+  var alarm7 = localStorage.getItem("alarm7");
+  if( alarm7 > 0 ){
+      open(6); // 报警红点
+  }
+  var alarm8 = localStorage.getItem("alarm8");
+  if( alarm8 > 0 ){
+      open(7); // 报警红点
   }
 </script>
 </html>
