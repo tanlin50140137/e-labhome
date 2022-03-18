@@ -57,7 +57,7 @@ class versionupdate:
         except Exception as err:
             return False
 
-    def upgrade_file(self, url, parameter, userid):
+    def upgrade_file(self, url, parameter, userid, sn):
         try:
             # 添加请求头
             req = request.Request(url, headers={
@@ -77,12 +77,12 @@ class versionupdate:
                         # 下载版本包
                         self.download(dd['msg']['path_name'], filename)
                         # 运行更新文件
-                        os.system("%s \"%s\" \"%s\"" % ("update.exe", userid, filename))
+                        os.system("%s \"%s\" \"%s\" \"%s\"" % ("update.exe", userid, filename, sn))
                     else:
                         # 只更新模板
                         # 热更新-先删除原来的模板
-                        if os.path.isdir('./template'):
-                            self.delete_directory('./template')
+                        # if os.path.isdir('./template'):
+                        #     self.delete_directory('./template')
                         # 下载模板包
                         self.download(dd['msg']['path_name'], filename)
                         # 解压
@@ -93,7 +93,7 @@ class versionupdate:
                         # 设置用户ID
                         self.set_user(userid)
                         # 更新状态
-                        self.update_status({'act': 'updateStatus', 'userid': userid})
+                        self.update_status({'act': 'updateStatus', 'userid': userid, 'sn': sn})
 
                     state = True
                 else:

@@ -214,9 +214,10 @@ class Elamain:
         try:
             info = s.split('-')
             userid = info[0]
+            sn = info[2]
             data = {'act': 'getVersionIdInfo', 'id': info[1]}
             versionup = versionupdate()
-            versionup.upgrade_file('http://py.e-labhome.cn/version.php', data, userid)
+            versionup.upgrade_file('http://py.e-labhome.cn/version.php', data, userid, sn)
         except Exception as err:
             pass
 

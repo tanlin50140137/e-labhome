@@ -633,8 +633,8 @@ function keyboard(obj){
     /*添加事件*/
     kb.action = function(){
         $(".kbkeyInner").unbind();
-        $(".kbkeyInner").click(function(e){
-            // e.stopPropagation();
+        $(".kbkeyInner").mousedown(function(e){
+            e.stopPropagation();
             $(".kbkeyInner").css({"background":"#b9b9b9","color":"#333333"});
             $(".kbkeyInner2").css({"background":"#b9b9b9","color":"#333333"});
             $(".kbkeyInner3:eq(0)").css({"background":"#b9b9b9","color":"#333333"});
@@ -654,27 +654,27 @@ function keyboard(obj){
             kb.getinput(kb.group0[index]);
         });
         //长按
-        $(".kbkeyInner").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  kb.isMove = false;
-                  var index = $(this).index();
-                  p.move = setInterval(function(){
-                      kb.btn_touch(index,function(res){
-                            kb.getinput(kb.group0[res]);
-                      });
-                  },200);
-              },
-              touchend: function(e){
-                  var p = this;
-                  clearInterval(p.move);
-              }
-        });
+        // $(".kbkeyInner").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           kb.isMove = false;
+        //           var index = $(this).index();
+        //           p.move = setInterval(function(){
+        //               kb.btn_touch(index,function(res){
+        //                     kb.getinput(kb.group0[res]);
+        //               });
+        //           },200);
+        //       },
+        //       touchend: function(e){
+        //           var p = this;
+        //           clearInterval(p.move);
+        //       }
+        // });
 
         $(".kbkeyInner2").unbind();
-        $(".kbkeyInner2").click(function(e){
-            // e.stopPropagation();
+        $(".kbkeyInner2").mousedown(function(e){
+            e.stopPropagation();
             $(".kbkeyInner").css({"background":"#b9b9b9","color":"#333333"});
             $(".kbkeyInner2").css({"background":"#b9b9b9","color":"#333333"});
             $(".kbkeyInner3:eq(0)").css({"background":"#b9b9b9","color":"#333333"});
@@ -694,27 +694,27 @@ function keyboard(obj){
             kb.getinput(kb.group1[index]);
         });
         //长按
-        $(".kbkeyInner2").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  kb.isMove = false;
-                  var index = $(this).index();
-                  p.move = setInterval(function(){
-                      kb.btn_touch(index,function(res){
-                            kb.getinput(kb.group1[res]);
-                      });
-                  },200);
-              },
-              touchend: function(e){
-                  var p = this;
-                  clearInterval(p.move);
-              }
-        });
+        // $(".kbkeyInner2").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           kb.isMove = false;
+        //           var index = $(this).index();
+        //           p.move = setInterval(function(){
+        //               kb.btn_touch(index,function(res){
+        //                     kb.getinput(kb.group1[res]);
+        //               });
+        //           },200);
+        //       },
+        //       touchend: function(e){
+        //           var p = this;
+        //           clearInterval(p.move);
+        //       }
+        // });
 
         $(".kbkeyInner3").unbind();
-        $(".kbkeyInner3").click(function(e){
-            // e.stopPropagation();
+        $(".kbkeyInner3").mousedown(function(e){
+            e.stopPropagation();
             if( index != 8 ){
                 $(".kbkeyInner").css({"background":"#b9b9b9","color":"#333333"});
                 $(".kbkeyInner2").css({"background":"#b9b9b9","color":"#333333"});
@@ -738,44 +738,44 @@ function keyboard(obj){
             kb.switch3(index);
         });
         //长按
-        $(".kbkeyInner3").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  kb.isMove = false;
-                  var index = $(this).index();
-                  if( index == 8 ){
-                      clearInterval(p.move);
-                      p.move = setInterval(function(){
-                          kb.btn_touch(index,function(res){
-                                console.log(res);
-                                kb.switch3(res);
-                          });
-                      },200);
-                  }else if( index != -1 ){
-                      clearInterval(p.move);
-                      p.move = setInterval(function(){
-                          kb.btn_touch(index,function(res){
-                                if( res != 0 ){
-                                    kb.switch3(res);
-                                }else{
-                                    clearInterval(p.move);
-                                }
-                          });
-                      },200);
-                  }else{
-                      clearInterval(p.move);
-                  }
-              },
-              touchend: function(e){
-                  var p = this;
-                  clearInterval(p.move);
-              }
-        });
+        // $(".kbkeyInner3").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           kb.isMove = false;
+        //           var index = $(this).index();
+        //           if( index == 8 ){
+        //               clearInterval(p.move);
+        //               p.move = setInterval(function(){
+        //                   kb.btn_touch(index,function(res){
+        //                         console.log(res);
+        //                         kb.switch3(res);
+        //                   });
+        //               },200);
+        //           }else if( index != -1 ){
+        //               clearInterval(p.move);
+        //               p.move = setInterval(function(){
+        //                   kb.btn_touch(index,function(res){
+        //                         if( res != 0 ){
+        //                             kb.switch3(res);
+        //                         }else{
+        //                             clearInterval(p.move);
+        //                         }
+        //                   });
+        //               },200);
+        //           }else{
+        //               clearInterval(p.move);
+        //           }
+        //       },
+        //       touchend: function(e){
+        //           var p = this;
+        //           clearInterval(p.move);
+        //       }
+        // });
 
         $(".kbkeyInner4").unbind();
-        $(".kbkeyInner4").click(function(e){
-            // e.stopPropagation();
+        $(".kbkeyInner4").mousedown(function(e){
+            e.stopPropagation();
             $(".kbkeyInner4:eq(2)").css({"background":"#b9b9b9","color":"#333333"});
             $(".kbkeyInner4:eq(3)").css({"background":"#b9b9b9","color":"#333333"});
             $(".kbkeyInner4:eq(4)").css({"background":"#b9b9b9","color":"#333333"});
@@ -789,29 +789,29 @@ function keyboard(obj){
             kb.switch4(index);
         });
         //长按
-        $(".kbkeyInner4").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  kb.isMove = false;
-                  var index = $(this).index();
-                  p.move = setInterval(function(){
-                      kb.btn_touch(index,function(res){
-                          if( res == 3 ){
-                              kb.switch4(res);
-                          }
-                      });
-                  },200);
-              },
-              touchend: function(e){
-                  var p = this;
-                  clearInterval(p.move);
-              }
-        });
+        // $(".kbkeyInner4").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           kb.isMove = false;
+        //           var index = $(this).index();
+        //           p.move = setInterval(function(){
+        //               kb.btn_touch(index,function(res){
+        //                   if( res == 3 ){
+        //                       kb.switch4(res);
+        //                   }
+        //               });
+        //           },200);
+        //       },
+        //       touchend: function(e){
+        //           var p = this;
+        //           clearInterval(p.move);
+        //       }
+        // });
 
         $(".kb_keyboard_left").eq(0).unbind();
-        $(".kb_keyboard_left").eq(0).click(function(e){
-            // e.stopPropagation();
+        $(".kb_keyboard_left").eq(0).mousedown(function(e){
+            e.stopPropagation();
             kb.isMove = false;
             // $(".kb_keyboard").animate({"left":"-1000px"},200,function(){
                 $(".kb_keyboard").hide();
@@ -820,8 +820,8 @@ function keyboard(obj){
             // });
         });
         $(".kb_keyboard_left").eq(2).unbind();
-        $(".kb_keyboard_left").eq(2).click(function(e){
-            // e.stopPropagation();
+        $(".kb_keyboard_left").eq(2).mousedown(function(e){
+            e.stopPropagation();
             // $(this).fadeOut(50);
             // $(this).fadeIn(50);
             kb.isMove = false;
@@ -833,8 +833,8 @@ function keyboard(obj){
             // });
         });
         $(".showChineseHanZiList").unbind();
-        $(".showChineseHanZiList").click(function(e){
-            // e.stopPropagation();
+        $(".showChineseHanZiList").mousedown(function(e){
+            e.stopPropagation();
             $(this).fadeOut(50);
             $(this).fadeIn(50);
             kb.isMove = false;
@@ -846,8 +846,8 @@ function keyboard(obj){
             }
         });
         $(".kbonclick_close").unbind();
-        $(".kbonclick_close").click(function(e){
-            // e.stopPropagation();
+        $(".kbonclick_close").mousedown(function(e){
+            e.stopPropagation();
             kb.isMove = false;
             $(".kbBoxChinese_list").show();
             if( kb.cursurPosition > 0 ){
@@ -855,8 +855,8 @@ function keyboard(obj){
             }
         });
         $(".closeHanZiList").unbind();
-        $(".closeHanZiList").click(function(e){
-            // e.stopPropagation();
+        $(".closeHanZiList").mousedown(function(e){
+            e.stopPropagation();
             kb.isMove = false;
             $(".kbBoxChinese_list").hide();
             if( kb.cursurPosition > 0 ){
@@ -864,8 +864,8 @@ function keyboard(obj){
             }
         });
         $(".kbShengyuHanZiFixel").unbind();
-        $(".kbShengyuHanZiFixel").click(function(e){
-            // e.stopPropagation();
+        $(".kbShengyuHanZiFixel").mousedown(function(e){
+            e.stopPropagation();
             kb.isMove = false;
             var index = $(this).index();
             if( kb.areChinese ){
@@ -941,8 +941,8 @@ function keyboard(obj){
     /*数字键盘添加事件*/
     kb.action2 = function(){
         $(".keyBoxFuHao").unbind();
-        $(".keyBoxFuHao").click(function(e){
-            // e.stopPropagation();
+        $(".keyBoxFuHao").mousedown(function(e){
+            e.stopPropagation();
             $(this).fadeOut(50);
             $(this).fadeIn(50);
             kb.isMove = false;
@@ -952,8 +952,8 @@ function keyboard(obj){
             }
         });
         $(".kbnumber_01").unbind();
-        $(".kbnumber_01").click(function(e){
-            // e.stopPropagation();
+        $(".kbnumber_01").mousedown(function(e){
+            e.stopPropagation();
             $(".kbnumber_01").css({"background":"#FFFFFF","color":"#333333"});
             $(".kbnumber_02").css({"background":"#FFFFFF","color":"#333333"});
             $(".kbnumber_03").css({"background":"#FFFFFF","color":"#333333"});
@@ -963,25 +963,25 @@ function keyboard(obj){
             $(".kbnumber_01:eq("+index+")").css({"background":"#3299ca","color":"#FFFFFF"});
             kb.EnglishKeyboard(kb.groupNum1[index]);
         });
-        $(".kbnumber_01").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  var index = $(this).index();
-                  p.move = setInterval(function(){
-                      kb.btn_touch(index,function(res){
-                          kb.EnglishKeyboard(kb.groupNum1[res]);
-                      });
-                  },200);
-              },
-              touchend: function(e){
-                  clearInterval(this.move);
-              }
-        });
+        // $(".kbnumber_01").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           var index = $(this).index();
+        //           p.move = setInterval(function(){
+        //               kb.btn_touch(index,function(res){
+        //                   kb.EnglishKeyboard(kb.groupNum1[res]);
+        //               });
+        //           },200);
+        //       },
+        //       touchend: function(e){
+        //           clearInterval(this.move);
+        //       }
+        // });
 
         $(".kbnumber_02").unbind();
-        $(".kbnumber_02").click(function(e){
-            // e.stopPropagation();
+        $(".kbnumber_02").mousedown(function(e){
+            e.stopPropagation();
             $(".kbnumber_01").css({"background":"#FFFFFF","color":"#333333"});
             $(".kbnumber_02").css({"background":"#FFFFFF","color":"#333333"});
             $(".kbnumber_03").css({"background":"#FFFFFF","color":"#333333"});
@@ -991,25 +991,25 @@ function keyboard(obj){
             $(".kbnumber_02:eq("+index+")").css({"background":"#3299ca","color":"#FFFFFF"});
             kb.EnglishKeyboard(kb.groupNum1_2[index]);
         });
-        $(".kbnumber_02").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  var index = $(this).index();
-                  p.move = setInterval(function(){
-                      kb.btn_touch(index,function(res){
-                          kb.EnglishKeyboard(kb.groupNum1_2[res]);
-                      });
-                  },200);
-              },
-              touchend: function(e){
-                  clearInterval(this.move);
-              }
-        });
+        // $(".kbnumber_02").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           var index = $(this).index();
+        //           p.move = setInterval(function(){
+        //               kb.btn_touch(index,function(res){
+        //                   kb.EnglishKeyboard(kb.groupNum1_2[res]);
+        //               });
+        //           },200);
+        //       },
+        //       touchend: function(e){
+        //           clearInterval(this.move);
+        //       }
+        // });
 
         $(".kbnumber_03").unbind();
-        $(".kbnumber_03").click(function(e){
-            // e.stopPropagation();
+        $(".kbnumber_03").mousedown(function(e){
+            e.stopPropagation();
             $(".kbnumber_01").css({"background":"#FFFFFF","color":"#333333"});
             $(".kbnumber_02").css({"background":"#FFFFFF","color":"#333333"});
             $(".kbnumber_03").css({"background":"#FFFFFF","color":"#333333"});
@@ -1019,50 +1019,50 @@ function keyboard(obj){
             $(".kbnumber_03:eq("+index+")").css({"background":"#3299ca","color":"#FFFFFF"});
             kb.EnglishKeyboard(kb.groupNum1_3[index]);
         });
-        $(".kbnumber_03").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  var index = $(this).index();
-                  p.move = setInterval(function(){
-                      kb.btn_touch(index,function(res){
-                          kb.EnglishKeyboard(kb.groupNum1_3[res]);
-                      });
-                  },200);
-              },
-              touchend: function(e){
-                  clearInterval(this.move);
-              }
-        });
+        // $(".kbnumber_03").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           var index = $(this).index();
+        //           p.move = setInterval(function(){
+        //               kb.btn_touch(index,function(res){
+        //                   kb.EnglishKeyboard(kb.groupNum1_3[res]);
+        //               });
+        //           },200);
+        //       },
+        //       touchend: function(e){
+        //           clearInterval(this.move);
+        //       }
+        // });
 
         $(".keyNumRight").unbind();
-        $(".keyNumRight").click(function(e){
-            // e.stopPropagation();
+        $(".keyNumRight").mousedown(function(e){
+            e.stopPropagation();
             kb.isMove = false;
             var index = $(this).index();
             kb.switchNumber1(index);
         });
-        $(".keyNumRight").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  var index = $(this).index();
-                  p.move = setInterval(function(){
-                      kb.btn_touch(index,function(res){
-                          if( index == 0 ){
-                             kb.switchNumber1(res);
-                          }
-                      });
-                  },200);
-              },
-              touchend: function(e){
-                  clearInterval(this.move);
-              }
-        });
+        // $(".keyNumRight").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           var index = $(this).index();
+        //           p.move = setInterval(function(){
+        //               kb.btn_touch(index,function(res){
+        //                   if( index == 0 ){
+        //                      kb.switchNumber1(res);
+        //                   }
+        //               });
+        //           },200);
+        //       },
+        //       touchend: function(e){
+        //           clearInterval(this.move);
+        //       }
+        // });
 
         $(".lastKyeList").unbind();
-        $(".lastKyeList").click(function(e){
-            // e.stopPropagation();
+        $(".lastKyeList").mousedown(function(e){
+            e.stopPropagation();
             $(".kbnumber_01").css({"background":"#FFFFFF","color":"#333333"});
             $(".kbnumber_02").css({"background":"#FFFFFF","color":"#333333"});
             $(".kbnumber_03").css({"background":"#FFFFFF","color":"#333333"});
@@ -1074,27 +1074,27 @@ function keyboard(obj){
             }
             kb.switchNumber2(index);
         });
-        $(".lastKyeList").on({
-              move:'',
-              touchstart:function(e){
-                  var p = this;
-                  var index = $(this).index();
-                  p.move = setInterval(function(){
-                      kb.btn_touch(index,function(res){
-                          if( index == 2 || index == 3 ){
-                             kb.switchNumber2(res);
-                          }
-                      });
-                  },150);
-              },
-              touchend: function(e){
-                  clearInterval(this.move);
-              }
-        });
+        // $(".lastKyeList").on({
+        //       move:'',
+        //       touchstart:function(e){
+        //           var p = this;
+        //           var index = $(this).index();
+        //           p.move = setInterval(function(){
+        //               kb.btn_touch(index,function(res){
+        //                   if( index == 2 || index == 3 ){
+        //                      kb.switchNumber2(res);
+        //                   }
+        //               });
+        //           },150);
+        //       },
+        //       touchend: function(e){
+        //           clearInterval(this.move);
+        //       }
+        // });
 
         $(".kb_keyboard_left").eq(0).unbind();
-        $(".kb_keyboard_left").eq(0).click(function(e){
-            // e.stopPropagation();
+        $(".kb_keyboard_left").eq(0).mousedown(function(e){
+            e.stopPropagation();
             $(this).fadeOut(50);
             $(this).fadeIn(50);
             kb.isMove = false;
@@ -1105,8 +1105,8 @@ function keyboard(obj){
             // });
         });
         $(".kb_keyboard_left").eq(2).unbind();
-        $(".kb_keyboard_left").eq(2).click(function(e){
-            // e.stopPropagation();
+        $(".kb_keyboard_left").eq(2).mousedown(function(e){
+            e.stopPropagation();
             $(this).fadeOut(50);
             $(this).fadeIn(50);
             kb.isMove = false;
@@ -1123,8 +1123,8 @@ function keyboard(obj){
     /*符号键盘添加事件*/
     kb.action3 = function(){
         $(".leftbutton").unbind();
-        $(".leftbutton").click(function(e){
-            // e.stopPropagation();
+        $(".leftbutton").mousedown(function(e){
+            e.stopPropagation();
             // $(this).fadeOut(50);
             // $(this).fadeIn(50);
             kb.isMove = false;
@@ -1183,8 +1183,8 @@ function keyboard(obj){
             }
         });
         $(".kbkeyfuhaoList").unbind();
-        $(".kbkeyfuhaoList").click(function(e){
-            // e.stopPropagation();
+        $(".kbkeyfuhaoList").mousedown(function(e){
+            e.stopPropagation();
             // $(this).fadeOut(50);
             // $(this).fadeIn(50);
             kb.isMove = false;
@@ -1212,8 +1212,8 @@ function keyboard(obj){
             }
         });
         $(".kb_keyboard_left").eq(0).unbind();
-        $(".kb_keyboard_left").eq(0).click(function(e){
-            // e.stopPropagation();
+        $(".kb_keyboard_left").eq(0).mousedown(function(e){
+            e.stopPropagation();
             // $(this).fadeOut(50);
             // $(this).fadeIn(50);
             kb.isMove = false;
@@ -1224,8 +1224,8 @@ function keyboard(obj){
             // });
         });
         $(".kb_keyboard_left").eq(2).unbind();
-        $(".kb_keyboard_left").eq(2).click(function(e){
-            // e.stopPropagation();
+        $(".kb_keyboard_left").eq(2).mousedown(function(e){
+            e.stopPropagation();
             // $(this).fadeOut(50);
             // $(this).fadeIn(50);
             kb.isMove = false;
@@ -1350,8 +1350,8 @@ function keyboard(obj){
     }
     /*添加输入控件事件*/
     kb.addEvent = function(index){
-        $(obj.el).eq(index).unbind('click');
-        $(obj.el).eq(index).click(function(){
+        $(obj.el).eq(index).unbind('mousedown');
+        $(obj.el).eq(index).mousedown(function(){
               kb.flagInput = true;
               var oTxt1 = $(this)[0];
               setTimeout(function(){

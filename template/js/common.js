@@ -8,6 +8,21 @@ var wifipassword = '';
 $(function(){
   overload_style();
 });
+function randomNum(minNum,maxNum){
+    var myDate = new Date();
+    var time = myDate.getFullYear()+((myDate.getMonth()+1)<10?'0'+(myDate.getMonth()+1):(myDate.getMonth()+1))+(myDate.getDate()<10?'0'+myDate.getDate():myDate.getDate())+(myDate.getHours()<10?'0'+myDate.getHours():myDate.getHours())+(myDate.getMinutes()<10?'0'+myDate.getMinutes():myDate.getMinutes())+(myDate.getSeconds()<10?'0'+myDate.getSeconds():myDate.getSeconds());
+    switch(arguments.length){
+        case 1:
+            return time+parseInt(Math.random()*minNum+1,10);
+        break;
+        case 2:
+            return time+parseInt(Math.random()*(maxNum-minNum+1)+minNum,10);
+        break;
+            default:
+                return 0;
+            break;
+    }
+}
 function overload_style(){
     var windows = $(window).height();
     var fuzuheight = $(".fuzuheight").height();
@@ -93,7 +108,15 @@ function linkSocket(report){
 var updateIndexVersion='',showupdateindex=2;
 // 版本更新
 function detectVersionUpdates(int){
-    $.post('http://py.e-labhome.cn/version.php', {'act':'getUserVersion','userid':userId} ,function(res){
+    // 生成系统唯一的SN号码
+    var SN = localStorage.getItem("SN")==null?'':localStorage.getItem("SN");
+    if( SN == '' ){
+        var snRound = randomNum(100000,999999);
+        localStorage.setItem("SN", snRound);
+        SN = snRound;
+    }
+    // 通过系统的SN号检查版本号
+    $.post('http://py.e-labhome.cn/version.php', {'act':'getUserVersion','sn':SN,'userid':userId} ,function(res){
           var obj = JSON.parse(res);
           //版本ID
           if( obj.code == 1 ){
@@ -106,30 +129,31 @@ function detectVersionUpdates(int){
               }
               var index = layer.confirm(obj.msg+'，是否更新？', {
                   title: title,
-                  btn: ['立即更新']
+                  btn: ['立即更新','暂不更新']
               }, function() {
                   layer.close(index);
                   if( obj.data[0].status == 1 ){
-                      layer.confirm('后台更新：不影响操作，更新完成，自动重启。（推荐）<br/>立即更新：同步更新，不能操作，等待时间长。（不推荐）', {
+                      layer.confirm('本次更新时间比较长，请点击进入后台更新，不影响操作。', {
                          title:'请选择更新形式',
-                         btn: ['后台更新','立即更新']
+                         btn: ['进入后台更新','暂不更新']
                       }, function(index){
                           showupdateindex = 3;
                           layer.msg('进入后台更新，完成后自动重启系统', {icon:16,shade:0.5},function(){
                               //进入后台升级版本
-                              onFactorial15( userId+'-'+versionId );
+                              onFactorial15( userId+'-'+versionId+'-'+SN );
                           });
                       },function(index){
-                          showupdateindex = 3;
-                          updateIndexVersion = layer.msg('正在升级版本耗时较长，更新完成后自动重启，不要关闭，请耐心等待！', {
-                             icon: 16
-                            ,shade: 0.5
-                            ,time:'-1'
-                          });
-                          setTimeout(function(){
-                              //立即升级版本－同步升级
-                              onFactorial14( userId+'-'+versionId );
-                          },1000);
+                          // showupdateindex = 3;
+                          // updateIndexVersion = layer.msg('正在升级版本耗时较长，更新完成后自动重启，不要关闭，请耐心等待！', {
+                          //    icon: 16
+                          //   ,shade: 0.5
+                          //   ,time:'-1'
+                          // });
+                          // setTimeout(function(){
+                          //     //立即升级版本－同步升级
+                          //     onFactorial14( userId+'-'+versionId+'-'+SN );
+                          // },1000);
+                          layer.close(index);
                       });
                   }else{
                       showupdateindex = 3;
@@ -165,7 +189,7 @@ function connectwifi(){
           onFactorial10('扫描WIFI名称');
     });
 }
-/*用户设置*/
+/*用户设置－停用了*/
 function userseting(){
     layer.close(layuiIndex1);
     layer.prompt({
@@ -181,6 +205,68 @@ function userseting(){
         kb2.kbhide();
     });
     $(".layui-layer-input").blur();
+    kb2 = new keyboard({
+        el:".layui-layer-input",
+        x:1.6,
+        keyHeight:"5rem",
+        fontSize:'1.8rem',
+        bottom:"6rem",
+        end:function(res,value){
+            // console.log(res, value)
+            if( res == 'OK' ){
+                // layer.msg('完成提交');
+            }else{
+                // layer.msg('什么都不做');
+            }
+        }
+    });
+    kb2.run();
+}
+function userseting2(){
+    var vcodeurl = url;
+    layer.close(layuiIndex1);
+    layer.prompt({
+      title: '登录新账号',
+      formType: 0,
+      offset:'150px',
+      btn2:function(){
+          kb2.kbhide();
+      }
+    }, function(pass, index){
+        kb2.kbhide();
+        if( pass.length > 11 ){
+            layer.msg('手机号码错误！',{offset:'210px'});
+            return false;
+        }
+        if (isNaN(pass)) {
+            layer.msg('请输入正确的手机号！',{offset:'210px'});
+            return false;
+        }
+        var vcode = $("#zxr").val();
+        if( vcode == '' ){
+            layer.msg('请输入密码',{offset:'210px'});
+            return false;
+        }
+        $.post(vcodeurl+'hwapi/basic/get_userid_by_phone_and_pwd',{phone:pass,password:vcode},function(res){
+              layer.close(index);
+              kb2.kbhide();
+              if( res.code == 0 ){
+                  layer.msg("登录成功", {shift:-1,time:1000,offset:'210px'}, function () {
+                      // 重置用户ID号
+                      localStorage.setItem("userId", res.userId);
+                      // 刷新页面
+                      location.reload();
+                  });
+              }else{
+                  layer.msg(res.msg,{offset:'210px'});
+              }
+        });
+    });
+    $(".layui-layer-input").attr({"placeholder":"e-labhome平台账号"});
+    // 添加备注框
+    $(".layui-layer-content").append('<div style="margin-top:1rem;"><input id= "zxr" type="password" class="layui-layer-input" style="display:inline-block;" placeholder="登录密码"/></div>');
+    $(".layui-layer-input").blur();
+    $(".showvirifyBoxs:eq(1)").hide();
     kb2 = new keyboard({
         el:".layui-layer-input",
         x:1.6,

@@ -61,16 +61,17 @@ def update_status(parameter):
 if __name__ == "__main__":
     userid = sys.argv[1]
     filename = sys.argv[2]
+    sn = sys.argv[3]
     # 关闭主程序
     os.system(r'taskkill /F /IM elabserver.exe')
     os.system(r'taskkill /F /IM elabhome.exe')
     time.sleep(2)
     # 先删除原来的模板
-    if os.path.isdir('./template'):
-        delete_directory('./template')
+    # if os.path.isdir('./template'):
+    #     delete_directory('./template')
     # 删除主程序
-    if os.path.isfile('./elabhome.exe'):
-        os.remove('./elabhome.exe')
+    # if os.path.isfile('./elabhome.exe'):
+    #     os.remove('./elabhome.exe')
     # 解压新版本
     unzip_file(filename, './')
     # 删除解压包
@@ -79,7 +80,7 @@ if __name__ == "__main__":
     # 设置用户ID
     set_user(userid)
     # 更新状态
-    update_status({'act': 'updateStatus', 'userid': userid})
+    update_status({'act': 'updateStatus', 'userid': userid, 'sn': sn})
     # 启动主程序
     # win32api.ShellExecute(0, 'open', 'elabhome.exe', '', '', 1)
     os.system("%s" % ("start.bat"))
