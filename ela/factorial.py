@@ -149,9 +149,10 @@ class Factorial(QObject):
         try:
             info = s.split('-')
             userid = info[0]
+            sn = info[2]
             data = {'act': 'getVersionIdInfo', 'id': info[1]}
             versionup = versionupdate()
-            bool_s = versionup.upgrade_file('http://py.e-labhome.cn/version.php', data, userid)
+            bool_s = versionup.upgrade_file('http://py.e-labhome.cn/version.php', data, userid, sn)
             if bool_s:
                 res = 'OK'
             else:

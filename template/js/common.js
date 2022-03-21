@@ -164,7 +164,7 @@ function detectVersionUpdates(int){
                       });
                       setTimeout(function(){
                           //热更新
-                          onFactorial14( userId+'-'+versionId );
+                          onFactorial14( userId+'-'+versionId+'-'+SN );
                       },1000);
                   }
               });
@@ -226,7 +226,7 @@ function userseting2(){
     var vcodeurl = url;
     layer.close(layuiIndex1);
     layer.prompt({
-      title: '登录新账号',
+      title: '账号登录或修改账号',
       formType: 0,
       offset:'150px',
       btn2:function(){
@@ -254,6 +254,7 @@ function userseting2(){
                   layer.msg("登录成功", {shift:-1,time:1000,offset:'210px'}, function () {
                       // 重置用户ID号
                       localStorage.setItem("userId", res.userId);
+                      //app.setpicnicname(res.userId);
                       // 刷新页面
                       location.reload();
                   });

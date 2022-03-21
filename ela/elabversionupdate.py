@@ -81,8 +81,8 @@ class versionupdate:
                     else:
                         # 只更新模板
                         # 热更新-先删除原来的模板
-                        # if os.path.isdir('./template'):
-                        #     self.delete_directory('./template')
+                        if os.path.isdir('./template'):
+                            self.delete_directory('./template')
                         # 下载模板包
                         self.download(dd['msg']['path_name'], filename)
                         # 解压

@@ -9,6 +9,7 @@ import win32api
 
 """
 版本升级
+pyinstaller -F -w -i template/img/logo.ico ./update.py
 """
 
 
@@ -59,19 +60,24 @@ def update_status(parameter):
 
 
 if __name__ == "__main__":
-    userid = sys.argv[1]
-    filename = sys.argv[2]
-    sn = sys.argv[3]
+    userid, filename, sn = ('', '', '')
+    if len(sys.argv) == 3:
+        userid = sys.argv[1]
+        filename = sys.argv[2]
+    elif len(sys.argv) == 4:
+        userid = sys.argv[1]
+        filename = sys.argv[2]
+        sn = sys.argv[3]
     # 关闭主程序
     os.system(r'taskkill /F /IM elabserver.exe')
     os.system(r'taskkill /F /IM elabhome.exe')
     time.sleep(2)
     # 先删除原来的模板
-    # if os.path.isdir('./template'):
-    #     delete_directory('./template')
+    if os.path.isdir('./template'):
+        delete_directory('./template')
     # 删除主程序
-    # if os.path.isfile('./elabhome.exe'):
-    #     os.remove('./elabhome.exe')
+    if os.path.isfile('./elabhome.exe'):
+        os.remove('./elabhome.exe')
     # 解压新版本
     unzip_file(filename, './')
     # 删除解压包

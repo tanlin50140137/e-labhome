@@ -9,7 +9,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QObject
 
 # 所有模块
-from ela import mainela, factorial, elabprinter, connectwifi, recordvideo, elabversionupdate, elabcommunicat, face
+from ela import mainela, factorial, elabprinter, connectwifi, recordvideo, elabversionupdate, elabcommunicat
 
 """
 打包命令必须是:记得要用这个来编译
