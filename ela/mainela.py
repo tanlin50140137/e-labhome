@@ -108,8 +108,14 @@ class Elamain:
         factorial.signalHtml9.connect(self.sendSignalHtml9)
         # 绑定信号
         factorial.signalHtml15.connect(self.sendSignalHtml15)
-        # 绑定信号
+        # 绑定信号-电子秤
         factorial.signalHtml19.connect(self.sendSignalHtml19)
+        # 绑定信号-温湿度
+        factorial.signalHtmWsd.connect(self.signalHtmWsd)
+        # 绑定信号-温湿度-关闭
+        factorial.signalHtmBack.connect(self.signalHtmBack)
+        # 绑定信号-温湿度-远程访问
+        factorial.signalEnableWsd.connect(self.signalEnableWsd)
 
     # 缩放视频
     def _fullScreenRequested(self, request):
@@ -238,3 +244,24 @@ class Elamain:
             self.run_thread2.start()
             time.sleep(1)
             self.run_thread2.join()
+
+    # 温湿度
+    def wsd_communication(self, s):
+        p = json.loads(s)
+        self.wenshidu = Communication(p['port'], 9600, 1)
+        self.wenshidu.set_end_hex(0)
+        self.wenshidu.set_enable_wsd(p['enable_v'])
+        self.wenshidu.recive_data_once(p['command'], p['userId'], p['rate'])
+
+    def signalHtmWsd(self, s):
+        # 打开温湿度串口-打开
+        self.run_thread = threading.Thread(target=self.wsd_communication, name='run_communication', args=(s,))
+        self.run_thread.start()
+
+    def signalHtmBack(self, s):
+        # 结束温湿度串口-关闭
+        self.wenshidu.set_end_hex(1)
+
+    def signalEnableWsd(self, s):
+        # 结束温湿度串口-关闭
+        self.wenshidu.set_enable_wsd(s)

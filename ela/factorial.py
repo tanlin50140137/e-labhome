@@ -23,6 +23,9 @@ class Factorial(QObject):
     signalHtml15 = pyqtSignal(str)  # 类型为字符串、整型
     signalHtml19 = pyqtSignal(str)  # 类型为字符串、整型
     signalHtml20 = pyqtSignal(str)  # 类型为字符串、整型
+    signalHtmWsd = pyqtSignal(str)  # 类型为字符串、整型
+    signalHtmBack = pyqtSignal(str)  # 类型为字符串、整型
+    signalEnableWsd = pyqtSignal(str)  # 类型为字符串、整型
 
     @pyqtSlot(str, result=str)
     def factorial(self, s):
@@ -222,6 +225,24 @@ class Factorial(QObject):
     def factorial19(self, s):
         """打开COM1串口"""
         self.signalHtml19.emit(s)  # 发送信号返回一个参数
+        return s
+
+    @pyqtSlot(str, result=str)
+    def factorial_wsd(self, s):
+        """打开串口-温湿度"""
+        self.signalHtmWsd.emit(s)  # 发送信号返回一个参数
+        return s
+
+    @pyqtSlot(str, result=str)
+    def factorial_back(self, s):
+        """打开串口-温湿度-关闭串口"""
+        self.signalHtmBack.emit(s)  # 发送信号返回一个参数
+        return s
+
+    @pyqtSlot(str, result=str)
+    def factorial_Enable(self, s):
+        """打开串口-温湿度-远程访问"""
+        self.signalEnableWsd.emit(s)  # 发送信号返回一个参数
         return s
 
     @pyqtSlot(str, result=str)

@@ -1,3 +1,4 @@
+import binascii
 import json
 import serial
 import serial.tools.list_ports
@@ -13,6 +14,8 @@ class Communication():
         self.bps = bps
         self.timeout = timeout
         self.flag = 0
+        self.enable_wsd = 0
+        self.flag_wsd = 0
         self.i = 0
         global Ret
         try:
@@ -67,10 +70,15 @@ class Communication():
         return self.main_engine.readline()
 
     # 发数据
-    def Send_data(self, data):
-        data = bytes(data, encoding="utf-8")
-        self.main_engine.write(data)
-
+    def Send_data(self, data, m=0):
+        if m == 0:
+            data = bytes(data, encoding='utf-8')
+            # 发送文本模式
+            self.main_engine.write(data)
+        else:
+            # 发送HEX模式
+            data = bytes.fromhex(data)
+            self.main_engine.write(data)
     # 更多示例
     # self.main_engine.write(chr(0x06).encode("utf-8"))  # 十六制发送一个数据
     # print(self.main_engine.read().hex())  #  # 十六进制的读取读一个字节
@@ -88,7 +96,7 @@ class Communication():
             self.main_engine.close()
         self.flag = 1
 
-    # 接收数据
+    # 接收文本模式
     # 一个整型数据占两个字节
     # 一个字符占一个字节
     def recive_data(self, way):
@@ -122,6 +130,66 @@ class Communication():
             except Exception as e:
                 break
 
+    # 结束HEX模式
+    def set_end_hex(self, s):
+        self.flag_wsd = int(s)
+
+    def set_enable_wsd(self, s):
+        self.enable_wsd = int(s)
+
+    # 只接HEX模式
+    def recive_data_once(self, command, userId, t=0.5):
+        while True:
+            # 结束发送
+            if self.flag_wsd == 1 and self.enable_wsd == 0:
+                break
+            try:
+                self.Send_data(command, t)
+                sb = self.Read_Line()
+                list = self.get_HEX(sb)
+                st_l = "-".join('%s' %id for id in list)
+                try:
+                    # 本机内网
+                    data1 = json.dumps({"type": "send", "userid": "wsd", "msg": st_l})
+                    self.websocket_sned_data1('ws://localhost:9501', data1)
+                    # 远程外网
+                    if self.enable_wsd == 1:
+                        data2 = json.dumps({"type": "send", "userid": userId, "msg": st_l})
+                        self.websocket_sned_data2('ws://8.135.103.186:9512', data2)
+
+                except Exception as e:
+                    break
+            except Exception as e:
+                break
+        # 关闭串口
+        try:
+            self.main_engine.close()
+        except Exception as e:
+            print(e)
+
+    # websocket
+    def websocket_sned_data1(self, uri, data):
+        try:
+            async def send1(wsurl):
+                async with websockets.connect(wsurl) as websocket:
+                    await websocket.send(data)
+            loop1 = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop1)
+            asyncio.get_event_loop().run_until_complete(send1(uri))
+        except Exception as e:
+            pass
+
+    def websocket_sned_data2(self, uri, data):
+        try:
+            async def send2(wsurl):
+                async with websockets.connect(wsurl) as websocket:
+                    await websocket.send(data)
+            loop2 = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop2)
+            asyncio.get_event_loop().run_until_complete(send2(uri))
+        except Exception as e:
+            pass
+
     # 解析串口数据
     def get_info(self, sb):
         st = str(sb, encoding="utf-8")
@@ -132,3 +200,12 @@ class Communication():
             if v != "":
                 l.append(v)
         return l
+
+    # 解析HEX模式返回数据
+    def get_HEX(self, sb):
+        data = str(binascii.b2a_hex(sb))[2:-1]
+        if data == '' or len(data) != 18:
+            return ['00.0', '00.0']
+        wendu = int(data[6:10], 16) / 10
+        shidu = int(data[10:14], 16) / 10
+        return [wendu, shidu]

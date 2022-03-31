@@ -49,7 +49,7 @@ function switching_system(){
     swiper.slideTo(swiperIndex-1, 500, false);//切换到第一个slide，速度为1秒
 }
 
-window.onpopstate = () => { history.go(1); }
-document.documentElement.addEventListener('touchstart',function (event){if(event.touches.length > 1){event.preventDefault();}},{passive:false});
-var lastTouchEnd = 0;
-document.documentElement.addEventListener('touchend',function (event){var now = Date.now();if (now-lastTouchEnd <= 300){event.preventDefault();}lastTouchEnd=now;},{passive:false});
+// window.onpopstate = () => { history.go(1); }
+// document.documentElement.addEventListener('touchstart',function (event){if(event.touches.length > 1){event.preventDefault();}},{passive:false});
+// var lastTouchEnd = 0;
+// document.documentElement.addEventListener('touchend',function (event){var now = Date.now();if (now-lastTouchEnd <= 300){event.preventDefault();}lastTouchEnd=now;},{passive:false});

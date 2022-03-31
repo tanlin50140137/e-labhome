@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>采购库存警报</title>
+    <title>环境监测</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../iview/node_modules/view-design/dist/styles/iview.css">
     <link rel="stylesheet" href="../layui/css/layui.css">
@@ -18,14 +18,27 @@
     <script src="../swiper/package/swiper-bundle.min.js"></script>
     <script src="../iview/node_modules/view-design/dist/iview.min.js"></script>
     <style>
-    .layui-table-cell{
-      height:2.7rem;
-      line-height:2.7rem;
-    }
-    .layui-table-cell span{
-        font-size:1.4rem;
-        font-weight:700;
-    }
+    .radio {margin: 0.5rem;}
+    .radio input[type="radio"] {position: absolute;opacity: 0;}
+    .radio input[type="radio"] + .radio-label:before {content: '';background: #f4f4f4;border-radius: 100%;border: 1px solid #b4b4b4;display: inline-block;width: 1.4em;height: 1.4em;position: relative;top: -0.2em;margin-right: 1em;vertical-align: top;cursor: pointer;text-align: center;-webkit-transition: all 250ms ease;transition: all 250ms ease;}
+    .radio input[type="radio"]:checked + .radio-label:before {background-color: #3197EE;box-shadow: inset 0 0 0 4px #f4f4f4;}
+    .radio input[type="radio"]:focus + .radio-label:before {outline: none;border-color: #3197EE;}
+    .radio input[type="radio"]:disabled + .radio-label:before {box-shadow:inset 0 0 0 4px #f4f4f4;border-color:#b4b4b4;background:#b4b4b4;}
+    .radio input[type="radio"] + .radio-label:empty:before {margin-right:0;}
+
+    @font-face{font-family:'oswald';src:url('..//LCD/DS-DIGII.TTF');}
+    .fontFail {font-family:oswald;}
+    .elaOption{background:#fdfdfd url(../img/wsdvalue.png) no-repeat;background-size:70% 100%;position:relative;background-position: center;}
+    .lcdBoxs{font-size:8.5vw;font-family:"oswald";color:#ff0000;position:absolute;top:28%;left:26.6%;width:25.3%;height:20.2%;text-align: center;z-index:1000;overflow: hidden;}
+    .lcdBoxs2{font-size:8.5vw;font-family:"oswald";color:#444343;position:absolute;top:28%;left:26.6%;width:25.3%;height:20.2%;text-align: center;overflow: hidden;}
+    .lcdBoxs3{font-size:8.5vw;font-family:"oswald";color:#ff0000;position:absolute;top:28%;left:52.4%;width:21%;height:20.2%;text-align: center;z-index:1000;overflow: hidden;}
+    .lcdBoxs4{font-size:8.5vw;font-family:"oswald";color:#444343;position:absolute;top:28%;left:52.4%;width:21%;height:20.2%;text-align: center;overflow: hidden;}
+    .lcdBoxSetting{position:absolute;bottom:1rem;right:1rem;padding:0.5rem;border-radius:0.5rem;background:#dfdbdb;}
+    .lcdImgIner{background:url(../img/wsetting.png) no-repeat;background-size:100% 100%;width:84px;height:84px;margin:auto;}
+    .lcdImgIner2{background:url(../img/phone.png) no-repeat;background-size:100% 100%;width:84px;height:84px;margin:auto;}
+    .lcdImgTitle{margin-top:0.5rem;text-align:center;color:#337cdc;}
+    .ComClass{background:rgb(25,214,65,50%);color:#FFFFFF;}
+    .port1{right:10rem;}
     </style>
 </head>
 <body>
@@ -35,14 +48,14 @@
             <div class="elaMenu">
               <div class="elaMenuInner">
                   <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                      <div class="elaLogo" onclick="backIndex();" style="background: #99ccff url(../img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                      <div class="elaLogo" onclick="backIndex();" style="background:#fdfdfd url(../img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
                   </div>
                   <div class="elaMenuList" style="border-top:1px solid #dddddd;">
-                      <div class="elaLogo">库存报警</div>
+                      <div class="elaLogo" style="background:#fdfdfd">环境监测</div>
                   </div>
                   <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                      <div class="elaLogo">
-                            <div class="userInfoList" onclick="back()">
+                      <div class="elaLogo" style="background:#fdfdfd">
+                            <div class="userInfoList" onclick="back_wsd()">
                                 <div class="userInfoInner"><img class="loginimg" src="../img/bcak.png" alt="头像"></div>
                                 <div class="userInfoInner">返回上一步</div>
                             </div>
@@ -51,40 +64,18 @@
               </div>
             </div>
             <div class="elaOption">
-                <div class="tablesBoxs">
-                    <!-- <table id="tables" lay-filter="tablesList"></table> -->
-                    <div class="layui-fluid">
-                      <div class="layui-row layui-col-space15">
-                        <div class="layui-col-md12">
-                          <div class="layui-card">
-                            <div class="layui-card-header">库存警报</div>
-                            <div class="layui-card-body">
-                              <div class="test-table-reload-btn" style="margin-bottom: 10px;">
-                                产品ID/产品名称：
-                                <div class="layui-inline">
-                                  <input class="layui-input" name="id" id="test-table-demoReload" autocomplete="off">
-                                </div>
-                                <button class="layui-btn" data-type="reload">搜索</button>
-                              </div>
-
-                              <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
-
-                              <script type="text/html" id="buttonTpl">
-                                {{#  if(d.re_status == 0){ }}
-                                  <button class="layui-btn layui-btn-xs">已处理</button>
-                                {{#  } else { }}
-                                  <button class="layui-btn layui-btn-primary layui-btn-xs">未处理</button>
-                                {{#  } }}
-                              </script>
-                              <script type="text/html" id="test-table-operate-barDemo">
-                                <a class="layui-btn layui-btn-primary layui-btn-xs" style="padding:1rem;line-height:0rem;font-size:1.2rem;" lay-event="detail">打印</a>
-                              </script>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
+                <div class="lcdBoxs wendu_value"></div>
+                <div class="lcdBoxs2 wendu_value2">00.0</div>
+                <div class="lcdBoxs3 shidu_value"></div>
+                <div class="lcdBoxs4 shidu_value2">00.0</div>
+                <!-- 设置 -->
+                <div class="lcdBoxSetting boom3" onclick="setPrision();">
+                  <div class="lcdImgIner"></div>
+                  <div class="lcdImgTitle">连接设置</div>
+                </div>
+                <div class="lcdBoxSetting port1 boom3" onclick="setInterWork();">
+                  <div class="lcdImgIner2"></div>
+                  <div class="lcdImgTitle">远程设置</div>
                 </div>
             </div>
         </div>
@@ -93,6 +84,7 @@
 <script src="../js/common.js"></script>
 <script type="text/javascript" src="../keyboard/kbmodule.js" id="keyboard"></script>
 <script src="../js/qwebchannel.js"></script>
+<script src="../js/qrcode.min.js"></script>
 <script>
 // 监听Python channel返回槽对像，赋值给 window.obj
 document.addEventListener("DOMContentLoaded", function(){
@@ -105,107 +97,219 @@ function onFactorial(url){
     // 如果对像存在
     if( window.obj ){
         // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
-        window.obj.factorial(url, callback);
+        window.obj.factorial_wsd(url, callback);
     }
 }
+// 返回
+function callback(callback){
+  console.log(callback);
+  //layer.alert(callback);
+}
 // html触发函数
-function onFactorial9(url){
+function onFactorial2(url){
     // 如果对像存在
     if( window.obj ){
         // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
-        window.obj.factorial9(url, callback);
+        window.obj.factorial_back(url, callback_back);
     }
 }
-// Python槽方法返回的数据
-function callback(result){}
-var kb = '',table = '';
-var windows = $(window).height();
-var fuzuheight = $(".fuzuheight").height();
-var elaMenu = $(".elaMenu").height();
-var height = windows-(fuzuheight+elaMenu)-185;
-layui.use('table', function(){
-  table = layui.table;
-  //第一个实例
-  table.render({
-    elem: '#test-table-operate'
-    ,height: height
-    ,url: url+'apisam/alarm/my_stock_alarm?userId='+userId
-    ,page: {
-      layout: [ 'prev', 'page', 'next', 'skip','count'],
-      limit:10
+function callback_back(callback_back){
+    if( callback_back == 'off' ){
+        window.history.back();
     }
-    ,cols: [[ //表头
-      {field: 'postId', title: '产品ID', fixed: 'left', align:'center', width:120, style:'font-size:1.2rem'}
-      ,{field: 'productName', title: '产品名称', align:'center', style:'font-size:1.2rem'}
-      ,{field: 'manufacturer', title: '厂商', align:'center', style:'font-size:1.2rem'}
-      ,{field: 'productType', title: '型号类型', align:'center', style:'font-size:1.2rem'}
-      ,{field: 'punit', title: '单位', align:'center', width:120, style:'font-size:1.2rem'}
-      ,{field: 'curMinstock', title: '报警数量', align:'center', width:150, style:'font-size:1.2rem'}
-      ,{field: 'curStock', title: '当前库存', align:'center', width:150, style:'font-size:1.2rem'}
-      ,{field: 'alarmTime', title: '时间', align:'center', style:'font-size:1.2rem'}
-      ,{width:120, title: '二维码', align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
-    ]]
-    ,done: function(res, curr, count){
-    	    //得到当前页码
-    	    page = curr;
-    	    //得到数据总量
-    	    // console.log(res);
-    	}
-  });
-  //监听工具条
-  table.on('tool(test-table-operate)', function(obj){
-        var data = obj.data;
-        if(obj.event === 'detail'){
-            layer.confirm('ID['+data.postId+']，是否打印？', {
-              title:'打印提示',
-              btn: ['确定','取消'] //按钮
-            }, function(){
-              layer.msg('正在打印...', {icon:16,shade:0.01,time:2000}, function(){
-                  $.post(url+'apisam/stock/makeqrcode',{userId:userId,postId:data.post_id,productType:data.product_type},function(res){
-                        var dataInfo = JSON.parse(res);
-                        layer.msg('正在打印...', {icon: 16,shade: 0.01}, function(){
-                              onFactorial(dataInfo.url);
-                        });
-                  });
-              });
-            }, function(){});
+}
+// html触发函数
+function onFactorial3(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial_Enable(url, callback_enable);
+    }
+}
+function callback_enable(callback){}
+// 显示设备面板
+var indexcloseframe = '', indexclosework='',qrcode = '';
+// 命令值
+var command = '01 03 00 20 00 02 C5 C1';
+// 发送命令频率 0.5秒每次, 单位为秒
+var rate = 0.5;
+// 连接串口
+var com = localStorage.getItem("com")==null?'':localStorage.getItem("com");
+var enable_v = localStorage.getItem("enable_v")==null?0:localStorage.getItem("enable_v");
+if( com == '' ){
+    setPrision();
+}else{
+    setTimeout(function(){
+        if( com == 'com1' ){
+            onFactorial(JSON.stringify({port:"COM1",command:command,rate:rate,enable_v:enable_v,userId:userId}));
+        }else if( com == 'com2' ){
+            onFactorial(JSON.stringify({port:"COM2",command:command,rate:rate,enable_v:enable_v,userId:userId}));
         }
-  });
-});
-var $ = layui.$, active = {
-      reload: function(){
-        kb.kbhide();
-        var demoReload = $('#test-table-demoReload');
-        //执行重载
-        table.reload('test-table-operate', {
-          page: {
-            curr: 1 //重新从第 1 页开始
-          }
-          ,where: {
-            search:demoReload.val()
-          }
-        });
+    },1500);
+}
+// 连接设置
+function setPrision(){
+  var html = '<div style="height:100%;display:flex;align-items:center;flex-wrap:nowrap;padding:0.5rem;">';
+      html += '<div style="width:50%;margin:0 0.5rem;height:100%;background:url(../img/wsdCOM.png) no-repeat;background-size:100% 100%;position:relative;">';
+      html += '<div class="com2" style="height:100%;" onclick="selConntent(1)">';
+      html += '<div class="com2-2" style="padding:0.5rem 0;color:#b1b1b1;position:absolute;bottom:0;width:100%;text-align:center;font-size:1.2rem;">连接COM2口</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '<div style="width:50%;margin:0 0.5rem;height:100%;background:url(../img/wsdCOM.png) no-repeat;background-size:100% 100%;position:relative;">';
+      html += '<div class="com1" style="height:100%;" onclick="selConntent(2)">';
+      html += '<div class="com1-1" style="padding:0.5rem 0;color:#b1b1b1;position:absolute;bottom:0;width:100%;text-align:center;font-size:1.2rem;">连接COM1口</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      indexcloseframe = layer.open({
+          type: 1,
+          title:false,
+          skin: 'layui-layer-rim', //加上边框
+          area: ['45%', '35%'], //宽高
+          content: html,
+          end:function(){}
+      });
+      var com = localStorage.getItem("com")==null?'':localStorage.getItem("com");
+      if( com == 'com2' ){
+          $(".com1").removeClass("ComClass"),$(".com1-1").css({"color":"#b1b1b1"});
+          $(".com2").addClass("ComClass"),$(".com2-2").css({"color":"#FFFFFF"});
+      }else if(  com == 'com1' ){
+          $(".com2").removeClass("ComClass"),$(".com2-2").css({"color":"#b1b1b1"});
+          $(".com1").addClass("ComClass"),$(".com1-1").css({"color":"#FFFFFF"});
       }
-};
-$('.test-table-reload-btn .layui-btn').on('click', function(){
-        var type = $(this).data('type');
-        active[type] ? active[type].call(this) : '';
-});
-kb = new keyboard({
-    el:"#test-table-demoReload",
-    x:1.6,
-    keyHeight:"5rem",
-    fontSize:'1.8rem',
-    bottom:"5rem",
-    end:function(res,value){
-        // console.log(res, value)
-        if( res == 'OK' ){
-            // layer.msg('完成提交');
-        }else{
-            // layer.msg('什么都不做');
-        }
+}
+// 连接设置
+function selConntent(i){
+    if(i == 1){
+      $(".com1").removeClass("ComClass"),$(".com1-1").css({"color":"#b1b1b1"});
+      $(".com2").addClass("ComClass"),$(".com2-2").css({"color":"#FFFFFF"});
+      localStorage.setItem("com","com2");
+      // 修改串口
+      onFactorial2("update");
+      // 发送串口
+      setTimeout(function(){
+        onFactorial(JSON.stringify({port:"COM2",command:command,rate:rate,enable_v:enable_v,userId:userId}));
+      },1000);
+    }else{
+      $(".com2").removeClass("ComClass"),$(".com2-2").css({"color":"#b1b1b1"});
+      $(".com1").addClass("ComClass"),$(".com1-1").css({"color":"#FFFFFF"});
+      localStorage.setItem("com","com1");
+      // 修改串口
+      onFactorial2("update");
+      // 发送串口
+      setTimeout(function(){
+        onFactorial(JSON.stringify({port:"COM1",command:command,rate:rate,enable_v:enable_v,userId:userId}));
+      },1000);
     }
-});
-kb.run();
+    layer.close(indexcloseframe);
+}
+// 网络设置
+function setInterWork(){
+    var enable_v = localStorage.getItem("enable_v");
+    var html = '<div style="display:flex;align-items:center;flex-wrap:wrap;padding:0.5rem;margin-top:2rem;">';
+      html += '<div style="width:100%;">';
+      html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;padding:0.5rem;">';
+      html += '<div style="width:15%;padding:0.5rem;colorr:#999999;font-size:1.2rem;">远程访问</div>';
+      html += '<div style="width:50%;">';
+      html += '<div class="radio" onclick="enable_set(0)" style="display: inline;position:relative;top:0.3rem;font-size:1.2rem;border:1px solid #767676;padding:1rem;border-radius:0.5rem;">';
+      if( enable_v == 0 ){
+        html += '<input id="radio-1" name="radio" type="radio" checked>';
+      }else{
+        html += '<input id="radio-1" name="radio" type="radio">';
+      }
+      html += '<label for="radio-1" class="radio-label">关闭</label>';
+      html += '</div>';
+      html += '<div class="radio" onclick="enable_set(1)" style="display: inline;position:relative;top:0.3rem;font-size:1.2rem;border:1px solid #767676;padding:1rem;border-radius:0.5rem;margin-left:3rem;">';
+      if( enable_v == 1 ){
+        html += '<input id="radio-2" name="radio" type="radio" checked>';
+      }else{
+        html += '<input id="radio-2" name="radio" type="radio">';
+      }
+      html += '<label for="radio-2" class="radio-label">开启</label>';
+      html += '</div>';
+      html += '</div>';
+      html += '<div style="width:50%;padding:0.5rem;colorr:#999999;font-size:1.2rem;position:relative;">';
+      html += '<div style="position:absolute;top:-0.5rem;left:4rem;display:none;" id="showqr">';
+      html += '<div id="qrcode"></div>';
+      html += '<div style="padding:0.5rem;text-align:center;color:#666666;">远程监测手机扫一扫</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      indexclosework = layer.open({
+          type: 1,
+          title:false,
+          skin: 'layui-layer-rim', //加上边框
+          area: ['45%', '35%'], //宽高
+          content: html,
+          end:function(){}
+      });
+      qrcode = new QRCode(document.getElementById("qrcode"), {width:180,height:180});
+      qrcode.makeCode("http://py.e-labhome.cn/remotewsd.html?id="+userId);
+      if( enable_v == 1 ){
+        $("#showqr").show();
+      }else{
+        $("#showqr").hide();
+      }
+}
+// 网络设置
+function enable_set(i){
+    localStorage.setItem("enable_v",i)
+    onFactorial3(i);
+    if( i == 0 ){
+        layer.close(indexclosework);
+    }else if( i == 1 ){
+        $("#showqr").show();
+    }
+}
+// 离开页面-关闭串口
+function back_wsd(){
+    onFactorial2("off");
+}
+// 连接服务器
+  var ws = new WebSocket("ws://localhost:9501");
+  ws.onopen = function(evt) {
+    //console.log("握手成功!");
+    var data = JSON.stringify({type:"login",userid:"wsd",msg:""});
+  	ws.send(data);
+  };
+  ws.onmessage = function(evt) {
+    // 温湿度传感器
+  	var l = evt.data.split("-");
+
+    // 时实变化
+    var wd = l[0].split(".");
+    var gs = wd[0].split("");
+    // 遇到1灰底调整
+    for(var i=0;i<gs.length;i++){
+        gs[i] = gs[i]==1?'1':'0';
+    }
+    var wdvalue = 0;
+    if(wd[1] == 1 ){
+        wdvalue = 1;
+    }
+    $(".wendu_value2").html(gs.join("")+'.'+wdvalue);
+
+    // 遇到1灰底调整
+    var sd = l[1].split(".");
+    var gs2 = sd[0].split("");
+    // 遇到1灰底调整
+    for(var i=0;i<gs2.length;i++){
+        gs2[i] = gs2[i]==1?'1':'0';
+    }
+    var sdvalue = 0;
+    if(sd[1] == 1 ){
+        sdvalue = 1;
+    }
+    $(".shidu_value2").html(gs2.join("")+'.'+sdvalue);
+
+    // 温湿度值
+    $(".wendu_value").html(l[0]);
+    $(".shidu_value").html(l[1]);
+  };
+  ws.onclose = function(evt) {
+  	console.log("Connection closed.");
+  };
 </script>
 </html>
