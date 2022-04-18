@@ -116,6 +116,8 @@ class Elamain:
         factorial.signalHtmBack.connect(self.signalHtmBack)
         # 绑定信号-温湿度-远程访问
         factorial.signalEnableWsd.connect(self.signalEnableWsd)
+        # 绑定信号-温湿度-停止本地socket
+        factorial.signalWsdSocket.connect(self.signalWsdSocket)
 
     # 缩放视频
     def _fullScreenRequested(self, request):
@@ -228,30 +230,41 @@ class Elamain:
         threading.Thread(target=self.background_update, name='background_update', args=(s,)).start()
 
     def run_communication(self, s):
-        if s == 'open':
-            self.Engine1 = Communication("COM1", 9600, 0.5)
-            self.Engine1.recive_data(0)
-        else:
-            self.Engine1.set_flag()
-            self.run_thread.join()
+        try:
+            p = json.loads(s)
+            if p['type'] == 'open':
+                self.Engine1 = Communication(p['port'], 9600, p['rate'], p['command'], p['format'], p['userId'])
+                self.Engine1.recive_data(0)
+            else:
+                self.Engine1.set_flag()
+                self.run_thread.join()
+        except Exception as err:
+            pass
 
     def sendSignalHtml19(self, s):
-        if s == 'open':
-            self.run_thread = threading.Thread(target=self.run_communication, name='run_communication', args=(s,))
-            self.run_thread.start()
-        else:
-            self.run_thread2 = threading.Thread(target=self.run_communication, name='run_communication', args=(s,))
-            self.run_thread2.start()
-            time.sleep(1)
-            self.run_thread2.join()
+        try:
+            p = json.loads(s)
+            if p['type'] == 'open':
+                self.run_thread = threading.Thread(target=self.run_communication, name='run_communication', args=(s,))
+                self.run_thread.start()
+            else:
+                self.run_thread2 = threading.Thread(target=self.run_communication, name='run_communication', args=(s,))
+                self.run_thread2.start()
+                time.sleep(1)
+                self.run_thread2.join()
+        except Exception as err:
+            pass
 
     # 温湿度
     def wsd_communication(self, s):
-        p = json.loads(s)
-        self.wenshidu = Communication(p['port'], 9600, 1)
-        self.wenshidu.set_end_hex(0)
-        self.wenshidu.set_enable_wsd(p['enable_v'])
-        self.wenshidu.recive_data_once(p['command'], p['userId'], p['rate'])
+        try:
+            p = json.loads(s)
+            self.wenshidu = Communication(p['port'], 9600, p['rate'], p['command'], p['format'], p['userId'])
+            self.wenshidu.set_end_hex(0)
+            self.wenshidu.set_enable_wsd(p['enable_v'])
+            self.wenshidu.recive_data_once()
+        except Exception as e:
+            pass
 
     def signalHtmWsd(self, s):
         # 打开温湿度串口-打开
@@ -260,8 +273,21 @@ class Elamain:
 
     def signalHtmBack(self, s):
         # 结束温湿度串口-关闭
-        self.wenshidu.set_end_hex(1)
+        try:
+            self.wenshidu.set_end_hex(1)
+        except Exception as e:
+            pass
 
     def signalEnableWsd(self, s):
         # 结束温湿度串口-关闭
-        self.wenshidu.set_enable_wsd(s)
+        try:
+            self.wenshidu.set_enable_wsd(s)
+        except Exception as e:
+            pass
+
+    def signalWsdSocket(self, s):
+        # 结束温湿度串口-停止本地Socket数据
+        try:
+            self.wenshidu.set_socket_stop(s)
+        except Exception as e:
+            pass

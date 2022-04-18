@@ -9,24 +9,89 @@ import threading
 class Communication():
 
     # 初始化
-    def __init__(self, com, bps, timeout):
+    def __init__(self, com, bps, timeout, command, format, userId):
         self.port = com
         self.bps = bps
         self.timeout = timeout
+        self.command = command
+        self.format = format
+        self.userId = userId
         self.flag = 0
         self.enable_wsd = 0
         self.flag_wsd = 0
+        self.stop_wsd = 0
+        self.openok = False
         self.i = 0
         global Ret
         try:
             # 打开串口，并得到串口对象
-            self.main_engine = serial.Serial(self.port, self.bps, timeout=self.timeout)
+            # self.main_engine = serial.Serial(self.port, self.bps, timeout=self.timeout)
             # 判断是否打开成功
-            if self.main_engine.is_open:
+            # if self.main_engine.is_open:
+            # 自动识别串口
+            self.openok = self.comConnect()
+            if self.openok:
                 Ret = True
                 self.flag = 0
+                self.stop_wsd = 0
         except Exception as e:
-            print("---异常---：", e)
+            pass
+            # print("---异常---：", e)
+
+    # 智能接入串口
+    def comConnect(self):
+        # 打开串口，并得到串口对象
+        openok = False
+        # 连接COM1
+        try:
+            self.main_engine = serial.Serial("COM1", self.bps, timeout=self.timeout)           # COM1
+            if self.main_engine.is_open:
+               self.Send_data(self.command, self.format)
+               sb = self.Read_Line()
+               if self.format == 0:
+                   info = self.get_info(sb)
+                   if len(info) == 0:
+                       self.main_engine.close()
+                       openok = False
+                   else:
+                       openok = True
+               elif self.format == 1:
+                   info = self.get_HEX(sb)
+                   if info[0] == '00.0' and info[1] == '00.0':
+                       self.main_engine.close()
+                       openok = False
+                   else:
+                       openok = True
+        except Exception as e:
+            pass
+        if openok == True:
+            return openok
+        # 连接COM2
+        try:
+            if openok == False:
+                self.main_engine = serial.Serial("COM2", self.bps, timeout=self.timeout)     # COM2
+                if self.main_engine.is_open:
+                    self.Send_data(self.command, self.format)
+                    sb = self.Read_Line()
+                    if self.format == 0:
+                        info = self.get_info(sb)
+                        if len(info) == 0:
+                            self.main_engine.close()
+                            openok = False
+                        else:
+                            openok = True
+                    elif self.format == 1:
+                        info = self.get_HEX(sb)
+                        if info[0] == '00.0' and info[1] == '00.0':
+                            self.main_engine.close()
+                            openok = False
+                        else:
+                            openok = True
+        except Exception as e:
+            pass
+
+        return openok
+
 
     # 打印设备基本信息
     def Print_Name(self):
@@ -100,26 +165,39 @@ class Communication():
     # 一个整型数据占两个字节
     # 一个字符占一个字节
     def recive_data(self, way):
+        self.time_end = 0
+        if self.openok == False:
+            return False
         # 循环接收数据，此为死循环，可用线程实现
         while True:
             # 结束发送
             if self.flag == 1:
                 break
+            # 如果接口拔除10秒后自动关闭串口
+            if self.time_end == 10:
+                self.main_engine.close()
+                break
             # 继续发送
             try:
                 # 一个字节一个字节的接收
                 if way == 0:
+                    self.Send_data(self.command, 0)
                     sb = self.Read_Line()
                     list = self.get_info(sb)
+                    # 如果接口拔除自动结束, 推出规则
+                    if len(list) == 0:
+                        self.time_end = self.time_end+1
+                    else:
+                        self.time_end =0
+                    # 上传数据
                     if float(list[len(list)-2]) == 0.00:
                         continue
                     if float(list[len(list)-2]) > 0.00:
                             try:
-                                data = json.dumps({"type": "send", "userid": "COM1", "msg": "-".join(list)})
+                                data = json.dumps({"type": "send", "userid": "tp", "msg": "-".join(list)})
                                 async def send(uri):
                                     async with websockets.connect(uri) as websocket:
                                         await websocket.send(data)
-
                                 loop = asyncio.new_event_loop()
                                 asyncio.set_event_loop(loop)
                                 asyncio.get_event_loop().run_until_complete(send('ws://localhost:9501'))
@@ -133,39 +211,58 @@ class Communication():
     # 结束HEX模式
     def set_end_hex(self, s):
         self.flag_wsd = int(s)
-
+        if self.flag_wsd == 1:
+            self.main_engine.close()
+    # 结束远程
     def set_enable_wsd(self, s):
         self.enable_wsd = int(s)
 
+    # 结束本地
+    def set_socket_stop(self, s):
+        self.stop_wsd = int(s)
+
     # 只接HEX模式
-    def recive_data_once(self, command, userId, t=0.5):
+    def recive_data_once(self):
+        self.time_end = 0
+        if self.openok == False:
+            return False
         while True:
-            # 结束发送
-            if self.flag_wsd == 1 and self.enable_wsd == 0:
+            # 结束
+            if self.flag_wsd == 1:
+                break
+            # 如果本地和远程都停止
+            if self.stop_wsd == 1 and self.enable_wsd == 0:
+                self.main_engine.close()
+                break
+            # 如果接口拔除10秒后自动关闭串口
+            if self.time_end == 10:
+                self.main_engine.close()
                 break
             try:
-                self.Send_data(command, t)
+                self.Send_data(self.command, 1)
                 sb = self.Read_Line()
                 list = self.get_HEX(sb)
+                # 如果接口拔除自动结束, 推出规则
+                if list[0] == '00.0' and list[1] == '00.0':
+                    self.time_end = self.time_end + 1
+                else:
+                    self.time_end = 0
+                # 上传数据
                 st_l = "-".join('%s' %id for id in list)
                 try:
                     # 本机内网
-                    data1 = json.dumps({"type": "send", "userid": "wsd", "msg": st_l})
-                    self.websocket_sned_data1('ws://localhost:9501', data1)
+                    if self.stop_wsd == 0:
+                        data1 = json.dumps({"type": "send", "userid": "wsd", "msg": st_l})
+                        self.websocket_sned_data1('ws://localhost:9501', data1)
                     # 远程外网
                     if self.enable_wsd == 1:
-                        data2 = json.dumps({"type": "send", "userid": userId, "msg": st_l})
+                        data2 = json.dumps({"type": "send", "userid": self.userId, "msg": st_l})
                         self.websocket_sned_data2('ws://8.135.103.186:9512', data2)
 
                 except Exception as e:
                     break
             except Exception as e:
                 break
-        # 关闭串口
-        try:
-            self.main_engine.close()
-        except Exception as e:
-            print(e)
 
     # websocket
     def websocket_sned_data1(self, uri, data):
@@ -192,14 +289,29 @@ class Communication():
 
     # 解析串口数据
     def get_info(self, sb):
+        # 解析数据
         st = str(sb, encoding="utf-8")
         s = st.replace("\r\n", "")
         d = s.split(" ")
+        # 处理数据
         l = []
         for v in d:
             if v != "":
                 l.append(v)
-        return l
+        # 兼容处理
+        c = []
+        if len(l) == 4 and l[0] == 'K':  # 上海越平科学仪器(苏州)制造有限公司  兼容 常州诺德电器有限公司 数据格式
+            c.append("S1+")
+            c.append(l[2])
+            c.append(l[3])
+        elif len(l) == 3 and l[0] == 'K*+':  # 上海越平科学仪器(苏州)制造有限公司  兼容 常州诺德电器有限公司 数据格式
+            c.append("S0+")
+            c.append(l[1])
+            c.append(l[2])
+        else:
+            c = l     # 默认是常州诺德电器有限公司
+        # 返回数据
+        return c
 
     # 解析HEX模式返回数据
     def get_HEX(self, sb):

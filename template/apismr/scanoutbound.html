@@ -259,7 +259,7 @@ function productInformation(obj, value){
                                     var timestamp = new Date().getTime();
                                     var filename = timestamp/1000;
                                     if( obj.data.status=="ok" ){
-                                        $.post(url+'apismr/outof/outof_by_scan',{qrcodeId:flagvalue,num:value,pickerId:id,filename:filename},function(res){
+                                        $.post(url+'apismr/outof/outof_by_scan',{qrcodeId:flagvalue,num:value,pickerId:obj.qrcodeid,filename:filename},function(res){
                                               if( res.code == 0 ){
                                                   $(".kblistauto").attr({"disabled":true});
                                                   var w_text = "产品ID:"+postIdnext+"-产品名称:"+(portinfo.productName==''?'未填写':portinfo.productName)+"-出库数量:"+value+"-领用人:"+obj.data.name;

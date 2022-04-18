@@ -34,11 +34,9 @@
     .lcdBoxs3{font-size:8.5vw;font-family:"oswald";color:#ff0000;position:absolute;top:28%;left:52.4%;width:21%;height:20.2%;text-align: center;z-index:1000;overflow: hidden;}
     .lcdBoxs4{font-size:8.5vw;font-family:"oswald";color:#444343;position:absolute;top:28%;left:52.4%;width:21%;height:20.2%;text-align: center;overflow: hidden;}
     .lcdBoxSetting{position:absolute;bottom:1rem;right:1rem;padding:0.5rem;border-radius:0.5rem;background:#dfdbdb;}
-    .lcdImgIner{background:url(../img/wsetting.png) no-repeat;background-size:100% 100%;width:84px;height:84px;margin:auto;}
     .lcdImgIner2{background:url(../img/phone.png) no-repeat;background-size:100% 100%;width:84px;height:84px;margin:auto;}
     .lcdImgTitle{margin-top:0.5rem;text-align:center;color:#337cdc;}
     .ComClass{background:rgb(25,214,65,50%);color:#FFFFFF;}
-    .port1{right:10rem;}
     </style>
 </head>
 <body>
@@ -69,11 +67,7 @@
                 <div class="lcdBoxs3 shidu_value"></div>
                 <div class="lcdBoxs4 shidu_value2">00.0</div>
                 <!-- 设置 -->
-                <div class="lcdBoxSetting boom3" onclick="setPrision();">
-                  <div class="lcdImgIner"></div>
-                  <div class="lcdImgTitle">连接设置</div>
-                </div>
-                <div class="lcdBoxSetting port1 boom3" onclick="setInterWork();">
+                <div class="lcdBoxSetting boom3" onclick="setInterWork();">
                   <div class="lcdImgIner2"></div>
                   <div class="lcdImgTitle">远程设置</div>
                 </div>
@@ -92,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function(){
           window.obj = channel.objects.obj;
     })
 })
-// html触发函数
+// 打开串口
 function onFactorial(url){
     // 如果对像存在
     if( window.obj ){
@@ -100,12 +94,11 @@ function onFactorial(url){
         window.obj.factorial_wsd(url, callback);
     }
 }
-// 返回
 function callback(callback){
   console.log(callback);
   //layer.alert(callback);
 }
-// html触发函数
+// 关闭串口
 function onFactorial2(url){
     // 如果对像存在
     if( window.obj ){
@@ -118,7 +111,7 @@ function callback_back(callback_back){
         window.history.back();
     }
 }
-// html触发函数
+// 远程设置
 function onFactorial3(url){
     // 如果对像存在
     if( window.obj ){
@@ -127,86 +120,43 @@ function onFactorial3(url){
     }
 }
 function callback_enable(callback){}
+
+// 返回时停止本地发送数据
+function onFactorial4(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial_stop(url, callback_stop);
+    }
+}
+function callback_stop(callback){
+    if( callback == 1 ){
+        window.history.back();
+    }
+}
 // 显示设备面板
 var indexcloseframe = '', indexclosework='',qrcode = '';
 // 命令值
 var command = '01 03 00 20 00 02 C5 C1';
-// 发送命令频率 0.5秒每次, 单位为秒
-var rate = 0.5;
+// 发送命令频率 1秒每次, 单位为秒
+var rate = 1;
+// 数据格式HEX,16进制
+var format = 1
 // 连接串口
 var com = localStorage.getItem("com")==null?'':localStorage.getItem("com");
 var enable_v = localStorage.getItem("enable_v")==null?0:localStorage.getItem("enable_v");
-if( com == '' ){
-    setPrision();
-}else{
-    setTimeout(function(){
-        if( com == 'com1' ){
-            onFactorial(JSON.stringify({port:"COM1",command:command,rate:rate,enable_v:enable_v,userId:userId}));
-        }else if( com == 'com2' ){
-            onFactorial(JSON.stringify({port:"COM2",command:command,rate:rate,enable_v:enable_v,userId:userId}));
-        }
-    },1500);
-}
-// 连接设置
-function setPrision(){
-  var html = '<div style="height:100%;display:flex;align-items:center;flex-wrap:nowrap;padding:0.5rem;">';
-      html += '<div style="width:50%;margin:0 0.5rem;height:100%;background:url(../img/wsdCOM.png) no-repeat;background-size:100% 100%;position:relative;">';
-      html += '<div class="com2" style="height:100%;" onclick="selConntent(1)">';
-      html += '<div class="com2-2" style="padding:0.5rem 0;color:#b1b1b1;position:absolute;bottom:0;width:100%;text-align:center;font-size:1.2rem;">连接COM2口</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '<div style="width:50%;margin:0 0.5rem;height:100%;background:url(../img/wsdCOM.png) no-repeat;background-size:100% 100%;position:relative;">';
-      html += '<div class="com1" style="height:100%;" onclick="selConntent(2)">';
-      html += '<div class="com1-1" style="padding:0.5rem 0;color:#b1b1b1;position:absolute;bottom:0;width:100%;text-align:center;font-size:1.2rem;">连接COM1口</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      indexcloseframe = layer.open({
-          type: 1,
-          title:false,
-          skin: 'layui-layer-rim', //加上边框
-          area: ['45%', '35%'], //宽高
-          content: html,
-          end:function(){}
-      });
-      var com = localStorage.getItem("com")==null?'':localStorage.getItem("com");
-      if( com == 'com2' ){
-          $(".com1").removeClass("ComClass"),$(".com1-1").css({"color":"#b1b1b1"});
-          $(".com2").addClass("ComClass"),$(".com2-2").css({"color":"#FFFFFF"});
-      }else if(  com == 'com1' ){
-          $(".com2").removeClass("ComClass"),$(".com2-2").css({"color":"#b1b1b1"});
-          $(".com1").addClass("ComClass"),$(".com1-1").css({"color":"#FFFFFF"});
-      }
-}
-// 连接设置
-function selConntent(i){
-    if(i == 1){
-      $(".com1").removeClass("ComClass"),$(".com1-1").css({"color":"#b1b1b1"});
-      $(".com2").addClass("ComClass"),$(".com2-2").css({"color":"#FFFFFF"});
-      localStorage.setItem("com","com2");
-      // 修改串口
-      onFactorial2("update");
-      // 发送串口
-      setTimeout(function(){
-        onFactorial(JSON.stringify({port:"COM2",command:command,rate:rate,enable_v:enable_v,userId:userId}));
-      },1000);
-    }else{
-      $(".com2").removeClass("ComClass"),$(".com2-2").css({"color":"#b1b1b1"});
-      $(".com1").addClass("ComClass"),$(".com1-1").css({"color":"#FFFFFF"});
-      localStorage.setItem("com","com1");
-      // 修改串口
-      onFactorial2("update");
-      // 发送串口
-      setTimeout(function(){
-        onFactorial(JSON.stringify({port:"COM1",command:command,rate:rate,enable_v:enable_v,userId:userId}));
-      },1000);
-    }
-    layer.close(indexcloseframe);
-}
+setTimeout(function(){
+     // 修改串口
+     onFactorial2("closeCOM1");
+     // 发送串口
+     setTimeout(function(){
+         onFactorial(JSON.stringify({port:"COM1",command:command,rate:rate,enable_v:enable_v,userId:userId,format:format}));
+     },1000);
+},1000);
 // 网络设置
 function setInterWork(){
-    var enable_v = localStorage.getItem("enable_v");
-    var html = '<div style="display:flex;align-items:center;flex-wrap:wrap;padding:0.5rem;margin-top:2rem;">';
+      var enable_v = localStorage.getItem("enable_v");
+      var html = '<div style="display:flex;align-items:center;flex-wrap:wrap;padding:0.5rem;margin-top:2rem;">';
       html += '<div style="width:100%;">';
       html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;padding:0.5rem;">';
       html += '<div style="width:15%;padding:0.5rem;colorr:#999999;font-size:1.2rem;">远程访问</div>';
@@ -240,8 +190,8 @@ function setInterWork(){
       indexclosework = layer.open({
           type: 1,
           title:false,
-          skin: 'layui-layer-rim', //加上边框
-          area: ['45%', '35%'], //宽高
+          skin: 'layui-layer-rim',    // 加上边框
+          area: ['45%', '35%'],       // 宽高
           content: html,
           end:function(){}
       });
@@ -265,11 +215,17 @@ function enable_set(i){
 }
 // 离开页面-关闭串口
 function back_wsd(){
-    onFactorial2("off");
+    var com = localStorage.getItem("com")==null?'':localStorage.getItem("com");
+    var enable_v = localStorage.getItem("enable_v")==null?0:localStorage.getItem("enable_v");
+    if( enable_v == 0 ){
+        onFactorial2("off");
+    }else{
+        onFactorial4(1);
+    }
 }
 // 连接服务器
-  var ws = new WebSocket("ws://localhost:9501");
-  ws.onopen = function(evt) {
+var ws = new WebSocket("ws://localhost:9501");
+ws.onopen = function(evt) {
     //console.log("握手成功!");
     var data = JSON.stringify({type:"login",userid:"wsd",msg:""});
   	ws.send(data);

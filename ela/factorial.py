@@ -13,19 +13,20 @@ from ela.elabversionupdate import *
 
 class Factorial(QObject):
     # 发送3个参数的信号
-    signalHtml = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml2 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml3 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml4 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml5 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml8 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml9 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml15 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml19 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtml20 = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtmWsd = pyqtSignal(str)  # 类型为字符串、整型
-    signalHtmBack = pyqtSignal(str)  # 类型为字符串、整型
+    signalHtml = pyqtSignal(str)       # 类型为字符串、整型
+    signalHtml2 = pyqtSignal(str)      # 类型为字符串、整型
+    signalHtml3 = pyqtSignal(str)      # 类型为字符串、整型
+    signalHtml4 = pyqtSignal(str)      # 类型为字符串、整型
+    signalHtml5 = pyqtSignal(str)      # 类型为字符串、整型
+    signalHtml8 = pyqtSignal(str)      # 类型为字符串、整型
+    signalHtml9 = pyqtSignal(str)      # 类型为字符串、整型
+    signalHtml15 = pyqtSignal(str)     # 类型为字符串、整型
+    signalHtml19 = pyqtSignal(str)     # 类型为字符串、整型
+    signalHtml20 = pyqtSignal(str)     # 类型为字符串、整型
+    signalHtmWsd = pyqtSignal(str)     # 类型为字符串、整型
+    signalHtmBack = pyqtSignal(str)    # 类型为字符串、整型
     signalEnableWsd = pyqtSignal(str)  # 类型为字符串、整型
+    signalWsdSocket = pyqtSignal(str)  # 类型为字符串、整型
 
     @pyqtSlot(str, result=str)
     def factorial(self, s):
@@ -243,6 +244,12 @@ class Factorial(QObject):
     def factorial_Enable(self, s):
         """打开串口-温湿度-远程访问"""
         self.signalEnableWsd.emit(s)  # 发送信号返回一个参数
+        return s
+
+    @pyqtSlot(str, result=str)
+    def factorial_stop(self, s):
+        """打开串口-温湿度-远程访问"""
+        self.signalWsdSocket.emit(s)  # 发送信号返回一个参数
         return s
 
     @pyqtSlot(str, result=str)

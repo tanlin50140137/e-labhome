@@ -400,7 +400,7 @@ layui.use(['table'], function(){
                                   var productList = JSON.stringify(a);
                                   var timestamp = new Date().getTime();
                                   var filename = timestamp/1000;
-                                  $.post(url+'apiequ/outof/outof_by_onebutton',{userId:userId,proName:toolbarinput,productList:productList,filename:filename,pickerId:id},function(res){
+                                  $.post(url+'apiequ/outof/outof_by_onebutton',{userId:userId,proName:toolbarinput,productList:productList,filename:filename,pickerId:obj.qrcodeid},function(res){
                                         if( res.code == 0 ){
                                             var w_text = "出库单ID:"+obj.data.id+"-出库单名称:"+(toolbarinput==''?'未填写':toolbarinput)+"-一键出库"+"-领用人:"+obj.data.name;
                                             var flagstr = JSON.stringify({"flag":"start","text":w_text,"filename":filename,"needle":100});

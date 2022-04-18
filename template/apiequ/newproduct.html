@@ -921,10 +921,18 @@ function analysis(res){
     }
 }
 var weigh_index = '';
+// 默认串口
+var port = 'COM1';
+// 命令值
+var command = 'R';
+// 每0.5秒交互一次
+var rate = 0.5
+// 数据格式文本模式
+var format = 0
 //点击开始称重
 function weightstart(){
   // 打开串口COM1
-  onFactorial19('open');
+  onFactorial19(JSON.stringify({type:"open",port:port,command:command,rate:rate,userId:userId,format:format}));
   // 同步电子秤数据
   var html = '<div style="width:100%;height:8rem;position:absolute;top:50%;left:0;margin-top:-4rem;">';
   html += '<div style="height:5rem;text-align:center;line-height:5rem;font-size:3rem;font-weight:bold;color:#333333;"><font id="weigh_value">......</font><font id="weigh_punit"></font></div>';
@@ -938,7 +946,7 @@ function weightstart(){
       area: ['30%', '30%'], //宽高
       content: html,
       end:function(){
-          onFactorial19('close');
+          onFactorial19(JSON.stringify({type:"close",port:port,command:command,rate:rate,userId:userId,format:format}));
       }
   });
   // 连接服务器
@@ -946,7 +954,7 @@ function weightstart(){
   ws.onopen = function(evt) {
     $("#weigh_state").html("已经连接")
     $("#weigh_value").html("0.00");
-    var data = JSON.stringify({type:"login",userid:"COM1",msg:""});
+    var data = JSON.stringify({type:"login",userid:"tp",msg:""});
   	ws.send(data);
   };
   ws.onmessage = function(evt) {
@@ -957,7 +965,7 @@ function weightstart(){
     $("#weigh_punit").html(l[l.length-1]);
     $("#weigh_state").html("正在确认")
     // 确认重量 并 关闭串口
-    if( l[0] == "K" ){
+    if( l[0] == "S1+" ){
         if( l[l.length-2] > 0 ){
             var weigh_value = l[l.length-2];
             $('[name="weight"]').val(weigh_value);
