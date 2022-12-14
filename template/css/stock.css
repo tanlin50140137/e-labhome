@@ -1,3 +1,5 @@
 .elaOption{background:#99ccff;}
 .tablesBoxs{background:#FFFFFF;margin:0.5rem;}
 .loginimg{position:relative;top:-35%;}
+
+.a{display: flex;align-items: center;flex-wrap: wrap;}

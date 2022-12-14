@@ -85,7 +85,7 @@ function onFactorial9(url){
 // Python槽方法返回的数据
 function callback(result){}
 //
-var kb='',kb2='',layerIndex='';
+var kb='',kb2='',layerIndex='',postIdnext='',productTypenext='';
 var indexcloseframe = '';
 var csg = new CodeScanningGrab({
   el:"#listen",
@@ -107,7 +107,7 @@ var csg = new CodeScanningGrab({
             if(res.code == 0 ){
                 productInformation(res.data, id)
             }else{
-                layer.msg('扫描失败，请重试！', {icon: 2});
+                layer.msg(res.msg, {icon: 2});
             }
       });
   },
@@ -119,20 +119,13 @@ var csg = new CodeScanningGrab({
 });
 //显示产品信息
 function productInformation(obj, value){
-    var postIdnext = obj.postId;
-    var productTypenext = obj.productType;
+    postIdnext = obj.postId;
+    productTypenext = obj.productType;
     var html = '<div style="margin:0.5rem;">';
         html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;">';
-        html += '当前产品信息';
+        html += '补充当前产品数量';
         html += '</div>';
-        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
-        html += '<div style="width:20%">';
-        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">厂商</div>';
-        html += '</div>';
-        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
-        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.manufacturer==null?'获取失败':obj.manufacturer)+'</div>';
-        html += '</div>';
-        html += '</div>';
+
         html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
         html += '<div style="width:20%">';
         html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">产品ID</div>';
@@ -141,6 +134,7 @@ function productInformation(obj, value){
         html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.postId==null?'无':obj.postId)+'</div>';
         html += '</div>';
         html += '</div>';
+
         html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
         html += '<div style="width:20%">';
         html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">产品名称</div>';
@@ -149,6 +143,16 @@ function productInformation(obj, value){
         html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.productName==null?'无':obj.productName)+'</div>';
         html += '</div>';
         html += '</div>';
+
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">厂商</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.manufacturer==null?'获取失败':obj.manufacturer)+'</div>';
+        html += '</div>';
+        html += '</div>';
+            
         html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
         html += '<div style="width:20%">';
         html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">产品型号</div>';
@@ -157,6 +161,7 @@ function productInformation(obj, value){
         html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.productType==null?'无':obj.productType)+'</div>';
         html += '</div>';
         html += '</div>';
+
         html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
         html += '<div style="width:20%">';
         html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">库存数量</div>';
@@ -170,12 +175,12 @@ function productInformation(obj, value){
         html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">添加数量</div>';
         html += '</div>';
         html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
-        html += '<div style="padding:0.5rem;font-size:1.2rem;"><input type="text" class="kbkeyClass2 kblistauto" placeholder="填写入库数量" style="padding:0.3rem;border:1px solid #dddddd;outline:none;"/><span style="margin-left:1rem;font-size:0.8rem;">补当前产品库存</span></div>';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;"><input type="text" class="kbkeyClass2 kblistauto getvalues" placeholder="填写入库数量" style="padding:0.3rem;border:1px solid #dddddd;outline:none;"/><span style="margin-left:1rem;font-size:0.8rem;">补当前产品库存</span></div>';
         html += '</div>';
         html += '</div>';
         html += '<div style="height:3rem;line-height:3rem;font-size:1.2rem;color:#ff0000;padding:0 0.5rem;">';
         html += '<div id="htmlvalbox" style="text-align:center;float:left;"></div>';
-        html += '<div id="htmlvalbox" onclick="closeframe();" style="border:1px solid #F0F0F0;margin-top:0.8rem;color:#999999;text-align:center;float:right;padding:0 1rem;background:#F0F0F0;border-radius: 0.3rem;">取消</div>';
+        html += '<div id="htmlvalbox" onclick="closeframe();" style="border:1px solid #F0F0F0;margin-top:0.8rem;color:#ffffff;text-align:center;float:right;padding:0 1rem;background:#499a0b;border-radius: 0.3rem;">入库</div>';
         html += '</div>';
         html += '</div>';
         layer.close(indexcloseframe);
@@ -200,103 +205,7 @@ function productInformation(obj, value){
             bottom:"5rem",
             end:function(res,value){
                 if( res == 'OK' ){
-                    if ( isNaN(value) ) {
-                        layer.msg('请输入数字！',{offset:'345px'});
-                        return false;
-                    }
-                    if( value == '' ){
-                        layer.msg('请输入产品数量！',{offset:'345px'});
-                        return false;
-                    }
-                    var html = '<div style="margin:0.5rem;">';
-                        html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
-                        html += '扫码入库，需要扫描管理员身份二维码';
-                        html += '</div>';
-                        html += '<div class="layui-container" style="width:100%;border-top:1px solid #999999;padding:1rem 0;">';
-                        html += '<div class="layui-row" style="margin-bottom:1rem;padding:0 1rem;">';
-                        html += '<div class="layuikuang" style="border:2px solid #6fb729;height:5rem;border-radius:0.5rem;overflow:hidden;position:relative;">';
-                        html += '<input type="text" id="listen2" placeholder="允许扫描" style="height:5rem;width:100%;text-align:center;font-size:1.2rem;border:none;background:#F0F0F0;color:#666666;"/>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '<div style="font-size:1.1rem;color:#b5b0b0;padding:0 1rem;">温馨提示：显示绿色边框时允许扫描，显示红色边框时禁止扫描。</div>';
-                        html += '</div>';
-                        html += '<div id="userNameBoxs1" style="padding:1rem;color:#213fd0;font-size:1.2rem;display:none;">扫描成功－〉操作人：<span id="userName"></span></div>';
-                        html += '<div id="userNameBoxs2" style="padding:1rem;color:red;font-size:1.2rem;display:none;"></div>';
-                        html += '</div>';
-                    layer.open({
-                      type: 1,
-                      title:false,
-                      skin: 'layui-layer-rim', //加上边框
-                      area: ['620px', '300px'], //宽高
-                      content: html
-                   });
-                   $("#listen2").focus(function(){
-                        $(".layuikuang").css({"border":"2px solid #6fb729"});
-                        $(this).attr({"placeholder":"允许扫描"});
-                   }).blur(function(){
-                        $(".layuikuang").css({"border":"2px solid red"});
-                        $(this).attr({"placeholder":"禁止扫描"});
-                   });
-                   var cs2 = new CodeScanningGrab({
-                     el:"#listen2",
-                     addClick:".layernoneouto",
-                     addClass:".inputBoxs",
-                     time:2000,
-                     success:function(res){
-                       var id = res;
-                        //验证管理员身份
-                        $.ajax({
-                            url:url+"hwapi/basic/name_bind_qrcode",
-                            data:{userId:userId,id:id},
-                            success:function(info){
-                                var obj = JSON.parse(info);
-                                if(obj.code == 0 ){
-                                    $("#userNameBoxs2").hide();
-                                    $("#userNameBoxs1").show();
-                                    $("#userName").html(obj.data.name);
-                                    if( obj.data.status=="ok" ){
-                                        if( obj.data.role == 1 ){
-                                            $.post(url+'hwapi/putin/putin_by_qrcode',{userId:userId,postId:postIdnext,productType:productTypenext,num:value,putinType:"pandian",pickerId:id},function(res){
-                                                  if(res.code == 0 ){
-                                                      $(".kblistauto").attr({"disabled":true});
-                                                      layer.msg(res.msg,{shift:-1,time:2000,offset:'230px'},function(){
-                                                            $("#htmlvalbox").html("当前产品总库存数量："+res.stock);
-                                                            //跳转到一键入库
-                                                            location.href = 'warehousingrecord.html';
-                                                      });
-                                                  }else{
-                                                      layer.msg(res.msg);
-                                                  }
-                                            });
-                                        }else{
-                                            $("#userNameBoxs1").hide();
-                                            $("#userNameBoxs2").show();
-                                            $("#userNameBoxs2").html("你不是管理员，没有权限操作!");
-                                        }
-                                    }else{
-                                        $("#userNameBoxs1").hide();
-                                        $("#userNameBoxs2").show();
-                                        $("#userNameBoxs2").html("该用户已经被禁用");
-                                    }
-                                }else{
-                                    $("#userNameBoxs1").hide();
-                                    $("#userNameBoxs2").show();
-                                    $("#userNameBoxs2").html('非管理员授权二维码，无法登录');
-                                }
-                            },
-                            error:function(err){
-                                $("#userNameBoxs2").show();
-                                $("#userNameBoxs2").html("非管理员授权二维码，无法登录");
-                            }
-                        });
-                     },
-                     endClick:function(res){
-                         console.log(res)
-                     }
-                   });
-                   setTimeout(function(){
-                      $("#listen2").focus();
-                   },1000);
+
                 }else{
                     // layer.msg('什么都不做');
                 }
@@ -332,7 +241,106 @@ function productInformation(obj, value){
 function closeframe(){
     csg.initFocus();
     kb2.kbhide();
-    layer.close(indexcloseframe);
+    var value = $(".getvalues").val();
+    if ( isNaN(value) ) {
+        layer.msg('请输入数字！',{offset:'345px'});
+        return false;
+    }
+    if( value == '' ){
+        layer.msg('请输入产品数量！',{offset:'345px'});
+        return false;
+    }
+    var html = '<div style="margin:0.5rem;">';
+        html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
+        html += '扫码入库，需要扫描管理员身份二维码';
+        html += '</div>';
+        html += '<div class="layui-container" style="width:100%;border-top:1px solid #999999;padding:1rem 0;">';
+        html += '<div class="layui-row" style="margin-bottom:1rem;padding:0 1rem;">';
+        html += '<div class="layuikuang" style="border:2px solid #6fb729;height:5rem;border-radius:0.5rem;overflow:hidden;position:relative;">';
+        html += '<input type="text" id="listen2" placeholder="允许扫描" style="height:5rem;width:100%;text-align:center;font-size:1.2rem;border:none;background:#F0F0F0;color:#666666;"/>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="font-size:1.1rem;color:#b5b0b0;padding:0 1rem;">温馨提示：显示绿色边框时允许扫描，显示红色边框时禁止扫描。</div>';
+        html += '</div>';
+        html += '<div id="userNameBoxs1" style="padding:1rem;color:#213fd0;font-size:1.2rem;display:none;">扫描成功－〉操作人：<span id="userName"></span></div>';
+        html += '<div id="userNameBoxs2" style="padding:1rem;color:red;font-size:1.2rem;display:none;"></div>';
+        html += '</div>';
+    var shaomiao = layer.open({
+      type: 1,
+      title:false,
+      skin: 'layui-layer-rim', //加上边框
+      area: ['620px', '300px'], //宽高
+      content: html
+   });
+   $("#listen2").focus(function(){
+        $(".layuikuang").css({"border":"2px solid #6fb729"});
+        $(this).attr({"placeholder":"允许扫描"});
+   }).blur(function(){
+        $(".layuikuang").css({"border":"2px solid red"});
+        $(this).attr({"placeholder":"禁止扫描"});
+   });
+   var cs2 = new CodeScanningGrab({
+     el:"#listen2",
+     addClick:".layernoneouto",
+     addClass:".inputBoxs",
+     time:2000,
+     success:function(res){
+       var id = res;
+        //验证管理员身份
+        $.ajax({
+            url:url+"hwapi/basic/name_bind_qrcode",
+            data:{userId:userId,id:id},
+            success:function(info){
+                var obj = JSON.parse(info);
+                if(obj.code == 0 ){
+                    $("#userNameBoxs2").hide();
+                    $("#userNameBoxs1").show();
+                    $("#userName").html(obj.data.name);
+                    if( obj.data.status=="ok" ){
+                        if( obj.data.role == 1 ){
+                            $.post(url+'hwapi/putin/putin_by_qrcode',{userId:userId,postId:postIdnext,productType:productTypenext,num:value,putinType:"pandian",pickerId:id},function(res){
+                                  layer.close(shaomiao);
+                                  layer.close(indexcloseframe);
+                                  if(res.code == 0 ){
+                                      $(".kblistauto").attr({"disabled":true});
+                                      layer.msg(res.msg,{shift:-1,time:2000,offset:'230px'},function(){
+                                            $("#htmlvalbox").html("当前产品总库存数量："+res.stock);
+                                            //跳转到一键入库
+                                            location.href = 'warehousingrecord.html';
+                                      });
+                                  }else{
+                                      layer.msg(res.msg);
+                                  }
+                            });
+                        }else{
+                            $("#userNameBoxs1").hide();
+                            $("#userNameBoxs2").show();
+                            $("#userNameBoxs2").html("你不是管理员，没有权限操作!");
+                        }
+                    }else{
+                        $("#userNameBoxs1").hide();
+                        $("#userNameBoxs2").show();
+                        $("#userNameBoxs2").html("该用户已经被禁用");
+                    }
+                }else{
+                    $("#userNameBoxs1").hide();
+                    $("#userNameBoxs2").show();
+                    $("#userNameBoxs2").html('非管理员授权二维码，无法登录');
+                }
+            },
+            error:function(err){
+                $("#userNameBoxs2").show();
+                $("#userNameBoxs2").html("非管理员授权二维码，无法登录");
+            }
+        });
+     },
+     endClick:function(res){
+         console.log(res)
+     }
+   });
+   setTimeout(function(){
+      $("#listen2").focus();
+   },1000);
 }
 function listenfocus(){
     $(".lampBoxs").css({"background":"#00b500"});

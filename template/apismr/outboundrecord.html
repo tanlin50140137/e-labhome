@@ -77,6 +77,7 @@
                                   <input class="layui-input" name="id" id="test-table-demoReload" autocomplete="off">
                                 </div>
                                 <button class="layui-btn" data-type="reload">搜索</button>
+                                <button class="layui-btn" data-type="selfconfiguring" style="float:right;">自配标准溶液出库记录</button>
                               </div>
 
                               <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
@@ -151,12 +152,12 @@ layui.use('table', function(){
       {field: 'putin_id', title: '编号', fixed: 'left', align:'center', width:120, style:'font-size:1.2rem'}
       ,{field: 'product_name', title: '产品名称', align:'center', style:'font-size:1.2rem'}
       ,{field: 'manufacturer', title: '厂商', align:'center', style:'font-size:1.2rem'}
-      ,{field: 'product_type', title: '规格型号', width:120, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'product_gcno', title: '通用证书号', align:'center', style:'font-size:1.2rem'}
       ,{field: 'punit', title: '单位', align:'center', width:120, style:'font-size:1.2rem'}
       ,{field: 'out_of_num', title: '出库数量', align:'center', width:120, style:'font-size:1.2rem'}
       ,{field: 'out_of_time', title: '时间', align:'center', style:'font-size:1.2rem'}
       ,{field: 'binder', title: '领用人', width:150, align:'center', style:'font-size:1.2rem'}
-      ,{field: 'post_id', title: '产品ID', align:'center', width:120, style:'font-size:1.2rem'}
+      ,{field: 'post_id', title: '产品ID', align:'center', width:100, style:'font-size:1.2rem'}
       ,{width:100, title: '二维码', align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
     ]]
     ,done: function(res, curr, count){
@@ -240,6 +241,9 @@ var $ = layui.$, active = {
             search:demoReload.val()
           }
         });
+      },
+      selfconfiguring: function(){
+        location = './selfconfiguring.html';
       }
 };
 $('.test-table-reload-btn .layui-btn').on('click', function(){

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>库存</title>
+    <title>标准品库存</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../iview/node_modules/view-design/dist/styles/iview.css">
     <link rel="stylesheet" href="../layui/css/layui.css">
@@ -50,7 +50,7 @@
                       <div class="elaLogo" onclick="backIndex();" style="background: #99ccff url(../img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
                   </div>
                   <div class="elaMenuList" style="border-top:1px solid #dddddd;">
-                      <div class="elaLogo">库存</div>
+                      <div class="elaLogo">标准品库存</div>
                   </div>
                   <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
                       <div class="elaLogo">
@@ -77,9 +77,11 @@
                                   <input class="layui-input" name="id" id="test-table-demoReload" autocomplete="off">
                                 </div>
                                 <button class="layui-btn" data-type="reload" style="padding:0 14px;height:2.19rem;line-height:2.19rem;">搜索</button>
+                                <!--
                                 <button class="layui-btn" data-type="see_overdue" style="padding:0 14px;height:2.19rem;line-height:2.19rem;float:right;">查看过期预警记录</button>
                                 <button class="layui-btn" data-type="see_warning" style="padding:0 14px;height:2.19rem;line-height:2.19rem;float:right;">查看库存预警记录</button>
-                                <button class="layui-btn" data-type="see_alarm" style="padding:0 14px;height:2.19rem;line-height:2.19rem;float:right;">查看库存报警</button>
+                                <button class="layui-btn" data-type="see_alarm" style="padding:0 14px;height:2.19rem;line-height:2.19rem;float:right;">查看库存报警</button> -->
+                                <button class="layui-btn" data-type="SelfConfiguring" style="padding:0 14px;height:2.19rem;line-height:2.19rem;float:right;">自配制标溶液库存</button>
                               </div>
 
                               <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
@@ -150,9 +152,9 @@ layui.use('table', function(){
       {field: 'post_id', title: '产品ID', fixed: 'left', width:120, align:'center', style:'font-size:1.2rem'}
       ,{field: 'product_name', title: '产品名称', align:'center', style:'font-size:1.2rem'}
       ,{field: 'manufacturer', title: '厂商', align:'center', style:'font-size:1.2rem'}
-      ,{field: 'product_type', title: '规格型号', align:'center', style:'font-size:1.2rem'}
+      ,{field: 'product_gcno', title: '通用证书号', align:'center', style:'font-size:1.2rem'}
       ,{field: 'punit', title: '单位', align:'center', width:120, style:'font-size:1.2rem'}
-      ,{field: 'min_stock', title: '报警数量', width:120, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'min_stock', title: '库存下限', width:120, align:'center', style:'font-size:1.2rem'}
       ,{field: 'product_stock', title: '库存数量', width:120, align:'center', style:'font-size:1.2rem'}
       ,{width:280, title: '操作', align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
     ]]
@@ -187,7 +189,7 @@ layui.use('table', function(){
                     layer.msg('不能大于库存数量',{offset:'210px'});
                     return;
                 }
-                $.post(url+'apismr/stock/makeqrcode',{userId:userId,postId:data.post_id,productType:data.product_type},function(res){
+                $.post(url+'apismr/stock/makeqrcode',{userId:userId,postId:data.post_id,productGcno:data.product_gcno,modType:'smr'},function(res){
                       layer.close(index);
                       var data = JSON.parse(res);
                       // console.log(data.url);
@@ -368,6 +370,9 @@ var $ = layui.$, active = {
       },
       see_overdue:function(){
           location.href = 'expire.html';
+      },
+      SelfConfiguring:function(){
+          location.href = 'stock_zpz.html';
       }
 };
 $('.test-table-reload-btn .layui-btn').on('click', function(){

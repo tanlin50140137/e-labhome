@@ -102,7 +102,7 @@ var csg = new CodeScanningGrab({
           icon: 16
           ,shade: 0.01
       });
-      $.post(url+'apismr/putin/putin_by_qrcode',{qrcodeId:id},function(res){
+      $.post(url+'apismr/putin/product_msg_by_qrcode',{qrcodeId:id},function(res){
             layer.close(layerIndex);
             if(res.code == 0 ){
                 productInformation(res.data, id)
@@ -125,14 +125,7 @@ function productInformation(obj, value){
         html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;">';
         html += '当前产品信息';
         html += '</div>';
-        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
-        html += '<div style="width:20%">';
-        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">厂商</div>';
-        html += '</div>';
-        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
-        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.manufacturer==null?'获取失败':obj.manufacturer)+'</div>';
-        html += '</div>';
-        html += '</div>';
+
         html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
         html += '<div style="width:20%">';
         html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">产品ID</div>';
@@ -141,6 +134,7 @@ function productInformation(obj, value){
         html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.postId==null?'无':obj.postId)+'</div>';
         html += '</div>';
         html += '</div>';
+
         html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
         html += '<div style="width:20%">';
         html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">产品名称</div>';
@@ -149,6 +143,16 @@ function productInformation(obj, value){
         html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.productName==null?'无':obj.productName)+'</div>';
         html += '</div>';
         html += '</div>';
+
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">厂商</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+(obj.manufacturer==null?'获取失败':obj.manufacturer)+'</div>';
+        html += '</div>';
+        html += '</div>';
+
         html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
         html += '<div style="width:20%">';
         html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">产品型号</div>';
