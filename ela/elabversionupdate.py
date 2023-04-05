@@ -1,8 +1,9 @@
 import os
+import time
 import json
 import zipfile
 from urllib import request, parse
-
+import win32api
 
 class versionupdate:
 
@@ -75,21 +76,27 @@ class versionupdate:
                     if dd['msg']['status'] == '1':
                         # 版本升级
                         # 下载版本包
-                        self.download(dd['msg']['path_name'], filename)
+                        # self.download(dd['msg']['path_name'], filename)
+                        # os.system("%s \"%s\" \"%s\" \"%s\"" % ("update.exe", userid, filename, sn))
+                        # os.system("%s \"%s\" \"%s\" \"%s\"" % ("update.exe", userid, dd['msg']['path_name'], sn))
                         # 运行更新文件
-                        os.system("%s \"%s\" \"%s\" \"%s\"" % ("update.exe", userid, filename, sn))
+                        win32api.ShellExecute(0, 'open', 'update.exe', f"{userid} {dd['msg']['path_name']} {sn}", os.getcwd() + '\\', 1)
                     else:
                         # 只更新模板
                         # 热更新-先删除原来的模板
                         if os.path.isdir('./template'):
                             self.delete_directory('./template')
+                        time.sleep(3)
                         # 下载模板包
                         self.download(dd['msg']['path_name'], filename)
-                        # 解压
-                        self.unzip_file(filename, './')
+                        time.sleep(3)
+                        # 解压,解压会覆盖原有文件
+                        self.unzip_file(filename, os.getcwd() + '\\')
+                        time.sleep(3)
                         # 删除解压包
                         if os.path.isfile(filename):
                             os.remove(filename)
+                        time.sleep(3)
                         # 设置用户ID
                         self.set_user(userid)
                         # 更新状态

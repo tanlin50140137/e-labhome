@@ -8,7 +8,6 @@ pyinstaller --hidden-import=websockets.legacy.auth --hidden-import=websockets.cl
 """
 
 userIndex = {}
-almIndex = {}
 async def echo(websocket, path):
     async for maessage in websocket:
         try:
@@ -18,22 +17,14 @@ async def echo(websocket, path):
             if data['type'] == 'login':
                 userIndex[data['userid']] = websocket
 
-            # 主机
-            if data['type'] == 'X80X':
-                almIndex[data['userid']] = websocket
-
             # 发给指定用户
             if data['type'] == 'send':
                 user_name = userIndex[data['userid']]
                 await user_name.send(data['msg'])
 
-            # 发给所有客户端
-            if data['type'] == 'X80XTCPIP':
-                for s in almIndex.values():
-                    await s.send(json.dumps(data['msg']))
-
         except Exception as e:
             print("---异常---：", e)
+            await websocket.stop()
 
 if __name__ == '__main__':
     asyncio.get_event_loop().run_until_complete(websockets.serve(echo, 'localhost', 9501))

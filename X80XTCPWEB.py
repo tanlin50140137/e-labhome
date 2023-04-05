@@ -15,6 +15,10 @@ async def echo(websocket, path):
         try:
             # 接收一个JSON数据
             data = json.loads(maessage)
+            # 心跳检测
+            if data['type'] == 'heartbeat':
+                await websocket.send(json.dumps(data))
+
             # 用户登录
             if data['type'] == 'login':
                 userIndex[data['userid']] = websocket
@@ -31,6 +35,8 @@ async def echo(websocket, path):
 
         except Exception as e:
             print("---异常---：", e)
+            await websocket.stop()
+
 
 if __name__ == '__main__':
     asyncio.get_event_loop().run_until_complete(websockets.serve(echo, 'localhost', 9502))

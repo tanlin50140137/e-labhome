@@ -84,7 +84,7 @@ function keyboard(obj){
         kb.UpDownLeftRight.append(kb.kb_keyboard_left1);
         kb.kb_keyboard_left2 = $("<div class='kb_keyboard_left'></div>");
         kb.UpDownLeftRight.append(kb.kb_keyboard_left2);
-        kb.kb_keyboard_left3 = $("<div class='kb_keyboard_left'>完成</div>");
+        kb.kb_keyboard_left3 = $("<div class='kb_keyboard_left'>提交</div>");
         kb.UpDownLeftRight.append(kb.kb_keyboard_left3);
 
         kb.kbBox  = $("<div class='kbBoxCss'></div>");
@@ -228,7 +228,7 @@ function keyboard(obj){
         kb.UpDownLeftRight.append(kb.kb_keyboard_left1);
         kb.kb_keyboard_left2 = $("<div class='kb_keyboard_left'></div>");
         kb.UpDownLeftRight.append(kb.kb_keyboard_left2);
-        kb.kb_keyboard_left3 = $("<div class='kb_keyboard_left'>完成</div>");
+        kb.kb_keyboard_left3 = $("<div class='kb_keyboard_left'>提交</div>");
         kb.UpDownLeftRight.append(kb.kb_keyboard_left3);
 
         kb.kbBox2  = $("<div class='kbBoxCss2'></div>");
@@ -319,7 +319,7 @@ function keyboard(obj){
         kb.UpDownLeftRight.append(kb.kb_keyboard_left1);
         kb.kb_keyboard_left2 = $("<div class='kb_keyboard_left'></div>");
         kb.UpDownLeftRight.append(kb.kb_keyboard_left2);
-        kb.kb_keyboard_left3 = $("<div class='kb_keyboard_left'>完成</div>");
+        kb.kb_keyboard_left3 = $("<div class='kb_keyboard_left'>提交</div>");
         kb.UpDownLeftRight.append(kb.kb_keyboard_left3);
 
         kb.kbBox3  = $("<div class='kbBoxCss3'></div>");
@@ -815,8 +815,9 @@ function keyboard(obj){
             kb.isMove = false;
             // $(".kb_keyboard").animate({"left":"-1000px"},200,function(){
                 $(".kb_keyboard").hide();
+                kb.inputIndexEnd = kb.inputIndex;
                 kb.inputIndex = '-1';
-                obj.end('off',"");
+                obj.end('off',"",kb.inputIndexEnd);
             // });
         });
         $(".kb_keyboard_left").eq(2).unbind();
@@ -827,9 +828,10 @@ function keyboard(obj){
             kb.isMove = false;
             // $(".kb_keyboard").animate({"left":"1000px"},200,function(){
                   $(".kb_keyboard").hide();
-                  kb.inputIndex = '-1';
+                  kb.inputIndexEnd = kb.inputIndex;
                   var inputval = $(obj.el).eq(kb.inputIndex).val();
-                  obj.end('OK',inputval);
+                  kb.inputIndex = '-1';
+                  obj.end('OK',inputval,kb.inputIndexEnd);
             // });
         });
         $(".showChineseHanZiList").unbind();
@@ -1100,8 +1102,9 @@ function keyboard(obj){
             kb.isMove = false;
             // $(".kb_keyboard").animate({"left":"-1000px"},200,function(){
                 $(".kb_keyboard").hide();
+                kb.inputIndexEnd = kb.inputIndex;
                 kb.inputIndex = '-1';
-                obj.end('OK',"");
+                obj.end('OK',"",kb.inputIndexEnd);
             // });
         });
         $(".kb_keyboard_left").eq(2).unbind();
@@ -1112,9 +1115,10 @@ function keyboard(obj){
             kb.isMove = false;
             // $(".kb_keyboard").animate({"left":"1000px"},200,function(){
                   $(".kb_keyboard").hide();
-                  kb.inputIndex = '-1';
+                  kb.inputIndexEnd = kb.inputIndex;
                   var inputval = $(obj.el).eq(kb.inputIndex).val();
-                  obj.end('OK',inputval);
+                  kb.inputIndex = '-1';
+                  obj.end('OK',inputval,kb.inputIndexEnd);
             // });
         });
         /*选中框*/
@@ -1219,8 +1223,9 @@ function keyboard(obj){
             kb.isMove = false;
             // $(".kb_keyboard").animate({"left":"-1000px"},200,function(){
                 $(".kb_keyboard").hide();
+                kb.inputIndexEnd = kb.inputIndex;
                 kb.inputIndex = '-1';
-                obj.end('OK',"");
+                obj.end('OK',"",kb.inputIndexEnd);
             // });
         });
         $(".kb_keyboard_left").eq(2).unbind();
@@ -1231,9 +1236,10 @@ function keyboard(obj){
             kb.isMove = false;
             // $(".kb_keyboard").animate({"left":"1000px"},200,function(){
                   $(".kb_keyboard").hide();
-                  kb.inputIndex = '-1';
+                  kb.inputIndexEnd = kb.inputIndex;
                   var inputval = $(obj.el).eq(kb.inputIndex).val();
-                  obj.end('OK',inputval);
+                  kb.inputIndex = '-1';
+                  obj.end('OK',inputval,kb.inputIndexEnd);
             // });
         });
         /*选中框*/

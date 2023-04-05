@@ -1,0 +1,23 @@
+<DATAROOT>
+	<LOGINFO>
+		<LOG id="1" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="30" btimesec="16" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="2" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="30" btimesec="48" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="3" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="43" btimesec="37" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="4" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="46" btimesec="0" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功"/>
+		<LOG id="5" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="46" btimesec="2" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="6" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="56" btimesec="54" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="7" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="2" btimesec="34" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="8" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="2" btimesec="42" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功"/>
+		<LOG id="9" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="2" btimesec="43" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="10" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="24" btimesec="38" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="11" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="26" btimesec="28" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="12" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="30" btimesec="6" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="13" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="30" btimesec="19" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="14" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="41" btimesec="19" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="15" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="46" btimesec="0" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="16" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="57" btimesec="50" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="17" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="58" btimesec="1" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="18" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="18" btimemin="11" btimesec="23" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+	</LOGINFO>
+	<GLOBAL index="19"/>
+</DATAROOT>

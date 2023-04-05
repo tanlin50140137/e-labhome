@@ -1,0 +1,8 @@
+<DATAROOT>
+	<LOGINFO>
+		<LOG id="1" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="42" btimesec="44" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="2" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="43" btimesec="1" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="3" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="43" btimesec="7" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+	</LOGINFO>
+	<GLOBAL index="4"/>
+</DATAROOT>

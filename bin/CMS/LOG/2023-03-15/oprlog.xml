@@ -1,0 +1,62 @@
+<DATAROOT>
+	<LOGINFO>
+		<LOG id="1" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="41" btimesec="35" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="2" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="41" btimesec="51" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功"/>
+		<LOG id="3" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="41" btimesec="55" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="4" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="44" btimesec="14" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="5" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="54" btimesec="35" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="6" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="54" btimesec="58" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功"/>
+		<LOG id="7" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开通道失败 未知错误"/>
+		<LOG id="8" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="1" devname="5F" username="kzy" info="通道 2 打开通道失败 打开通道出错"/>
+		<LOG id="9" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="2" devname="5F" username="kzy" info="通道 3 打开通道失败 打开通道出错"/>
+		<LOG id="10" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="3" devname="5F" username="kzy" info="通道 4 打开通道失败 打开通道出错"/>
+		<LOG id="11" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="4" devname="5F" username="kzy" info="通道 5 打开通道失败 打开通道出错"/>
+		<LOG id="12" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="5" devname="5F" username="kzy" info="通道 6 打开通道失败 打开通道出错"/>
+		<LOG id="13" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="6" devname="5F" username="kzy" info="通道 7 打开通道失败 打开通道出错"/>
+		<LOG id="14" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="7" devname="5F" username="kzy" info="通道 8 打开通道失败 打开通道出错"/>
+		<LOG id="15" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="25" DevId="1" type="0" channel="8" devname="5F" username="kzy" info="通道 9 打开通道失败 打开通道出错"/>
+		<LOG id="16" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="17" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="1" devname="5F" username="kzy" info="通道 2 打开通道失败 打开通道出错"/>
+		<LOG id="18" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="2" devname="5F" username="kzy" info="通道 3 打开通道失败 打开通道出错"/>
+		<LOG id="19" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="3" devname="5F" username="kzy" info="通道 4 打开通道失败 打开通道出错"/>
+		<LOG id="20" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="4" devname="5F" username="kzy" info="通道 5 打开通道失败 打开通道出错"/>
+		<LOG id="21" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="5" devname="5F" username="kzy" info="通道 6 打开通道失败 打开通道出错"/>
+		<LOG id="22" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="6" devname="5F" username="kzy" info="通道 7 打开通道失败 打开通道出错"/>
+		<LOG id="23" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="7" devname="5F" username="kzy" info="通道 8 打开通道失败 打开通道出错"/>
+		<LOG id="24" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="45" DevId="1" type="0" channel="8" devname="5F" username="kzy" info="通道 9 打开通道失败 打开通道出错"/>
+		<LOG id="25" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="50" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 关闭成功"/>
+		<LOG id="26" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="55" btimesec="54" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="27" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="57" btimesec="15" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="28" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="57" btimesec="21" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="29" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="57" btimesec="32" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="30" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="57" btimesec="50" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="31" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="8" btimemin="59" btimesec="48" DevId="0" type="6" channel="0" devname="" username="super" info="基本配置"/>
+		<LOG id="32" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="2" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="33" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="5" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="34" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="24" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功"/>
+		<LOG id="35" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="28" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="36" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="47" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 关闭成功"/>
+		<LOG id="37" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="48" DevId="1" type="8" channel="0" devname="5F" username="kzy" info="断开"/>
+		<LOG id="38" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="48" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功"/>
+		<LOG id="39" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="49" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="40" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="49" DevId="1" type="0" channel="1" devname="5F" username="kzy" info="通道 2 打开通道失败 打开通道出错"/>
+		<LOG id="41" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="49" DevId="1" type="0" channel="2" devname="5F" username="kzy" info="通道 3 打开通道失败 打开通道出错"/>
+		<LOG id="42" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="49" DevId="1" type="0" channel="3" devname="5F" username="kzy" info="通道 4 打开通道失败 打开通道出错"/>
+		<LOG id="43" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="59" DevId="1" type="0" channel="1" devname="5F" username="kzy" info="通道 2 打开通道失败 打开通道出错"/>
+		<LOG id="44" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="0" btimesec="59" DevId="1" type="0" channel="2" devname="5F" username="kzy" info="通道 3 打开通道失败 打开通道出错"/>
+		<LOG id="45" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="1" btimesec="0" DevId="1" type="0" channel="3" devname="5F" username="kzy" info="通道 4 打开通道失败 打开通道出错"/>
+		<LOG id="46" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="1" btimesec="0" DevId="1" type="0" channel="4" devname="5F" username="kzy" info="通道 5 打开通道失败 打开通道出错"/>
+		<LOG id="47" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="1" btimesec="0" DevId="1" type="0" channel="5" devname="5F" username="kzy" info="通道 6 打开通道失败 打开通道出错"/>
+		<LOG id="48" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="1" btimesec="0" DevId="1" type="0" channel="6" devname="5F" username="kzy" info="通道 7 打开通道失败 打开通道出错"/>
+		<LOG id="49" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="1" btimesec="0" DevId="1" type="0" channel="7" devname="5F" username="kzy" info="通道 8 打开通道失败 打开通道出错"/>
+		<LOG id="50" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="1" btimesec="0" DevId="1" type="0" channel="8" devname="5F" username="kzy" info="通道 9 打开通道失败 打开通道出错"/>
+		<LOG id="51" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="2" btimesec="16" DevId="0" type="6" channel="0" devname="" username="super" info="基本配置"/>
+		<LOG id="52" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="4" btimesec="44" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+		<LOG id="53" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="6" btimesec="51" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="54" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="7" btimesec="12" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功 "/>
+		<LOG id="55" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="7" btimesec="15" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开通道失败 未知错误"/>
+		<LOG id="56" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="7" btimesec="22" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="57" btimeyear="2023" btimemonth="3" btimeday="15" btimehour="9" btimemin="7" btimesec="52" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+	</LOGINFO>
+	<GLOBAL index="58"/>
+</DATAROOT>

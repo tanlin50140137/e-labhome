@@ -1,0 +1,31 @@
+<DATAROOT>
+	<LOGINFO>
+		<LOG id="1" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="47" btimesec="35" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="2" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="48" btimesec="38" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="3" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="49" btimesec="33" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="4" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="50" btimesec="1" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="5" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="50" btimesec="14" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="6" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="16" btimemin="56" btimesec="35" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="7" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="3" btimesec="42" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="8" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="5" btimesec="45" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="9" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="5" btimesec="54" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="10" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="6" btimesec="13" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="11" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="6" btimesec="16" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="12" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="6" btimesec="35" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="13" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="7" btimesec="33" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="14" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="7" btimesec="40" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="15" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="7" btimesec="42" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="16" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="7" btimesec="45" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="17" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="7" btimesec="49" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="18" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="12" btimesec="12" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="19" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="13" btimesec="2" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="20" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="16" btimesec="39" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="21" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="19" btimesec="20" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="22" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="19" btimesec="35" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="23" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="19" btimesec="44" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="24" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="22" btimesec="36" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="25" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="24" btimesec="24" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+		<LOG id="26" btimeyear="2023" btimemonth="3" btimeday="14" btimehour="17" btimemin="24" btimesec="30" DevId="1" type="11" channel="0" devname="5F" username="kzy" info="通道 1 人形检测"/>
+	</LOGINFO>
+	<GLOBAL index="27"/>
+</DATAROOT>

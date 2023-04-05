@@ -1,0 +1,230 @@
+/* 头部 */
+.headImg{height:60px;background:url(../img/line2-1.png) no-repeat;position:relative;background-size:100% 100%;}
+.titleBoxs{width: 410px;height:40px;position: absolute;top:50%;left:50%;margin-left:-195px;margin-top: -19px;line-height: 40px;color: #fff;text-align: center;font-size: 1.45rem;}
+.systemTimeBoxs{position:absolute;bottom: -1.5rem;right:7rem;color:#ffffff;font-weight: bold;font-size: 1.2rem;}
+/* 走马灯 */
+.ridingLantern{
+  height:70px;
+  /* overflow:hidden; */
+  margin-bottom:0.5rem;
+  /* padding-top:0.6rem; */
+  /* margin-top:1rem; */
+}
+/* .ridingLantern marquee{height:70px;color:#ffab91;font-size:1rem;line-height:90px;} */
+.marqueeBoxs{height:70px;color:#ffab91;font-size:1rem;line-height:90px;text-indent:1.2rem;color:#999999;}
+/* 导航条 */
+.boxNavigationiner{border:1px solid #00aeef;background:#001a53;margin:0 1rem 1rem 1rem;border-radius:0.5rem;text-align: center;letter-spacing: 0.5rem;color:#FFFFFF;height:100px;line-height:100px;}
+
+/* 首页样式 */
+.selectYlbInerBoxs{display:flex;flex-wrap:wrap;}
+.selectYlbListBoxs{width:25%;}
+.selectYlbImgBoxs{border:1px solid #00aeef;margin:0.5rem;padding:0.5rem;background:#001a53;border-radius:0.5rem;}
+.selectYlbImgmaxs{width:100%;}
+.selectYlbNameBoxs{color:#ffffff;font-size:1.4rem;height:3rem;line-height:3rem;text-align:center;margin-top:0.5rem;}
+
+.indexToolBoxs{position:absolute;bottom:1rem;right:0.5rem;}
+.indexToolLsBoxs{display:flex;flex-wrap:nowrap;align-items:center;}
+.indexToolBtnBoxs{border:1px solid #00aeef;width:50%;color:#ffffff;font-size:1.4rem;padding:0.5rem 1rem;margin-left:1.5rem;background:#001a53;cursor:default;}
+
+/* 首页中间仪表盘 */
+.yibiaoBox{display:flex;flex-wrap:nowrap;}
+.yibiaoinnerBox:nth-child(1){width:12%;margin-right:0.5rem;}
+.yibiaoinnerBox:nth-child(2){width:88%;}
+
+.rightListBoxs{display:flex;flex-wrap:nowrap;}
+.rightListInnerBoxs:nth-child(1){width:88%;margin-right:0.5rem;}
+.rightListInnerBoxs:nth-child(2){width:12%;}
+
+.rightListTableBoxs{width:100%;}
+.tableBoxs{width:100%;}
+.tableBoxs tr td{border: 1px solid #00aeef;text-align: center;font-size: 1rem;line-height: 3.5rem;background: #001a53;color:#ffffff;}
+.tableBoxs tr .titleTable{color:#ffab91;}
+
+.yibiaoinnerStateBox{border:2px solid #00aeef;margin-left:0.5rem;border-radius:0.6rem;background:#001a53;padding:1rem 0.5rem;}
+
+.yibiaoPageBox{display:flex;flex-wrap:nowrap;}
+.yibiaoinner:nth-child(1){width: 25%;margin-right:0.25rem;}
+.yibiaoinner:nth-child(2){width: 25%;margin-left:0.25rem;margin-right:0.25rem;}
+.yibiaoinner:nth-child(3){width: 25%;margin-left:0.25rem;margin-right:0.25rem;}
+.yibiaoinner:nth-child(4){width: 25%;margin-left:0.25rem;}
+
+.boxline{border:1px solid #00aeef;height:240px;margin-bottom:0.5rem;overflow:hidden;border-radius: 0.2rem;background: #001a53;}
+
+/* 状态栏 */
+.stateyibiaoBoxs{display: flex;align-items:center;flex-wrap:nowrap;color:#ffffff;font-size:1.25rem;}
+.stateyibiaoBoxs:nth-child(1){margin-bottom: 1rem;}
+.stateyibiaInner{height:50px;line-height: 50px;margin-bottom: 0.5rem;}
+.stateyibiaInner:nth-child(1){width:70%;text-align: center;}
+.stateyibiaInner:nth-child(2){width:30%;}
+
+.stateyibiaBtn{border:1px solid #0141a3;margin-right:0.8rem;border-radius:0.5rem;background:#0141a3;font-size:1rem;}
+
+/* 线框图 */
+.wireframeBoxs{display:flex;align-items:center;flex-wrap:nowrap;}
+.wireframeInner{border:1px solid red;width: 33.3%;position:relative;padding:0.5 0;}
+.wireframeInner:nth-child(1){margin-right:0.5rem;}
+.wireframeInner:nth-child(2){margin-left: 0.5rem;margin-right:0.5rem;}
+.wireframeInner:nth-child(3){margin-left: 0.5rem;}
+
+.wireframeInner{border: 1px solid #00aeef;margin:2rem 0;padding:0.5rem 0;background:#001a53;border-radius:0.2rem;}
+.wireframeList{color:#ffffff;display:flex;align-items:center;flex-wrap: nowrap;font-size: 1rem;}
+.wireframeLi{text-align: center;line-height: 30px;}
+.wireframeLi:nth-child(1){width:50%;}
+.wireframeLi:nth-child(2){width:25%;}
+.wireframeLi:nth-child(3){width:25%;}
+
+/* 中部状态栏 */
+.centerstateBoxs{display:flex;align-items:center;flex-wrap:nowrap;}
+.centerstateInner{width:33.3%;text-align: center;color:#ffffff;font-size:1.25rem;padding:0.5rem;}
+.imgCharBoxs{width:32px;height:32px;}
+
+/* 选择卡 */
+.selpakBoxs{border:1px solid #00aeef;border-bottom:none;color:#ffab91;position:absolute;top:-29px;left:-1px;width: 50%;height:30px;background: #001a53;text-align: left;text-indent: 1em;-webkit-clip-path: polygon(0 0, 50% 0, 60% 100%, 0% 100%);clip-path: polygon(0 0, 50% 0, 60% 100%, 0% 100%);}
+.switch {position: relative;float: left;width: 90px;margin: 0;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;}
+.switch-checkbox {display: none;}
+.switch-label {display: block;overflow: hidden;cursor: pointer;border: 2px solid #00aeef;border-radius: 20px;}
+.switch-inner {display:block;width:200%;margin-left: -100%;transition: margin 0.3s ease-in 0s;}
+.switch-inner::before,.switch-inner::after {display: block;float: right;width: 50%;height: 30px;padding: 0;line-height: 30px;font-size: 14px;color: white;font-family:Trebuchet, Arial, sans-serif;font-weight: bold;box-sizing: border-box;}
+.switch-inner::after {content: attr(data-on);padding-left: 10px;background-color: #1afa29;color: #002992;text-align: left;}
+.switch-inner::before {content: attr(data-off);padding-right: 10px;background-color: #EEEEEE;color: #002992;text-align: right;}
+.switch-switch {position: absolute;display: block;width: 25px;height: 25px;margin: 4px;background: #FFFFFF;top: 0;bottom: 0;right: 56px;border: 2px solid #00aeef;border-radius: 20px;transition: all 0.3s ease-in 0s;}
+.switch-checkbox:checked+.switch-label .switch-inner {margin-left: 0;}
+.switch-checkbox:checked+.switch-label .switch-switch {right: 0px;}
+
+.openortitleBoxs{display: inline-block;position:relative;top:-0.3rem;}
+.openorcloseBoxs{display: inline-block;position:relative;top:0.2rem;}
+
+/* UPS */
+.upsBoxs{display:flex;flex-wrap:nowrap;width: 100%;}
+.upsInnerBoxs:nth-child(1){border:2px solid #00aeef;width:50%;border-radius:0.5rem;margin-right:0.5rem;padding:0.5rem;background:#001a53;}
+.upsInnerBoxs:nth-child(2){border:2px solid #00aeef;width:50%;border-radius:0.5rem;margin-left:0.5rem;padding:0.5rem;background:#001a53;}
+.upsTileBoxs{color:#ffffff;text-align:center;font-size:1.45rem;padding:1rem 0;}
+.upsListBoxs{display:flex;flex-wrap:nowrap;align-items:center;}
+.upsListInerBoxs{width:50%;}
+.upsListInerBoxs:nth-child(1){margin-right: 0.5rem;}
+.upsListInerBoxs:nth-child(2){margin-left: 0.5rem;}
+
+.upsInputBoxs{display:flex;flex-wrap:nowrap;align-items:center;margin-bottom:0.6rem;}
+.upsInputInnerBoxs{text-align: center;color:#ffffff;font-size:1.25rem;}
+.upsInputInnerBoxs:nth-child(1){width:40%;}
+.upsInputInnerBoxs:nth-child(2){width:30%;}
+.upsInputInnerBoxs:nth-child(3){width:30%;}
+.imgups1Boxs{position:absolute;top:1rem;left:50%;width:150px;}
+
+.electricityBoxs{padding:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;color:#ffffff;font-size:1.25rem;text-align: center;margin:2rem 0;}
+.electrinnerBoxs:nth-child(1){width:15%;}
+.electrinnerBoxs:nth-child(2){width:80%;margin:0 0.5rem;height:2rem;background:#c1afaf;position:relative;}
+.electrinnerBoxs:nth-child(4){width:5%;}
+
+.progressBoxs{height:2rem;background:#1afa29;}
+.progresvalueBoxs{height:2rem;width:100%;position:absolute;top:0;left:0;color:#000000;font-size:1.25rem;text-align:center;font-weight:bold;}
+
+.inputVoltageBoxs{display:flex;align-items:center;flex-wrap:nowrap;margin-bottom:1rem;margin-right:3rem;}
+.inputInnerBoxs{width:50%;color:#ffffff;text-align:right;}
+.inputInnerBoxs:nth-child(1){margin-right:0.5rem;}
+.inputInnerBoxs:nth-child(2){margin-left:0.5rem;}
+
+.inputInner2Boxs:nth-child(1){width:80%;font-size:1.25rem;}
+.inputInner2Boxs:nth-child(2){width:20%;}
+
+/* 市配电 */
+.shipdianBoxs{display:flex;align-items:center;flex-wrap:nowrap;}
+.shipinneBxos:nth-child(1){width:70%;}
+.shipinneBxos:nth-child(2){width:30%;}
+.shipinneulBoxs{display:flex;align-items:center;flex-wrap:nowrap;color:#ffffff;font-size:1.25rem;text-align:center;}
+.shipinneliBoxs{margin-bottom:1rem;}
+.shipinneliBoxs:nth-child(1){width:40%;}
+.shipinneliBoxs:nth-child(2){width:30%;}
+.shipinneliBoxs:nth-child(3){width:30%;}
+.diannengBoxs{display:flex;align-items:center;flex-wrap:nowrap;color:#ffffff;font-size:1.25rem;text-align:center;}
+.diannengliBoxs{width:33.3%;margin-bottom:3rem;}
+
+/* 设备控制 */
+.devicecontrolBoxs{border:2px solid #00aeef;border-radius:0.5rem;padding:6rem 1.5rem;background:#001a53;width:100%;}
+.deviceulBoxs{display:flex;align-items:center;flex-wrap:nowrap;}
+.deviceliBoxs{width:16.7%;color:#ffffff;font-size:1.4rem;text-align:center;}
+.deviceimgBoxs{padding:1rem;}
+.devicebtnBoxs{height:3.5rem;position:relative;}
+.switch_systems{position:absolute;top:50%;left:50%;margin-top:-8%;margin-left:-20%;}
+.devicetagBoxs{margin:0.25rem;padding:0.25rem;}
+.deviceimgmaxBoxs{width:90px;}
+
+.devtitlesBoxs{border-bottom:1px solid #00aeef;color:#ffab91;padding:0.5rem;margin-bottom:1.5rem;position:relative;}
+.devnetworkBoxs{display:flex;align-items:center;flex-wrap:nowrap;color:#ffffff;width:100%;margin-bottom:1rem;}
+.devnetinerBoxs:nth-child(1){width:30%;text-align:center;}
+.devnetinerBoxs:nth-child(2){width:70%;}
+
+/* 参数设置 */
+.devicesetBoxs{display:flex;flex-wrap:nowrap;}
+.devicesetinner:nth-child(1){border:2px solid #00aeef;width:50%;border-radius:0.5rem;padding:1rem 3rem 1rem 1rem;}
+.devicesetinner:nth-child(2){width:30%;}
+.devicesetinner:nth-child(3){width:20%;}
+
+.devlayerBoxs{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(1,26,82,0.5);display:none;}
+.imgDevLayerBoxs{border:none;width:64px;height:64px;position:absolute;top:50%;left:50%;margin-top:-32px;margin-left:-32px;}
+
+.devmenjinshebBoxs{display:flex;align-items:center;flex-wrap:nowrap;color:#ffffff;}
+.devmenjinsheiBoxs:nth-child(1){width:25%;text-align:left;}
+.devmenjinsheiBoxs:nth-child(2){width:75%;}
+.devbaocunsheBoxs{border:2px solid #00aeef;color:#ffffff;text-align:center;margin-top:1rem;padding:0.2rem;}
+
+/* 设置温湿度 */
+.devwenshiduBoxs{display:flex;align-items:center;flex-wrap:nowrap;}
+.devweninnerBoxs{width:50%;margin-bottom:0.5rem;}
+.devwenshangxBoxs{display:flex;align-items:center;flex-wrap:nowrap;color:#ffffff;text-align:center;margin-bottom:1rem;}
+.devwenshinnerBoxs:nth-child(1){width:50%;}
+.devwenshinnerBoxs:nth-child(2){width:50%;}
+.inputdevBoxs{width:100%;text-align:center;}
+.inputdevBoxs2{width:100%;text-align:center;}
+.inputdevBoxs3{width:100%;text-align:center;}
+.devsetbtnBoxs{border:2px solid #00aeef;text-align:center;color:#ffffff;margin-left:2rem;padding:0.5rem;border-radius:0.2rem;}
+
+.switch_listBoxs{border:2px solid #00aeef;display:flex;align-items:center;flex-wrap:nowrap;margin-bottom:0.5rem;border-radius:0.5rem;}
+.switch_ulisBoxs{width:500%;padding:0.5rem;text-align:right;color:#ffffff;}
+
+/* 警告界面 */
+.warningmessageBoxs{border:1px solid #00aeef;border-radius:0.5rem;background:#001a53;padding:1rem 5rem 3rem 1rem;}
+.warningInnerBoxs{display: flex;align-items: center;flex-wrap: nowrap;margin:1rem 1rem 0 1rem;}
+.warningInnerList{width:14.3%;text-align:right;color:#ffffff;font-size:1.25rem;}
+
+.devtabtishiBoxs{border-bottom:2px solid #00aeef;color:#ffffff;padding:0.5rem;}
+.devtabtitxtBoxs{padding:0.5rem;height:16rem;overflow-y:auto;overflow-x:hidden;}
+.devtabtsrcBoxs{overflow-x:hidden;height:100%;width:110%;padding-right:1.6rem;}
+.devtabtsrcBoxs p{color:#ffab91;margin-bottom:0.5rem;border-bottom:1px dashed #00aeef;padding-bottom:0.5rem;}
+
+.devtabclean{border:1px solid #00aeef;float: right;padding: 0 0.5rem;border-radius: 0.2rem;}
+
+.refresh_interface{border: 2px solid #00aeef;position:absolute;top:-1rem;right:0;padding:0.5rem;border-radius:0.5rem;color:#ffffff;}
+
+/* 系统启用项 */
+.enbalBoxs{display:flex;flex-wrap:nowrap;}
+.enbalInnerBoxs{width:20%;}
+.enbalintoBoxs{margin:0.5rem;border:1px solid #00aeef;padding:0.5rem;border-radius:0.2rem;}
+.systemimgmaxs{width:100%;height:9rem;}
+.enableButton{height:2.8rem;margin-top:0.5rem;}
+.platformIntroduction{margin:0.5rem 0;font-size:1.4rem;color:#ffffff;text-align:center;}
+
+.selectshowImgBoxs{height:13rem;}
+.ridingLanLoginBoxs{position:absolute;top:0;left:0.4rem;background:url(../img/logo3.png) no-repeat;width:350px;height:100px;background-size:100%;}
+.ridingLanLoginBoxs2{position:absolute;top:0;left:0.4rem;background:url(../img/back_logo1.png) no-repeat;width:350px;height:100px;background-size:100%;}
+/* 摄像头监控系统 */
+.videoAllBoxs{display:flex;flex-wrap:nowrap;}
+.videoListBoxs:nth-child(1){width:85%;}
+.videoListBoxs:nth-child(2){width:15%;}
+
+.videoShowUlBoxs{display:flex;align-items:center;flex-wrap:wrap;border:0;margin:0;padding:0;}
+.videoShowLiBoxs{border:1px solid #00aeef;width:33.3%;overflow:hidden;position:relative;background:#333333;}
+.videoMJPGBoxs{width:100%;}
+
+.sadisLayoutBoxs{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1000;background:#333333;color:#a2a2a2;text-align:center;font-style:italic;font-size:2.2rem;font-weight:bold;}
+
+.videoButtonBoxs{display:flex;flex-wrap:wrap;align-items:center;margin:1.5rem;padding:1.5rem;}
+.videoBtnlisBoxs{border:1px solid #00aeef;width:100%;height:4rem;margin-bottom:2.5rem;text-align:center;line-height:4rem;border-radius:0.3rem;background:#0141a3;font-size:2rem;color:#00aeef;}
+
+.videoLTileBoxs{margin:0.5rem;font-size:1.5rem;color:#ffffff;color:#e0dddd;padding-left:0.5rem;}
+.videopagesBoxs{margin:0.5rem;display:flex;flex-wrap:wrap;}
+.videopListBoxs{width:33.3%;}
+.vibtnListBoxs{border:1px solid #00aeef;color:#ffffff;font-size:1.5rem;text-align:center;margin:0.3rem;border-radius:0.2rem;height:3.5rem;line-height:3.5rem;background:#0141a3;}
+
+.videopagebgus{background:#98b7e6;}
+.videoLogoImgBoxs{margin:0.5rem;height:80px;background:url(../img/logo3.png) no-repeat;background-size:100%;background-position:center;}

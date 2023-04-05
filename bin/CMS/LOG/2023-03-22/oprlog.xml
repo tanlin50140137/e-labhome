@@ -1,0 +1,9 @@
+<DATAROOT>
+	<LOGINFO>
+		<LOG id="1" btimeyear="2023" btimemonth="3" btimeday="22" btimehour="9" btimemin="53" btimesec="55" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="2" btimeyear="2023" btimemonth="3" btimeday="22" btimehour="9" btimemin="54" btimesec="6" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功 "/>
+		<LOG id="3" btimeyear="2023" btimemonth="3" btimeday="22" btimehour="9" btimemin="54" btimesec="13" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="通道 1 打开成功"/>
+		<LOG id="4" btimeyear="2023" btimemonth="3" btimeday="22" btimehour="9" btimemin="55" btimesec="3" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+	</LOGINFO>
+	<GLOBAL index="5"/>
+</DATAROOT>

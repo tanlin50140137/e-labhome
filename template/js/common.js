@@ -1,3 +1,5 @@
+var host = "192.168.0.10";
+var port = 12388;
 var url = 'http://api.e-labhome.com/';
 var userId = localStorage.getItem("userId")==null?'6':localStorage.getItem("userId");
 var nickname = localStorage.getItem("nickname")==null?'正在登录中...':localStorage.getItem("nickname");
@@ -57,6 +59,20 @@ function overload_style(){
     var shownumZi = (upImgBoxs-dateshowl)/7
     $(".shownumZi").css({"height":shownumZi+"px","line-height":shownumZi+"px"});
 
+    var headImg = $(".headImg").height();
+    var ridingLantern = $(".ridingLantern").height();
+    var elaBoxs = (windows-headImg-ridingLantern)-15;
+    $(".elaBoxs").css({"height":elaBoxs+"px"});
+    $(".boxNavigationBar").css({"height":(elaBoxs-15)+"px"});
+
+    var elaBoxs = (windows);
+    $(".elaBoxs2").css({"height":elaBoxs+"px"});
+    var videoShowLiBoxs = (windows/3);
+    $(".videoShowLiBoxs").css({"height":videoShowLiBoxs+"px"});
+    $(".videoMJPGBoxs").css({"height":videoShowLiBoxs+"px"});
+    $(".sadisLayoutBoxs").css({"line-height":videoShowLiBoxs+"px"});
+    $(".videoAllBoxs").show();
+
     wifiname = localStorage.getItem("wifiname")==null?'':localStorage.getItem("wifiname");
     wifipassword = localStorage.getItem("wifipassword")==null?'':localStorage.getItem("wifipassword");
 }
@@ -115,8 +131,10 @@ function detectVersionUpdates(int){
         localStorage.setItem("SN", snRound);
         SN = snRound;
     }
+    var msg = app.loading();
     // 通过系统的SN号检查版本号
     $.post('http://py.e-labhome.cn/version.php', {'act':'getUserVersion','sn':SN,'userid':userId} ,function(res){
+          app.loading_close(msg);
           var obj = JSON.parse(res);
           //版本ID
           if( obj.code == 1 ){
@@ -127,22 +145,23 @@ function detectVersionUpdates(int){
               }else{
                   title = '修复提示';
               }
-              var index = layer.confirm(obj.msg+'，是否更新？', {
+              var index = layer.confirm(obj.msg+'，请保持网络通畅，否则更新失败，界面无法打开，是否更新？', {
                   title: title,
                   btn: ['立即更新','暂不更新']
               }, function() {
                   layer.close(index);
                   if( obj.data[0].status == 1 ){
-                      layer.confirm('本次更新时间比较长，请点击进入后台更新，不影响操作。', {
-                         title:'请选择更新形式',
-                         btn: ['进入后台更新','暂不更新']
-                      }, function(index){
-                          showupdateindex = 3;
-                          layer.msg('进入后台更新，完成后自动重启系统', {icon:16,shade:0.5},function(){
-                              //进入后台升级版本
-                              onFactorial15( userId+'-'+versionId+'-'+SN );
-                          });
-                      },function(index){
+                      onFactorial15( userId+'-'+versionId+'-'+SN );
+                      // layer.confirm('本次更新时间比较长，请点击进入后台更新，不影响操作。', {
+                      //    title:'请选择更新形式',
+                      //    btn: ['进入后台更新','暂不更新']
+                      // }, function(index){
+                      //     showupdateindex = 3;
+                      //     layer.msg('进入后台更新，完成后自动重启系统', {icon:16,shade:0.5},function(){
+                      //         //进入后台升级版本
+                      //         onFactorial15( userId+'-'+versionId+'-'+SN );
+                      //     });
+                      // },function(index){
                           // showupdateindex = 3;
                           // updateIndexVersion = layer.msg('正在升级版本耗时较长，更新完成后自动重启，不要关闭，请耐心等待！', {
                           //    icon: 16
@@ -153,8 +172,8 @@ function detectVersionUpdates(int){
                           //     //立即升级版本－同步升级
                           //     onFactorial14( userId+'-'+versionId+'-'+SN );
                           // },1000);
-                          layer.close(index);
-                      });
+                      //     layer.close(index);
+                      // });
                   }else{
                       showupdateindex = 3;
                       updateIndexVersion = layer.msg('正在修复，不要关闭，请耐心等待几分钟！', {
@@ -173,6 +192,9 @@ function detectVersionUpdates(int){
                   layer.msg(obj.msg)
               }
           }
+    }).error(function() {
+        app.loading_close(msg);
+        app.notice_error('post failed', '未连接网络或网络已断开，请检查网络后再重试！');
     });
 }
 // 监测版本升级
@@ -230,6 +252,9 @@ function userseting2(){
       formType: 0,
       offset:'150px',
       btn2:function(){
+          kb2.kbhide();
+      },
+      cancel:function() {
           kb2.kbhide();
       }
     }, function(pass, index){
@@ -605,4 +630,541 @@ function toggleOptions(s) {
         $(s).find("button").eq(1).hide();
         $(s).find("button").eq(0).show();
     }
+}
+// 主页系统设置
+function systemsetingcard() {
+  layer.prompt({
+    title: '输入系统管理口令，并确认',
+    offset:'150px',
+    formType: 1,
+    btn2:function(){
+        kb2.kbhide();
+    },
+    cancel:function() {
+        kb2.kbhide();
+    }
+  },
+  function(pass, index){
+      layer.close(index);
+      kb2.kbhide();
+
+      // 验证密码
+      var sysAdminPassowrd = localStorage.getItem("sysAdminPassowrd")==null?'123456':localStorage.getItem("sysAdminPassowrd");
+      if ( pass != sysAdminPassowrd ) {
+          return layer.alert('输入管理口令有误，请重试~!',{title:"错误提示",offset:'150px'});
+      }
+
+      // 设置系统使能
+      var html  = '<div style="padding:1rem;">';
+          html += '<div style="margin:1rem;">';
+          html += '<div onclick="updateSysAdminPassowrd();" style="border:1px solid #00aeef;float:left;padding:0.5rem 1rem;text-align:center;color:#ffffff;font-size:1.4rem;">修改口令</div>';
+          html += '<div id="showpassword" style="float:left;padding:0.5rem 1rem;text-align:center;color:#ffffff;font-size:1.2rem;margin-left:0.5rem;color:#ffeb3b;"></div>';
+          html += '<div style="clear:both;"></div>';
+          html += '</div>';
+          html += '<div style="display:flex;flex-wrap:wrap;margin:0.5rem;">';
+
+          html += '<div style="width:25%;background:#001a53;">';
+          html += '<div style="border:1px solid #00aeef;margin:0.5rem;padding:0.5rem;border-radius:0.5rem;">';
+          // html += '<img src="./img/hcxt_dh.png" style="width:100%;"/>';
+          html += '<div style="height:11.7rem;background:url(./img/enve.png) no-repeat;background-position:center;"></div>';
+          html += '<div style="height:3rem;margin-top:0.5rem;">';
+          html += '<div class="switch" style="left:50%;margin-left:-45px;top:0.4rem;">';
+          html += '<input class="switch-checkbox" id="index_btn1_switch" type="checkbox">';
+          html += '<label class="switch-label" for="index_btn1_switch">';
+          html += '<span class="switch-inner" data-on="ON" data-off="OFF"></span>';
+          html += '<span class="switch-switch"></span>';
+          html += '</label>';
+          html += '</div>';
+          html += '</div>';
+          html += '<div style="font-size:1.4rem;color:#ffffff;text-align:center;margin-top:0.5rem;">环境监控系统</div>';
+          html += '</div>';
+          html += '</div>';
+
+          html += '<div style="width:25%;background:#001a53;">';
+          html += '<div style="border:1px solid #00aeef;margin:0.5rem;padding:0.5rem;border-radius:0.5rem;">';
+          // html += '<img src="./img/hcxt.png" style="width:100%;"/>';
+          html += '<div style="height:11.7rem;background:url(./img/enve2.png) no-repeat;background-position:center;"></div>';
+          html += '<div style="height:3rem;margin-top:0.5rem;">';
+          html += '<div class="switch" style="left:50%;margin-left:-45px;top:0.4rem;">';
+          html += '<input class="switch-checkbox" id="index_btn2_switch" type="checkbox">';
+          html += '<label class="switch-label" for="index_btn2_switch">';
+          html += '<span class="switch-inner" data-on="ON" data-off="OFF"></span>';
+          html += '<span class="switch-switch"></span>';
+          html += '</label>';
+          html += '</div>';
+          html += '</div>';
+          html += '<div style="font-size:1.4rem;color:#ffffff;text-align:center;margin-top:0.5rem;">试剂耗材管理系统</div>';
+          html += '</div>';
+          html += '</div>';
+
+          html += '<div style="width:25%;background:#001a53;">';
+          html += '<div style="border:1px solid #00aeef;margin:0.5rem;padding:0.5rem;border-radius:0.5rem;">';
+          // html += '<img src="./img/hcxt_bzp.png" style="width:100%;"/>';
+          html += '<div style="height:11.7rem;background:url(./img/enve3.png) no-repeat;background-position:center;"></div>';
+          html += '<div style="height:3rem;margin-top:0.5rem;">';
+          html += '<div class="switch" style="left:50%;margin-left:-45px;top:0.4rem;">';
+          html += '<input class="switch-checkbox" id="index_btn3_switch" type="checkbox">';
+          html += '<label class="switch-label" for="index_btn3_switch">';
+          html += '<span class="switch-inner" data-on="ON" data-off="OFF"></span>';
+          html += '<span class="switch-switch"></span>';
+          html += '</label>';
+          html += '</div>';
+          html += '</div>';
+          html += '<div style="font-size:1.4rem;color:#ffffff;text-align:center;margin-top:0.5rem;">标准品管理系统</div>';
+          html += '</div>';
+          html += '</div>';
+
+          html += '<div style="width:25%;background:#001a53;">';
+          html += '<div style="border:1px solid #00aeef;margin:0.5rem;padding:0.5rem;border-radius:0.5rem;">';
+          // html += '<img src="./img/hcxt_yp.png" style="width:100%;"/>';
+          html += '<div style="height:11.7rem;background:url(./img/enve4.png) no-repeat;background-position:center;"></div>';
+          html += '<div style="height:3rem;margin-top:0.5rem;">';
+          html += '<div class="switch" style="left:50%;margin-left:-45px;top:0.4rem;">';
+          html += '<input class="switch-checkbox" id="index_btn4_switch" type="checkbox">';
+          html += '<label class="switch-label" for="index_btn4_switch">';
+          html += '<span class="switch-inner" data-on="ON" data-off="OFF"></span>';
+          html += '<span class="switch-switch"></span>';
+          html += '</label>';
+          html += '</div>';
+          html += '</div>';
+          html += '<div style="font-size:1.4rem;color:#ffffff;text-align:center;margin-top:0.5rem;">标准品管理系统</div>';
+          html += '</div>';
+          html += '</div>';
+
+          html += '<div style="width:25%;background:#001a53;">';
+          html += '<div style="border:1px solid #00aeef;margin:0.5rem;padding:0.5rem;border-radius:0.5rem;">';
+          // html += '<img src="./img/hcxt_yq.png" style="width:100%;"/>';
+          html += '<div style="height:11.7rem;background:url(./img/enve5.png) no-repeat;background-position:center;"></div>';
+          html += '<div style="height:3rem;margin-top:0.5rem;">';
+          html += '<div class="switch" style="left:50%;margin-left:-45px;top:0.4rem;">';
+          html += '<input class="switch-checkbox" id="index_btn5_switch" type="checkbox">';
+          html += '<label class="switch-label" for="index_btn5_switch">';
+          html += '<span class="switch-inner" data-on="ON" data-off="OFF"></span>';
+          html += '<span class="switch-switch"></span>';
+          html += '</label>';
+          html += '</div>';
+          html += '</div>';
+          html += '<div style="font-size:1.4rem;color:#ffffff;text-align:center;margin-top:0.5rem;">标准品管理系统</div>';
+          html += '</div>';
+          html += '</div>';
+
+          html += '<div style="width:25%;background:#001a53;">';
+          html += '<div style="border:1px solid #00aeef;margin:0.5rem;padding:0.5rem;border-radius:0.5rem;">';
+          // html += '<img src="./img/hcxt_shu.png" style="width:100%;"/>';
+          html += '<div style="height:11.7rem;background:url(./img/enve6.png) no-repeat;background-position:center;"></div>';
+          html += '<div style="height:3rem;margin-top:0.5rem;">';
+          html += '<div class="switch" style="left:50%;margin-left:-45px;top:0.4rem;">';
+          html += '<input class="switch-checkbox" id="index_btn6_switch" type="checkbox">';
+          html += '<label class="switch-label" for="index_btn6_switch">';
+          html += '<span class="switch-inner" data-on="ON" data-off="OFF"></span>';
+          html += '<span class="switch-switch"></span>';
+          html += '</label>';
+          html += '</div>';
+          html += '</div>';
+          html += '<div style="font-size:1.4rem;color:#ffffff;text-align:center;margin-top:0.5rem;">标准品管理系统</div>';
+          html += '</div>';
+          html += '</div>';
+
+          html += '<div style="width:25%;background:#001a53;position:relative;">';
+          html += '<div style="border:1px solid #1e41ea;background:#1e41ea;position:absolute;top:1rem;right:1rem;color:#ffffff;font-size:1.2rem;padding:0.5rem;border-radius:0.2rem;" onclick="appletSettings()">小程序设置</div>'
+          html += '<div style="border:1px solid #00aeef;margin:0.5rem;padding:0.5rem;border-radius:0.5rem;">';
+          html += '<div style="height:11.7rem;background:url(./img/enve7.png) no-repeat;background-position:center;"></div>';
+          html += '<div style="height:3rem;margin-top:0.5rem;">';
+          html += '<div class="switch" style="left:50%;margin-left:-45px;top:0.4rem;">';
+          html += '<input class="switch-checkbox" id="index_btn7_switch" type="checkbox">';
+          html += '<label class="switch-label" for="index_btn7_switch">';
+          html += '<span class="switch-inner" data-on="ON" data-off="OFF"></span>';
+          html += '<span class="switch-switch"></span>';
+          html += '</label>';
+          html += '</div>';
+          html += '</div>';
+          html += '<div style="font-size:1.4rem;color:#ffffff;text-align:center;margin-top:0.5rem;">摄像头监控系统</div>';
+          html += '</div>';
+          html += '</div>';
+
+          html += '</div>';
+          html += '<div style="text-align:center;font-size:1.4rem;color:#ffeb3b;">提示：ON表示启用系统；OFF表示禁用系统</div>';
+          html += '</div>';
+      layer.open({
+              type: 1,
+              title: false,
+              skin: 'layui-layer-rim', //加上边框
+              // area: ['1200px', '650px'], //宽高
+              area:['85%','auto'],
+              content: html,
+              cancel:function() {
+                  app.refreshinterface();
+              }
+      });
+      $(".layui-layer-content").css({"background":"#001a53"});
+      // 获取默认数据
+      factorial_get_enable_system(1);
+      // 滑动按钮逻辑
+      SysAdminPassowrdJS();
+  });
+  $(".layui-layer-input").blur();
+  kb2 = new keyboard({
+      el:".layui-layer-input",
+      x:1.6,
+      keyHeight:"5rem",
+      fontSize:'1.8rem',
+      bottom:"6rem",
+      end:function(res,value){
+          // console.log(res, value)
+          if( res == 'OK' ){
+              // layer.msg('完成提交');
+          }else{
+              // layer.msg('什么都不做');
+          }
+      }
+  });
+  kb2.run();
+}
+var videoIndex = '';
+// 设置微信视频
+function appletSettings(){
+  html  = '<div style="padding:1rem;">';
+  html += '<div style="border-bottom:1px solid #00aeef;color:#FFFFFF;font-size:1.2rem;margin:0 0.5rem 0.5rem 0.5rem;padding:0 0.5rem 0.5rem 0.5rem;"><b>视频监控－小程序远程访问设置</b></div>';
+  //分组
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="width:50%;color:#FFFFFF;font-size:1.4rem;padding:0 1.5rem;"><b>添加网络摄像机协议</b></div>';
+  html += '<div style="width:50%;color:#FFFFFF;font-size:1.4rem;padding:0 1.5rem;"><b>内网穿透设置</b></div>';
+  html += '</div>';
+  html += '<div style="display:flex;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="width:50%;">';
+
+  // 1路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">1路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton1" onclick="setRtspVideo(0,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton1"  onclick="setRtspVideo(0,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+  // 2路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">2路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton2" onclick="setRtspVideo(1,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton2"  onclick="setRtspVideo(1,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+  // 3路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">3路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton3" onclick="setRtspVideo(2,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton3"  onclick="setRtspVideo(2,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+  // 4路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">4路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton4" onclick="setRtspVideo(3,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton4"  onclick="setRtspVideo(3,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+  // 5路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">5路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton5" onclick="setRtspVideo(4,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton5"  onclick="setRtspVideo(4,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+  // 6路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">6路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input2 stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton6" onclick="setRtspVideo(5,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton6"  onclick="setRtspVideo(5,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+  // 7路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">7路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input2 stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton7" onclick="setRtspVideo(6,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton7"  onclick="setRtspVideo(6,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+  // 8路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">8路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input2 stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton8" onclick="setRtspVideo(7,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton8"  onclick="setRtspVideo(7,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+  // 9路
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:20%;text-align:center;padding:0.5rem;">9路（RTSP）：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:60%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input2 stsp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">';
+  html += '<input type="button" value="打开" class="openVdeioButton9" onclick="setRtspVideo(8,1)"/>';
+  html += '<input type="button" value="关闭" class="openVdeioButton9"  onclick="setRtspVideo(8,0)" style="display:none;"/>';
+  html += '</div>';
+  html += '</div>';
+
+  html += '</div>';
+  html += '<div style="width:50%;">';
+
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;"><b>本地服务器</b></div>';
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;">内网IP：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:55%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input frp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">本地</div>';
+  html += '</div>';
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;">端口号：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:55%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input frp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">本地</div>';
+  html += '</div>';
+
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;"><b>远程服务器</b></div>';
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;">服务器IP：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:55%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input frp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">远程</div>';
+  html += '</div>';
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;">端口号：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:55%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input frp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">远程</div>';
+  html += '</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;"><b>映射</b></div>';
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;">映射端口：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:55%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input2 frp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">远程</div>';
+  html += '</div>';
+  html += '<div style="display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;">';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:25%;text-align:center;padding:0.5rem;">绑定域名：</div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:55%;"><input type="text" style="width:100%;padding:0.2rem;" class="layui-layer-input2 frp_value"/></div>';
+  html += '<div style="color:#FFFFFF;font-size:1.2rem;width:10%;text-align:center;padding:0.5rem;">远程</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // 提交按钮
+  html += '<div style="border-radius:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;margin-top:0.5rem;float:right;width:35%;height:5rem;margin-botton:0.5rem;">';
+  if (app.mapping == 2) {
+    html += '<div style="border:1px solid #00aeef;color:#FFFFFF;font-size:1.2rem;width:50%;text-align:center;padding:0.5rem;margin-left:1rem;" onclick="mappingButtonInt(2)">停止映射</div>';
+  } else {
+    html += '<div style="border:1px solid #666666;color:#666666;font-size:1.2rem;width:50%;text-align:center;padding:0.5rem;margin-left:1rem;">停止映射</div>';
+  }
+  if (app.mapping == 1) {
+    html += '<div style="border:1px solid #00aeef;color:#FFFFFF;font-size:1.2rem;width:50%;text-align:center;padding:0.5rem;margin-left:1rem;" onclick="mappingButtonInt(1);">开始映射</div>';
+  } else {
+    html += '<div style="border:1px solid #666666;color:#666666;font-size:1.2rem;width:50%;text-align:center;padding:0.5rem;margin-left:1rem;">开始映射</div>';
+  }
+  html += '<div style="border:1px solid #00aeef;color:#FFFFFF;font-size:1.2rem;width:50%;text-align:center;padding:0.5rem;margin-left:1rem;" onclick="videoSealIn()">保存设置</div>';
+  html += '<div style="border:1px solid #00aeef;color:#FFFFFF;font-size:1.2rem;width:50%;text-align:center;padding:0.5rem;margin-left:1rem;" onclick="videoCloseCancel();">取消</div>';
+  html += '</div>';
+
+  html += '</div>';
+  videoIndex = layer.open({
+          type: 1,
+          title: false,
+          skin: 'layui-layer-rim', //加上边框
+          area:['85%','auto'],
+          content: html,
+          cancel:function() {
+              console.log("123456")
+          }
+  });
+  $(".layui-layer-content").css({"background":"#001a53"});
+  $(".layui-layer-input").blur();
+  $(".layui-layer-input2").blur();
+  kb1 = new keyboard({
+      el:".layui-layer-input",
+      x:1.6,
+      keyHeight:"5rem",
+      fontSize:'1.8rem',
+      bottom:"1rem",
+      end:function(res,value){
+          // console.log(res, value)
+          if( res == 'OK' ){
+              // layer.msg('完成提交');
+          }else{
+              // layer.msg('什么都不做');
+          }
+      }
+  });
+  kb1.run();
+  kb2 = new keyboard({
+      el:".layui-layer-input2",
+      x:1.6,
+      keyHeight:"5rem",
+      fontSize:'1.8rem',
+      bottom:"55%",
+      end:function(res,value){
+          // console.log(res, value)
+          if( res == 'OK' ){
+              // layer.msg('完成提交');
+          }else{
+              // layer.msg('什么都不做');
+          }
+      }
+  });
+  kb2.run();
+  //　获取默认数据
+  factorial_get_applet_settings()
+}
+// 打开摄像机
+function setRtspVideo(index, flag) {
+    var openstate = JSON.stringify({"index": index, "flag": flag});
+    factorial_set_rtsp_video(openstate);
+}
+// 映射
+function mappingButtonInt(int){
+  app.mappingfumc(int)
+  layer.close(videoIndex);
+}
+// 保存
+function videoSealIn(){
+  // 设置摄像机协议
+  var stsp_obj = $(".stsp_value");
+  var stsp = [];
+  for(var i=0; i<stsp_obj.length; i++){
+    stsp[i] = stsp_obj.eq(i).val();
+  }
+  // 内鸩穿透
+  var frp_obj = $(".frp_value");
+  var frp = [];
+  for(var i=0; i<frp_obj.length; i++){
+    frp[i] = frp_obj.eq(i).val();
+  }
+  // 编辑数据包
+  var data = {
+    "stsp":stsp,
+    "frp":frp
+  }
+  var sendDate = JSON.stringify(data)
+  // 提交保存
+  factorial_save_applet_settings(sendDate);
+}
+// 取消
+function videoCloseCancel(){
+  layer.close(videoIndex);
+}
+
+function SysAdminPassowrdJS(){
+  var sysid_enable_state = localStorage.getItem("has_mod_flag_enable")==null?{dht:"y",con:"y",smr:"y",sam:"y",equ:"y",doc:"y"}:JSON.parse(localStorage.getItem("has_mod_flag_enable"));
+  var device_btn = new button_switch('#index_btn1_switch',function(e){
+      var obj = {sysid:1,enable:e==true?1:0};
+      if (e) {
+          sysid_enable_state.dht = 'y';
+      } else {
+          sysid_enable_state.dht = 'n';
+      }
+
+      // console.log(sysid_enable_state);
+
+      localStorage.setItem("has_mod_flag_enable", JSON.stringify(sysid_enable_state));
+      factorial_enable_system(JSON.stringify(obj));
+  });
+  var device_btn = new button_switch('#index_btn2_switch',function(e){
+      var obj = {sysid:2,enable:e==true?1:0};
+      if (e) {
+          sysid_enable_state.con = 'y';
+      } else {
+          sysid_enable_state.con = 'n';
+      }
+      localStorage.setItem("has_mod_flag_enable", JSON.stringify(sysid_enable_state));
+      factorial_enable_system(JSON.stringify(obj));
+  });
+  var device_btn = new button_switch('#index_btn3_switch',function(e){
+      var obj = {sysid:3,enable:e==true?1:0};
+      if (e) {
+          sysid_enable_state.smr = 'y';
+      } else {
+          sysid_enable_state.smr = 'n';
+      }
+      localStorage.setItem("has_mod_flag_enable", JSON.stringify(sysid_enable_state));
+      factorial_enable_system(JSON.stringify(obj));
+  });
+  var device_btn = new button_switch('#index_btn4_switch',function(e){
+      var obj = {sysid:4,enable:e==true?1:0};
+      if (e) {
+          sysid_enable_state.sam = 'y';
+      } else {
+          sysid_enable_state.sam = 'n';
+      }
+      localStorage.setItem("has_mod_flag_enable", JSON.stringify(sysid_enable_state));
+      factorial_enable_system(JSON.stringify(obj));
+  });
+  var device_btn = new button_switch('#index_btn5_switch',function(e){
+      var obj = {sysid:5,enable:e==true?1:0};
+      if (e) {
+          sysid_enable_state.equ = 'y';
+      } else {
+          sysid_enable_state.equ = 'n';
+      }
+      localStorage.setItem("has_mod_flag_enable", JSON.stringify(sysid_enable_state));
+      factorial_enable_system(JSON.stringify(obj));
+  });
+  var device_btn = new button_switch('#index_btn6_switch',function(e){
+      var obj = {sysid:6,enable:e==true?1:0};
+      if (e) {
+          sysid_enable_state.doc = 'y';
+      } else {
+          sysid_enable_state.doc = 'n';
+      }
+      localStorage.setItem("has_mod_flag_enable", JSON.stringify(sysid_enable_state));
+      factorial_enable_system(JSON.stringify(obj));
+  });
+  var device_btn = new button_switch('#index_btn7_switch',function(e){
+      var obj = {sysid:7,enable:e==true?1:0};
+      if (e) {
+          sysid_enable_state.vid = 'y';
+      } else {
+          sysid_enable_state.vid = 'n';
+      }
+      localStorage.setItem("has_mod_flag_enable", JSON.stringify(sysid_enable_state));
+      factorial_enable_system(JSON.stringify(obj));
+  });
+}
+//修改口令
+function updateSysAdminPassowrd() {
+  layer.prompt({
+    title: '输入新口令，并确认',
+    formType: 1,
+    offset:'150px',
+    btn2:function(){
+        kb2.kbhide();
+    }
+  }, function(pass, index){
+      layer.close(index);
+      kb2.kbhide();
+      localStorage.setItem("sysAdminPassowrd",pass);
+      layer.msg('修改成功',{offset:'100px'});
+      $("#showpassword").html("请记住新口令 : "+pass);
+  });
+  $(".layui-layer-input").blur();
+  kb2 = new keyboard({
+      el:".layui-layer-input",
+      x:1.6,
+      keyHeight:"5rem",
+      fontSize:'1.8rem',
+      bottom:"6rem",
+      end:function(res,value){
+          // console.log(res, value)
+          if( res == 'OK' ){
+              // layer.msg('完成提交');
+          }else{
+              // layer.msg('什么都不做');
+          }
+      }
+  });
+  kb2.run();
 }

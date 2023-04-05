@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>远程测试</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/qrcode.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="qrcode" style="width:250px;height:250px;margin:1.2rem auto 0 auto;"></div>
+<script language="javascript">
+  var qrcode = '';
+  qrcode = new QRCode(document.getElementById("qrcode"), {width:250,height:250});
+  qrcode.clear();
+  qrcode.makeCode('http://py.e-labhome.cn/remotetest/index.html');
+</script>
+</body>
+</html>

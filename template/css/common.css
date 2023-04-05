@@ -3,7 +3,7 @@ html,body{
   background:url(../img/bag01.jpg);
   height:100%;
   /* background:#FFFFFF; */
-
+  overflow:hidden;
 }
 .elaBoxs{min-width:1200px;width:90%;margin:auto;color:#333333;padding:0.5rem;font-size:1.5rem;}
 /* display:inline-flex;align-items:center;flex-wrap:wrap;  */

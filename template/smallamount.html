@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小额领用记录列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="./iview/node_modules/view-design/dist/styles/iview.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./layer/theme/default/layer.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/stock.css">
+    <link rel="stylesheet" href="./swiper/package/swiper-bundle.min.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script src="./layer/layer.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./swiper/package/swiper-bundle.min.js"></script>
+    <script src="./iview/node_modules/view-design/dist/iview.min.js"></script>
+    <style>
+    .layui-table-cell{
+      height:3.24rem;
+      line-height:3.24rem;
+    }
+    .layui-table-cell span{
+        font-size:1.4rem;
+        font-weight:700;
+    }
+    #layui-table-page1 .layui-laypage-limits{
+        display: none;
+    }
+    .layui-btn{
+        height:2.8rem;
+        line-height:2.8rem;
+        font-size:1.2rem;
+        padding:0 0.9rem;
+    }
+    #layui-table-page1 .layui-laypage-curr{
+        padding:0 20px;
+    }
+    </style>
+</head>
+<body>
+<div class="swiper-container" id="Vueapp">
+          <div class="elaBoxs">
+            <div class="fuzuheight" style="height:1rem;"></div>
+            <div class="elaMenu">
+              <div class="elaMenuInner">
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo" onclick="backIndex();" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:98% 80%;background-position:center;"></div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;">
+                      <div class="elaLogo">小额领用记录列表</div>
+                  </div>
+                  <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
+                      <div class="elaLogo">
+                            <div class="userInfoList" onclick="back()">
+                                <div class="userInfoInner"><img class="loginimg" src="./img/bcak.png" alt="头像"></div>
+                                <div class="userInfoInner">返回上一步</div>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="elaOption">
+                <div class="tablesBoxs">
+                    <!-- <table id="tables" lay-filter="tablesList"></table> -->
+                    <div class="layui-fluid">
+                      <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md12">
+                          <div class="layui-card">
+                            <div class="layui-card-header">出库记录</div>
+                            <div class="layui-card-body">
+                              <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                                物品ID/内部编号：
+                                <div class="layui-inline">
+                                  <input class="layui-input" name="id" id="test-table-demoReload" autocomplete="off">
+                                </div>
+                                <button class="layui-btn" data-type="reload">搜索</button>
+                              </div>
+
+                              <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
+
+                              <script type="text/html" id="test-table-operate-barDemo">
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="return">归还</a>
+                              </script>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+<script src="./js/common.js"></script>
+<script src="./js/CSG.js"></script>
+<script type="text/javascript" src="./keyboard/kbmodule.js" id="keyboard"></script>
+<script src="./js/qwebchannel.js"></script>
+<script>
+// 监听Python channel返回槽对像，赋值给 window.obj
+document.addEventListener("DOMContentLoaded", function(){
+    new QWebChannel(qt.webChannelTransport, function(channel){
+          window.obj = channel.objects.obj;
+    })
+})
+// html触发函数
+function onFactorial(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial(url, callback);
+    }
+}
+function onFactorial8(flag){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial8(flag, callback);
+    }
+}
+// html触发函数
+function onFactorial9(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial9(url, callback);
+    }
+}
+// html触发函数
+function onFactorial19(url){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial19(url, callback);
+    }
+}
+// Python槽方法返回的数据
+function callback(result){}
+
+var indexcloseframe = '';
+var selUnit = '';
+var lp_id='';
+var kb = '',table = '';
+var windows = $(window).height();
+var fuzuheight = $(".fuzuheight").height();
+var elaMenu = $(".elaMenu").height();
+var height = windows-(fuzuheight+elaMenu)-185;
+layui.use('table', function(){
+  table = layui.table;
+  //第一个实例
+  table.render({
+    elem: '#test-table-operate'
+    ,height: height
+    ,url: url+'hwapi/outof/get_borrow_list?userId='+userId+'&operType=0'
+    ,page: {
+      layout: ['prev', 'page', 'next', 'skip', 'count'],
+      limit:10
+    }
+    ,cols: [[ //表头
+      {field: 'noid', title: '操作ID', fixed: 'left', align:'center', width:120, style:'font-size:1.2rem'}
+      ,{field: 'oper_name', title: '操作名称', align:'center', style:'font-size:1.2rem'}
+      ,{field: 'product_name', title: '物品名称', align:'center', style:'font-size:1.2rem'}
+      ,{field: 'pno', title: '内部编号', width:180, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'punit', title: '单位', align:'center', width:100, style:'font-size:1.2rem'}
+      ,{field: 'num', title: '数量', align:'center', width:100, style:'font-size:1.2rem'}
+      ,{field: 'time', title: '领用时间', width:180, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'binder', title: '领用人', width:130, align:'center', style:'font-size:1.2rem'}
+      ,{field: 'status_msg', title: '状态', align:'center', width:120, style:'font-size:1.2rem'}
+      ,{field: 'mark', title: '备注', align:'center', width:120, style:'font-size:1.2rem'}
+      ,{field: 'post_id', title: '物品ID', align:'center', width:120, style:'font-size:1.2rem'}
+      ,{width:100, title: '归还', align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
+    ]]
+    ,done: function(res, curr, count){
+    	    //得到当前页码
+    	    page = curr;
+    	    //得到数据总量
+    	    // console.log(res);
+          // 停止录制
+          // setTimeout(function(){
+          //     var flagstr = JSON.stringify({"flag":"end","filename":""});
+          //     onFactorial8(flagstr)
+          // },9000);
+    	}
+  });
+  //监听工具条
+  table.on('tool(test-table-operate)', function(obj){
+        var data = obj.data;
+        if(obj.event === 'detail'){
+            layer.prompt({
+              title: '产品ID['+data.post_id+']，打印多少张？',
+              offset:'250px',
+              formType: 0,
+              end:function(){
+                  kb2.kbhide();
+              }
+            }, function(pass, index){
+                  if (isNaN(pass)) {
+                      layer.msg('请输入数字！',{offset:'210px'});
+                      return;
+                  }
+                  if( pass < 1 ){
+                      layer.msg('至少1张',{offset:'210px'});
+                      return;
+                  }
+                  if( pass > data.product_stock ){
+                      layer.msg('不能大于库存数量',{offset:'210px'});
+                      return;
+                  }
+                  $.post(url+'hwapi/stock/makeqrcode',{userId:userId,postId:data.post_id,productType:data.product_type},function(res){
+                        layer.close(index);
+                        var data = JSON.parse(res);
+                        // console.log(data.url);
+                        onFactorial(data.url);
+                        for( var i=1; i<pass; i++ ){
+                            setTimeout(function(){
+                                onFactorial(data.url);
+                            },2000);
+                        }
+                  });
+            });
+            $(".layui-layer-input").blur();
+            kb2 = new keyboard({
+                el:".layui-layer-input",
+                x:1.6,
+                keyHeight:"5rem",
+                fontSize:'1.8rem',
+                bottom:"6rem",
+                end:function(res,value){
+                    // console.log(res, value)
+                    if( res == 'OK' ){
+                        // layer.msg('完成提交');
+                    }else{
+                        // layer.msg('什么都不做');
+                    }
+                }
+            });
+            kb2.run();
+        }else if( obj.event === 'return' ){
+            productInformation(obj);
+        }
+  });
+});
+var $ = layui.$, active = {
+      reload: function(){
+        kb.kbhide();
+        var demoReload = $('#test-table-demoReload');
+        //执行重载
+        table.reload('test-table-operate', {
+          page: {
+            curr: 1 //重新从第 1 页开始
+          }
+          ,where: {
+            search:demoReload.val()
+          }
+        });
+      }
+};
+$('.test-table-reload-btn .layui-btn').on('click', function(){
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+});
+
+kb = new keyboard({
+    el:"#test-table-demoReload",
+    x:1.6,
+    keyHeight:"5rem",
+    fontSize:'1.8rem',
+    bottom:"5rem",
+    end:function(res,value){
+        // console.log(res, value)
+        if( res == 'OK' ){
+            // layer.msg('完成提交');
+        }else{
+            // layer.msg('什么都不做');
+        }
+    }
+});
+kb.run();
+//显示产品信息
+function productInformation(obj){
+    var portinfo = obj.data;
+    selUnit = portinfo.punit;
+    lp_id = portinfo.lpId;
+
+    var html = '<div style="margin:0.5rem;">';
+        html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;">';
+        html += '归还当前物品';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">操作ID</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+portinfo.noid+'</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">操作名称</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+portinfo.oper_name+'</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">物品名称</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+portinfo.product_name+'</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">内部编号</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+portinfo.pno+'</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">领用时间</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+portinfo.time+'</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">领用数量</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">'+portinfo.num+'</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;"><span id="jieyong">归还数量</span></div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;">';
+        html += '<input type="text" nme="num" class="kbkeyClass2 kblistauto showNums" placeholder="数量" style="padding:0.3rem;border:1px solid #dddddd;outline:none;"/>';
+        if( portinfo.punit == 'g' ){
+            html += '<span class="chengzmb" onclick="weightstart();" style="margin-left:1rem;font-size:0.8rem;padding:0.6rem;border-radius:0.2rem;background:#499a0b;color:#FFFFFF;">打开秤重面板</span>';
+        }
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">产品单位</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;"><span id="spanPunit">'+portinfo.punit+'</span></div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="border:1px solid #ccc9c9;margin:0.5rem;display:flex;align-items:center;flex-wrap:nowrap;">';
+        html += '<div style="width:20%">';
+        html += '<div style="text-align:center;padding:0.5rem;font-size:1.2rem;">备注</div>';
+        html += '</div>';
+        html += '<div style="border-left:1px solid #ccc9c9;width:80%">';
+        html += '<div style="padding:0.5rem;font-size:1.2rem;"><input type="text" nme="prepare" class="kbkeyClass2 kblistauto" placeholder="填写用途" style="padding:0.3rem;border:1px solid #dddddd;outline:none;"/><span style="margin-left:1rem;font-size:0.8rem;">填写用途</span></div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="height:3rem;line-height:3rem;font-size:1.2rem;color:#ff0000;padding:0 0.5rem;">';
+        html += '<div id="htmlvalbox" style="text-align:center;float:left;"></div>';
+        html += '<div id="htmlvalbox" onclick="closeframe();" style="border:1px solid #F0F0F0;margin-top:0.8rem;color:#ffffff;text-align:center;float:right;padding:0 1rem;background:#499a0b;border-radius: 0.3rem;">归还</div>';
+        html += '</div>';
+        html += '</div>';
+        layer.close(indexcloseframe);
+        indexcloseframe = layer.open({
+            type: 1,
+            // title: '产品信息',
+            title:false,
+            offset:'20px',
+            skin: 'layui-layer-rim', //加上边框
+            area: ['850px', '660px'], //宽高
+            content: html,
+            end:function(){
+                kb2.kbhide();
+            }
+        });
+        kb2 = new keyboard({
+            el:".kbkeyClass2",
+            x:1.6,
+            keyHeight:"5rem",
+            fontSize:'1.8rem',
+            bottom:"2rem",
+            end:function(res,value){
+                if( res == 'OK' ){
+
+                }else{
+                    // layer.msg('什么都不做');
+                }
+            }
+        });
+        kb2.run();
+}
+function closeframe(){
+    kb2.kbhide();
+    var value = $('[nme="num"]').val();
+    var use = $('[nme="prepare"]').val();
+    if ( isNaN(value) ) {
+        layer.msg('请输入数字！',{offset:'345px'});
+        return false;
+    }
+    if( value == '' ){
+        var title = selUnit=='g'?'请输入重量！':'请输入数量！';
+        layer.msg(title,{offset:'345px'});
+        return false;
+    }
+    var html = '<div style="margin:0.5rem;">';
+        html += '<div style="height:2.5rem;line-height:2.5rem;padding:0 1rem;font-size:1.2rem;font-weight:700;margin-bottom:1rem;">';
+        html += '借用物品，需要扫描身份二维码';
+        html += '</div>';
+        html += '<div class="layui-container" style="width:100%;border-top:1px solid #999999;padding:1rem 0;">';
+        html += '<div class="layui-row" style="margin-bottom:1rem;padding:0 1rem;">';
+        html += '<div class="layuikuang" style="border:2px solid #6fb729;height:5rem;border-radius:0.5rem;overflow:hidden;position:relative;">';
+        html += '<input type="text" id="listen2" placeholder="允许扫描" style="height:5rem;width:100%;text-align:center;font-size:1.2rem;border:none;background:#F0F0F0;color:#666666;"/>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div style="font-size:1.1rem;color:#b5b0b0;padding:0 1rem;">温馨提示：显示绿色边框时允许扫描，显示红色边框时禁止扫描。</div>';
+        html += '</div>';
+        html += '<div id="userNameBoxs1" style="padding:1rem;color:#213fd0;font-size:1.2rem;display:none;">扫描成功－〉操作人：<span id="userName"></span></div>';
+        html += '<div id="userNameBoxs2" style="padding:1rem;color:red;font-size:1.2rem;display:none;"></div>';
+        html += '</div>';
+     var indexnexts = layer.open({
+        type: 1,
+        title:false,
+        skin: 'layui-layer-rim', //加上边框
+        area: ['620px', '300px'], //宽高
+        content: html
+     });
+     $("#listen2").focus(function(){
+          $(".layuikuang").css({"border":"2px solid #6fb729"});
+          $(this).attr({"placeholder":"允许扫描"});
+     }).blur(function(){
+          $(".layuikuang").css({"border":"2px solid red"});
+          $(this).attr({"placeholder":"禁止扫描"});
+     });
+     var cs2 = new CodeScanningGrab({
+       el:"#listen2",
+       addClick:".layernoneouto",
+       addClass:".inputBoxs",
+       time:2000,
+       success:function(res){
+          var id = res;
+          //验证管理员身份
+          $.ajax({
+              url:url+"hwapi/basic/name_bind_qrcode",
+              data:{userId:userId,id:id},
+              success:function(info){
+                  var obj = JSON.parse(info);
+                  if(obj.code == 0 ){
+                      $("#userNameBoxs2").hide();
+                      $("#userNameBoxs1").show();
+                      $("#userName").html(obj.data.name);
+                      var timestamp = new Date().getTime();
+                      var filename = timestamp/1000;
+                      if( obj.data.status=="ok" ){
+                          $.post(url+'hwapi/outof/borrow',{operType:3,pickerId:id,amount:value,use:use,lpId:lp_id,selUnit:selUnit,filename:filename},function(info){
+                                layer.close(indexnexts);
+                                layer.close(indexcloseframe);
+                                if( info.code == 0 ){
+                                    layer.msg(info.msg,{shift:-1,time:2000,offset:'230px'},function(){
+                                        //跳转到出库记录
+                                        location.href = 'returnrecord.html';
+                                    });
+                                }else{
+                                    layer.msg(info.msg);
+                                }
+                          });
+                      }else{
+                          $("#userNameBoxs1").hide();
+                          $("#userNameBoxs2").show();
+                          $("#userNameBoxs2").html("该用户已经被禁用");
+                      }
+                  }else{
+                      $("#userNameBoxs1").hide();
+                      $("#userNameBoxs2").show();
+                      $("#userNameBoxs2").html('非管理员授权二维码，无法登录');
+                  }
+              },
+              error:function(err){
+                  $("#userNameBoxs2").show();
+                  $("#userNameBoxs2").html("非管理员授权二维码，无法登录");
+              }
+          });
+       },
+       endClick:function(res){
+           console.log(res)
+       }
+     });
+}
+var weigh_index = '';
+// 默认串口
+var port = 'COM1';
+// 命令值
+var command = 'R';
+// 每0.5秒交互一次
+var rate = 0.5
+// 数据格式文本模式
+var format = 0
+//点击开始称重
+function weightstart(){
+  // 打开串口
+  onFactorial19(JSON.stringify({type:"open",port:port,command:command,rate:rate,userId:userId,format:format}));
+  // 同步电子秤数据
+  var html = '<div style="width:100%;height:8rem;position:absolute;top:50%;left:0;margin-top:-4rem;">';
+  html += '<div style="height:5rem;text-align:center;line-height:5rem;font-size:3rem;font-weight:bold;color:#333333;"><font id="weigh_value">......</font><font id="weigh_punit"></font></div>';
+  html += '<div style="height:3rem;text-align:center;line-height:3rem;font-size:1.2rem;font-weight:bold;color:#333333;"><font id="weigh_state"></font></div>';
+  html += '</div>';
+  weigh_index = layer.open({
+      type: 1,
+      // title: '填写产品信息',
+      title:false,
+      skin: 'layui-layer-rim', //加上边框
+      area: ['30%', '30%'], //宽高
+      content: html,
+      end:function(){
+          onFactorial19(JSON.stringify({type:"close",port:port,command:command,rate:rate,userId:userId,format:format}));
+      }
+  });
+  // 连接服务器
+  var ws = new WebSocket("ws://localhost:9501");
+  ws.onopen = function(evt) {
+    $("#weigh_state").html("已经连接")
+    $("#weigh_value").html("0.00");
+    var data = JSON.stringify({type:"login",userid:"tp",msg:""});
+    ws.send(data);
+  };
+  ws.onmessage = function(evt) {
+    // 电子秤数据
+    var l = evt.data.split("-");
+    // 时实变化
+    $("#weigh_value").html(l[l.length-2]);
+    $("#weigh_punit").html(l[l.length-1]);
+    $("#weigh_state").html("正在确认")
+    // 确认重量 并 关闭串口
+    if( l[0] == "S1+" ){
+        if( l[l.length-2] > 0 ){
+            var weigh_value = l[l.length-2];
+            $('.showNums').val(weigh_value);
+            var weigh_punit = l[l.length-1];
+            $('#spanPunit').val(weigh_punit);
+            layer.close(weigh_index);
+        }
+      }
+    };
+    ws.onclose = function(evt) {
+      $("#weigh_value").html("......");
+      $("#weigh_state").html("连接失败，请重试");
+      // console.log("Connection closed.");
+    };
+}
+</script>
+</html>

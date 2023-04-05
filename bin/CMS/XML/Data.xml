@@ -1,0 +1,18 @@
+<DATAROOT>
+	<DEVINFO>
+		<DEV id="1" ip="3" area="layout 5" name="5F" host="70c8b378900b7d98jef9" port="34567" port2="0" cameras="9" devcType="1" alarmcameras="0" ddnsFlag="0" DDNSHost="" pos="0" desc="" username="kzy" OrgId="1" vendor="0" SerialID="" link-mode="0" arspstatus="0" password="60043932E4AA5348506E55E717457E54">
+			<DEV id="2" type="0" name="5F_1" channel="0" desc=""/>
+			<DEV id="3" type="0" name="5F_2" channel="1" desc=""/>
+			<DEV id="4" type="0" name="5F_3" channel="2" desc=""/>
+			<DEV id="5" type="0" name="5F_4" channel="3" desc=""/>
+			<DEV id="6" type="0" name="5F_5" channel="4" desc=""/>
+			<DEV id="7" type="0" name="5F_6" channel="5" desc=""/>
+			<DEV id="8" type="0" name="5F_7" channel="6" desc=""/>
+			<DEV id="9" type="0" name="5F_8" channel="7" desc=""/>
+			<DEV id="10" type="0" name="5F_9" channel="8" desc=""/>
+		</DEV>
+	</DEVINFO>
+	<IMGINFO/>
+	<MAPINFO/>
+	<GLOBAL index="11"/>
+</DATAROOT>

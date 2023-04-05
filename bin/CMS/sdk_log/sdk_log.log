@@ -1,0 +1,270 @@
+Begin Time:2023-03-14 16:30:17.604
+[2023-03-14 16:30:17.604][P:5688/T:5304][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-14 16:30:17.608][P:5688/T:5304][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-14 16:30:17.620][P:5688/T:5304][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-14 16:30:17.622][P:5688/T:5304][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-14 16:30:17.684][P:5688/T:5304][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A6C0000
+
+[2023-03-14 16:30:17.684][P:5688/T:5304][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=0900EF58].
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=0900EF58].
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-14 16:30:17.687][P:5688/T:5304][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-14 16:43:38.813
+[2023-03-14 16:43:38.814][P:2780/T:11924][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-14 16:43:38.817][P:2780/T:11924][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-14 16:43:38.829][P:2780/T:11924][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-14 16:43:38.830][P:2780/T:11924][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-14 16:43:38.842][P:2780/T:11924][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A690000
+
+[2023-03-14 16:43:38.842][P:2780/T:11924][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=0658D340].
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=0658D340].
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-14 16:43:38.844][P:2780/T:11924][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-14 17:02:35.322
+[2023-03-14 17:02:35.322][P:8844/T:12676][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-14 17:02:35.326][P:8844/T:12676][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-14 17:02:35.338][P:8844/T:12676][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-14 17:02:35.340][P:8844/T:12676][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-14 17:02:35.350][P:8844/T:12676][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A450000
+
+[2023-03-14 17:02:35.350][P:8844/T:12676][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06D73C50].
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06D73C50].
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-14 17:02:35.352][P:8844/T:12676][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-14 17:26:29.253
+[2023-03-14 17:26:29.253][P:16132/T:8376][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-14 17:26:29.257][P:16132/T:8376][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-14 17:26:29.269][P:16132/T:8376][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-14 17:26:29.271][P:16132/T:8376][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-14 17:26:29.282][P:16132/T:8376][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A400000
+
+[2023-03-14 17:26:29.282][P:16132/T:8376][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-14 17:26:29.284][P:16132/T:8376][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-14 17:26:29.284][P:16132/T:8376][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=095E2DE0].
+[2023-03-14 17:26:29.284][P:16132/T:8376][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-14 17:26:29.284][P:16132/T:8376][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=095E2DE0].
+[2023-03-14 17:26:29.284][P:16132/T:8376][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-14 17:26:29.284][P:16132/T:8376][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-14 17:26:29.284][P:16132/T:8376][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-14 17:26:29.284][P:16132/T:8376][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-14 17:26:29.285][P:16132/T:8376][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-14 17:30:20.228
+[2023-03-14 17:30:20.228][P:10036/T:15064][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-14 17:30:20.231][P:10036/T:15064][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-14 17:30:20.243][P:10036/T:15064][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-14 17:30:20.245][P:10036/T:15064][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-14 17:30:20.256][P:10036/T:15064][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 19A20000
+
+[2023-03-14 17:30:20.256][P:10036/T:15064][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-14 17:30:20.259][P:10036/T:15064][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-14 17:30:20.259][P:10036/T:15064][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06E29F98].
+[2023-03-14 17:30:20.259][P:10036/T:15064][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-14 17:30:20.259][P:10036/T:15064][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06E29F98].
+[2023-03-14 17:30:20.259][P:10036/T:15064][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-14 17:30:20.259][P:10036/T:15064][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-14 17:30:20.260][P:10036/T:15064][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-14 17:30:20.260][P:10036/T:15064][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-14 17:30:20.260][P:10036/T:15064][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-14 17:46:01.967
+[2023-03-14 17:46:01.967][P:12272/T:3412][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-14 17:46:01.969][P:12272/T:3412][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-14 17:46:01.981][P:12272/T:3412][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-14 17:46:01.982][P:12272/T:3412][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-14 17:46:01.993][P:12272/T:3412][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A3F0000
+
+[2023-03-14 17:46:01.993][P:12272/T:3412][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-14 17:46:01.995][P:12272/T:3412][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-14 17:46:01.996][P:12272/T:3412][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=095D84B8].
+[2023-03-14 17:46:01.996][P:12272/T:3412][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-14 17:46:01.996][P:12272/T:3412][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=095D84B8].
+[2023-03-14 17:46:01.996][P:12272/T:3412][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-14 17:46:01.996][P:12272/T:3412][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-14 17:46:01.996][P:12272/T:3412][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-14 17:46:01.996][P:12272/T:3412][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-14 17:46:01.996][P:12272/T:3412][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-14 17:58:03.156
+[2023-03-14 17:58:03.156][P:7504/T:7588][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-14 17:58:03.160][P:7504/T:7588][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-14 17:58:03.170][P:7504/T:7588][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-14 17:58:03.172][P:7504/T:7588][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-14 17:58:03.184][P:7504/T:7588][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 19A30000
+
+[2023-03-14 17:58:03.184][P:7504/T:7588][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=072D7178].
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=072D7178].
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-14 17:58:03.187][P:7504/T:7588][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-15 08:41:36.651
+[2023-03-15 08:41:36.687][P:2252/T:16344][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-15 08:41:36.687][P:2252/T:16344][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-15 08:41:36.698][P:2252/T:16344][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-15 08:41:36.700][P:2252/T:16344][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-15 08:41:37.407][P:2252/T:16344][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A470000
+
+[2023-03-15 08:41:37.407][P:2252/T:16344][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06D3E2E0].
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06D3E2E0].
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-15 08:41:37.410][P:2252/T:16344][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-15 08:54:37.220
+[2023-03-15 08:54:37.220][P:2408/T:13640][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-15 08:54:37.224][P:2408/T:13640][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-15 08:54:37.237][P:2408/T:13640][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-15 08:54:37.240][P:2408/T:13640][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-15 08:54:37.253][P:2408/T:13640][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A400000
+
+[2023-03-15 08:54:37.253][P:2408/T:13640][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=09586100].
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=09586100].
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-15 08:54:37.256][P:2408/T:13640][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-15 08:57:23.370
+[2023-03-15 08:57:23.370][P:15356/T:14456][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-15 08:57:23.374][P:15356/T:14456][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-15 08:57:23.386][P:15356/T:14456][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-15 08:57:23.388][P:15356/T:14456][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-15 08:57:23.400][P:15356/T:14456][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A6C0000
+
+[2023-03-15 08:57:23.400][P:15356/T:14456][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06E2DA18].
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06E2DA18].
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-15 08:57:23.403][P:15356/T:14456][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-15 08:57:51.973
+[2023-03-15 08:57:51.973][P:17256/T:16196][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-15 08:57:51.976][P:17256/T:16196][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-15 08:57:51.989][P:17256/T:16196][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-15 08:57:51.991][P:17256/T:16196][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-15 08:57:52.004][P:17256/T:16196][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A670000
+
+[2023-03-15 08:57:52.004][P:17256/T:16196][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06D1D4A8].
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06D1D4A8].
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-15 08:57:52.007][P:17256/T:16196][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-15 09:00:07.566
+[2023-03-15 09:00:07.567][P:12376/T:17164][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-15 09:00:07.571][P:12376/T:17164][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-15 09:00:07.586][P:12376/T:17164][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-15 09:00:07.588][P:12376/T:17164][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-15 09:00:07.600][P:12376/T:17164][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A6D0000
+
+[2023-03-15 09:00:07.600][P:12376/T:17164][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06F4EF90].
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06F4EF90].
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-15 09:00:07.603][P:12376/T:17164][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-15 09:06:53.280
+[2023-03-15 09:06:53.280][P:12044/T:8224][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-15 09:06:53.284][P:12044/T:8224][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-15 09:06:53.298][P:12044/T:8224][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-15 09:06:53.300][P:12044/T:8224][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-15 09:06:53.314][P:12044/T:8224][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A600000
+
+[2023-03-15 09:06:53.314][P:12044/T:8224][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06DB3688].
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06DB3688].
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-15 09:06:53.317][P:12044/T:8224][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-20 10:53:28.283
+[2023-03-20 10:53:28.292][P:18692/T:21384][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-20 10:53:28.292][P:18692/T:21384][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-20 10:53:28.311][P:18692/T:21384][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-20 10:53:28.316][P:18692/T:21384][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-20 10:53:28.550][P:18692/T:21384][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A610000
+
+[2023-03-20 10:53:28.550][P:18692/T:21384][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-20 10:53:28.564][P:18692/T:21384][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-20 10:53:28.564][P:18692/T:21384][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06D03688].
+[2023-03-20 10:53:28.564][P:18692/T:21384][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-20 10:53:28.564][P:18692/T:21384][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06D03688].
+[2023-03-20 10:53:28.564][P:18692/T:21384][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-20 10:53:28.564][P:18692/T:21384][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-20 10:53:28.565][P:18692/T:21384][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-20 10:53:28.565][P:18692/T:21384][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-20 10:53:28.565][P:18692/T:21384][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.
+Begin Time:2023-03-22 09:53:56.757
+[2023-03-22 09:53:56.771][P:13140/T:14068][HttpClient.cpp:323][Info][0] Load curl dynamically
+[2023-03-22 09:53:56.771][P:13140/T:14068][HttpClient.cpp:352][Info][0] curl module handle: 00000000
+
+[2023-03-22 09:53:56.784][P:13140/T:14068][Utils.cpp:4792][Info][0] mutil NIC client
+[2023-03-22 09:53:56.786][P:13140/T:14068][AVNetSDKMgr.cpp:350][Info][0] Load avnetsdk library dynamically
+[2023-03-22 09:53:57.005][P:13140/T:14068][AVNetSDKMgr.cpp:374][Info][0] avnetsdk module handle: 1A600000
+
+[2023-03-22 09:53:57.005][P:13140/T:14068][AVNetSDKMgr.cpp:624][Info][0] Load configsdk dynamically
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:109][Info][0] Leave CLIENT_InitEx.
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:140][Info][0] Enter CLIENT_SetAutoReconnect:[cbAutoConnect=0058E7A0, dwUser=06DD34D0].
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:142][Info][0] Leave CLIENT_SetAutoReconnect.
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:207][Info][0] Enter CLIENT_SetDVRMessCallBack: [cbMessage=0058E7B0, dwUser=06DD34D0].
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:209][Info][0] Leave CLIENT_SetDVRMessCallBack.
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:160][Info][0] Enter CLIENT_SetConnectTime:[nWaitTime=3000, nTryTimes=3].
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:173][Info][0] Leave CLIENT_SetConnectTime.
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:184][Info][0] Enter CLIENT_SetNetworkParam:[nWaittime=8000, nConnectTime=3000, nConnectTryNum=3, nSubConnectSpaceTime=100, nGetDevInfoTime=0, nConnectBufSize=0, nGetConnInfoTime=0, nSearchRecordTime=0, nsubDisconnetTime=0, byNetType=0, byPlaybackBufSize=0, bDetectDisconnTime=0, bKeepLifeInterval=0, nPicBufSize=0].
+[2023-03-22 09:53:57.008][P:13140/T:14068][dhnetsdk.cpp:199][Info][0] Leave CLIENT_SetNetworkParam.

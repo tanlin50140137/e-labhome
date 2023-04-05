@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/showtime.css">
     <link rel="stylesheet" href="./swiper/package/swiper-bundle.min.css">
+    <link rel="stylesheet" href="./css/echarts.css">
     <script src="./js/jquery.min.js"></script>
     <script src="./js/qrcode.min.js"></script>
     <script src="./layui/layui.js"></script>
@@ -34,6 +35,7 @@
       /*标准品效期报警*/
       .blue3{width:15%;height:12%;background:blue;border-radius:100%;margin-left:0.2rem;}
       .red3{width:15%;height:12%;background:red;border-radius:100%;margin-left:0.2rem;}
+
       /*样品效期报警*/
       .blue4{width:15%;height:12%;background:blue;border-radius:100%;margin-left:0.2rem;}
       .red4{width:15%;height:12%;background:red;border-radius:100%;margin-left:0.2rem;}
@@ -41,9 +43,10 @@
       /*仪器报警*/
       .blue5{width:20%;height:15%;background:blue;border-radius:100%;margin-left:0.2rem;}
       .red5{width:20%;height:15%;background:red;border-radius:100%;margin-left:0.2rem;}
-
+      /*仪器报警*/
       .blue6{width:20%;height:15%;background:blue;border-radius:100%;margin-left:0.2rem;}
       .red6{width:20%;height:15%;background:red;border-radius:100%;margin-left:0.2rem;}
+
       /*资料报警*/
       .blue7{width:13%;height:12%;background:blue;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
       .red7{width:13%;height:12%;background:red;border-radius:50px 50px 5px 5px;margin-left:0.2rem;}
@@ -64,18 +67,1924 @@
 <body>
 <div class="swiper-container" id="Vueapp" v-cloak>
     <div class="swiper-wrapper">
+      <!-- 易莱博实验室管理与服务平台 -->
+      <div class="swiper-slide" data-index="0">
+          <div class="headImg">
+            <div class="titleBoxs">e-labhome 实验室智能管理系统</div>
+          </div>
+          <div class="elaBoxs">
+            <div class="ridingLantern" style="height:150px;position:relative;">
+              <div class="ridingLanLoginBoxs"></div>
+              <div class="marqueeBoxs" style="height:150px;line-height:250px;"><font size="4">请选择系统</font></div>
+              <div class="systemTimeBoxs" style="position:absolute;top:0;right:0;"><!-- 显示系统时间 --></div>
+              <div class="indexToolBoxs">
+                  <div class="indexToolLsBoxs">
+                      <div class="indexToolBtnBoxs" onclick="userseting2();">用户登录</div>
+                      <div class="indexToolBtnBoxs" onclick="connectwifi();">连接网络</div>
+                      <div class="indexToolBtnBoxs" onclick="systemsetingcard();">启用设置</div>
+                      <div class="indexToolBtnBoxs" @click="refreshinterface();">刷新系统</div>
+                      <div class="indexToolBtnBoxs" onclick="updatedVersion(1);">更新系统</div>
+                      <div class="indexToolBtnBoxs" onclick="restartTerminal();">系统重启</div>
+                      <div class="indexToolBtnBoxs" onclick="closeTerminal();">系统关机</div>
+                  </div>
+              </div>
+            </div>
+            <div class="selectYlbBoxs">
+                <div class="selectYlbInerBoxs">
+                  <div class="selectYlbListBoxs">
+                    <div class="selectYlbImgBoxs" onclick="_postion(1);">
+                      <div class="selectshowImgBoxs" style="background:url(./img/enve.png) no-repeat;background-position:center;"></div>
+                      <div class="selectYlbNameBoxs">
+                        环境监控系统
+                        <font color="#00ff00" v-if="sysid_enable_state.dht=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="selectYlbListBoxs">
+                    <div class="selectYlbImgBoxs" onclick="_postion(2);">
+                      <div class="selectshowImgBoxs" style="background:url(./img/enve2.png) no-repeat;background-position:center;"></div>
+                      <div class="selectYlbNameBoxs">
+                        试剂耗材管理系统
+                        <font color="#00ff00" v-if="sysid_enable_state.con=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="selectYlbListBoxs">
+                    <div class="selectYlbImgBoxs" onclick="_postion(3);">
+                      <div class="selectshowImgBoxs" style="background:url(./img/enve3.png) no-repeat;background-position:center;"></div>
+                      <div class="selectYlbNameBoxs">
+                        标准品管理系统
+                        <font color="#00ff00" v-if="sysid_enable_state.smr=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="selectYlbListBoxs">
+                    <div class="selectYlbImgBoxs" onclick="_postion(4);">
+                      <div class="selectshowImgBoxs" style="background:url(./img/enve4.png) no-repeat;background-position:center;"></div>
+                      <div class="selectYlbNameBoxs">
+                        样品管理系统
+                        <font color="#00ff00" v-if="sysid_enable_state.sam=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="selectYlbListBoxs">
+                    <div class="selectYlbImgBoxs" onclick="_postion(5);">
+                      <div class="selectshowImgBoxs" style="background:url(./img/enve5.png) no-repeat;background-position:center;"></div>
+                      <div class="selectYlbNameBoxs">
+                        仪器设备管理系统
+                        <font color="#00ff00" v-if="sysid_enable_state.equ=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="selectYlbListBoxs">
+                    <div class="selectYlbImgBoxs" onclick="_postion(6);">
+                      <div class="selectshowImgBoxs" style="background:url(./img/enve6.png) no-repeat;background-position:center;"></div>
+                      <div class="selectYlbNameBoxs">
+                        数字化档案管理系统
+                        <font color="#00ff00" v-if="sysid_enable_state.doc=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="selectYlbListBoxs">
+                    <div class="selectYlbImgBoxs" onclick="_postion(7);">
+                      <div class="selectshowImgBoxs" style="background:url(./img/enve7.png) no-repeat;background-position:center;"></div>
+                      <div class="selectYlbNameBoxs">
+                        摄像头监控系统
+                        <font color="#00ff00" v-if="sysid_enable_state.doc=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+          </div>
+      </div>
       <!-- 环境监控系统 -->
-      <div class="swiper-slide">
-          <div>环境监控系统,环境监控系统,环境监控系统,环境监控系统</div>
+      <div class="swiper-slide" data-index="1">
+          <div class="headImg">
+            <div class="titleBoxs">{{titleNames}}</div>
+            <div class="systemTimeBoxs"><!-- 显示系统时间 --></div>
+          </div>
+          <div class="elaBoxs">
+            <div class="ridingLantern" style="position:relative;">
+              <div class="ridingLanLoginBoxs2" onclick="_callback();" style="top:-1.7rem;"></div>
+              <!-- <div class="marqueeBoxs">欢迎使用易莱博动环监控系统，支持：动环监测、UPS数据监测、空调监测、市配电、设备控制、门禁控制、视频监控</div> -->
+            </div>
+            <div class="yibiaoBox">
+              <!-- 导航条 -->
+              <div class="yibiaoinnerBox">
+                  <div class="boxNavigationBar">
+                      <div class="boxNavigationiner boom3" @click="_tab(0,'环境监控系统');">首页</div>
+                      <div class="boxNavigationiner boom3" @click="_tab(1,'环境数据');">环境数据</div>
+                      <div class="boxNavigationiner boom3" @click="_tab(2,'UPS');">UPS</div>
+                      <div class="boxNavigationiner boom3" @click="_tab(3,'空调');">空调</div>
+                      <div class="boxNavigationiner boom3" @click="_tab(4,'市配电');">市配电</div>
+                      <div class="boxNavigationiner boom3" @click="_tab(5,'设备控制');">设备控制</div>
+                      <div class="boxNavigationiner boom3" @click="_tab(6,'参数设置');">参数设置</div>
+                  </div>
+              </div>
+              <!-- 右边部份 -->
+              <div class="yibiaoinnerBox">
+                <!-- 首页面index -->
+                <div class="rightListBoxs">
+                  <div class="rightListInnerBoxs">
+                    <div class="yibiaoPageBox">
+                        <div class="yibiaoinner">
+                          <div id="temp_inst1" class="boxline"></div>
+                          <div id="temp_inst_tb1" class="boxline"></div>
+                        </div>
+                        <div class="yibiaoinner">
+                          <div id="humidity1" class="boxline"></div>
+                          <div id="humidity_tb1" class="boxline"></div>
+                        </div>
+                        <div class="yibiaoinner">
+                          <div id="temp_inst2" class="boxline"></div>
+                          <div id="temp_inst_tb2" class="boxline"></div>
+                        </div>
+                        <div class="yibiaoinner">
+                          <div id="humidity2" class="boxline"></div>
+                          <div id="humidity_tb2" class="boxline"></div>
+                        </div>
+                    </div>
+                    <!-- 线框图 -->
+                    <div class="wireframeBoxs">
+                        <div class="wireframeInner">
+                          <div class="wireframeList">
+                              <div class="wireframeLi">输入电压A相：<div class="selpakBoxs">UPS信息</div></div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">输入电压B相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">输入电压C相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">输出电压A相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">输出电压B相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">输出电压C相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                        </div>
+                        <div class="wireframeInner">
+                          <div class="wireframeList">
+                              <div class="wireframeLi">空调回风温度：<div class="selpakBoxs">空调信息</div></div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">°C</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">空调回风湿度：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">%RH</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">&nbsp;</div>
+                              <div class="wireframeLi">&nbsp;</div>
+                              <div class="wireframeLi">&nbsp;</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">&nbsp;</div>
+                              <div class="wireframeLi">&nbsp;</div>
+                              <div class="wireframeLi">&nbsp;</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">空调设定温度：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">°C</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">空调设定湿度：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">%RH</div>
+                          </div>
+                        </div>
+                        <div class="wireframeInner">
+                          <div class="wireframeList">
+                              <div class="wireframeLi">市电电压A相：<div class="selpakBoxs">市电信息</div></div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">市电电压B相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">市电电压C相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">V</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">市电电流A相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">A</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">市电电流B相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">A</div>
+                          </div>
+                          <div class="wireframeList">
+                              <div class="wireframeLi">市电电流C相：</div>
+                              <div class="wireframeLi">0</div>
+                              <div class="wireframeLi">A</div>
+                          </div>
+                        </div>
+                    </div>
+                    <!-- 中部状态栏 -->
+                    <div class="centerstateBoxs">
+                        <div class="centerstateInner">UPS告警状态：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="centerstateInner">空调告警状态：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="centerstateInner">
+                            <div class="openortitleBoxs">开关门：</div>
+                            <div class="openorcloseBoxs">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="btn_switch" type="checkbox">
+                                 <label class="switch-label" for="btn_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="rightListInnerBoxs">
+                    <div class="yibiaoinnerStateBox">
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">
+                              <div class="stateyibiaBtn boom3" @click="warning_tab(0,'警告信息');">警告信息</div>
+                            </div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:almurl,backgroundPosition:'center',backgroundSize:'80%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">温度1</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:t1url,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">湿度1</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:h1url,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">温度2</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:t2url,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">湿度2</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:h2url,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+
+                        <div class="stateyibiaoBoxs"　style="margin-top:1rem;">
+                            <div class="stateyibiaInner">门磁</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:hwxurl,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">漏水</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:leakurl,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">烟感</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:smakeurl,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">停电</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:powerfailure,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">前门</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:frontdoor,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">后门</div>
+                            <div class="stateyibiaInner" :style="{backgroundImage:backdoor,backgroundPosition:'center',backgroundSize:'60%',backgroundRepeat:'no-repeat'}"></div>
+                        </div>
+
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">照明</div>
+                            <div class="stateyibiaInner" style="background:url(./img/lighting1.png) no-repeat;background-position:center;background-size:60%;"></div>
+                        </div>
+                        <div class="stateyibiaoBoxs">
+                            <div class="stateyibiaInner">新风</div>
+                            <div class="stateyibiaInner" style="background:url(./img/freshair1.png) no-repeat;background-position:center;background-size:60%;"></div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- 数据页面data -->
+                <div class="rightListBoxs" style="display:none;">
+                    <div class="rightListTableBoxs">
+                        <table class="tableBoxs">
+                          <tr>
+                            <td class="titleTable">名称</td>
+                            <td class="titleTable">数值</td>
+                            <td class="titleTable">单位</td>
+                            <td class="titleTable">名称</td>
+                            <td class="titleTable">数值</td>
+                            <td class="titleTable">单位</td>
+                            <td class="titleTable">名称</td>
+                            <td class="titleTable">数值</td>
+                            <td class="titleTable">单位</td>
+                            <td class="titleTable">名称</td>
+                            <td class="titleTable">数值</td>
+                            <td class="titleTable">单位</td>
+                            <td class="titleTable">名称</td>
+                            <td class="titleTable">数值</td>
+                            <td class="titleTable">单位</td>
+                          </tr>
+                          <tr v-for="item in tableList">
+                            <td>{{item[0]}}</td>
+                            <td>{{item[1]}}</td>
+                            <td>{{item[2]}}</td>
+                            <td>{{item[3]}}</td>
+                            <td>{{item[4]}}</td>
+                            <td>{{item[5]}}</td>
+                            <td>{{item[6]}}</td>
+                            <td>{{item[7]}}</td>
+                            <td>{{item[8]}}</td>
+                            <td>{{item[9]}}</td>
+                            <td>{{item[10]}}</td>
+                            <td>{{item[11]}}</td>
+                            <td>{{item[12]}}</td>
+                            <td>{{item[13]}}</td>
+                            <td>{{item[14]}}</td>
+                          </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- UPS -->
+                <div class="rightListBoxs" style="display:none;">
+                    <div class="upsBoxs">
+                        <div class="upsInnerBoxs">
+                            <div class="upsTileBoxs">UPS 1</div>
+                            <div class="upsListBoxs">
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输入　A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输入　B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输入　C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                </div>
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出　A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出　B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出　C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="upsListBoxs" style="margin-top:1rem;">
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输入频率：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">HZ</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs" style="position: relative;">
+                                            <img class="imgups1Boxs" src="./img/ups1.png"/>
+                                        </div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出电流A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A/%</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出电流B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A/%</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出电流C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A/%</div>
+                                    </div>
+
+                                    <div class="upsInputBoxs" style="margin-top:1rem;">
+                                        <div class="upsInputInnerBoxs">输出频率：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">HZ</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电池电压：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电池温度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="electricityBoxs">
+                                  <div class="electrinnerBoxs">剩余电量：</div>
+                                  <div class="electrinnerBoxs">
+                                    <div class="progresvalueBoxs">0%</div>
+                                    <div class="progressBoxs" style="width:0%;"></div>
+                                  </div>
+                                  <div class="electrinnerBoxs">%</div>
+                            </div>
+                            <div class="inputVoltageBoxs">
+                                <div class="inputInnerBoxs">
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">输入电压异常</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">电池电压低</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">输出电压异常</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">电池电压高</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                </div>
+                                <div class="inputInnerBoxs">
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">整流器故障</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">逆变器故障</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">环境温度高</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">输出过载</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upsInnerBoxs">
+                            <div class="upsTileBoxs">UPS 2</div>
+                            <div class="upsListBoxs">
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输入　A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输入　B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输入　C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                </div>
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出　A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出　B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出　C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="upsListBoxs" style="margin-top:1rem;">
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输入频率：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">HZ</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs" style="position: relative;">
+                                            <img class="imgups1Boxs" src="./img/ups1.png"/>
+                                        </div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出电流A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A/%</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出电流B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A/%</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">输出电流C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A/%</div>
+                                    </div>
+
+                                    <div class="upsInputBoxs" style="margin-top:1rem;">
+                                        <div class="upsInputInnerBoxs">输出频率：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">HZ</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电池电压：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电池温度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="electricityBoxs">
+                                  <div class="electrinnerBoxs">剩余电量：</div>
+                                  <div class="electrinnerBoxs">
+                                    <div class="progresvalueBoxs">0%</div>
+                                    <div class="progressBoxs" style="width:0%;"></div>
+                                  </div>
+                                  <div class="electrinnerBoxs">%</div>
+                            </div>
+                            <div class="inputVoltageBoxs">
+                                <div class="inputInnerBoxs">
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">输入电压异常</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">电池电压低</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">输出电压异常</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">电池电压高</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                </div>
+                                <div class="inputInnerBoxs">
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">整流器故障</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">逆变器故障</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">环境温度高</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">输出过载</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 空调 -->
+                <div class="rightListBoxs" style="display:none;">
+                    <div class="upsBoxs">
+                        <div class="upsInnerBoxs">
+                            <div class="upsTileBoxs">空调 1</div>
+                            <div class="upsListBoxs" style="margin-top:1rem;">
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs"　style="position: relative;">
+                                          <img class="imgups1Boxs" src="./img/kongtiao1.png" style="top:-3rem;left:80%;"/>
+                                        </div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">回风温度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">回风湿度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">%RH</div>
+                                    </div>
+                                    <div class="upsInputBoxs" style="margin-top:2rem;">
+                                        <div class="upsInputInnerBoxs">设定温度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+
+                                    <div class="upsInputBoxs" style="margin-top:1rem;">
+                                        <div class="upsInputInnerBoxs">设定湿度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">%RH</div>
+                                    </div>
+                                    <div class="upsInputBoxs" style="margin-top:2rem;">
+                                        <div class="upsInputInnerBoxs">温度上限：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">温度下限：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+                                    <div class="upsInputBoxs" style="margin-top:2rem;">
+                                        <div class="upsInputInnerBoxs">湿度上限：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">%RH</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">湿度下限：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">%RH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height:5rem;"></div>
+                            <div class="inputVoltageBoxs">
+                                <div class="inputInnerBoxs">
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">回风温度高</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">回风温度低</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">回风湿度高</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">回风湿度低</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                </div>
+                                <div class="inputInnerBoxs">
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">压机高压告警</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">压机低压告警</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">空调OC状态</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">滤网堵塞告警</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upsInnerBoxs">
+                            <div class="upsTileBoxs">空调 2</div>
+                            <div class="upsListBoxs" style="margin-top:1rem;">
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs"　style="position: relative;">
+                                          <img class="imgups1Boxs" src="./img/kongtiao1.png" style="top:-3rem;left:80%;"/>
+                                        </div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">回风温度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">回风湿度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">%RH</div>
+                                    </div>
+                                    <div class="upsInputBoxs" style="margin-top:2rem;">
+                                        <div class="upsInputInnerBoxs">设定温度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+
+                                    <div class="upsInputBoxs" style="margin-top:1rem;">
+                                        <div class="upsInputInnerBoxs">设定湿度：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">%RH</div>
+                                    </div>
+                                    <div class="upsInputBoxs" style="margin-top:2rem;">
+                                        <div class="upsInputInnerBoxs">温度上限：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">温度下限：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">°C</div>
+                                    </div>
+                                    <div class="upsInputBoxs" style="margin-top:2rem;">
+                                        <div class="upsInputInnerBoxs">湿度上限：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">%RH</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">湿度下限：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">%RH</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height:5rem;"></div>
+                            <div class="inputVoltageBoxs">
+                                <div class="inputInnerBoxs">
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">回风温度高</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">回风温度低</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">回风湿度高</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">回风湿度低</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                </div>
+                                <div class="inputInnerBoxs">
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">压机高压告警</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">压机低压告警</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">空调OC状态</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                    <div class="inputVoltageBoxs">
+                                        <div class="inputInner2Boxs">滤网堵塞告警</div>
+                                        <div class="inputInner2Boxs"><img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 市配电 -->
+                <div class="rightListBoxs" style="display:none;">
+                    <div class="upsBoxs">
+                        <div class="upsInnerBoxs">
+                            <div class="upsTileBoxs">市配电 1</div>
+                            <div class="upsListBoxs" style="margin-top:1rem;">
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs"　style="position: relative;">
+                                          <img class="imgups1Boxs" src="./img/shpd.png" style="top:-3rem;left:80%;"/>
+                                        </div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电压 A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电压 B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电压 C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+
+                                    <div class="upsInputBoxs" style="margin-top:3rem;">
+                                        <div class="upsInputInnerBoxs">电流 A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电流 B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电流 C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height:5rem;"></div>
+                            <div class="shipdianBoxs">
+                                <div class="shipinneBxos">
+                                    <div class="shipinneulBoxs">
+                                      <div class="shipinneliBoxs">有效功率：</div>
+                                      <div class="shipinneliBoxs">0</div>
+                                      <div class="shipinneliBoxs">W</div>
+                                    </div>
+                                    <div class="shipinneulBoxs">
+                                      <div class="shipinneliBoxs">无效功率：</div>
+                                      <div class="shipinneliBoxs">0</div>
+                                      <div class="shipinneliBoxs">Var</div>
+                                    </div>
+                                    <div class="shipinneulBoxs">
+                                      <div class="shipinneliBoxs">视在功率：</div>
+                                      <div class="shipinneliBoxs">0</div>
+                                      <div class="shipinneliBoxs">VA</div>
+                                    </div>
+                                    <div class="shipinneulBoxs">
+                                      <div class="shipinneliBoxs">功率因素：</div>
+                                      <div class="shipinneliBoxs">0</div>
+                                      <div class="shipinneliBoxs">cosΦ</div>
+                                    </div>
+                                </div>
+                                <div class="shipinneBxos">&nbsp;</div>
+                            </div>
+                            <div style="height:5rem;"></div>
+                            <div class="diannengBoxs">
+                              <div class="diannengliBoxs">电能：</div>
+                              <div class="diannengliBoxs">0</div>
+                              <div class="diannengliBoxs">W/h</div>
+                            </div>
+                        </div>
+                        <div class="upsInnerBoxs">
+                            <div class="upsTileBoxs">市配电 2</div>
+                            <div class="upsListBoxs" style="margin-top:1rem;">
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs"　style="position: relative;">
+                                          <img class="imgups1Boxs" src="./img/shpd.png" style="top:-3rem;left:80%;"/>
+                                        </div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                        <div class="upsInputInnerBoxs">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="upsListInerBoxs">
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电压 A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电压 B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电压 C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">V</div>
+                                    </div>
+
+                                    <div class="upsInputBoxs" style="margin-top:3rem;">
+                                        <div class="upsInputInnerBoxs">电流 A：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电流 B：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A</div>
+                                    </div>
+                                    <div class="upsInputBoxs">
+                                        <div class="upsInputInnerBoxs">电流 C：</div>
+                                        <div class="upsInputInnerBoxs">0</div>
+                                        <div class="upsInputInnerBoxs">A</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height:5rem;"></div>
+                            <div class="shipdianBoxs">
+                                <div class="shipinneBxos">
+                                    <div class="shipinneulBoxs">
+                                      <div class="shipinneliBoxs">有效功率：</div>
+                                      <div class="shipinneliBoxs">0</div>
+                                      <div class="shipinneliBoxs">W</div>
+                                    </div>
+                                    <div class="shipinneulBoxs">
+                                      <div class="shipinneliBoxs">无效功率：</div>
+                                      <div class="shipinneliBoxs">0</div>
+                                      <div class="shipinneliBoxs">Var</div>
+                                    </div>
+                                    <div class="shipinneulBoxs">
+                                      <div class="shipinneliBoxs">视在功率：</div>
+                                      <div class="shipinneliBoxs">0</div>
+                                      <div class="shipinneliBoxs">VA</div>
+                                    </div>
+                                    <div class="shipinneulBoxs">
+                                      <div class="shipinneliBoxs">功率因素：</div>
+                                      <div class="shipinneliBoxs">0</div>
+                                      <div class="shipinneliBoxs">cosΦ</div>
+                                    </div>
+                                </div>
+                                <div class="shipinneBxos">&nbsp;</div>
+                            </div>
+                            <div style="height:5rem;"></div>
+                            <div class="diannengBoxs">
+                              <div class="diannengliBoxs">电能：</div>
+                              <div class="diannengliBoxs">0</div>
+                              <div class="diannengliBoxs">W/h</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 设备控制 -->
+                <div class="rightListBoxs" style="display:none;">
+                  <div class="devicecontrolBoxs">
+                      <div class="deviceulBoxs">
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/lighting1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">照　明1</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/lighting1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn1_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn1_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">照　明2</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" :src="qianmenimg"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn2_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn2_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">前 门</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" :src="houmenimg"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn3_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn3_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">后 门</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/pump1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn4_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn4_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">水　泵1</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/pump1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn5_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn5_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">水　泵2</div>
+                        </div>
+                      </div>
+                      <div style="height:10rem;"></div>
+                      <div class="deviceulBoxs">
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/air1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn6_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn6_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">空　调1</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/air1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn7_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn7_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">空　调2</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/newtrend1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn8_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn8_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">新 风</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/xeransis1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn9_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn9_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">除 湿1</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/xeransis1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn10_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn10_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">除 湿2</div>
+                        </div>
+                        <div class="deviceliBoxs">
+                          <div class="deviceimgBoxs"><img class="deviceimgmaxBoxs" src="./img/fan1.png"/></div>
+                          <div class="devicebtnBoxs">
+                          <div class="switch_systems">
+                              <div class="switch">
+                                 <input class="switch-checkbox" id="device_btn11_switch" type="checkbox">
+                                 <label class="switch-label" for="device_btn11_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devicetagBoxs">风 机</div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- 参数设置1，参数设置 -->
+                <div class="rightListBoxs" style="display:none;">
+                  <div class="devicecontrolBoxs" style="height:50rem;padding:2rem 1.5rem;">
+                      <div class="devtitlesBoxs">物管台网络适配设置
+                        <!-- <div class="refresh_interface boom3" onclick="_callback();" style="right:44rem;">返回主页</div> -->
+                        <!-- <div class="refresh_interface boom3" @click="_tab(8,'系统启用项');" style="right:44rem;">系统启用项</div> -->
+                        <div class="refresh_interface boom3" @click="_tab(7,'内网穿透/短信通知');" style="right:27.2rem;">内网穿透/短信通知</div>
+                        <div class="refresh_interface boom3" @click="refreshinterface();" style="right:18rem;">刷新界面</div>
+                        <div class="refresh_interface boom3" onclick="updatedVersion(1);" style="right:8.8rem;">更新系统</div>
+                        <div class="refresh_interface boom3" onclick="closeTerminal();">关闭系统</div>
+                      </div>
+                      <div class="devicesetBoxs" style="margin-bottom:1.5rem;">
+                        <div class="devicesetinner">
+                            <div class="devulnetworkBoxs">
+                                <div class="devnetworkBoxs">
+                                  <div class="devnetinerBoxs">IP地址</div>
+                                  <div class="devnetinerBoxs"><input type="text" value="192.168.0.10" class="inputdevBoxs2 cmd-x80x-default2" autocomplete="off"/></div>
+                                </div>
+                                <div class="devnetworkBoxs">
+                                  <div class="devnetinerBoxs">网关</div>
+                                  <div class="devnetinerBoxs"><input type="text" value="192.168.0.1" class="inputdevBoxs2 cmd-x80x-default2" autocomplete="off"/></div>
+                                </div>
+                                <div class="devnetworkBoxs">
+                                  <div class="devnetinerBoxs">子网掩码</div>
+                                  <div class="devnetinerBoxs"><input type="text" value="255.255.255.0" class="inputdevBoxs2 cmd-x80x-default2" autocomplete="off"/></div>
+                                </div>
+                                <div class="devnetworkBoxs">
+                                  <div class="devnetinerBoxs">DNS</div>
+                                  <div class="devnetinerBoxs"><input type="text" value="114.114.114.114" class="inputdevBoxs2 cmd-x80x-default2" autocomplete="off"/></div>
+                                </div>
+                            </div>
+                            <div class="devsetbtnBoxs boom3" @click="networkSettings();">设置以太网卡为静态IP(与采集主机IP一至)</div>
+                        </div>
+                        <div class="devicesetinner" style="border:2px solid #00aeef;margin:0 0.5rem;border-radius:0.5rem;position:relative;">
+                            <div class="devtabtishiBoxs">状态
+                              <span class="devtabclean boom3" @click="devtabclen();">清空</span>
+                              <span class="devtabclean boom3" @click="select_connect();" style="margin-right:1.5rem;">检查网络连接</span>
+                            </div>
+                            <div class="devtabtitxtBoxs">
+                              <div class="devtabtsrcBoxs">
+                                <p v-for="item in networkcall">
+                                  时间：{{item.time}}<br/>
+                                  网口：{{item.connect_state==1?'已插入网线':'未插入网线'}}<br/>
+                                  网卡：{{item.update_state}}<br/>
+                                  数据：{{item.server_state==1?'接收数据-->开启':'接收数据-->关闭'}}
+                                </p>
+                              </div>
+                            </div>
+                            <div class="devlayerBoxs"><img  class="imgDevLayerBoxs" src="./layer/theme/default/loading-1.gif"/></div>
+                        </div>
+                        <div class="devicesetinner">
+                          <div class="switch_listBoxs" style="margin-bottom:0.5rem;">
+                            <div class="switch_ulisBoxs" style="width:40%;">端口号</div>
+                            <div class="switch_ulisBoxs" style="width:60%;"><input type="text" value="12388" class="inputdevBoxs2 cmd-x80x-default2" autocomplete="off"/></div>
+                         </div>
+                         <div class="switch_listBoxs">
+                           <div class="switch_ulisBoxs">接收数据</div>
+                           <div class="switch_ulisBoxs">
+                             <div class="switch" style="left:1rem;">
+                              <input class="switch-checkbox" id="device_socket_switch" type="checkbox">
+                              <label class="switch-label" for="device_socket_switch">
+                                <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                <span class="switch-switch"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                         <div class="switch_listBoxs">
+                           <div class="switch_ulisBoxs boom3" onclick="connectwifi();" style="width:100%;text-align:center;">物管台设置WIFI上网</div>
+                         </div>
+                         <div class="switch_listBoxs">
+                           <div class="switch_ulisBoxs boom3"  @click="dynamic_get_ip();" style="width:100%;text-align:center;">物管台设置有线上网</div>
+                         </div>
+                         <div class="switch_listBoxs">
+                           <div class="switch_ulisBoxs boom3" onclick="restartTerminal();" style="width:100%;text-align:center;">重启物管台系统</div>
+                         </div>
+                      </div>
+                      </div>
+                      <div class="devtitlesBoxs">采集主机参数设置</div>
+                      <div class="devicesetBoxs">
+                        <div class="devicesetinner">
+                            <div class="devwenshiduBoxs" style="margin-top:1.5rem;">
+                              <div class="devweninnerBoxs">
+                                  <div class="devwenshangxBoxs">
+                                      <div class="devwenshinnerBoxs">温度上限</div>
+                                      <div class="devwenshinnerBoxs"><input type="text" value="0" class="inputdevBoxs cmd-x80x-default" data-flag="0" autocomplete="off"/></div>
+                                  </div>
+                                  <div class="devwenshangxBoxs">
+                                      <div class="devwenshinnerBoxs">温度下限</div>
+                                      <div class="devwenshinnerBoxs"><input type="text" value="0" class="inputdevBoxs cmd-x80x-default" data-flag="0" autocomplete="off"/></div>
+                                  </div>
+                              </div>
+                              <div class="devweninnerBoxs">
+                                <div class="devwenshangxBoxs">
+                                    <div class="devwenshinnerBoxs">湿度上限</div>
+                                    <div class="devwenshinnerBoxs"><input type="text" value="0" class="inputdevBoxs cmd-x80x-default" data-flag="0" autocomplete="off"/></div>
+                                </div>
+                                <div class="devwenshangxBoxs">
+                                    <div class="devwenshinnerBoxs">湿度下限</div>
+                                    <div class="devwenshinnerBoxs"><input type="text" value="0" class="inputdevBoxs cmd-x80x-default" data-flag="0" autocomplete="off"/></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="devsetbtnBoxs boom3" @click="broadcastSettings();">广播设置网络设置温湿度范围</div>
+                        </div>
+                        <div class="devicesetinner" style="border:2px solid #00aeef;margin:0 0.5rem;border-radius:0.5rem;position:relative;">
+                            <div class="devtabtishiBoxs">
+                                设置前后门禁设备号
+                            </div>
+                            <div class="devtabtitxtBoxs" style="height:12rem;">
+                                <div class="devmenjinshebBoxs">
+                                    <div class="devmenjinsheiBoxs" style="font-size:1rem;">服务器地址</div>
+                                    <div class="devmenjinsheiBoxs"><input type="text" value="http://xxx.xxx.xxx/xxx" class="inputdevBoxs cmd-x80x-default menjinInputboxs" data-flag="1" autocomplete="off" style="font-size:0.9rem;padding:0.2rem 0;"/></div>
+                                </div>
+                                <div class="devmenjinshebBoxs">
+                                    <div class="devmenjinsheiBoxs" style="font-size:1rem;">前门设备号</div>
+                                    <div class="devmenjinsheiBoxs"><input type="text" value="0" class="inputdevBoxs cmd-x80x-default menjinInputboxs" data-flag="1" autocomplete="off" style="font-size:0.9rem;padding:0.2rem 0;"/></div>
+                                </div>
+                                <div class="devmenjinshebBoxs">
+                                    <div class="devmenjinsheiBoxs" style="font-size:1rem;">后门设备号</div>
+                                    <div class="devmenjinsheiBoxs"><input type="text" value="0" class="inputdevBoxs cmd-x80x-default menjinInputboxs" data-flag="1" autocomplete="off" style="font-size:0.9rem;padding:0.2rem 0;"/></div>
+                                </div>
+                                <div class="devbaocunsheBoxs boom3" @click="saveSetingMJ();">保存设置</div>
+                            </div>
+                        </div>
+                        <div class="devicesetinner">
+                          <div class="switch_listBoxs">
+                            <div class="switch_ulisBoxs">设置报警</div>
+                            <div class="switch_ulisBoxs">
+                              <div class="switch" style="left:1rem;">
+                               <input class="switch-checkbox" id="device_alm_switch" type="checkbox">
+                               <label class="switch-label" for="device_alm_switch">
+                                 <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                 <span class="switch-switch"></span>
+                               </label>
+                             </div>
+                           </div>
+                         </div>
+                         <div class="switch_listBoxs">
+                           <div class="switch_ulisBoxs boom3"  @click="reboot_cmd();" style="width:100%;text-align:center;">重启采集主机</div>
+                        </div>
+                      </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- 参数设置1，内网穿透 -->
+                <div class="rightListBoxs" style="display:none;">
+                  <div class="devicecontrolBoxs" style="height:50rem;padding:2rem 1.5rem;">
+                    <div class="devtitlesBoxs">内网穿透 (把采集主机映射到远程服务器，使能远程控制)
+                      <div class="refresh_interface boom3" @click="_tab(6,'参数设置');">返回</div>
+                    </div>
+                    <div class="devicesetBoxs">
+                      <div class="devicesetinner" style="width:45%;padding:0;">
+                          <div class="devtabtishiBoxs">内网设置 (映射类型默认为TCP)</div>
+                          <div class="devulnetworkBoxs" style="margin-top:1rem;margin-right:2rem;">
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs">IP地址</div>
+                                <div class="devnetinerBoxs"><input type="text" value="192.168.0.10" class="inputdevBoxs3 cmd-x80x-default3" autocomplete="off"/></div>
+                              </div>
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs">端口号</div>
+                                <div class="devnetinerBoxs"><input type="text" value="12388" class="inputdevBoxs3 cmd-x80x-default3" autocomplete="off"/></div>
+                              </div>
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs">映射端口</div>
+                                <div class="devnetinerBoxs"><input type="text" value="9690" class="inputdevBoxs3 cmd-x80x-default3" autocomplete="off"/></div>
+                              </div>
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs">域名</div>
+                                <div class="devnetinerBoxs"><input type="text" value="pmp.e-labhome.cn" class="inputdevBoxs3 cmd-x80x-default3" autocomplete="off"/></div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="devicesetinner" style="border:2px solid #00aeef;margin:0 0.5rem;border-radius:0.5rem;width:45%;">
+                          <div class="devtabtishiBoxs">服务器设置 (远程服务器)　
+                            <pan style="float:right;color:red;" v-if="mapping==1">未挂起</pan>
+                            <pan style="float:right;color:#30f30c;" v-if="mapping==2">已挂起</pan>
+                          </div>
+                          <div class="devulnetworkBoxs" style="margin-top:1rem;margin-right:2rem;">
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs">IP地址</div>
+                                <div class="devnetinerBoxs"><input type="text" value="192.168.0.10" class="inputdevBoxs3 cmd-x80x-default3" autocomplete="off"/></div>
+                              </div>
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs">端口号</div>
+                                <div class="devnetinerBoxs"><input type="text" value="12388" class="inputdevBoxs3 cmd-x80x-default3" autocomplete="off"/></div>
+                              </div>
+                              <div style="color:#999999;margin-left:2rem;font-size:1.2rem;">
+                                  使用说明：(TCP/IP)<br/>
+                                  将内网 <span id="showipandport1"></span> 映射到远程 <span id="showipandport2"></span> <br/>
+                                  远程访问：<span id="showipandport3"></span> 或 <span id="showipandport4"></span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="devicesetinner" style="width:10%;">
+                          <div class="switch_listBoxs">
+                              <div class="switch_ulisBoxs boom3" @click="tcpipsavesettings();" style="width:100%;text-align:center;">保存设置</div>
+                          </div>
+                          <div class="switch_listBoxs">
+                              <div v-if="mapping == 1" class="switch_ulisBoxs boom3" @click="mappingfumc(1);" style="width:100%;text-align:center;">开始映射</div>
+                              <div v-else class="switch_ulisBoxs" style="width:100%;text-align:center;color:#888181;">开始映射</div>
+                          </div>
+                          <div class="switch_listBoxs">
+                              <div v-if="mapping == 2" class="switch_ulisBoxs boom3" @click="mappingfumc(2);" style="width:100%;text-align:center;">停止映射</div>
+                              <div v-else class="switch_ulisBoxs" style="width:100%;text-align:center;color:#888181;">停止映射</div>
+                          </div>
+                          <div class="switch_listBoxs">
+                              <div class="switch_ulisBoxs boom3" @click="cmdremotetest();" style="width:100%;text-align:center;">远程测试</div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="devtitlesBoxs" style="margin-top:2.5rem;">短信通知 (填入手机号码，使能接收到短信通知)</div>
+                    <div class="devicesetBoxs">
+                      <div class="devicesetinner" style="width:22%;padding:0;">
+                          <div class="devtabtishiBoxs">传感器通知
+                            <div style="float:right;margin-right:1rem;">
+                              <div class="switch" style="left:1rem;">
+                                 <input class="switch-checkbox" id="device_cgq_switch" type="checkbox">
+                                 <label class="switch-label" for="device_cgq_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devulnetworkBoxs" style="margin-top:1rem;margin-right:0.5rem;">
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号1</div>
+                                <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 sensor_tel" autocomplete="off"/></div>
+                              </div>
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号2</div>
+                                <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 sensor_tel" autocomplete="off"/></div>
+                              </div>
+                              <div class="devnetworkBoxs">
+                                <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号3</div>
+                                <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 sensor_tel" autocomplete="off"/></div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="devicesetinner" style="border:2px solid #00aeef;margin:0 0.5rem;border-radius:0.5rem;width:22%;">
+                          <div class="devtabtishiBoxs">UPS通知
+                            <div style="float:right;margin-right:1rem;">
+                              <div class="switch" style="left:1rem;">
+                                 <input class="switch-checkbox" id="device_ups_switch" type="checkbox">
+                                 <label class="switch-label" for="device_ups_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devulnetworkBoxs" style="margin-top:1rem;margin-right:0.5rem;">
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号1</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 ups_tel" autocomplete="off"/></div>
+                            </div>
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号2</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 ups_tel" autocomplete="off"/></div>
+                            </div>
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号3</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 ups_tel" autocomplete="off"/></div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="devicesetinner" style="border:2px solid #00aeef;margin:0 0.5rem;border-radius:0.5rem;width:22%;">
+                          <div class="devtabtishiBoxs">空调通知
+                            <div style="float:right;margin-right:1rem;">
+                              <div class="switch" style="left:1rem;">
+                                 <input class="switch-checkbox" id="device_kongt_switch" type="checkbox">
+                                 <label class="switch-label" for="device_kongt_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devulnetworkBoxs" style="margin-top:1rem;margin-right:0.5rem;">
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号1</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 air_tel" autocomplete="off"/></div>
+                            </div>
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号2</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 air_tel" autocomplete="off"/></div>
+                            </div>
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号3</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 air_tel" autocomplete="off"/></div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="devicesetinner" style="border:2px solid #00aeef;margin:0 0.5rem;border-radius:0.5rem;width:22%;">
+                          <div class="devtabtishiBoxs">市配电通知
+                            <div style="float:right;margin-right:1rem;">
+                              <div class="switch" style="left:1rem;">
+                                 <input class="switch-checkbox" id="device_spd_switch" type="checkbox">
+                                 <label class="switch-label" for="device_spd_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="devulnetworkBoxs" style="margin-top:1rem;margin-right:0.5rem;">
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号1</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 mpd_tel" autocomplete="off"/></div>
+                            </div>
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号2</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 mpd_tel" autocomplete="off"/></div>
+                            </div>
+                            <div class="devnetworkBoxs">
+                              <div class="devnetinerBoxs" style="font-size:1.2rem;">手机号3</div>
+                              <div class="devnetinerBoxs"><input type="text" value="0" class="inputdevBoxs2 cmd-x80x-default4 mpd_tel" autocomplete="off"/></div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="devicesetinner" style="width:10%;">
+                          <div class="switch_listBoxs">
+                              <div class="switch_ulisBoxs boom3" onclick="shortMsgSaveSettings();" style="width:100%;text-align:center;">保存设置</div>
+                          </div>
+                          <div class="switch_listBoxs">
+                              <div class="switch_ulisBoxs boom3" style="width:100%;text-align:center;">短信测试</div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 系统启用项 -->
+                <div class="rightListBoxs" style="display:none;">
+                  <div class="devicecontrolBoxs" style="height:50rem;padding:2rem 1.5rem;">
+                    <div class="devtitlesBoxs">请选择启用系统　(NO=启用，OFF=关闭，设置完成需要刷新才能生效)
+                      <div class="refresh_interface boom3" @click="refreshinterface();" style="right:8rem;">刷新生效</div>
+                      <div class="refresh_interface boom3" @click="_tab(6,'参数设置');">返回</div>
+                    </div>
+                    <div class="enbalBoxs">
+                      <div class="enbalInnerBoxs">
+                        <div class="enbalintoBoxs">
+                          <img src="./img/hcxt.png" alt="试剂耗材管理系统" class="systemimgmaxs"/>
+                          <div class="enableButton">
+                              <div class="switch" style="left:5rem;top:0.5rem;">
+                                 <input class="switch-checkbox" id="device_sjhc_switch" type="checkbox">
+                                 <label class="switch-label" for="device_sjhc_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                          </div>
+                          <div class="platformIntroduction">
+                            试剂耗材管理系统
+                          </div>
+                        </div>
+                      </div>
+                      <div class="enbalInnerBoxs">
+                        <div class="enbalintoBoxs">
+                          <img src="./img/hcxt_bzp.png" alt="标准品管理系统" class="systemimgmaxs"/>
+                          <div class="enableButton">
+                              <div class="switch" style="left:5rem;top:0.5rem;">
+                                 <input class="switch-checkbox" id="device_bzp_switch" type="checkbox">
+                                 <label class="switch-label" for="device_bzp_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                          </div>
+                          <div class="platformIntroduction">
+                            标准品管理系统
+                          </div>
+                        </div>
+                      </div>
+                      <div class="enbalInnerBoxs">
+                        <div class="enbalintoBoxs">
+                          <img src="./img/hcxt_yp.png" alt="样品管理系统" class="systemimgmaxs"/>
+                          <div class="enableButton">
+                              <div class="switch" style="left:5rem;top:0.5rem;">
+                                 <input class="switch-checkbox" id="device_ypxt_switch" type="checkbox">
+                                 <label class="switch-label" for="device_ypxt_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                          </div>
+                          <div class="platformIntroduction">
+                            样品管理系统
+                          </div>
+                        </div>
+                      </div>
+                      <div class="enbalInnerBoxs">
+                        <div class="enbalintoBoxs">
+                          <img src="./img/hcxt_yq.png" alt="仪器设备管理系统" class="systemimgmaxs"/>
+                          <div class="enableButton">
+                              <div class="switch" style="left:5rem;top:0.5rem;">
+                                 <input class="switch-checkbox" id="device_yiqi_switch" type="checkbox">
+                                 <label class="switch-label" for="device_yiqi_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                          </div>
+                          <div class="platformIntroduction">
+                            仪器设备管理系统
+                          </div>
+                        </div>
+                      </div>
+                      <div class="enbalInnerBoxs">
+                        <div class="enbalintoBoxs">
+                          <img src="./img/hcxt_shu.png" alt="数字化档案管理系统" class="systemimgmaxs"/>
+                          <div class="enableButton">
+                              <div class="switch" style="left:5rem;top:0.5rem;">
+                                 <input class="switch-checkbox" id="device_shuzi_switch" type="checkbox">
+                                 <label class="switch-label" for="device_shuzi_switch">
+                                   <span class="switch-inner" data-on="ON" data-off="OFF"></span>
+                                   <span class="switch-switch"></span>
+                                 </label>
+                              </div>
+                          </div>
+                          <div class="platformIntroduction">
+                            数字化档案管理系统
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 警告信息 -->
+                <div class="warningmessageBoxs" style="display:none;">
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度1：<img class="imgCharBoxs" :src="wmT1"/></div>
+                        <div class="warningInnerList">湿度1：<img class="imgCharBoxs" :src="wmH1"/></div>
+                        <div class="warningInnerList">温度10：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度10：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾1：<img class="imgCharBoxs" :src="wmS1"/></div>
+                        <div class="warningInnerList">停电1：<img class="imgCharBoxs" :src="wmP1"/></div>
+                        <div class="warningInnerList">漏水1：<img class="imgCharBoxs" :src="wmL1"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度2：<img class="imgCharBoxs" :src="wmT2"/></div>
+                        <div class="warningInnerList">湿度2：<img class="imgCharBoxs" :src="wmH2"/></div>
+                        <div class="warningInnerList">温度11：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度11：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾2：<img class="imgCharBoxs" :src="wmS2"/></div>
+                        <div class="warningInnerList">停电2：<img class="imgCharBoxs" :src="wmP2"/></div>
+                        <div class="warningInnerList">漏水2：<img class="imgCharBoxs" :src="wmL2"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度3：<img class="imgCharBoxs" :src="wmT3"/></div>
+                        <div class="warningInnerList">湿度3：<img class="imgCharBoxs" :src="wmH3"/></div>
+                        <div class="warningInnerList">温度12：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度12：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾3：<img class="imgCharBoxs" :src="wmS3"/></div>
+                        <div class="warningInnerList">停电3：<img class="imgCharBoxs" :src="wmP3"/></div>
+                        <div class="warningInnerList">漏水3：<img class="imgCharBoxs" :src="wmL3"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度4：<img class="imgCharBoxs" :src="wmT4"/></div>
+                        <div class="warningInnerList">湿度4：<img class="imgCharBoxs" :src="wmH4"/></div>
+                        <div class="warningInnerList">温度13：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度13：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾4：<img class="imgCharBoxs" :src="wmS4"/></div>
+                        <div class="warningInnerList">停电4：<img class="imgCharBoxs" :src="wmP4"/></div>
+                        <div class="warningInnerList">漏水4：<img class="imgCharBoxs" :src="wmL4"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度5：<img class="imgCharBoxs" :src="wmT5"/></div>
+                        <div class="warningInnerList">湿度5：<img class="imgCharBoxs" :src="wmH5"/></div>
+                        <div class="warningInnerList">温度14：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度14：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾5：<img class="imgCharBoxs" :src="wmS5"/></div>
+                        <div class="warningInnerList">停电5：<img class="imgCharBoxs" :src="wmP5"/></div>
+                        <div class="warningInnerList">消防 ：<img class="imgCharBoxs" :src="wmF1"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度6：<img class="imgCharBoxs" :src="wmT6"/></div>
+                        <div class="warningInnerList">湿度6：<img class="imgCharBoxs" :src="wmH6"/></div>
+                        <div class="warningInnerList">温度15：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度15：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾6：<img class="imgCharBoxs" :src="wmS6"/></div>
+                        <div class="warningInnerList">停电6：<img class="imgCharBoxs" :src="wmP6"/></div>
+                        <div class="warningInnerList">人感/门磁1：<img class="imgCharBoxs" :src="wmD1"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度7：<img class="imgCharBoxs" :src="wmT7"/></div>
+                        <div class="warningInnerList">湿度7：<img class="imgCharBoxs" :src="wmH7"/></div>
+                        <div class="warningInnerList">温度16：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度16：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾7：<img class="imgCharBoxs" :src="wmS7"/></div>
+                        <div class="warningInnerList">停电7：<img class="imgCharBoxs" :src="wmP7"/></div>
+                        <div class="warningInnerList">人感/门磁2：<img class="imgCharBoxs" :src="wmD2"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度8：<img class="imgCharBoxs" :src="wmT8"/></div>
+                        <div class="warningInnerList">湿度8：<img class="imgCharBoxs" :src="wmH8"/></div>
+                        <div class="warningInnerList">温度17：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度17：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾8：<img class="imgCharBoxs" :src="wmS8"/></div>
+                        <div class="warningInnerList">停电8：<img class="imgCharBoxs" :src="wmP8"/></div>
+                        <div class="warningInnerList">人感/门磁3：<img class="imgCharBoxs" :src="wmD3"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">温度9：<img class="imgCharBoxs" :src="wmT9"/></div>
+                        <div class="warningInnerList">湿度9：<img class="imgCharBoxs" :src="wmH9"/></div>
+                        <div class="warningInnerList">温度18：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">湿度18：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">烟雾9：<img class="imgCharBoxs" :src="wmS9"/></div>
+                        <div class="warningInnerList">停电9：<img class="imgCharBoxs" :src="wmP9"/></div>
+                        <div class="warningInnerList">人感/门磁4：<img class="imgCharBoxs" :src="wmD4"/></div>
+                    </div>
+
+                    <div class="warningInnerBoxs" style="margin-top:4rem;">
+                        <div class="warningInnerList">UPS1：<img class="imgCharBoxs" :src="UPS1"/></div>
+                        <div class="warningInnerList">空调1：<img class="imgCharBoxs" :src="wmA1"/></div>
+                        <div class="warningInnerList">市配电1：<img class="imgCharBoxs" :src="wmM1"/></div>
+                        <div class="warningInnerList">氧气1：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">PM2.5：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">风速：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">直流电压1：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">UPS2：<img class="imgCharBoxs" :src="UPS2"/></div>
+                        <div class="warningInnerList">空调2：<img class="imgCharBoxs" :src="wmA2"/></div>
+                        <div class="warningInnerList">市配电2：<img class="imgCharBoxs" :src="wmM2"/></div>
+                        <div class="warningInnerList">氧气2：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">PM10：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">风向：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">直流电流1：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">UPS3：<img class="imgCharBoxs" :src="UPS3"/></div>
+                        <div class="warningInnerList">空调3：<img class="imgCharBoxs" :src="wmA3"/></div>
+                        <div class="warningInnerList">市配电3：<img class="imgCharBoxs" :src="wmM3"/></div>
+                        <div class="warningInnerList">氧气3：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">噪声1：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">对射1：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">直流电压2：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">UPS4：<img class="imgCharBoxs" :src="UPS4"/></div>
+                        <div class="warningInnerList">空调4：<img class="imgCharBoxs" :src="wmA4"/></div>
+                        <div class="warningInnerList">市配电4：<img class="imgCharBoxs" :src="wmM4"/></div>
+                        <div class="warningInnerList">氧气4：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">噪声2：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">对射2：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">直流电流2：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                    </div>
+                    <div class="warningInnerBoxs">
+                        <div class="warningInnerList">风压：<img class="imgCharBoxs" src="./img/switchalarm1.png"/></div>
+                        <div class="warningInnerList">防雷：<img class="imgCharBoxs" :src="wmLP1"/></div>
+                        <div class="warningInnerList">电池组：<img class="imgCharBoxs" :src="wmB1"/></div>
+                        <div class="warningInnerList">RS1：<img class="imgCharBoxs" :src="RS1"/></div>
+                        <div class="warningInnerList">RS2：<img class="imgCharBoxs" :src="RS2"/></div>
+                        <div class="warningInnerList">RS3：<img class="imgCharBoxs" :src="RS3"/></div>
+                        <div class="warningInnerList">RS4：<img class="imgCharBoxs" :src="RS4"/></div>
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
       </div>
       <!-- 试剂耗材管理系统 -->
-      <div class="swiper-slide">
+      <div class="swiper-slide" data-index="2">
           <div class="elaBoxs">
             <div class="fuzuheight" style="height:1rem;"></div>
             <div class="elaMenu">
               <div class="elaMenuInner">
                   <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                      <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                      <div class="elaLogo" onclick="_callback();" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:98% 80%;background-position:center;"></div>
                   </div>
                   <div class="elaMenuList" style="border-top:1px solid #dddddd;position: relative;">
                       <div class="elaLogo">试剂耗材管理系统</div>
@@ -101,10 +2010,10 @@
                           </div>
                           <div class="elaCardname">
                               <div class="elaCardnameList boom3" @click="voiceAnnouncements('查看库存警报','alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;position:relative;">
-                                  <div class="wingBoxs postionins0 blue0"></div>
+                                  <div class="wingBoxs postionins0 blue0 con0"></div>
                               </div>
                               <div class="elaCardnameList boom3" @click="voiceAnnouncements('查看过期警报','expire.html')"  style="background:url(./img/guoqiyujing.jpg) no-repeat;background-size:100% 100%;position:relative;">
-                                  <div class="wingBoxs postionins1 blue1"></div>
+                                  <div class="wingBoxs postionins1 blue1 con1"></div>
                               </div>
                           </div>
                       </div>
@@ -260,13 +2169,13 @@
         </div>
     </div>
     <!-- 标准品管理系统 -->
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-index="3">
         <div class="elaBoxs">
           <div class="fuzuheight" style="height:1rem;"></div>
           <div class="elaMenu">
             <div class="elaMenuInner">
                 <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                    <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                    <div class="elaLogo" @click="_callback();" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:98% 80%;background-position:center;"></div>
                 </div>
                 <div class="elaMenuList" style="border-top:1px solid #dddddd;">
                     <div class="elaLogo">标准品管理系统</div>
@@ -291,10 +2200,10 @@
                         </div>
                         <div class="elaCardname">
                             <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apismr/alarm.html')"  style="background:url(./img/kucunbaojing.jpg) no-repeat;background-size:100% 100%;">
-                                <div class="wingBoxs postionins2 blue2"></div>
+                                <div class="wingBoxs postionins2 blue2 smr0"></div>
                             </div>
                             <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apismr/expire.html')"  style="background:url(./img/guoqiyujing_yp.png) no-repeat;background-size:100% 100%;">
-                                <div class="wingBoxs postionins3 blue3"></div>
+                                <div class="wingBoxs postionins3 blue3 smr1"></div>
                             </div>
                         </div>
                     </div>
@@ -449,13 +2358,13 @@
       </div>
   </div>
   <!-- 样品管理系统 -->
-  <div class="swiper-slide">
+  <div class="swiper-slide" data-index="4">
       <div class="elaBoxs">
         <div class="fuzuheight" style="height:1rem;"></div>
         <div class="elaMenu">
           <div class="elaMenuInner">
               <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                  <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                  <div class="elaLogo" onclick="_callback();" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:98% 80%;background-position:center;"></div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;">
                   <div class="elaLogo">样品管理系统</div>
@@ -481,7 +2390,7 @@
                       <div class="elaCardname">
                           <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apisam/alarm.html')"  style="background:url(./img/kucunbaojing_yp.png) no-repeat;background-size:100% 100%;"></div>
                           <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apisam/expire.html')"  style="background:url(./img/guoqiyujing_yp.png) no-repeat;background-size:100% 100%;">
-                              <div class="wingBoxs postionins4 blue4"></div>
+                              <div class="wingBoxs postionins4 blue4 sam0"></div>
                           </div>
                       </div>
                   </div>
@@ -636,13 +2545,13 @@
     </div>
   </div>
   <!-- 仪器设备管理系统 -->
-  <div class="swiper-slide">
+  <div class="swiper-slide" data-index="5">
       <div class="elaBoxs">
         <div class="fuzuheight" style="height:1rem;"></div>
         <div class="elaMenu">
           <div class="elaMenuInner">
               <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                  <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                  <div class="elaLogo" onclick="_callback();" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:98% 80%;background-position:center;"></div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;">
                   <div class="elaLogo">仪器设备管理系统</div>
@@ -667,10 +2576,10 @@
                       </div>
                       <div class="elaCardname">
                           <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','./apiequ/alarm.html')"  style="background:url(./img/kucunbaojing_wb.png) no-repeat;background-size:100% 100%;">
-                              <div class="wingBoxs postionins5 blue5"></div>
+                              <div class="wingBoxs postionins5 blue5 equ0"></div>
                           </div>
                           <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','./apiequ/expire.html')"  style="background:url(./img/guoqiyujing_wb.png) no-repeat;background-size:100% 100%;">
-                                <div class="wingBoxs postionins6 blue6"></div>
+                                <div class="wingBoxs postionins6 blue6 equ1"></div>
                           </div>
                       </div>
                   </div>
@@ -825,13 +2734,13 @@
     </div>
   </div>
   <!-- 资料档案管理系统 -->
-  <div class="swiper-slide">
+  <div class="swiper-slide" data-index="6">
       <div class="elaBoxs">
         <div class="fuzuheight" style="height:1rem;"></div>
         <div class="elaMenu">
           <div class="elaMenuInner">
               <div class="elaMenuList" style="border-top:1px solid #dddddd;background:#dddddd;">
-                  <div class="elaLogo" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:80% 80%;background-position:center;"></div>
+                  <div class="elaLogo" onclick="_callback();" style="background: #99ccff url(./img/logo2.png) no-repeat;background-size:98% 80%;background-position:center;"></div>
               </div>
               <div class="elaMenuList" style="border-top:1px solid #dddddd;">
                   <div class="elaLogo">数字化档案管理系统</div>
@@ -863,7 +2772,7 @@
                       </div>
                       <div class="elaCardname">
                           <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看库存警报','')"  style="background:url(./img/kucunbaojing_zl2.png) no-repeat;background-size:100% 100%;">
-                                <div class="wingBoxs postionins7 blue7"></div>
+                                <div class="wingBoxs postionins7 blue7 doc0"></div>
                           </div>
                           <div class="elaCardnameList boom3" @click="voiceAnnouncements('正在查看过期警报','')"  style="background:url(./img/guoqiyujing_zl.png) no-repeat;background-size:100% 100%;"></div>
                       </div>
@@ -1076,6 +2985,163 @@
         </div>
     </div>
   </div>
+  <!-- 摄像头监控系统 -->
+  <!-- <div class="swiper-slide" data-index="7">
+      <div class="elaBoxs2">
+        <div class="selectYlbBoxs">
+            <div class="videoAllBoxs" style="display:none;">
+              <div class="videoListBoxs">
+
+                <div class="videoShowUlBoxs">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.1</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.2</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.3</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.4</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.5</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.6</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.7</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.8</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.9</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+
+                <div class="videoShowUlBoxs"  style="display:none;">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.10</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.11</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.12</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.13</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.14</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.15</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.16</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.17</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.18</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+
+                <div class="videoShowUlBoxs"  style="display:none;">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.19</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.20</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.21</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.22</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.23</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.24</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.25</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.26</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.27</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+
+                <div class="videoShowUlBoxs"  style="display:none;">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.28</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.29</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.30</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.31</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.32</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.33</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.34</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.35</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.36</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+
+                <div class="videoShowUlBoxs"  style="display:none;">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.37</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.38</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.39</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.40</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.41</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.42</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.43</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.44</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.45</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+
+                <div class="videoShowUlBoxs"  style="display:none;">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.46</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.47</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.48</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.49</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.50</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.51</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.52</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.53</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.54</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+
+                <div class="videoShowUlBoxs"  style="display:none;">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.55</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.56</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.57</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.58</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.59</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.60</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.61</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.62</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.63</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+
+                <div class="videoShowUlBoxs"  style="display:none;">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.64</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.65</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.66</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.67</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.68</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.69</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.70</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.71</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.72</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+
+                <div class="videoShowUlBoxs"  style="display:none;">
+                   <div class="videoShowLiBoxs" style="border-top:0;border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.73</div><img src="#" class="videoMJPGBoxs" alt="摄像头1"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.74</div><img src="#" class="videoMJPGBoxs" alt="摄像头2"/></div>
+                   <div class="videoShowLiBoxs" style="border-top:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.75</div><img src="#" class="videoMJPGBoxs" alt="摄像头3"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.76</div><img src="#" class="videoMJPGBoxs" alt="摄像头4"/></div>
+                   <div class="videoShowLiBoxs"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.77</div><img src="#" class="videoMJPGBoxs" alt="摄像头5"/></div>
+                   <div class="videoShowLiBoxs" style="border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.78</div><img src="#" class="videoMJPGBoxs" alt="摄像头6"/></div>
+                   <div class="videoShowLiBoxs" style="border-left:0;border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.79</div><img src="#" class="videoMJPGBoxs" alt="摄像头7"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.80</div><img src="#" class="videoMJPGBoxs" alt="摄像头8"/></div>
+                   <div class="videoShowLiBoxs" style="border-bottom:0;border-right:0;"><div class="sadisLayoutBoxs">E-LABHOME VIDEO No.81</div><img src="#" class="videoMJPGBoxs" alt="摄像头9"/></div>
+                </div>
+              </div>
+              <div class="videoListBoxs">
+                  <div class="videoLogoImgBoxs"></div>
+                  <div class="videoButtonBoxs">
+                    <div class="videoBtnlisBoxs" onclick="_callback();">返回</div>
+                    <div class="videoBtnlisBoxs">设置</div>
+                  </div>
+                  <div class="videoLTileBoxs">视频区显示页码</div>
+                  <div class="videopagesBoxs">
+                    <div class="videopListBoxs" @click="_video_page(0)">
+                      <div class="vibtnListBoxs videopagebgus">1</div>
+                    </div>
+                    <div class="videopListBoxs" @click="_video_page(1)">
+                      <div class="vibtnListBoxs">2</div>
+                    </div>
+                    <div class="videopListBoxs" @click="_video_page(2)">
+                      <div class="vibtnListBoxs">3</div>
+                    </div>
+                    <div class="videopListBoxs" @click="_video_page(3)">
+                      <div class="vibtnListBoxs">4</div>
+                    </div>
+                    <div class="videopListBoxs" @click="_video_page(4)">
+                      <div class="vibtnListBoxs">5</div>
+                    </div>
+                    <div class="videopListBoxs" @click="_video_page(5)">
+                      <div class="vibtnListBoxs">6</div>
+                    </div>
+                    <div class="videopListBoxs" @click="_video_page(6)">
+                      <div class="vibtnListBoxs">7</div>
+                    </div>
+                    <div class="videopListBoxs" @click="_video_page(7)">
+                      <div class="vibtnListBoxs">8</div>
+                    </div>
+                    <div class="videopListBoxs" @click="_video_page(8)">
+                      <div class="vibtnListBoxs">9</div>
+                    </div>
+                  </div>
+                  <div class="videoLTileBoxs" style="font-size:1.2rem;">当前选中第　{{video_page_index}}　页</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div> -->
 
   </div>
 </div>
@@ -1083,13 +3149,16 @@
 <div class="networkBoxs" style="position:fixed;bottom:1rem;right:1.3rem;width:3.5rem;height:3.5rem;display:none;"><img src="./img/nonetwork.png" style="width:100%;"/></div>
 <div class="networkBoxs" style="position:fixed;bottom:1rem;right:1.3rem;width:3.5rem;height:3.5rem;display:none;"><img src="./img/network.png" style="width:100%;"/></div>
 </body>
+<script src="./js/qwebchannel.js"></script>
 <script src="./js/CSG.js"></script>
+<script src="./js/echarts.js"></script>
 <script src="./js/common.js"></script>
+<script src="./echarts/node_modules/echarts/dist/echarts.js"></script>
 <script src="./js/showtime.js"></script>
 <script src="./js/resetlogin.js"></script>
 <script src="./js/disablescaling.js"></script>
 <script type="text/javascript" src="./keyboard/kbmodule.js" id="keyboard"></script>
-<script src="./js/qwebchannel.js"></script>
+<script src="./js/X80X.js"></script>
 <!--  实现部分  -->
 <script language="javascript">
   app.setpicnicname(userId);
@@ -1348,6 +3417,10 @@
             var form = layui.form;
         var obj = eval("("+result+")");
         var list = obj.show.split("<br/>");
+        if ( list.length == 0 ) {
+            app.message('error', 'WIFI链接失败');
+            return false;
+        }
         var netlist = obj.net.split("<br/>");
         var html  = '<div>';
             html += '<blockquote class="layui-elem-quote layui-quote-nm">';
@@ -1455,25 +3528,39 @@
           layer.msg('网络不可用，正在尝试连接...');
       }
   }
-  // Python槽方法返回的数据
-  function callback7(result){
-      if( result == 1 ){
-          $(".networkBoxs:eq(1)").show(),$(".networkBoxs:eq(0)").hide();
-      }else{
-          $(".networkBoxs:eq(0)").show(),$(".networkBoxs:eq(1)").hide();
-          localStorage.setItem("flagInIndexs", '');
-          layer.msg('网络不可用，正在尝试连接...',{shift:-1,time:3000},function(){
-                var dataJson = JSON.stringify({"wifiname":wifiname,"password":wifipassword});
-                onFactorial5(dataJson);
-                if( password == '' ){
-                    onFactorial10('扫描WIFI名称');
-                }
-          });
+  function client_wifi_state(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.client_wifi_state(flag, callback_wifi_connect);
       }
   }
+  // Python槽方法返回的数据
+  function callback7(result){
+      /*获取wifi链接状态*/
+      client_wifi_state(1);
+  }
+  function callback_wifi_connect(result) {
+      if( result == 1 ) {
+          $(".networkBoxs:eq(1)").show(),$(".networkBoxs:eq(0)").hide();
+      } else {
+          $(".networkBoxs:eq(0)").show(),$(".networkBoxs:eq(1)").hide();
+          // localStorage.setItem("flagInIndexs", '');
+          // layer.msg('网络不可用，正在尝试连接...',{shift:-1,time:3000},function(){
+          //       var dataJson = JSON.stringify({"wifiname":wifiname,"password":wifipassword});
+          //       onFactorial5(dataJson);
+          //       if( password == '' ){
+          //           onFactorial10('扫描WIFI名称');
+          //       }
+          // });
+      }
+  }
+
+  // 监测wifi连接状态－自动
   setTimeout(function(){
       onFactorial7('监测wifi连接状态')
   },3000);
+
   // 扫描抢页面
   function CSG(){
       open("./csg.html","_self");
@@ -1482,48 +3569,515 @@
       kb.kbhide();
       layer.close(setingIndex);
   }
-  //开启警报器
-  function open(i){
-      $(".postionins"+i).show();
-      setInterval(function(){
-          $(".wingBoxs:eq("+i+")").toggleClass("red"+i);
-      },1);
+  // 主机下发命令
+  function factorial_cmd(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_cmd(flag, callback_cmd);
+      }
   }
-  // 试剂耗材系统
-  var alarm1 = localStorage.getItem("alarm1");
-  if( alarm1 > 0 ){
-      open(0); // 报警红点
+  function callback_cmd(callback){
+      app.message('success',callback);
   }
-  var alarm2 = localStorage.getItem("alarm2");
-  if( alarm2 > 0 ){
-      open(1); // 报警红点
+  // 主机下发命令
+  function factorial_cmd_read(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_cmd_read(flag, callback_cmd_read);
+      }
   }
-  // 标准品系统
-  var alarm3 = localStorage.getItem("alarm3");
-  if( alarm3 > 0 ){
-      open(2); // 报警红点
+  function callback_cmd_read(callback){
+      /*设置默认参数值x80x*/
+      if( callback != 'NULL' ){
+          var obj = JSON.parse(callback);
+          app.set_factorial_cmd_value(obj);
+      }
   }
-  var alarm4 = localStorage.getItem("alarm4");
-  if( alarm4 > 0 ){
-      open(3); // 报警红点
+  // 修改本机以太网为静态IP
+  function factorial_set_network(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_set_network(flag, callback_set_network);
+      }
   }
-  // 样品系统
-  var alarm5 = localStorage.getItem("alarm5");
-  if( alarm5 > 0 ){
-      open(4); // 报警红点
+  function factorial_get_network(flag){
+    // 如果对像存在
+    if( window.obj ){
+        // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+        window.obj.factorial_get_network(flag, callback_get_network);
+    }
   }
-  // 仪器设备系统
-  var alarm6 = localStorage.getItem("alarm6");
-  if( alarm6 > 0 ){
-      open(5); // 报警红点
+  function callback_set_network(callback){
+      /*获取数据*/
+      $(".devlayerBoxs").show();
+      setTimeout(function(){
+          factorial_get_network(1);
+          $(".devlayerBoxs").hide();
+      },3000);
   }
-  var alarm7 = localStorage.getItem("alarm7");
-  if( alarm7 > 0 ){
-      open(6); // 报警红点
+  function callback_get_network(callback) {
+      var obj = JSON.parse(callback);
+      if ( obj.code == 0 ) {
+          app.networkCallback(obj)
+      } else {
+          app.message('error', '操作失败');
+      }
   }
-  var alarm8 = localStorage.getItem("alarm8");
-  if( alarm8 > 0 ){
-      open(7); // 报警红点
+  function factorial_refresh_network(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_refresh_network(flag, callback_refresh_network);
+      }
   }
+  function callback_refresh_network(callback){
+      var obj = JSON.parse(callback);
+      if ( obj.code == 0 ) {
+          app.networkCallback(obj)
+      } else {
+          app.message('error', '操作失败');
+      }
+  }
+  function factorial_socket_open(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_socket_open(flag, callback_socket);
+      }
+  }
+  function factorial_socket_close(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_socket_close(flag, callback_socket);
+      }
+  }
+  function callback_socket(callback){
+      $(".devlayerBoxs").show();
+      setTimeout(function(){
+          var obj = {ip:"192.168.0.10",gateway:"192.168.0.1",netmask:"255.255.255.0",dns:"114.114.114.114"};
+          factorial_refresh_network(JSON.stringify(obj));
+          $(".devlayerBoxs").hide();
+      },3000);
+  }
+  function factorial_save_menjin(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_save_menjin(flag, callback_save);
+      }
+  }
+  function callback_save(callback){
+      app.message('success', '操作成功');
+  }
+  /*首页开锁*/
+  function factorial_control_unlocking(flag) {
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_control_unlocking(flag, callback_unlocking);
+      }
+  }
+  function factorial_callback_unlocking(flag) {
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_callback_unlocking(flag, callback_data);
+      }
+  }
+  function callback_unlocking(callback) {
+      app.unlocking = callback;
+      /*前后门*/
+      if ( app.unlocking == 1 ) {
+          $("#btn_switch").attr("checked","checked");
+          var device_num1 = $(".menjinInputboxs:eq(1)").val();
+          if ( device_num1 != '0' ) {
+              app.frontdoor = 'url(./img/frontdoor1.png)';
+          }
+          var device_num2 = $(".menjinInputboxs:eq(2)").val();
+          if ( device_num2 != '0' ) {
+              app.backdoor = 'url(./img/backdoor1.png)';
+          }
+      /*前门*/
+      } else if( app.unlocking == 2 ) {
+          $("#device_btn2_switch").attr("checked","checked");
+          app.frontdoor = 'url(./img/frontdoor1.png)';
+      /*后门*/
+      } else if( app.unlocking == 3 ) {
+          $("#device_btn3_switch").attr("checked","checked");
+          app.backdoor = 'url(./img/backdoor1.png)';
+      }
+      /*3移后获取开锁数据*/
+      setTimeout(function(){
+          factorial_callback_unlocking(1);
+      },3000);
+  }
+  function callback_data(callback) {
+      var obj = JSON.parse(callback);
+      /*首页前门*/
+      if ( app.unlocking == 1 ) {
+          for ( var i = 0; i < obj.length; i++ ) {
+              if ( obj[i].code == 0 ) {
+                  if ( obj[i].SN != '0' ) {
+                     app.message('success', obj[i].msg);
+                  }
+              } else {
+                  if ( obj[i].SN != '0' ) {
+                      app.message('error', obj[i].msg);
+                  }
+              }
+          }
+          app.frontdoor = 'url(./img/frontdoor2.png)';
+          app.backdoor = 'url(./img/backdoor2.png)';
+          $("#btn_switch").removeAttr("checked");
+      /*前门*/
+      } else if( app.unlocking == 2 ) {
+          if ( obj[0].code == 0 ) {
+              app.message('success', obj[0].msg);
+          } else {
+              app.message('error', obj[0].msg);
+          }
+          $("#device_btn2_switch").removeAttr("checked");
+          app.frontdoor = 'url(./img/frontdoor2.png)';
+          app.qianmenimg = './img/frontdoor2.png';
+      /*后面*/
+      } else if( app.unlocking == 3 ) {
+          if ( obj[1].code == 0 ) {
+              app.message('success', obj[1].msg);
+          } else {
+              app.message('error', obj[1].msg);
+          }
+          $("#device_btn3_switch").removeAttr("checked");
+          app.backdoor = 'url(./img/backdoor2.png)';
+          app.houmenimg = './img/backdoor2.png';
+      }
+  }
+  function factorial_dynamic_setip(flag) {
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_dynamic_setip(flag, callback_dynamic);
+      }
+  }
+  function callback_dynamic(callback) {
+      app.message('success', '操作成功');
+  }
+  function factorial_get_settings(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_get_settings(flag, callback_getsettings);
+      }
+  }
+  function callback_getsettings(callback) {
+      /*获取数据并解析数据*/
+      var obj = JSON.parse(callback);
+      /*内网穿透默认参数*/
+      $(".inputdevBoxs3:eq(0)").val(obj.innerIP);
+      $(".inputdevBoxs3:eq(1)").val(obj.innerport);
+      $(".inputdevBoxs3:eq(2)").val(obj.remoteport);
+      $(".inputdevBoxs3:eq(3)").val(obj.url);
+      $(".inputdevBoxs3:eq(4)").val(obj.serverIP);
+      $(".inputdevBoxs3:eq(5)").val(obj.serverport);
+      /*使用说明*/
+      var ip = $(".inputdevBoxs3:eq(4)").val();
+      var port = $(".inputdevBoxs3:eq(2)").val();
+      $("#showipandport4").html($(".inputdevBoxs3:eq(3)").val()+":"+port);
+      $("#showipandport3").html(ip+":"+port);
+      $("#showipandport2").html(ip+":"+$(".inputdevBoxs3:eq(5)").val());
+      $("#showipandport1").html($(".inputdevBoxs3:eq(0)").val()+":"+$(".inputdevBoxs3:eq(1)").val());
+      /*短信设置*/
+
+  }
+  function factorial_save_settings(flag) {
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_save_settings(flag, callback_settings);
+      }
+  }
+  function callback_settings(callback){
+      if ( callback > 0 ) {
+        app.message('success', '保存成功');
+      } else {
+        app.message('error', '保存失败');
+      }
+  }
+  function factorial_mapping_start(flag) {
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_mapping_start(flag, callback_mapping);
+      }
+  }
+  function factorial_mapping_state(flag) {
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_mapping_state(flag, callback_mappingstate);
+      }
+  }
+  function callback_mapping(callback) {
+      /*秒后获取挂起结果*/
+      setTimeout(function(){
+          factorial_mapping_state(callback);
+      },3000);
+  }
+  function callback_mappingstate(callback) {
+      /*获取数据并解析数据*/
+      var obj = JSON.parse(callback);
+      if ( obj.enable == 1 ) {
+          if ( obj.state == 1 ) {
+            app.message('success', "映射成功");
+            app.mapping = 2
+            localStorage.setItem("mapping", 2);
+          } else {
+            app.message('error', "映射失败，可能的原因是，你设置的内网IP与本机网段IP不匹配，请检查后重试");
+            app.mapping = 1
+            localStorage.setItem("mapping", 1);
+          }
+      } else {
+          if ( obj.state == 0 ) {
+              app.message('success', "已经停止映射");
+              app.mapping = 1
+              localStorage.setItem("mapping", 1);
+          }
+      }
+
+  }
+  function factorial_enable_system(flag) {
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_enable_system(flag, callback_enable);
+      }
+  }
+  function factorial_get_enable_system(flag) {
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_get_enable_system(flag, callback_get_enable);
+      }
+  }
+  function callback_enable(callback) {
+      setTimeout(function(){
+          factorial_get_enable_system(callback);
+      },2000);
+  }
+  function callback_get_enable(callback) {
+    // app.message('success', callback);
+      var obj = JSON.parse(callback);
+      if ( obj.length > 0 ) {
+          app.set_enable_system(obj);
+      } else {
+        app.message('success', "操作出错了");
+      }
+  }
+  // 打开外部软件
+  function factorial_open_external_software(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_open_external_software(flag, callback_external_software);
+      }
+  }
+  function callback_external_software(callback) {
+      app.message('success', callback);
+  }
+  // 保存小程序设置
+  function factorial_save_applet_settings(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_save_applet_settings(flag, callback_save_applet_settings);
+      }
+  }
+  function callback_save_applet_settings(callback) {
+      app.message('success', callback);
+  }
+  // 保存小程序设置-返回默认值
+  function factorial_get_applet_settings(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_get_applet_settings(flag, callback_get_applet_settings);
+      }
+  }
+  function callback_get_applet_settings(callback) {
+      var obj = JSON.parse(callback);
+      // app.message('success', callback);
+      // stsp视频源
+      for(var i=0; i<obj.stsp.length; i++){
+          $(".stsp_value").eq(i).val(obj.stsp[i]);
+      }
+      // stsp状态
+      if (obj.stsp_state[0] == 0){
+          $(".openVdeioButton1").eq(0).show();
+          $(".openVdeioButton1").eq(1).hide()
+      } else {
+          $(".openVdeioButton1").eq(0).hide()
+          $(".openVdeioButton1").eq(1).show();
+      }
+      if (obj.stsp_state[1] == 0){
+          $(".openVdeioButton2").eq(0).show();
+          $(".openVdeioButton2").eq(1).hide()
+      } else {
+          $(".openVdeioButton2").eq(0).hide()
+          $(".openVdeioButton2").eq(1).show();
+      }
+      if (obj.stsp_state[2] == 0){
+          $(".openVdeioButton3").eq(0).show();
+          $(".openVdeioButton3").eq(1).hide()
+      } else {
+          $(".openVdeioButton3").eq(0).hide()
+          $(".openVdeioButton3").eq(1).show();
+      }
+      if (obj.stsp_state[3] == 0){
+          $(".openVdeioButton4").eq(0).show();
+          $(".openVdeioButton4").eq(1).hide()
+      } else {
+          $(".openVdeioButton4").eq(0).hide()
+          $(".openVdeioButton4").eq(1).show();
+      }
+      if (obj.stsp_state[4] == 0){
+          $(".openVdeioButton5").eq(0).show();
+          $(".openVdeioButton5").eq(1).hide()
+      } else {
+          $(".openVdeioButton5").eq(0).hide()
+          $(".openVdeioButton5").eq(1).show();
+      }
+      if (obj.stsp_state[5] == 0){
+          $(".openVdeioButton6").eq(0).show();
+          $(".openVdeioButton6").eq(1).hide()
+      } else {
+          $(".openVdeioButton6").eq(0).hide()
+          $(".openVdeioButton6").eq(1).show();
+      }
+      if (obj.stsp_state[6] == 0){
+          $(".openVdeioButton7").eq(0).show();
+          $(".openVdeioButton7").eq(1).hide()
+      } else {
+          $(".openVdeioButton7").eq(0).hide()
+          $(".openVdeioButton7").eq(1).show();
+      }
+      if (obj.stsp_state[7] == 0){
+          $(".openVdeioButton8").eq(0).show();
+          $(".openVdeioButton8").eq(1).hide()
+      } else {
+          $(".openVdeioButton8").eq(0).hide()
+          $(".openVdeioButton8").eq(1).show();
+      }
+      if (obj.stsp_state[8] == 0){
+          $(".openVdeioButton9").eq(0).show();
+          $(".openVdeioButton9").eq(1).hide()
+      } else {
+          $(".openVdeioButton9").eq(0).hide()
+          $(".openVdeioButton9").eq(1).show();
+      }
+      // 内网穿透
+      $(".frp_value").eq(0).val(obj.innerIP);
+      $(".frp_value").eq(1).val(obj.innerport);
+      $(".frp_value").eq(2).val(obj.serverIP);
+      $(".frp_value").eq(3).val(obj.serverport);
+      $(".frp_value").eq(4).val(obj.remoteport);
+      $(".frp_value").eq(5).val(obj.url);
+  }
+  // 保存小程序设置
+  function factorial_set_rtsp_video(flag){
+      // 如果对像存在
+      if( window.obj ){
+          // 调用Python槽方法并传递参数，槽方法返回值以callback回调函数接收
+          window.obj.factorial_set_rtsp_video(flag, callback_set_rtsp_vide);
+      }
+  }
+  function callback_set_rtsp_vide(callback) {
+      // app.message('success', callback);
+      var list = callback.split("-");
+      if ( list[0] == 0 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton1").eq(0).hide();
+            $(".openVdeioButton1").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton1").eq(1).hide();
+            $(".openVdeioButton1").eq(0).show();
+        }
+      } else if( list[0] == 1 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton2").eq(0).hide();
+            $(".openVdeioButton2").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton2").eq(1).hide();
+            $(".openVdeioButton2").eq(0).show();
+        }
+      } else if( list[0] == 2 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton3").eq(0).hide();
+            $(".openVdeioButton3").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton3").eq(1).hide();
+            $(".openVdeioButton3").eq(0).show();
+        }
+      } else if( list[0] == 3 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton4").eq(0).hide();
+            $(".openVdeioButton4").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton4").eq(1).hide();
+            $(".openVdeioButton4").eq(0).show();
+        }
+      } else if( list[0] == 4 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton5").eq(0).hide();
+            $(".openVdeioButton5").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton5").eq(1).hide();
+            $(".openVdeioButton5").eq(0).show();
+        }
+      } else if( list[0] == 5 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton6").eq(0).hide();
+            $(".openVdeioButton6").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton6").eq(1).hide();
+            $(".openVdeioButton6").eq(0).show();
+        }
+      } else if( list[0] == 6 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton7").eq(0).hide();
+            $(".openVdeioButton7").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton7").eq(1).hide();
+            $(".openVdeioButton7").eq(0).show();
+        }
+      } else if( list[0] == 7 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton8").eq(0).hide();
+            $(".openVdeioButton8").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton8").eq(1).hide();
+            $(".openVdeioButton8").eq(0).show();
+        }
+      } else if( list[0] == 8 && list[1] == 1 ) {
+        if ( list[2] == 1 ) {  // 打开
+            $(".openVdeioButton9").eq(0).hide();
+            $(".openVdeioButton9").eq(1).show();
+        } else {　// 关闭
+            $(".openVdeioButton9").eq(1).hide();
+            $(".openVdeioButton9").eq(0).show();
+        }
+      } else {
+          app.message('error', '打开失败');
+      }
+  }
+
+  // 模块ID
+  var sys_id = localStorage.getItem("swiperIndex");
+  // 使能红点闪烁
+  enable_alm(sys_id);
+  // 环境监控
+  environmental_monitoring();
 </script>
 </html>

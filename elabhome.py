@@ -2,14 +2,14 @@
 主程序模块-
 """
 import sys
-import threading
-
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QObject
+import subprocess
+import psutil
 
 # 所有模块
-from ela import mainela, factorial, elabprinter, connectwifi, recordvideo, elabversionupdate, elabcommunicat
+from ela import mainela, factorial, elabprinter, connectwifi, recordvideo, elabversionupdate, elabcommunicat, x80xclient, x80xnetwork
 
 """
 打包命令必须是:记得要用这个来编译
@@ -27,6 +27,12 @@ class elaMain(QObject):
         self.window = ''
         self.widget = ''
         self.icon = QIcon("./template/img/logo.ico")
+        # 启动主程序时关闭安装文件
+        for proc in psutil.process_iter():
+            # 找到名为update.exe进程程序
+            if proc.name() == "update.exe":
+                # 关闭update.exe进程程序
+                subprocess.Popen("taskkill /F /T /PID " + str(proc.pid), shell=True)
 
     # 主面板
     def showMainela(self):

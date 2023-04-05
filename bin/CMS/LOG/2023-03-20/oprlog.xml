@@ -1,0 +1,14 @@
+<DATAROOT>
+	<LOGINFO>
+		<LOG id="1" btimeyear="2023" btimemonth="3" btimeday="20" btimehour="10" btimemin="53" btimesec="25" DevId="0" type="8" channel="0" devname="" username="super" info="用户:super  登录"/>
+		<LOG id="2" btimeyear="2023" btimemonth="3" btimeday="20" btimehour="11" btimemin="5" btimesec="43" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功 "/>
+		<LOG id="3" btimeyear="2023" btimemonth="3" btimeday="20" btimehour="12" btimemin="4" btimesec="10" DevId="1" type="8" channel="0" devname="5F" username="kzy" info="断开 网络错误"/>
+		<LOG id="4" btimeyear="2023" btimemonth="3" btimeday="20" btimehour="12" btimemin="4" btimesec="15" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接失败 11.C6380235.12201.140000.0000000", "TalkInChannel" : 1, "TalkOutChannel" : 1, "UpdataTime" : "", "UpdataType" : "0x00000000", "VideoInChannel" : 0, "VideoOutChannel" : 1 } }
+"/>
+		<LOG id="5" btimeyear="2023" btimemonth="3" btimeday="20" btimehour="12" btimemin="6" btimesec="12" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功 "/>
+		<LOG id="6" btimeyear="2023" btimemonth="3" btimeday="20" btimehour="14" btimemin="1" btimesec="25" DevId="1" type="8" channel="0" devname="5F" username="kzy" info="断开 网络错误"/>
+		<LOG id="7" btimeyear="2023" btimemonth="3" btimeday="20" btimehour="14" btimemin="1" btimesec="26" DevId="1" type="0" channel="0" devname="5F" username="kzy" info="连接成功 "/>
+		<LOG id="8" btimeyear="2023" btimemonth="3" btimeday="20" btimehour="15" btimemin="27" btimesec="23" DevId="0" type="8" channel="0" devname="" username="super" info="关闭CMS"/>
+	</LOGINFO>
+	<GLOBAL index="9"/>
+</DATAROOT>

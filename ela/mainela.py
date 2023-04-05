@@ -62,13 +62,11 @@ class Elamain:
 
         # 创建浏览器对像
         self.browser = WebEngineView()
-
         # 设置视频
         self.browser.settings().setAttribute(QtWebEngineWidgets.QWebEngineSettings.PluginsEnabled, True)
         self.browser.settings().setAttribute(QtWebEngineWidgets.QWebEngineSettings.JavascriptEnabled, True)
         self.browser.settings().setAttribute(QtWebEngineWidgets.QWebEngineSettings.FullScreenSupportEnabled, True)
         self.browser.page().fullScreenRequested.connect(self._fullScreenRequested)
-
         # 清空缓存
         objProfile = self.browser.page().profile()
         objProfile.clearHttpCache()
@@ -83,15 +81,12 @@ class Elamain:
         self.browser.load(QUrl.fromLocalFile(url))
         # 网络链接
         # self.browser.load(QtCore.QUrl(url))
-
         # 添加浏览器控件到主窗口中
         window.setCentralWidget(self.browser)
-
         # 注册槽到JavaScript中
         channel.registerObject("obj", factorial)
         # 将channel对像映射到浏览器中
         self.browser.page().setWebChannel(channel)
-
         # 绑定信号
         factorial.signalHtml.connect(self.sendSignalHtml)
         # 绑定信号

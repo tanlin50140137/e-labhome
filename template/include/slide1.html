@@ -1,0 +1,78 @@
+<!-- 易莱博实验室管理与服务平台 -->
+<div class="headImg">
+  <div class="titleBoxs">易莱博系统主页</div>
+</div>
+<div class="elaBoxs">
+  <div class="ridingLantern" style="height:100px;position:relative;">
+    <div class="marqueeBoxs" style="height:90px;line-height:120px;"><font size="4">弘扬求是精神，争做创新企业，求实是我们的根本，创新是我们的.动力</font></div>
+    <div class="indexToolBoxs">
+        <div class="indexToolLsBoxs">
+            <div class="indexToolBtnBoxs" @click="refreshinterface();">刷新主页</div>
+            <div class="indexToolBtnBoxs" onclick="userseting2();">用户登录</div>
+            <div class="indexToolBtnBoxs" onclick="connectwifi();">连接网络</div>
+            <div class="indexToolBtnBoxs" onclick="systemsetingcard();">启用设置</div>
+            <div class="indexToolBtnBoxs" onclick="updatedVersion(1);">更新系统</div>
+            <div class="indexToolBtnBoxs" onclick="restartTerminal();">系统重启</div>
+            <div class="indexToolBtnBoxs" onclick="closeTerminal();">系统关机</div>
+        </div>
+    </div>
+  </div>
+  <div class="selectYlbBoxs">
+      <div class="selectYlbInerBoxs">
+        <div class="selectYlbListBoxs">
+          <div class="selectYlbImgBoxs" onclick="_postion(1);">
+            <img src="./img/hcxt_dh.png" alt="环境监控系统" class="selectYlbImgmaxs">
+            <div class="selectYlbNameBoxs">
+              环境监控系统（动环硬件管理系统）
+              <font color="#00ff00" v-if="sysid_enable_state.dht=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+            </div>
+          </div>
+        </div>
+        <div class="selectYlbListBoxs">
+          <div class="selectYlbImgBoxs" onclick="_postion(2);">
+            <img src="./img/hcxt.png" alt="试剂耗材管理系统" class="selectYlbImgmaxs">
+            <div class="selectYlbNameBoxs">
+              试剂耗材管理系统（实验室耗材管理）
+              <font color="#00ff00" v-if="sysid_enable_state.con=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+            </div>
+          </div>
+        </div>
+        <div class="selectYlbListBoxs">
+          <div class="selectYlbImgBoxs" onclick="_postion(3);">
+            <img src="./img/hcxt_bzp.png" alt="标准品管理系统" class="selectYlbImgmaxs">
+            <div class="selectYlbNameBoxs">
+              标准品管理系统（实验室标准品管理）
+              <font color="#00ff00" v-if="sysid_enable_state.smr=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+            </div>
+          </div>
+        </div>
+        <div class="selectYlbListBoxs">
+          <div class="selectYlbImgBoxs" onclick="_postion(4);">
+            <img src="./img/hcxt_yp.png" alt="样品管理系统" class="selectYlbImgmaxs">
+            <div class="selectYlbNameBoxs">
+              样品管理系统（实验室样品管理）
+              <font color="#00ff00" v-if="sysid_enable_state.sam=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+            </div>
+          </div>
+        </div>
+        <div class="selectYlbListBoxs">
+          <div class="selectYlbImgBoxs" onclick="_postion(5);">
+            <img src="./img/hcxt_yq.png" alt="仪器设备管理系统" class="selectYlbImgmaxs">
+            <div class="selectYlbNameBoxs">
+              仪器设备管理系统（实验室仪器管理）
+              <font color="#00ff00" v-if="sysid_enable_state.equ=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+            </div>
+          </div>
+        </div>
+        <div class="selectYlbListBoxs">
+          <div class="selectYlbImgBoxs" onclick="_postion(6);">
+            <img src="./img/hcxt_shu.png" alt="数字化档案管理系统" class="selectYlbImgmaxs">
+            <div class="selectYlbNameBoxs">
+              数字化档案管理系统（实验室档案管理）
+              <font color="#00ff00" v-if="sysid_enable_state.doc=='y'">启用</font><font color="#ff0000" v-else>禁用</font>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
